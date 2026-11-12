@@ -1,0 +1,73 @@
+/* use-world: the page frame around seven mockup plates. The artwork is in the SVG components. */
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding-block: clamp(32px, 6vw, 88px) clamp(20px, 3vw, 40px);
+}
+
+.lead {
+  max-width: 46ch;
+}
+
+.plate {
+  margin: 0;
+  background: var(--beige-60);
+  border-radius: var(--r-print);
+  overflow: hidden;
+}
+
+.plate svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px clamp(12px, 1.4vw, 20px) 14px;
+  color: var(--muted);
+  background: var(--beige-60);
+}
+
+.cap h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(16px, 1.4vw, 21px);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.cap span {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.grid {
+  margin-top: var(--gap);
+  padding-bottom: clamp(40px, 6vw, 96px);
+}
+
+.cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell > .plate {
+  flex: 1 1 auto;
+}
+
+.hero {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .cap span {
+    display: none;
+  }
+}
