@@ -1,0 +1,86 @@
+/* Plans landing page. Page-only styles; tokens come from globals.css. */
+
+.page { padding-bottom: 0; }
+.top { background: var(--tribal); color: var(--beige); }
+
+/* ---------- Hero: a tilted tablet on Tribal Brown ---------- */
+.hero { position: relative; padding-block: clamp(8px, 3vw, 40px) clamp(40px, 6vw, 96px); overflow-x: clip; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(16px, 3vw, 56px); align-items: end; }
+.heroCopy { padding-bottom: clamp(8px, 3vw, 48px); position: relative; z-index: 2; }
+.heroLabel { font-size: 13px; color: var(--beige); margin-bottom: 18px; letter-spacing: 0; }
+.heroLabel::before { content: ""; display: inline-block; width: 36px; height: 1px; background: currentColor; vertical-align: middle; margin-right: 12px; }
+.lineMask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.heroSub { margin-top: 24px; max-width: 26em; color: var(--beige); }
+.heroArt { min-width: 0; margin-right: calc(var(--pad) * -0.9); }
+.heroArt svg { width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr); }
+  .heroArt { margin-right: 0; order: -1; }
+}
+
+/* ---------- Story: the box opening ---------- */
+.storySection { padding-block: clamp(32px, 6vw, 96px) 0; position: relative; }
+.boxStage { overflow: clip; position: relative; width: 100%; aspect-ratio: 1340 / 900; }
+.layer { position: absolute; inset: 0; will-change: transform; }
+.layer svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.progress { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; width: 100%; max-width: 560px; margin-top: 8px; }
+.progressItem { display: grid; gap: 6px; }
+.progressBar { display: block; height: 2px; background: var(--line-strong); position: relative; overflow: hidden; }
+.progressBar::after { content: ""; position: absolute; inset: 0; background: var(--tribal); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--dur-4) var(--ease-draw); }
+.progressBar[data-on="true"]::after { transform: scaleX(1); }
+.sentence { margin-top: 10px; text-wrap: pretty; }
+.rowsGap { margin-top: 14px; }
+@media (max-width: 900px) {
+  .storySection { padding-top: 24px; }
+  .progress { max-width: none; }
+}
+
+/* ---------- Plan study ---------- */
+.study { padding-block: clamp(72px, 10vw, 160px); background: var(--white); position: relative; }
+.study:not([data-seen]) :global(.draw),
+.study:not([data-seen]) :global(.fade-in) { animation-play-state: paused; }
+.studyHead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; margin-bottom: clamp(28px, 4vw, 64px); }
+.studyNote { max-width: 24em; }
+.studyBoard { background: var(--beige); padding: clamp(16px, 3vw, 48px); border-radius: var(--r-print); max-width: 860px; margin-inline: auto; box-shadow: 10px 11px 0 0 rgba(53, 36, 28, 0.1); }
+.crops { max-width: 860px; margin-inline: auto !important; list-style: none; margin: clamp(28px, 4vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: 1.1fr 0.8fr 1fr; gap: var(--gap); align-items: end; }
+.crops li { min-width: 0; }
+.crops svg { background: var(--white); box-shadow: inset 0 0 0 1px var(--line); }
+@media (max-width: 900px) {
+  .studyHead { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .crops { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Grounds: Beige or Dark ---------- */
+.grounds { padding-block: clamp(72px, 10vw, 160px); background: var(--beige); }
+.groundsGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 96px); align-items: center; }
+.groundsCopy { display: grid; gap: clamp(20px, 3vw, 40px); }
+.switchRow { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.parts { list-style: none; margin: 0; padding: 0; border-top: var(--hair) solid var(--line-strong); }
+.part { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 2px; border-bottom: var(--hair) solid var(--line-strong); }
+.swatch { width: 34px; height: 34px; border-radius: 2px; box-shadow: inset 0 0 0 1px var(--line-strong); }
+.partText { display: grid; gap: 2px; min-width: 0; }
+.groundStage { position: relative; display: grid; place-items: center; padding: clamp(20px, 4vw, 56px); transition: background-color var(--dur-4) var(--ease-sun), color var(--dur-4) var(--ease-sun); min-height: 300px; }
+.stageLight { background: var(--tribal-20); }
+.stageDark { background: var(--black); }
+.sheetWrap { width: min(100%, 520px); }
+.sheetWrap svg { filter: drop-shadow(8px 9px 0 rgba(53, 36, 28, 0.2)); }
+@media (max-width: 900px) {
+  .groundsGrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Closing ---------- */
+.closing { background: var(--chocolate); padding-block: clamp(72px, 10vw, 160px); position: relative; overflow-x: clip; }
+.closingGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 96px); align-items: center; }
+.closingArt { min-width: 0; max-width: 520px; margin-left: auto; width: 100%; }
+@media (max-width: 900px) {
+  .closingGrid { grid-template-columns: minmax(0, 1fr); }
+  .closingArt { margin-left: 0; }
+}
+
+/* At phone width the box stays pinned above and the text slides under it. */
+@media (max-width: 900px) {
+  :global(.story) > .pin { z-index: 2; background: var(--beige); height: 42vh; align-content: center; padding-bottom: 6px; }
+  .pin .boxStage { width: min(100%, calc(30vh * 1.4889)); margin-inline: auto; }
+}

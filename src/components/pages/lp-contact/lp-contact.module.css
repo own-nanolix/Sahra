@@ -1,0 +1,79 @@
+/* Contact landing page. Page-only styles; tokens come from globals.css. */
+
+.page { padding-bottom: 0; }
+.mask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+
+/* ---------- Hero: the business card beside the contact blocks ---------- */
+.hero { padding-block: clamp(16px, 3vw, 48px) clamp(56px, 8vw, 128px); overflow-x: clip; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(28px, 6vw, 110px); align-items: center; }
+.cardCol { min-width: 0; }
+.cardStage { position: relative; background: var(--studio); padding: clamp(24px, 6vw, 88px) clamp(20px, 5vw, 72px); perspective: 1600px; display: grid; place-items: center; }
+.card { position: relative; width: min(100%, 560px); aspect-ratio: 7 / 4; transform-style: preserve-3d; z-index: 1; }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.face svg { width: 100%; height: 100%; }
+.faceBack { transform: rotateY(180deg); }
+.cardShadow { position: absolute; width: min(100%, 560px); aspect-ratio: 7 / 4; background: var(--chocolate); transform-origin: 0 50%; z-index: 0; max-width: calc(100% - 2 * clamp(20px, 5vw, 72px)); }
+.cardControls { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 18px; }
+.heroCopy { min-width: 0; }
+.bigBlocks { display: grid; gap: clamp(20px, 2.6vw, 34px); margin-top: clamp(28px, 4vw, 56px); }
+.bigBlock { display: grid; gap: 4px; font-style: normal; padding-top: 14px; border-top: var(--hair) solid var(--line-strong); }
+.bigLine { font-size: clamp(22px, 2.5vw, 38px); line-height: 1.1; letter-spacing: -0.015em; overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Letter story ---------- */
+.storySection { padding-block: clamp(24px, 4vw, 64px) 0; background: var(--white); }
+.envStage { position: relative; width: 100%; aspect-ratio: 1000 / 900; overflow: clip; }
+.layer { position: absolute; inset: 0; will-change: transform; }
+.layer svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+:global(.story) > .steps { gap: clamp(20vh, 26vh, 32vh); padding-block: 14vh 22vh; }
+.paragraph { margin-top: 6px; text-wrap: pretty; max-width: 30em; }
+.letterBlocks { display: flex; flex-wrap: wrap; gap: 20px 56px; margin-top: 28px; }
+.letterBlock { font-style: normal; font-size: 15px; line-height: 1.5; display: grid; }
+.dots { list-style: none; margin: 8px 0 0; padding: 0; display: flex; gap: 8px; }
+.dot { width: 36px; height: 2px; background: var(--tribal); transform-origin: 0 50%; }
+@media (max-width: 900px) {
+  :global(.story) > .pin { z-index: 2; background: var(--white); height: 42vh; align-content: center; }
+  .pin .envStage { width: min(100%, calc(32vh * 1.111)); margin-inline: auto; }
+  .storySection { padding-top: 12px; }
+}
+
+/* ---------- Contact lines on Dark Chocolate ---------- */
+.lines { position: relative; background: var(--chocolate); padding-block: clamp(72px, 10vw, 160px); overflow: clip; }
+.linesArch { position: absolute; top: 0; right: 0; width: min(46vw, 560px); opacity: 0.9; pointer-events: none; }
+.linesGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); margin-top: clamp(32px, 5vw, 72px); position: relative; z-index: 1; }
+.lineGroup { background: rgba(245, 240, 227, 0.05); padding: clamp(18px, 2vw, 32px); box-shadow: inset 0 0 0 var(--hair) var(--line-on-dark); }
+.lineList { list-style: none; margin: 18px 0 0; padding: 0; }
+.lineRow { display: grid; gap: 4px; padding: 14px 0; border-top: var(--hair) solid var(--line-on-dark); }
+.copyLine { font-family: var(--font-serif); font-size: clamp(19px, 1.7vw, 26px); line-height: 1.15; letter-spacing: -0.01em; text-align: left; overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+  .linesGrid { grid-template-columns: minmax(0, 1fr); }
+  .linesArch { width: 60vw; opacity: 0.5; }
+}
+
+/* ---------- Form on Beige ---------- */
+.formSection { background: var(--beige); padding-block: clamp(72px, 10vw, 160px); }
+.formGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 6vw, 110px); align-items: start; }
+.formCopy { position: sticky; top: 48px; }
+.formCard { background: var(--white); padding: clamp(20px, 3vw, 44px); border-radius: var(--r-card); box-shadow: 10px 11px 0 0 rgba(53, 36, 28, 0.1); min-width: 0; }
+.form { display: grid; gap: 20px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.invalid :global(.input) { box-shadow: inset 0 0 0 1.5px var(--error-ink); }
+.invalid p { color: var(--error-ink); }
+.alert { color: var(--error-ink); font-size: 14px; padding: 10px 14px; box-shadow: inset 0 0 0 1px var(--error-ink); border-radius: var(--r-btn); }
+.sent { min-width: 0; }
+.preview { margin: 20px 0 0; padding: 16px; background: var(--beige); font-family: var(--font-sans); font-size: 14px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; border-radius: var(--r-btn); color: var(--ink); }
+@media (max-width: 900px) {
+  .formGrid { grid-template-columns: minmax(0, 1fr); }
+  .formCopy { position: static; }
+}
+@media (max-width: 600px) {
+  .two { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Sign-off on Black ---------- */
+.signoff { background: var(--black); padding-block: clamp(72px, 9vw, 144px) clamp(48px, 6vw, 96px); }
+.signGrid { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+.signSide { display: grid; gap: 20px; justify-items: start; }
+.signMark { margin-top: clamp(40px, 7vw, 112px); }
