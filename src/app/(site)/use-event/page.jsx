@@ -1,11 +1,8 @@
 import { pageMeta } from '@/lib/pages';
+import EventPage from '@/components/pages/use-event/EventPage';
 
 export const metadata = pageMeta('use-event');
 
 export default function Page() {
-  return (
-    <section className="page" id="p-use-event" aria-label="Event" data-stub="">
-      <h1 tabIndex={-1}>Event</h1>
-    </section>
-  );
+  return <EventPage title="Event" />;
 }
