@@ -1,0 +1,12 @@
+/* Artwork animations wait (paused at their start state) until the piece is in view. */
+.play {
+  min-width: 0;
+}
+
+.play[data-play="wait"] * {
+  animation-play-state: paused !important;
+}
+
+.play[data-play="go"] * {
+  animation-play-state: running;
+}

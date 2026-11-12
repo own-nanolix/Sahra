@@ -1,0 +1,324 @@
+/* Overview: the intro slide (m02) rebuilt, then the bento, principles and the two ruled indexes.
+   Page-only styles. Keyframes are named overview-*. */
+
+/* ---------- Opening: the intro slide ---------- */
+.opening {
+  padding-top: clamp(40px, 6vw, 96px);
+  padding-bottom: clamp(56px, 8vw, 128px);
+}
+
+.slide {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+  grid-template-areas:
+    "title title title title body body body body body body . ."
+    ". . . . . . . . . . . ."
+    "credits credits credits credits sheet sheet sheet sheet sheet sheet . .";
+  row-gap: clamp(56px, 11vw, 200px);
+  align-items: start;
+}
+
+.title {
+  grid-area: title;
+  position: relative;
+  padding-left: clamp(16px, 2.6vw, 40px);
+  padding-top: 2px;
+  min-height: 84px;
+}
+
+.rule {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--line-strong);
+  transform-origin: 50% 0;
+}
+
+.h1 {
+  margin: 0;
+  font-size: clamp(30px, 3.1vw, 50px);
+  line-height: 1.08;
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.maskIn {
+  display: block;
+  will-change: transform;
+}
+
+.kicker {
+  margin: 18px 0 0;
+}
+
+.body {
+  grid-area: body;
+  display: grid;
+  gap: clamp(18px, 2vw, 28px);
+  /* the slide sets its body a little under the title's first line */
+  padding-top: clamp(0px, 3.4vw, 56px);
+}
+
+.para {
+  margin: 0;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.62;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.credits {
+  grid-area: credits;
+  align-self: end;
+  display: grid;
+  gap: 14px;
+  outline: none;
+}
+
+.badges {
+  width: 132px;
+}
+
+.badges svg {
+  width: 100%;
+  height: auto;
+}
+
+.creditList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.sheet {
+  grid-area: sheet;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.sheetRow {
+  display: grid;
+  grid-template-columns: minmax(7.4em, 17em) minmax(0, 1fr);
+  gap: 12px;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.55;
+  letter-spacing: -0.02em;
+}
+
+.sheetRow dt {
+  color: var(--ink);
+}
+
+.sheetRow dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+/* ---------- Blocks and tiles ---------- */
+.block {
+  margin-top: clamp(40px, 6vw, 96px);
+  outline: none;
+}
+
+.block > :first-child {
+  margin-bottom: clamp(20px, 3vw, 40px);
+}
+
+.hline {
+  display: block;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+}
+
+.fill svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bentoGap {
+  margin-top: 0;
+}
+
+/* Principles: text and drawing in one tile */
+.principle {
+  display: flex;
+  gap: 16px;
+  min-height: 0;
+}
+
+.pText {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pText h3 {
+  margin: 0;
+}
+
+.quote {
+  margin: 8px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.quote p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.quote footer {
+  margin: 0;
+}
+
+.pArt {
+  min-width: 0;
+}
+
+.pArt svg {
+  width: 100%;
+  height: auto;
+}
+
+.wide {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.wide .pText {
+  flex: 1 1 52%;
+}
+
+.wide .pArt {
+  flex: 1 1 40%;
+  align-self: end;
+}
+
+.tall {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tall .pArt {
+  align-self: center;
+  width: min(100%, 230px);
+}
+
+.compact {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.compact .pText {
+  flex: 1 1 46%;
+}
+
+.compact .pArt {
+  flex: 1 1 50%;
+}
+
+/* ---------- Indexes ---------- */
+.indexes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 96px);
+  margin-top: clamp(56px, 8vw, 128px);
+  align-items: start;
+}
+
+.list {
+  min-width: 0;
+  outline: none;
+}
+
+.list > :first-child {
+  margin-bottom: clamp(16px, 2.4vw, 32px);
+}
+
+.group {
+  margin-top: clamp(20px, 2.4vw, 36px);
+}
+
+.groupName {
+  margin: 0 0 10px;
+  color: var(--sand-ink);
+}
+
+.compactRows :global(.ruled-row) {
+  padding-block: 13px;
+}
+
+.compactRows :global(.ruled-row-label) {
+  font-size: clamp(18px, 1.35vw, 21px);
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .slide {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "title"
+      "body"
+      "sheet"
+      "credits";
+    row-gap: 40px;
+  }
+
+  .body {
+    padding-top: 0;
+  }
+
+  .indexes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wide,
+  .compact {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tall .pArt,
+  .wide .pArt,
+  .compact .pArt {
+    width: min(100%, 260px);
+    align-self: flex-start;
+  }
+
+  .fill {
+    position: relative;
+    inset: auto;
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sheetRow {
+    grid-template-columns: minmax(6.4em, 8em) minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maskIn {
+    will-change: auto;
+  }
+}

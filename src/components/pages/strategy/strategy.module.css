@@ -1,0 +1,224 @@
+/* Strategy: a hero, then six bento rows that change shape (8+4, 4+8, 6+6, 12, 3+9, 9+3) and a closing tile.
+   Page-only styles. */
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  padding-top: clamp(40px, 6vw, 96px);
+  padding-bottom: clamp(40px, 6vw, 96px);
+}
+
+.heroRule {
+  display: block;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: 0 50%;
+  margin-bottom: clamp(24px, 3vw, 48px);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+  row-gap: 32px;
+  align-items: end;
+}
+
+.heroTitle {
+  grid-column: 1 / span 6;
+}
+
+.heroText {
+  grid-column: 8 / span 5;
+  display: grid;
+  gap: 28px;
+}
+
+.h1 {
+  margin: 10px 0 0;
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.maskIn {
+  display: block;
+  will-change: transform;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--hair) solid var(--line-strong);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 3.2em minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 2px;
+  border-bottom: var(--hair) solid var(--line-strong);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Story rows ---------- */
+.story {
+  display: grid;
+  gap: var(--gap);
+}
+
+.row {
+  grid-auto-rows: auto;
+}
+
+.tileText {
+  display: flex;
+  align-items: flex-start;
+}
+
+.text {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  max-width: 44em;
+}
+
+.textHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pull {
+  margin: 0;
+  color: var(--tribal);
+  text-wrap: balance;
+}
+
+.para {
+  margin: 0;
+  color: var(--ink);
+  max-width: 40em;
+}
+
+.tileArt {
+  min-height: 260px;
+  display: flex;
+}
+
+.artPlay {
+  width: 100%;
+  display: flex;
+}
+
+.artPlay svg {
+  width: 100%;
+  height: 100%;
+  max-height: 560px;
+}
+
+/* ---------- Description and scope map ---------- */
+.description,
+.map {
+  margin-top: clamp(56px, 8vw, 128px);
+  outline: none;
+}
+
+.sectionHead {
+  margin-bottom: clamp(20px, 3vw, 40px);
+}
+
+.hline {
+  display: block;
+}
+
+.clauses {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.clauses :global(.ruled-row-label) {
+  font-size: clamp(18px, 1.5vw, 23px);
+}
+
+.mapTile {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.mapTile h3 {
+  margin: 0 0 8px;
+}
+
+.mapTile :global(.ruled-row) {
+  grid-template-columns: 0 minmax(0, 1fr) auto;
+  padding-block: 14px;
+}
+
+.closeWrap {
+  margin-top: var(--gap);
+}
+
+/* ---------- Closing tile ---------- */
+.close {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 4vw, 72px);
+  align-items: end;
+  padding: clamp(28px, 4vw, 64px);
+  margin-top: 0;
+}
+
+.closeText {
+  display: grid;
+  gap: 18px;
+}
+
+.closeText h2 {
+  margin: 0;
+}
+
+.closeLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .heroTitle,
+  .heroText {
+    grid-column: 1 / -1;
+  }
+
+  .close {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .closeLinks {
+    justify-content: flex-start;
+  }
+
+  .tileArt {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maskIn {
+    will-change: auto;
+  }
+}
