@@ -86,3 +86,15 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
 - Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
 - Wave 1 done: 12 builders, 17 pages, each committed locally; lint clean, build passes, check 17 of 30 ok; every page is over 700 lines. Shared fix: the landing nav fits at phone width (brand shrinks, links wrap). Wave 2 launched (B13 to B24, Sonnet).
 - Wave 2 done: 12 builders, 13 pages, each committed locally. Lint clean, build passes, check --strict 30 of 30 ok; no page under 650 lines, so no page was sent back. Step 6 started: 8 reviewers launched (Opus).
+
+## Pending shared fixes from the review round (lead applies once all 8 reviewers are back)
+
+- R2, `src/components/site/icons.js`: replace these seven icon lines:
+  - `key: ring(8, 12, 4) + line([[12, 12], [21, 12]], C) + line([[15, 12], [15, 16.5]], C) + line([[19, 12], [19, 15]], C),`
+  - `wall: rect(3, 5, 18, 14) + line([[3, 12], [21, 12]]) + line([[12, 5], [12, 12]]) + line([[8, 12], [8, 19]]) + line([[16, 12], [16, 19]]),`
+  - `ruler: rect(3, 7, 18, 10) + [7, 12, 17].map((x, i) => line([[x, 7], [x, i % 2 ? 13 : 11]], C)).join(''),`
+  - `download: line([[12, 3], [12, 15]], CS) + line([[6.5, 9.5], [12, 15], [17.5, 9.5]]) + line([[4, 21], [20, 21]], CB),`
+  - `house: line([[3, 11.5], [12, 3.5], [21, 11.5]]) + line([[5, 9.7], [5, 21], [19, 21], [19, 9.7]]) + line([[10, 21], [10, 15], [14, 15], [14, 21]]),`
+  - `car: line([[4.5, 16], [3, 16], [3, 11.5], [6.5, 10.5], [8.5, 6], [15.5, 6], [17.5, 10.5], [21, 11.5], [21, 16], [19.5, 16]]) + line([[10.5, 16], [13.5, 16]]) + ring(7.5, 17, 2) + ring(16.5, 17, 2),`
+  - `grid: rect(4, 4, 6, 6) + rect(14, 4, 6, 6) + rect(4, 14, 6, 6) + rect(14, 14, 6, 6),`
+- R2, `ConstructionG` (art/KeyArt.jsx): m03_2 prints "34°" on the Latin cuts; only the Arabic cuts are labelled "42°". It currently prints "42°" on all. Check the frame and correct.
