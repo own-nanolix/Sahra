@@ -10,17 +10,17 @@ import { PlanArt, LAYERS } from './PlanArt';
 import s from './lp-process.module.css';
 
 // The plan on its own, large, with one chip per layer: take layers away to read the plan a part at a time.
-// The labels are plain English names for the layers (our words); the paragraph is the plan text of m13.
+// The labels are plain English names of what each layer draws (our words), nothing more.
 const LABELS = {
   shell: 'Walls',
   openings: 'Doors',
   grid: 'Grid',
   people: 'Desks',
-  circulation: 'Circulation',
-  light: 'Light',
-  scale: 'Scale',
-  flow: 'Flow',
-  materials: 'Materials',
+  circulation: 'Dashed path',
+  light: 'Windows',
+  scale: 'Scale bar',
+  flow: 'Arrows',
+  materials: 'Hatching',
   park: 'Car park',
 };
 
@@ -36,7 +36,7 @@ export default function Layers() {
           </Reveal>
           <Reveal delay={140} className={s.layersSide}>
             <Lines as="h2" id="lp-process-layers-title" className="t-h3" rows={LINES.cleanArchitecture.rows} />
-            <p className={`t-small ${s.layersText}`}>Choose the layers to show. Each part of the plan is drawn on its own layer.</p>
+            <p className={`t-label ${s.layersText}`}>Plan layers</p>
             <div className={s.layersChips} role="group" aria-label="Plan layers">
               {LAYERS.map((id) => (
                 <Chip key={id} pressed={on.includes(id)} onClick={() => toggle(id)}>

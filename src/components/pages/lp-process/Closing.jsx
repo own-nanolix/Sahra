@@ -7,8 +7,8 @@ import { LINES, HEX } from '@/lib/brand';
 import { arcPath, arcLength } from '@/lib/charts';
 import s from './lp-process.module.css';
 
-// The close: Tribal Brown board with the guide grid of a drawing, a quarter arch drawn on along it, the brand
-// line and the web address as the one button.
+// The close: Tribal Brown board with the guide grid of a drawing, a quarter arch drawn on along it, the hoarding's
+// line (m16) and the web address as the one button.
 export default function Closing() {
   return (
     <section className={`field-tribal on-brown ${s.closing}`} id="lp-process-closing" aria-labelledby="lp-process-closing-title">
@@ -22,7 +22,7 @@ export default function Closing() {
         ))}
       </Art>
       <div className={`wrap ${s.closingInner}`}>
-        <Lines as="h2" id="lp-process-closing-title" rows={LINES.imagination.rows} className="t-display" />
+        <Lines as="h2" id="lp-process-closing-title" rows={LINES.refinedLiving.rows} className="t-display" />
         <Button url href="/lp-contact/" variant="beige" size="lg">sahra.sa</Button>
       </div>
     </section>

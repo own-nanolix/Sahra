@@ -62,10 +62,6 @@ export default function Hero() {
           <motion.div className={s.fillWrap} style={{ '--lp-fill': fill }}>
             <ArchHeaderArt />
           </motion.div>
-          <p className={`t-label ${s.cap}`}>
-            <span>We Build Spaces of Imagination</span>
-            <span>Scroll to fill the arch</span>
-          </p>
         </motion.div>
       </div>
     </section>

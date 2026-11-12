@@ -5,7 +5,7 @@ import Reveal from '@/components/site/Reveal';
 import Button from '@/components/ui/Button';
 import RuledRows from '@/components/ui/RuledRows';
 import { Lines, Contact } from '@/components/ui/Card';
-import { ABOUT, INTRO, LINES, PLAN, POSTER_BODY, CONTACT_BLOCKS } from '@/lib/brand';
+import { ABOUT, CLIENT, INTRO, LINES, PLAN, POSTER_BODY, CONTACT_BLOCKS } from '@/lib/brand';
 import { ArchWindowArt } from './ArtHeader';
 import { IntroSlideArt, WallSkyArt, BrickPosterArt, SkyPosterArt, HoardingArt } from './ArtPosters';
 import { PlanSheetArt, ContactsArt } from './ArtPlan';
@@ -81,11 +81,11 @@ export default function Story() {
         </div>
 
         <div className="story-steps">
-          <Step i={0} label="About Sahra" title="Philosophy, Our Process and Our Vision" setRef={setRef}>
+          <Step i={0} label={ABOUT.label} title={LINES.designing.text} setRef={setRef}>
             <RuledRows id="lp-home-story-rows" rows={ROWS} />
           </Step>
 
-          <Step i={1} label="Intro" title={LINES.imagination.text} setRef={setRef}>
+          <Step i={1} label="Intro slide" title={LINES.imagination.text} setRef={setRef}>
             <div className="stack">
               {[0, 4, 5].map((n) => (
                 <p key={n} className="t-body t-justify">{INTRO.paragraphs[n]}</p>
@@ -93,7 +93,7 @@ export default function Story() {
             </div>
           </Step>
 
-          <Step i={2} label="Posters" title="Sahra develops spaces that go beyond structure" setRef={setRef}>
+          <Step i={2} label="Poster body" title="Posters" setRef={setRef}>
             <p className="t-body">{POSTER_BODY}</p>
           </Step>
 
@@ -112,11 +112,11 @@ export default function Story() {
             </p>
           </Step>
 
-          <Step i={6} label="Plan sheet" title="Floor planning at Sahra" setRef={setRef}>
+          <Step i={6} label="Presentation box" title="Plan sheet" setRef={setRef}>
             <p className="t-body">{PLAN.text}</p>
           </Step>
 
-          <Step i={7} label="Contacts" title="Riyadh, Saudi Arabia" setRef={setRef}>
+          <Step i={7} label={CLIENT} title="Contacts" setRef={setRef}>
             <div className="contact-group">
               <Contact lines={CONTACT_BLOCKS.office} />
               <Contact lines={CONTACT_BLOCKS.service} />

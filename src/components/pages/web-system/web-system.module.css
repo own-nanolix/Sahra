@@ -37,7 +37,11 @@
 .sActive :global(.btn-black) { background: var(--chocolate); }
 .sActive :global(.btn-outline) { background: rgba(135, 93, 65, 0.16); color: inherit; }
 .sActive :global(.btn-ghost) { background: rgba(135, 93, 65, 0.16); color: inherit; }
+.sHover :global(.btn-dark) { background: #4a3328; }
+.sHover :global(.btn-beige) { background: var(--white); }
+.sActive :global(.btn-beige) { background: var(--sand-20); }
 .sFocus :global(.btn) { outline: 2px solid var(--tribal); outline-offset: 2px; }
+.sFocus.onDarkCell :global(.btn) { outline-color: var(--sand); }
 
 /* ---- Links and tags ---- */
 .linkList { display: grid; gap: 22px; }

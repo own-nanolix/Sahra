@@ -228,23 +228,25 @@ export function SheetArt({ className }) {
     <Art viewBox="0 0 640 840" title="Sahra plan sheet with a floor plan" exportName="lp-process-sheet" className={className}>
       <rect x="58" y="46" width="560" height="780" fill="#000000" opacity="0.28" className="fade-in" />
       <rect x="40" y="30" width="560" height="780" fill={HEX.white} className="settle" />
-      <g className="sans fade-in" style={{ '--i': 4 }} fontSize="12" fill={INK}>
-        <text x="84" y="92" fill={HEX.tribal}>{SENDER.developement}</text>
-        <text x="270" y="92">{CONTACT.support}</text>
-        <text x="270" y="108">{CONTACT.partnerships}</text>
-        <text x="470" y="92">{CONTACT_BLOCKS.office[0]}</text>
-        <text x="470" y="108">{CONTACT.phone}</text>
-        <text x="470" y="124">{CONTACT.info}</text>
+      {/* m13, measured as fractions of the sheet: header at 5.5 % of its height, the contacts at 37.6 % and 76.7 %
+          of its width, the Sand mark and the plan text (from 37.6 %) at 91 %, the rings at 32 % and 68 %. */}
+      <g className="sans fade-in" style={{ '--i': 4 }} fontSize="9.5" fill={INK}>
+        <text x="74" y="76" fill={HEX.tribal}>{SENDER.developement}</text>
+        <text x="251" y="76">{CONTACT.support}</text>
+        <text x="251" y="89">{CONTACT.partnerships}</text>
+        <text x="470" y="76">{CONTACT_BLOCKS.office[0]}</text>
+        <text x="470" y="89">{CONTACT.phone}</text>
+        <text x="470" y="102">{CONTACT.info}</text>
       </g>
-      <g transform="translate(96 150) scale(0.86)">
+      <g transform="translate(96 140) scale(0.86)">
         <PlanG idp="lp-process-sheet" draw />
       </g>
-      <MarkG x={84} y={708} size={34} fill={HEX.sand} topClass="mark-top" bottomClass="mark-bottom" />
+      <MarkG x={74} y={736} size={36} fill={HEX.sand} topClass="mark-top" bottomClass="mark-bottom" />
       <g fill={HEX.tribal} opacity="0.22">
-        {[0, 1, 2, 3].map((i) => <rect key={i} className="grow-x" style={{ '--i': i + 6 }} x="150" y={712 + i * 12} width={i === 3 ? 260 : 400} height="4" />)}
+        {[0, 1, 2, 3, 4].map((i) => <rect key={i} className="grow-x" style={{ '--i': i + 6 }} x="251" y={738 + i * 10} width={i === 4 ? 200 : 312} height="3.5" />)}
       </g>
-      <g fill="none" stroke="#111111" strokeWidth="7">
-        {[250, 600].map((y) => <ellipse key={y} cx="44" cy={y} rx="30" ry="9" />)}
+      <g fill="none" stroke={HEX.black} strokeWidth="7">
+        {[280, 560].map((y) => <ellipse key={y} cx="44" cy={y} rx="30" ry="9" />)}
       </g>
     </Art>
   );

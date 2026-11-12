@@ -2,9 +2,9 @@
 // quarter arch used as a window, and the About page on the phone (m12, right) as flat artwork.
 import Art from '@/components/art/Art';
 import { BrandDefs, ArchWindowG, TimberG } from '@/components/art/KeyArt';
-import { MarkTileG, MarkG } from '@/components/art/Mark';
-import { ScreenAboutG, wrap } from '@/components/art/Devices';
-import { LINES, PROFILE } from '@/lib/brand';
+import { MarkTileG, MarkG, WordmarkG } from '@/components/art/Mark';
+import { wrap } from '@/components/art/Devices';
+import { ABOUT, LINES, PROFILE } from '@/lib/brand';
 import s from './lp-home.module.css';
 
 // The thick band of the arch is ONE stroked centre line (a quarter circle that runs on into a straight arm), so the
@@ -31,9 +31,9 @@ export function ArchHeaderArt() {
         <g clipPath={`url(#${idp}-head)`}>
           <path d={ARCH_D} className={s.archStroke} fill="none" stroke={`url(#${idp}-arch)`} strokeWidth="85" strokeDasharray={ARCH_LEN} />
         </g>
-        <text className="serif" fontSize="27" fill="#F5F0E3" letterSpacing="-0.4">
+        <text className="serif" fontSize="28.5" fill="#F5F0E3" letterSpacing="-0.4">
           {LINES.imagination.rows.map((r, i) => (
-            <tspan key={r} x="234" y={70 + i * 32}>{r}</tspan>
+            <tspan key={r} x="234" y={81 + i * 32}>{r}</tspan>
           ))}
         </text>
         <MarkTileG x={47} y={130} size={104} radius={24} tile="#F5F0E3" fill="#875D41" />
@@ -71,11 +71,47 @@ export function ArchWindowArt() {
   );
 }
 
-// The About page on the phone as flat artwork (390 x 844): the shared rebuild of m12.
+// The About page on the phone (m12, right), re-measured from the full-size original (screen straightened, 390 x 844
+// artboard): word-mark 152 wide at the top left, the menu's three bars at the right, label baseline 165, headline
+// 31 / 35, paragraph 12 / 23.5 in five lines, three rows 99 apart with a fine rule, the number, the serif label
+// and a small "+".
+export const SCREEN = {
+  word: { x: 26, y: 60, w: 152 },
+  menu: { x: 334, y: 63, w: 30, gap: 8 },
+  label: { y: 165, size: 12 },
+  head: { y: 210, size: 31, lh: 35 },
+  text: { y: 324, size: 12, lh: 23.5, wrap: 44 },
+  rows: { y: 480, h: 99, noY: 62, labelX: 64, labelY: 60, plusX: 329, plusY: 46, plus: 11 },
+};
+
 export function PhoneScreenArt() {
+  const { word, menu, label, head, text, rows } = SCREEN;
+  const ink = '#35241C';
+  const rule = 'rgba(53, 36, 28, 0.4)';
+  const half = rows.plus / 2;
   return (
     <Art viewBox="0 0 390 844" title="About Sahra page on the phone" exportName="lp-home-phone-screen">
-      <ScreenAboutG idp="lp-home-ps" />
+      <rect width="390" height="844" fill="#F5F0E3" />
+      <WordmarkG x={word.x} y={word.y} width={word.w} fill="#875D41" />
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x={menu.x} y={menu.y + i * menu.gap} width={menu.w} height="2" fill={ink} />
+      ))}
+      <text x="28" y={label.y} fontSize={label.size} fill={ink} className="sans">{ABOUT.label}</text>
+      <text fontSize={head.size} fontWeight="500" className="serif" fill={ink} letterSpacing="-0.5">
+        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x="28" y={head.y + i * head.lh}>{r}</tspan>)}
+      </text>
+      <text fontSize={text.size} className="sans" fill="#1E140F">
+        {wrap(ABOUT.text, text.wrap).map((l, i) => <tspan key={i} x="28" y={text.y + i * text.lh}>{l}</tspan>)}
+      </text>
+      {ABOUT.rows.map((r, i) => (
+        <g key={r.no} transform={`translate(28 ${rows.y + i * rows.h})`}>
+          <path d="M0 0H334" stroke={rule} strokeWidth="1" />
+          <text x="0" y={rows.noY} fontSize="14" className="sans" fill={ink}>{r.no}</text>
+          <text x={rows.labelX} y={rows.labelY} fontSize="20" className="serif" fill={ink}>{r.label}</text>
+          <path d={`M${rows.plusX - half} ${rows.plusY}h${rows.plus}M${rows.plusX} ${rows.plusY - half}v${rows.plus}`} stroke={ink} strokeWidth="1" />
+        </g>
+      ))}
+      <path d={`M28 ${rows.y + 3 * rows.h}H362`} stroke={rule} strokeWidth="1" />
     </Art>
   );
 }

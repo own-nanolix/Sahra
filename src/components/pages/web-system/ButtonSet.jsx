@@ -11,13 +11,17 @@ const STATES = [
   { key: 'disabled', label: 'Disabled', cls: '' },
 ];
 
+// The six variants of the shared Button (tribal, black, dark, beige, outline, ghost), then the icon and large sizes.
+// Beige is shown on Dark Chocolate, where it is used.
 const VARIANTS = [
-  { key: 'url', label: 'Tribal Brown, as the hoarding', props: { url: true }, text: 'sahra.sa' },
+  { key: 'tribal', label: 'Tribal Brown, as the hoarding', props: { url: true }, text: 'sahra.sa' },
   { key: 'black', label: 'Black, as Follow', props: { variant: 'black' }, text: 'Follow' },
+  { key: 'dark', label: 'Dark Chocolate', props: { variant: 'dark' }, text: 'Philosophy' },
+  { key: 'beige', label: 'Beige, on dark', props: { variant: 'beige', url: true }, text: 'sahra.sa', dark: true },
   { key: 'outline', label: 'Outline', props: { variant: 'outline' }, text: 'Our Vision' },
-  { key: 'quiet', label: 'Quiet link with arrow', props: { variant: 'ghost', iconRight: 'arrow-right' }, text: 'Our Process' },
+  { key: 'ghost', label: 'Ghost with arrow', props: { variant: 'ghost', iconRight: 'arrow-right' }, text: 'Our Process' },
   { key: 'icon', label: 'Icon button', props: { icon: 'menu', label: 'Menu' }, text: null },
-  { key: 'large', label: 'Large', props: { url: true, size: 'lg' }, text: 'sahra.sa' },
+  { key: 'large', label: 'Large', props: { size: 'lg' }, text: 'Follow' },
 ];
 
 export default function ButtonSet() {
@@ -39,7 +43,7 @@ function ButtonRow({ v }) {
     <>
       <span className={s.rowHead}>{v.label}</span>
       {STATES.map((st) => (
-        <div key={st.key} className={`${s.cell} ${st.cls}`}>
+        <div key={st.key} className={`${s.cell} ${st.cls} ${v.dark ? `${s.onDarkCell} on-dark` : ''}`}>
           <Button
             {...v.props}
             disabled={st.key === 'disabled'}

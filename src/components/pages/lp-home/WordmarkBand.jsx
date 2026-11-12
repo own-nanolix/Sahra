@@ -1,6 +1,6 @@
 import Art from '@/components/art/Art';
 import { WordmarkG, WM } from '@/components/art/Mark';
-import { CONSTRUCTION_MARKS } from '@/components/art/KeyArt';
+import { CONSTRUCTION_MARKS, DRAWING } from '@/components/art/KeyArt';
 import { LINES } from '@/lib/brand';
 import InView from './InView';
 import s from './lp-home.module.css';
@@ -21,7 +21,7 @@ export function WordmarkArt() {
       </g>
       <WordmarkG x={0} y={0} width={WM.W} fill="#875D41" pieceClass="settle" />
       <g className="fade-in" style={{ "--i": 9 }}>
-        <rect x="0" y="236" width={WM.X} height="10" fill="#F2B4AA" />
+        <rect x="0" y="236" width={WM.X} height="10" fill={DRAWING.unit} />
         <text x="0" y="276" fontSize="22" fill="#7A5A3F" className="sans">x</text>
       </g>
     </Art>
@@ -33,7 +33,7 @@ export default function WordmarkBand() {
     <section className={`wrap ${s.markBand}`} aria-labelledby="lp-home-mark-h">
       <div className={s.markHead}>
         <h2 id="lp-home-mark-h" className="t-line t-balance">{LINES.imagination.text}</h2>
-        <p className="t-label">Drawn on a grid of equal strokes</p>
+        <p className="t-label">Word-mark construction</p>
       </div>
       <InView>
         <WordmarkArt />

@@ -78,7 +78,7 @@ export default function PlanStory() {
                 {st.lens && (
                   <div className={`row ${s.lenses}`} role="group" aria-label="Show on the plan">
                     {LENSES.map((l) => (
-                      <Chip key={l.id} pressed={lens === l.id} onClick={() => setLens(l.id)}>
+                      <Chip key={l.id} pressed={lens === l.id} onClick={() => { setLens(l.id); setActive(i); }}>
                         {l.label}
                       </Chip>
                     ))}
