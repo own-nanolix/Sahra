@@ -100,3 +100,4 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
 - R2, `ConstructionG` (art/KeyArt.jsx): m03_2 prints "34°" on the Latin cuts; only the Arabic cuts are labelled "42°". It currently prints "42°" on all. Check the frame and correct.
 - R5, `src/components/art/Devices.jsx` `ScreenAboutG`: take the measured values now in `src/components/pages/lp-home/ArtHeader.jsx` (`SCREEN`: word-mark 152 wide, headline 31/35, five-line paragraph, rows 99 apart).
 - R5, `globals.css`: `.btn:active` turns `.btn-beige` chocolate on chocolate; add `.btn-beige:active { background: var(--sand-20) }`.
+- R4 also asks to update `ScreenAboutG`, but its measurements of the same screen (m12) differ from R5's: R4 has 24 px margins, word-mark 160 wide, 34 px headline, rows 99 px apart from 488 px, no status bar; R5 has word-mark 152 wide, headline 31/35. The lead must re-measure m12 once and make ScreenAboutG, mobile-a screen 1 and the lp-home phone screen agree.
