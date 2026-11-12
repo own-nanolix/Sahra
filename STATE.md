@@ -98,3 +98,5 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
   - `car: line([[4.5, 16], [3, 16], [3, 11.5], [6.5, 10.5], [8.5, 6], [15.5, 6], [17.5, 10.5], [21, 11.5], [21, 16], [19.5, 16]]) + line([[10.5, 16], [13.5, 16]]) + ring(7.5, 17, 2) + ring(16.5, 17, 2),`
   - `grid: rect(4, 4, 6, 6) + rect(14, 4, 6, 6) + rect(4, 14, 6, 6) + rect(14, 14, 6, 6),`
 - R2, `ConstructionG` (art/KeyArt.jsx): m03_2 prints "34°" on the Latin cuts; only the Arabic cuts are labelled "42°". It currently prints "42°" on all. Check the frame and correct.
+- R5, `src/components/art/Devices.jsx` `ScreenAboutG`: take the measured values now in `src/components/pages/lp-home/ArtHeader.jsx` (`SCREEN`: word-mark 152 wide, headline 31/35, five-line paragraph, rows 99 apart).
+- R5, `globals.css`: `.btn:active` turns `.btn-beige` chocolate on chocolate; add `.btn-beige:active { background: var(--sand-20) }`.
