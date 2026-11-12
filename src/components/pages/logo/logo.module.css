@@ -1,0 +1,83 @@
+/* The logo page. Layout only: every graphic keeps its geometry in SVG attributes. */
+.page { padding-bottom: calc(var(--band) / 2); }
+
+.head { padding-block: clamp(36px, 6vw, 96px) clamp(20px, 3vw, 40px); display: grid; gap: 18px; max-width: 920px; }
+.head p { max-width: 62ch; }
+
+.section { padding-block: clamp(28px, 4vw, 64px); display: grid; gap: clamp(18px, 2.4vw, 36px); }
+.sectionHead { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 16px; align-items: baseline; border-top: var(--hair) solid var(--line-strong); padding-top: 16px; }
+.sectionHead h2 { grid-column: 2; }
+.sectionHead p { grid-column: 2; max-width: 64ch; margin-top: 10px; }
+.sectionHead .num { grid-column: 1; grid-row: 1; }
+
+/* A 12 column grid; the plates choose their spans. */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+.c12 { grid-column: span 12; } .c9 { grid-column: span 9; } .c8 { grid-column: span 8; } .c7 { grid-column: span 7; }
+.c6 { grid-column: span 6; } .c5 { grid-column: span 5; } .c4 { grid-column: span 4; } .c3 { grid-column: span 3; }
+.rowSpan2 { grid-row: span 2; align-self: stretch; }
+
+.plate { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.art { position: relative; overflow: hidden; border-radius: var(--r-card-sm); line-height: 0; }
+.art > svg, .art > div > svg { display: block; width: 100%; height: auto; }
+.cap { display: grid; gap: 2px; }
+.flat .art { border-radius: 0; }
+
+/* A plate that stretches to the height of its neighbours; the artwork letterboxes on its own ground. */
+.fill { height: 100%; }
+.fill .art { flex: 1; min-height: 360px; background: var(--ground, var(--chocolate)); }
+.fill .art > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Wide drawings keep a readable size and scroll inside their own box on small screens. */
+.scroll { overflow-x: auto; border-radius: var(--r-card-sm); }
+.scroll:focus-visible { outline: 2px solid var(--tribal); outline-offset: 3px; }
+.scrollIn { min-width: 760px; }
+
+.hero { background: var(--chocolate); border-radius: var(--r-card-sm); overflow: hidden; line-height: 0; }
+.hero svg { display: block; width: 100%; height: clamp(300px, 64vh, 760px); }
+
+/* Measurements of the trace, as ruled rows. */
+.measures { margin: 0; padding: 0; list-style: none; display: grid; align-content: start; }
+.measures li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 14px 0; border-bottom: var(--hair) solid var(--line-strong); }
+.measures li:first-child { border-top: var(--hair) solid var(--line-strong); }
+.measures .label { font-family: var(--font-serif); font-size: clamp(16px, 1.3vw, 20px); line-height: 1.2; color: var(--ink); }
+.measures .value { font-variant-numeric: tabular-nums; color: var(--ink); font-size: 15px; }
+.measuresNote { margin-top: 14px; }
+
+.minGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+
+/* The four colour versions: equal fields that meet, as on m09. */
+.colours { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-radius: var(--r-card-sm); overflow: hidden; line-height: 0; }
+.colours svg { display: block; width: 100%; height: auto; }
+.colourNames { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin: 0; padding: 0; list-style: none; }
+.colourNames li { border-top: var(--hair) solid var(--line-strong); padding-top: 8px; }
+
+.marks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.misuse { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+
+/* The draw-on: a dark stage, a bar with the Replay button. */
+.drawOn { background: var(--chocolate); border-radius: var(--r-card-sm); overflow: hidden; }
+.drawStage { line-height: 0; }
+.drawStage svg { display: block; width: 100%; height: auto; }
+.drawBar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px clamp(16px, 2vw, 28px); border-top: var(--hair) solid var(--line-on-dark); flex-wrap: wrap; }
+
+.enter { animation: slide-up var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 120ms + 80ms); }
+
+@media (max-width: 1000px) {
+  .marks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .misuse { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .colourNames { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .c9, .c8, .c7, .c6, .c5, .c4 { grid-column: span 12; }
+  .c3 { grid-column: span 12; }
+  .rowSpan2 { grid-row: auto; align-self: start; }
+  .fill { height: auto; }
+  .fill .art { min-height: 0; aspect-ratio: var(--ratio, 1 / 1); }
+  .fill .art { max-height: 520px; }
+}
+@media (max-width: 600px) {
+  .misuse { grid-template-columns: minmax(0, 1fr); }
+  .marks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sectionHead { grid-template-columns: 44px minmax(0, 1fr); }
+  .scrollIn { min-width: 640px; }
+}
