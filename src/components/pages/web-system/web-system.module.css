@@ -1,0 +1,120 @@
+/* Web system workbench: page-only styles. Shared classes (btn, chip, card, rows, lp-nav, lp-footer) are never
+   redefined here; the "pinned state" rules only hold a state still so it can be shown next to the others. */
+
+.head { display: grid; gap: 14px; padding-block: clamp(40px, 6vw, 96px) clamp(28px, 4vw, 56px); }
+.head h1 { animation: web-system-enter var(--dur-4) var(--ease-out) both; }
+.head p { animation: web-system-enter var(--dur-4) var(--ease-out) 120ms both; }
+.rule { display: block; height: 1px; background: var(--line-strong); transform-origin: 0 50%; animation: web-system-line var(--dur-4) var(--ease-draw) 200ms both; }
+@keyframes web-system-enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes web-system-line { from { transform: scaleX(0); } to { transform: none; } }
+
+.tileHead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+.tileHead h2 { font-family: var(--font-serif); font-size: 21px; line-height: 1.1; letter-spacing: -0.01em; font-weight: 400; }
+.tileHead span { font-size: 12px; color: var(--muted); }
+:global(.tile-dark) .tileHead span { color: var(--beige-muted); }
+.navTile { padding: 0; }
+.navTile .tileHead { padding: clamp(16px, 1.8vw, 28px) clamp(16px, 1.8vw, 28px) 0; }
+.navDemo { display: grid; }
+.navDemo > div + div { margin-top: 1px; }
+.navLight { background: var(--beige); }
+.navDark { background: var(--chocolate); }
+
+/* ---- Button set ---- */
+.scroller { overflow-x: auto; max-width: 100%; scrollbar-width: thin; }
+.matrix { display: grid; grid-template-columns: 100px repeat(5, minmax(112px, 1fr)); gap: 14px 12px; align-items: center; min-width: 720px; }
+.matrix > .colHead { font-size: 12px; color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--line-strong); }
+.matrix > .rowHead { font-size: 12px; color: var(--muted); }
+.cell { display: flex; align-items: center; min-height: 54px; }
+.onDarkCell { background: var(--chocolate); border-radius: var(--r-btn); padding: 0 8px; color: var(--beige); }
+
+/* Pinned states: the same declarations as the shared :hover / :active, held still. */
+.sHover :global(.btn) { background: #774f36; transform: translateY(-1px); }
+.sHover :global(.btn-black) { background: var(--chocolate); }
+.sHover :global(.btn-outline) { background: rgba(135, 93, 65, 0.08); }
+.sHover :global(.btn-ghost) { background: rgba(135, 93, 65, 0.08); }
+.sHover :global(.btn-url)::before { transform: translateX(4px); }
+.sActive :global(.btn) { background: var(--chocolate); transform: translateY(1px); }
+.sActive :global(.btn-black) { background: var(--chocolate); }
+.sActive :global(.btn-outline) { background: rgba(135, 93, 65, 0.16); color: inherit; }
+.sActive :global(.btn-ghost) { background: rgba(135, 93, 65, 0.16); color: inherit; }
+.sFocus :global(.btn) { outline: 2px solid var(--tribal); outline-offset: 2px; }
+
+/* ---- Links and tags ---- */
+.linkList { display: grid; gap: 22px; }
+.inline { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 16px; }
+.darkStrip { background: var(--chocolate); color: var(--beige); border-radius: var(--r-card-sm); padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; }
+.tagBlock { display: grid; gap: 14px; }
+
+/* ---- Feature cards ---- */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); align-items: stretch; }
+@media (max-width: 1100px) { .cards { grid-template-columns: minmax(0, 1fr); } }
+.cardHover { transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out); }
+.cardHover:hover { transform: translateY(-4px); box-shadow: 8px 9px 0 0 rgba(53, 36, 28, 0.1); }
+.cardMedia { display: block; width: 100%; height: auto; border-radius: var(--r-card-sm); margin-bottom: 20px; }
+.cardWide { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 20px; align-items: center; }
+.cardWide svg { width: 100%; height: auto; border-radius: 12px; }
+@media (max-width: 1100px) and (min-width: 560px) { .cardWide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+@media (max-width: 559px) { .cardWide { grid-template-columns: minmax(0, 1fr); } }
+.cardBody { display: grid; gap: 12px; align-content: start; }
+.boardMedia { display: block; width: 100%; height: auto; margin: 0 0 20px; }
+.cardFoot { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+
+/* ---- Content block ---- */
+.block { display: grid; gap: 16px; max-width: 34em; }
+.block h3 { text-wrap: balance; }
+
+/* ---- Footer tile ---- */
+.footTile { padding: 0; }
+.footTile :global(.lp-footer) { padding-block: 40px 24px; }
+.footTile .tileHead { padding: clamp(16px, 1.8vw, 28px) clamp(16px, 1.8vw, 28px) 18px; margin: 0; }
+
+/* ---- Mega menu ---- */
+.megaTile { background: var(--chocolate); color: var(--beige); padding: 0; }
+.megaTile .tileHead { padding: clamp(16px, 1.8vw, 28px) clamp(16px, 1.8vw, 28px) 0; }
+.megaBar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px clamp(16px, 1.8vw, 28px); }
+.megaBar svg { width: clamp(104px, 9vw, 140px); height: auto; color: var(--sand); }
+.megaStage { position: relative; overflow: hidden; border-top: 1px solid var(--line-on-dark); }
+.megaPanel { position: relative; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 3fr); gap: clamp(20px, 3vw, 56px); padding: clamp(20px, 3vw, 48px) clamp(16px, 1.8vw, 28px) clamp(24px, 3vw, 44px); }
+@media (max-width: 900px) { .megaPanel { grid-template-columns: minmax(0, 1fr); } }
+.megaArt { display: block; width: 100%; height: auto; max-height: 420px; border-radius: var(--r-card-sm); }
+.megaGroup h3 { font-size: 12px; font-weight: 400; color: var(--beige-muted); padding-bottom: 12px; border-bottom: 1px solid var(--line-on-dark); margin-bottom: 2px; }
+.megaLink { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line-on-dark); color: var(--beige); text-decoration: none; font-family: var(--font-serif); font-size: clamp(20px, 2vw, 28px); line-height: 1.1; transition: color var(--dur-1) var(--ease-out), padding var(--dur-3) var(--ease-out); }
+.megaLink span:first-child { font-family: var(--font-sans); font-size: 12px; color: var(--beige-muted); }
+.megaLink::after { content: "+"; font-family: var(--font-sans); font-size: 16px; color: var(--beige-muted); transition: transform var(--dur-3) var(--ease-out); }
+.megaLink:hover { color: var(--sand); padding-left: 10px; }
+.megaLink:hover::after { transform: rotate(90deg); }
+.megaLink:active { color: var(--beige); }
+.megaSide { display: grid; gap: 28px; align-content: start; }
+/* The wall that slides aside: a Tribal Brown plate covering the panel, drawn with a hard Sand edge. */
+.wall { position: absolute; inset: 0; z-index: 3; background: var(--tribal); box-shadow: -10px 0 0 0 var(--sand); pointer-events: none; will-change: transform; }
+.wallTag { position: absolute; left: clamp(16px, 1.8vw, 28px); bottom: 20px; font-family: var(--font-serif); font-size: clamp(22px, 2.6vw, 40px); line-height: 1.05; color: var(--beige); }
+.megaClosed { padding: clamp(28px, 4vw, 56px) clamp(16px, 1.8vw, 28px); color: var(--beige-muted); font-size: 13px; }
+.megaBtn { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border: 0; border-radius: var(--r-btn); background: var(--beige); color: var(--chocolate); font-size: 15px; transition: background-color var(--dur-2) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.megaBtn:hover { background: var(--white); transform: translateY(-1px); }
+.megaBtn:active { transform: translateY(1px); }
+.megaBtn:focus-visible { outline: 2px solid var(--sand); outline-offset: 3px; }
+
+/* ---- Anatomy ---- */
+.anatomy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 1100px) { .anatomy { grid-template-columns: minmax(0, 1fr); } }
+.anatomy svg { width: 100%; height: auto; border-radius: var(--r-card-sm); }
+.flat { display: block; width: 100%; height: auto; }
+
+/* ---- Specification ---- */
+.spec { margin: 0; border-bottom: 1px solid var(--line-strong); }
+.specRow { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); gap: 16px; padding: 12px 2px; border-top: 1px solid var(--line-strong); font-size: 14px; line-height: 1.4; }
+.specRow dt { font-family: var(--font-serif); font-size: 17px; }
+.specRow dd { margin: 0; color: var(--muted); }
+@media (max-width: 600px) { .specRow { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.anatomyWide { }
+
+/* ---- Pinned states for links and tags ---- */
+.strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 700px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.stripCol { display: grid; gap: 12px; justify-items: start; align-content: start; }
+.pHover :global(.site-url)::before { transform: translateX(4px); }
+.pHover :global(.link) { background-size: 0% 1px; background-position: 100% 100%; }
+.pHover :global(button.chip) { background: var(--sand-20); }
+.pFocus :global(a), .pFocus :global(button) { outline: 2px solid var(--tribal); outline-offset: 3px; }
+.pActive :global(button.chip) { transform: translateY(1px); }
+.pActive :global(.link) { color: var(--chocolate); }
