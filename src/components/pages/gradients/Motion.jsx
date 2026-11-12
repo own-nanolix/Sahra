@@ -7,11 +7,13 @@ import { WordmarkDebossG, MarkG } from '@/components/art/Mark';
 import Reveal from '@/components/site/Reveal';
 import { HEX } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
+import { ease } from '@/lib/motion';
 import GradDef from './GradDef';
 import { byId } from './data';
 import s from './gradients.module.css';
 
-const SLOW = 'cubic-bezier(0.45, 0, 0.55, 1)'; // --ease-sun, written out because an exported file has no tokens
+// The shared --ease-sun token (ease.sun in @/lib/motion), written out: an exported file carries no CSS variables.
+const SLOW = `cubic-bezier(${ease.sun.join(", ")})`;
 const still = (names) => `@media (prefers-reduced-motion: reduce) { ${names} { animation: none; } }`;
 
 // 1. A wide gradient drifting behind a fixed frame and a fixed quarter arch.
@@ -115,7 +117,7 @@ ${still(`.${P}-band`)}`}</style>
 
 const STUDIES = [
   { C: Drift, label: 'Drift: a wide gradient slides behind the arch' },
-  { C: Sun, label: 'Shadow: it lengthens from the foot of the slab and stops' },
+  { C: Sun, label: 'Shadow: it lengthens from the foot of the slab, then draws back' },
   { C: Fill, label: 'Fill: the quarter arch draws on along its curve' },
   { C: Light, label: 'Light: a band crosses the debossed word-mark' },
 ];

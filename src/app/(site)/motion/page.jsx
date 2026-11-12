@@ -57,8 +57,8 @@ export default function Page() {
         </Reveal>
         <div className="bento bento-8">
           <Reveal className="span-5">
-            <div className="tile tile-dark on-dark tile-print">
-              <Label title="Word-mark build" />
+            <div className="tile tile-print">
+              <Label title="Word-mark build" text="In the construction drawing&apos;s own colours, in the order it is drawn." />
               <LogoBuild />
             </div>
           </Reveal>
@@ -76,7 +76,7 @@ export default function Page() {
           </Reveal>
           <Reveal className="span-8">
             <div className="tile">
-              <Label title="Reference frames" text="The four stills of the construction animation, redrawn. Cuts are labelled 42° as the designers printed them." />
+              <Label title="Reference frames" text="The four stills of the construction animation, redrawn." />
               <RefFrames />
             </div>
           </Reveal>
@@ -132,7 +132,7 @@ export default function Page() {
           <Head id="motion-h-micro" title="Micro-interactions" text="Hover, focus and press on every control. Tab to any of them to see the focus ring." />
         </Reveal>
         <div className={`bento bento-8 ${s.microGrid}`}>
-          <Reveal className="span-4"><div className="tile"><Label title="Buttons" text="Hover lifts 1 px, press sinks 1 px. Save runs a task through to Saved." /><ButtonsDemo /></div></Reveal>
+          <Reveal className="span-4"><div className="tile"><Label title="Buttons" text="Hover lifts 1 px, press sinks 1 px. Run shows the busy state through to Done." /><ButtonsDemo /></div></Reveal>
           <Reveal className="span-2"><div className="tile"><Label title="Toggle" text="The thumb slides 20 px in 240 ms." /><ToggleDemo /></div></Reveal>
           <Reveal className="span-2"><div className="tile"><Label title="Chips" text="Pressed chips change ground in 140 ms." /><ChipsDemo /></div></Reveal>
           <Reveal className="span-4"><div className="tile"><Label title="Inputs" text="Focus draws the ring, or a rule that runs along the field." /><InputDemo /></div></Reveal>

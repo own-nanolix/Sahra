@@ -50,7 +50,7 @@ export default function InUse() {
         <h3 className={`t-label ${s.darkLabel}`}>A button</h3>
         <div className={s.useStack}>
           <Button url href="/lp-contact/" variant="beige" size="sm">sahra.sa</Button>
-          <Button variant="outline" size="sm" icon="plus">Follow</Button>
+          <Button variant="outline" size="sm" icon="plan" href="/lp-process/">Our Process</Button>
           <div className="row">
             <Button icon="menu" label="Menu" variant="outline" size="sm" />
             <Button icon="search" label="Search" variant="outline" size="sm" />

@@ -123,7 +123,7 @@ export function SizeStrip({ name, sizes = [16, 24, 32, 48] }) {
 const RULES = [
   ['Grid', `${ICON_GRID.size} px square, live area ${ICON_GRID.live[0]} to ${ICON_GRID.live[1]}: two units of clear space on every side.`],
   ['Equal stroke', `Every line is ${ICON_GRID.stroke} px, the unit x, as the word-mark's stroke is x.`],
-  ['Quarter circles', 'Corners and bowls are quarter circles on the centre line: outer radius one unit more, inner one less.'],
+  ['Quarter circles', `Corners are quarter circles of ${ICON_GRID.radius} px on the centre line: ${ICON_GRID.radius + ICON_GRID.stroke / 2} px outside, ${ICON_GRID.radius - ICON_GRID.stroke / 2} px inside.`],
   ['Diagonal cut', 'Free ends are cut on the word-mark’s diagonal, labelled 42° in the construction drawing.'],
 ];
 

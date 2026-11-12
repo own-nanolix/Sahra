@@ -15,7 +15,7 @@ import { C } from './data';
 import s from './motion.module.css';
 
 // Buttons: the shared states (hover lifts 1 px, active presses 1 px, focus-visible rings 2 px) and one that
-// carries a task through to "Saved". The spinner is the quarter arch turning on --ease-in-out.
+// shows the busy state through to done (a demo: nothing is sent or stored). The spinner is the quarter arch turning on --ease-in-out.
 export function ButtonsDemo() {
   const [state, setState] = useState('idle');
   const timers = useRef([]);
@@ -40,7 +40,7 @@ export function ButtonsDemo() {
           )}
           {state === 'done' && <Icon name="check" size={18} />}
         </span>
-        {state === 'busy' ? 'Saving' : state === 'done' ? 'Saved' : 'Save'}
+        {state === 'busy' ? 'Working' : state === 'done' ? 'Done' : 'Run'}
       </Button>
       <Button variant="outline">Preview</Button>
       <Button variant="black">Follow</Button>
@@ -125,8 +125,8 @@ function LineLoader() {
 export function ToastDemo() {
   return (
     <div className="row" style={{ gap: 10 }}>
-      <Button size="sm" onClick={() => toast('Saved')}>Show saved toast</Button>
-      <Button size="sm" variant="outline" onClick={() => toast('Copied')}>Show copied toast</Button>
+      <Button size="sm" onClick={() => toast('A toast, in from the right')}>Show a toast</Button>
+      <Button size="sm" variant="outline" onClick={() => { toast('First toast'); toast('Second toast'); }}>Show two</Button>
     </div>
   );
 }

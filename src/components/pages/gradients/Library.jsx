@@ -2,6 +2,8 @@
 import Art from '@/components/art/Art';
 import { GrainFilter } from '@/components/art/KeyArt';
 import Reveal from '@/components/site/Reveal';
+import { HEX } from '@/lib/brand';
+import { contrast } from '@/lib/site';
 import { GRADIENTS } from './data';
 import GradDef from './GradDef';
 import s from './gradients.module.css';
@@ -18,12 +20,13 @@ function Plate({ g, i }) {
       <g clipPath={`url(#${idp}-clip)`}>
         <rect width="200" height={g.h} fill={`url(#${idp}-${g.id})`} filter={`url(#${idp}-grain)`} />
       </g>
+      <rect x="0.5" y="0.5" width="199" height={g.h - 1} rx="17.5" fill="none" stroke={HEX.chocolate} strokeOpacity="0.14" />
       {g.stops.map(([o], k) => {
         // a small tick at each stop, on the vector, so the plate carries its own anatomy
         const [x1, y1, x2, y2] = g.v;
         const px = (x1 + (x2 - x1) * o) * 200, py = (y1 + (y2 - y1) * o) * g.h;
         const cx = Math.min(188, Math.max(12, px)), cy = Math.min(g.h - 12, Math.max(12, py));
-        return <circle key={k} cx={cx} cy={cy} r="3.5" fill="none" stroke="#FFFFFF" strokeOpacity="0.8" strokeWidth="1.2" />;
+        return <circle key={k} cx={cx} cy={cy} r="3.5" fill="none" stroke={contrast(g.stops[k][1], HEX.white) < 2 ? HEX.chocolate : HEX.white} strokeOpacity="0.8" strokeWidth="1.2" />;
       })}
     </Art>
   );

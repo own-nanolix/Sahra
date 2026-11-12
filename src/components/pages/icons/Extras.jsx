@@ -61,8 +61,8 @@ export function UtilSheet() {
 }
 
 export const USAGE = [
-  { no: '01', label: 'Size', body: 'Draw at 24 px. Use 16 px inside small buttons and chips, 20 px in the standard button, 32 px and 48 px on plaques and sheets. Never draw between these sizes: the 2 px stroke must land on the pixel grid.' },
-  { no: '02', label: 'Colour', body: 'An icon takes the ink of the text beside it: Chocolate on light grounds, Beige on dark ones. Sand is kept for dark grounds, where it passes; on Beige it is for large artwork only.' },
-  { no: '03', label: 'Stroke', body: 'One stroke, never thickened or thinned to suit a size. If an icon is too crowded at 16 px, it is redrawn on the grid, not scaled.' },
-  { no: '04', label: 'Corners and ends', body: 'Corners are quarter circles, bowls are true circles, and free ends are cut on the word-mark’s diagonal. Nothing is softened, rounded off or capped.' },
+  { no: '01', label: 'Size', body: 'Draw on the 24 px grid. Use 16 px in small buttons and chips, 20 px in the standard button, 24 px beside text, and 32 or 48 px on plaques and sheets. At other sizes the stroke falls between pixels and softens.' },
+  { no: '02', label: 'Colour', body: 'Give an icon the ink of the text beside it: Dark Chocolate Brown on light grounds, Beige on dark ones. Keep Sand for dark grounds; on Beige use it only for large artwork.' },
+  { no: '03', label: 'Stroke', body: 'Keep one stroke; do not thicken or thin it to suit a size. If an icon is too crowded at 16 px, redraw it on the grid rather than scaling it.' },
+  { no: '04', label: 'Corners and ends', body: 'Draw corners as quarter circles and bowls as true circles, and cut free ends on the word-mark’s diagonal. Do not soften, round off or cap them.' },
 ];

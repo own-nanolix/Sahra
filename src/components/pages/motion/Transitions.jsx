@@ -40,7 +40,7 @@ export function EnterTimeline() {
       <rect width="420" height="220" fill={C.beige} />
       <text x="20" y="28" fontSize="13" fill={C.muted} className="sans">Page enter, time in ms</text>
       {rows.map((i) => {
-        const d = 80 + i * 60;
+        const d = i * 60;
         const y = 48 + i * 28;
         return (
           <g key={i}>

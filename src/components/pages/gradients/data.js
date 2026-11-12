@@ -6,11 +6,11 @@ const C = HEX;
 // Each gradient: a name built from the published colour names, the vector in bounding-box units (x1 y1 x2 y2),
 // the angle that vector makes, and its stops [offset, colour, name].
 export const GRADIENTS = [
-  { id: 'chocolate-tribal', name: 'Dark Chocolate to Tribal Brown', angle: 0, v: [0, 0, 1, 0], stops: [[0, C.chocolate, 'Dark Chocolate Brown'], [1, C.tribal, 'Tribal Brown']], h: 170 },
+  { id: 'chocolate-tribal', name: 'Dark Chocolate Brown to Tribal Brown', angle: 0, v: [0, 0, 1, 0], stops: [[0, C.chocolate, 'Dark Chocolate Brown'], [1, C.tribal, 'Tribal Brown']], h: 170 },
   { id: 'beige-sand-tribal', name: 'Beige to Sand to Tribal Brown', angle: 90, v: [0, 0, 0, 1], stops: [[0, C.beige, 'Beige'], [0.55, C.sand, 'Sand'], [1, C.tribal, 'Tribal Brown']], h: 215 },
-  { id: 'chocolate-black', name: 'Dark Chocolate to Black', angle: 70, v: [0.2, 0, 0.8, 1], stops: [[0, C.chocolate, 'Dark Chocolate Brown'], [1, C.black, 'Black']], h: 260 },
+  { id: 'chocolate-black', name: 'Dark Chocolate Brown to Black', angle: 70, v: [0.2, 0, 0.8, 1], stops: [[0, C.chocolate, 'Dark Chocolate Brown'], [1, C.black, 'Black']], h: 260 },
   { id: 'sand-beige', name: 'Sand to Beige', angle: 270, v: [0, 1, 0, 0], stops: [[0, C.sand, 'Sand'], [1, C.beige, 'Beige']], h: 305 },
-  { id: 'black-chocolate-tribal', name: 'Black to Dark Chocolate to Tribal Brown', angle: 45, v: [0, 0, 1, 1], stops: [[0, C.black, 'Black'], [0.5, C.chocolate, 'Dark Chocolate Brown'], [1, C.tribal, 'Tribal Brown']], h: 350 },
+  { id: 'black-chocolate-tribal', name: 'Black to Dark Chocolate Brown to Tribal Brown', angle: 45, v: [0, 0, 1, 1], stops: [[0, C.black, 'Black'], [0.5, C.chocolate, 'Dark Chocolate Brown'], [1, C.tribal, 'Tribal Brown']], h: 350 },
   { id: 'white-beige', name: 'White to Beige', angle: 45, v: [0, 0, 1, 1], stops: [[0, C.white, 'White'], [1, C.beige, 'Beige']], h: 395 },
 ];
 

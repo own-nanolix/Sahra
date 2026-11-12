@@ -10,6 +10,8 @@ import s from './gradients.module.css';
 
 const P = 'gradients-hero';
 const W = 512, H = 410, HEAD = 171, RAD = 44;
+// The card body is a pale grey in the reference, sampled at #F5F5F5 (not the palette's White).
+const CARD = '#F5F5F5';
 const BIO = [
   'Sahra is where creativity meets purpose, crafting refined brand experiences that',
   'inspire and resonate. Through thoughtful design and a deep understanding of',
@@ -33,7 +35,7 @@ export function ProfileHeaderArt() {
         <GrainFilter idp={P} amount={0.05} />
       </defs>
       <g clipPath={`url(#${P}-card)`}>
-        <rect width={W} height={H} fill={HEX.white} />
+        <rect width={W} height={H} fill={CARD} />
         <g clipPath={`url(#${P}-head)`}>
           <rect width={W} height={HEAD} fill={`url(#${P}-chocolate-tribal)`} filter={`url(#${P}-grain)`} />
           <path d={arch} fill={`url(#${P}-arch)`} />
