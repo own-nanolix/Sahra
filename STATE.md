@@ -29,7 +29,7 @@ here from the start.
 - [x] 2. Extract the case study
 - [x] 3. Study it and write `SOURCE.md`
 - [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
-- [ ] 5. Build team, two waves; check reports 30 of 30 `ok`
+- [x] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [ ] 6. Review team; shared fixes applied
 - [ ] 7. Verify in the browser; SVG export
 - [ ] 8. `REPORT.md` and `README.md`
@@ -85,3 +85,4 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
   lists 30 stubs and "/". The dev server is not left running (the lead starts it for the build team).
 - Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
 - Wave 1 done: 12 builders, 17 pages, each committed locally; lint clean, build passes, check 17 of 30 ok; every page is over 700 lines. Shared fix: the landing nav fits at phone width (brand shrinks, links wrap). Wave 2 launched (B13 to B24, Sonnet).
+- Wave 2 done: 12 builders, 13 pages, each committed locally. Lint clean, build passes, check --strict 30 of 30 ok; no page under 650 lines, so no page was sent back. Step 6 started: 8 reviewers launched (Opus).
