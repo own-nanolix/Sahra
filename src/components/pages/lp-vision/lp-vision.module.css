@@ -1,0 +1,116 @@
+/* Our Vision: a full-bleed court, a pinned band whose crop slides, the poster pair on a ribbed wall. */
+
+/* ---------- Hero ---------- */
+.stage { position: relative; background: var(--chocolate); }
+.navOver { position: absolute; inset: 0 0 auto 0; z-index: 5; }
+.hero { position: relative; min-height: max(100svh, 640px); display: flex; align-items: flex-end; overflow: hidden; color: var(--beige); isolation: isolate; }
+.heroArt { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: -1; }
+.heroText { width: 100%; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; padding: 0 var(--pad) clamp(28px, 5vw, 84px); }
+.heroTitle { margin: 0; color: var(--beige); }
+.mask { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.heroMeta { display: grid; gap: 8px; justify-items: end; }
+.heroMeta :global(.t-label) { color: var(--beige); }
+
+/* ---------- Intro: built with intention + construction drawing ---------- */
+.intro { padding-block: clamp(64px, 9vw, 150px) clamp(32px, 5vw, 80px); }
+.introHead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 96px); align-items: end; }
+.introMore { margin-top: 20px; max-width: 34em; }
+.construction { margin-top: clamp(40px, 6vw, 96px); border-top: var(--hair) solid var(--line-strong); padding-top: clamp(16px, 2vw, 32px); }
+.construction svg { width: 100%; height: auto; }
+@media (max-width: 800px) { .introHead { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Scope of work ---------- */
+.scope { padding-block: clamp(24px, 4vw, 64px) clamp(56px, 8vw, 128px); }
+.scopeList { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.scopeItem { position: relative; display: grid; gap: 14px; align-content: start; padding-top: 20px; min-height: 140px; }
+.scopeRule { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--line-strong); transform-origin: 0 50%; }
+@media (max-width: 800px) { .scopeList { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- Story: the pinned band ---------- */
+.story { position: relative; background: var(--beige); }
+.storyRoot { position: relative; }
+.bandPin { position: sticky; top: 0; z-index: 3; background: var(--beige); --bh: clamp(220px, 40vh, 440px); }
+.bandView { position: relative; height: var(--bh); overflow: hidden; background: var(--beige); }
+.bandTrack { height: var(--bh); width: max(160vw, calc(var(--bh) * 5.5)); will-change: transform; }
+.bandArt { width: 100%; height: 100%; max-width: none; }
+.bandBar { height: 3px; background: var(--tribal); transform-origin: 0 50%; }
+.steps { position: relative; z-index: 1; padding-inline: var(--pad); max-width: 1680px; margin-inline: auto; }
+.step { width: 100%; max-width: 40em; }
+.stepRight { margin-left: auto; }
+.stepRule { display: block; height: 1px; background: var(--line-strong); margin: 14px 0 22px; transform-origin: 0 50%; }
+.stepText { font-family: var(--font-serif); font-size: clamp(20px, 2vw, 31px); line-height: 1.3; letter-spacing: -0.012em; text-wrap: pretty; }
+
+/* ---------- Statement on Dark Chocolate ---------- */
+.statement { background: var(--chocolate); padding-block: clamp(72px, 10vw, 168px); overflow: hidden; }
+.statementGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 96px); align-items: center; }
+.statementSub { margin: 28px 0 32px; max-width: 24em; color: var(--beige-muted); }
+.arch { width: 100%; max-width: 560px; justify-self: end; }
+.arch svg { width: 100%; height: auto; }
+@media (max-width: 800px) { .statementGrid { grid-template-columns: minmax(0, 1fr); } .arch { justify-self: start; max-width: 360px; } }
+
+/* ---------- The posters on a ribbed wall ---------- */
+.wall { transition: background-color var(--dur-5) var(--ease-sun); position: relative; background-color: var(--sand-40); background-image: repeating-linear-gradient(90deg, rgba(53, 36, 28, 0.07) 0 2px, transparent 2px 10px); padding-block: clamp(56px, 8vw, 128px) clamp(64px, 9vw, 150px); overflow: hidden; }
+.wall::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(53, 36, 28, 0.2) 0%, rgba(53, 36, 28, 0) 38%, rgba(53, 36, 28, 0.12) 100%); }
+.wallLabel { color: var(--chocolate); position: relative; z-index: 1; }
+.posters { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2vw, 32px); max-width: 1100px; margin-inline: auto; padding: clamp(10px, 1.6vw, 26px); background: #1e140f; box-shadow: 14px 18px 0 0 rgba(53, 36, 28, 0.22); }
+.frame { background: #2b2017; padding: clamp(6px, 1.2vw, 18px); box-shadow: inset 0 0 0 1px rgba(245, 240, 227, 0.08); transition: transform var(--dur-4) var(--ease-out); }
+.frame:hover { transform: translateY(-4px); }
+.frame svg { width: 100%; height: auto; }
+.wallFoot { position: relative; z-index: 1; margin-top: 28px; text-align: center; font-size: 14px; color: var(--chocolate); }
+@media (max-width: 560px) { .posters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 6px; gap: 6px; } .frame { padding: 4px; } }
+
+/* ---------- The court as a line drawing ---------- */
+.drawing { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(24px, 5vw, 96px); align-items: center; padding-block: clamp(64px, 9vw, 150px); }
+.drawingArt { border-radius: var(--r-card-sm); overflow: hidden; box-shadow: inset 0 0 0 var(--hair) var(--line-strong); }
+.drawingArt svg { width: 100%; height: auto; }
+.drawingText { display: grid; gap: clamp(28px, 4vw, 56px); }
+@media (max-width: 900px) { .drawing { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Black: the right poster of m14 ---------- */
+.black { padding-block: clamp(72px, 10vw, 168px) clamp(40px, 6vw, 96px); min-height: min(100svh, 880px); display: flex; }
+.blackGrid { display: grid; grid-template-rows: auto 1fr; gap: clamp(40px, 8vw, 140px); width: 100%; }
+.blackGrid :global(.t-display) { max-width: 13em; font-size: clamp(40px, 5.6vw, 96px); }
+.blackFoot { align-self: end; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.blackMark { width: clamp(52px, 6vw, 92px); height: auto; }
+.blackContacts { display: grid; gap: 14px; justify-items: end; text-align: right; color: var(--beige-muted); }
+@media (max-width: 560px) { .blackContacts { justify-items: start; text-align: left; } }
+
+/* ---------- Story ticks under the pinned band ---------- */
+.ticks { list-style: none; margin: 0; padding: 8px var(--pad); display: flex; gap: 20px; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.tick { transition: color var(--dur-2) var(--ease-out), transform var(--dur-3) var(--ease-out); }
+.tickOn { color: var(--ink); transform: translateX(4px); }
+
+/* ---------- The brand lines ---------- */
+.lines { padding-block: 0 clamp(56px, 8vw, 128px); }
+.lineList { list-style: none; margin: 24px 0 0; padding: 0; border-bottom: var(--hair) solid var(--line-strong); }
+.lineRow { display: grid; grid-template-columns: 3.2em minmax(0, 1fr) clamp(72px, 14vw, 220px); align-items: center; gap: 12px; padding: clamp(14px, 1.8vw, 26px) 2px; border-top: var(--hair) solid var(--line-strong); }
+.lineRow :global(.t-line) { max-width: 22em; text-wrap: balance; }
+.lineField { display: block; aspect-ratio: 5 / 3; border-radius: var(--r-card-sm); transform-origin: 100% 50%; transition: transform var(--dur-4) var(--ease-out); }
+.lineRow:hover .lineField { transform: scaleX(1.12); }
+@media (max-width: 560px) { .lineRow { grid-template-columns: 2.4em minmax(0, 1fr) 56px; } }
+
+/* ---------- Hero cue: a line that draws down and rests ---------- */
+.cue { display: block; width: 1px; height: clamp(48px, 7vw, 96px); background: var(--beige); transform-origin: 50% 0; animation: lp-vision-cue var(--dur-5) var(--ease-draw) 1.4s both; }
+@keyframes lp-vision-cue { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* ---------- Evening light on the wall ---------- */
+.wallHead { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.wallHead .wallLabel { margin-bottom: 0; }
+.wall::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; background: linear-gradient(100deg, rgba(30, 20, 15, 0.82) 0%, rgba(30, 20, 15, 0.55) 55%, rgba(30, 20, 15, 0.7) 100%); opacity: 0; transition: opacity var(--dur-5) var(--ease-sun); }
+.wallDusk::before { opacity: 1; }
+.wallDusk .wallLabel, .wallDusk .wallFoot, .wallDusk .wallToggle { color: var(--beige); }
+.wallDusk .wallFoot :global(.link) { color: var(--sand); }
+
+/* ---------- Hover, focus and active states of the page's own controls ---------- */
+.scopeItem { transition: transform var(--dur-3) var(--ease-out); }
+.scopeItem:hover { transform: translateX(6px); }
+.wallToggle { color: var(--chocolate); }
+.frame:active { transform: translateY(1px); }
+.lineRow :global(.t-line) { transition: transform var(--dur-3) var(--ease-out); }
+.lineRow:hover :global(.t-line) { transform: translateX(8px); }
+.stepText::selection { background: var(--sand); }
+@media (prefers-reduced-motion: reduce) { .scopeItem:hover, .lineRow:hover :global(.t-line) { transform: none; } }
+
+/* ---------- Closing block of the story ---------- */
+.storyEnd { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 0 var(--pad) clamp(56px, 8vw, 120px); max-width: 1680px; margin-inline: auto; }
+.storyEnd :global(.t-line) { margin: 0; }

@@ -1,0 +1,109 @@
+/* Spaces: the two posters as panels, one pinned frame that swaps wall and brick, a divider like sun on a wall. */
+
+/* ---------- Hero: two tall posters on a ribbed wall ---------- */
+.hero { position: relative; background-color: var(--sand-40); background-image: repeating-linear-gradient(90deg, rgba(53, 36, 28, 0.07) 0 2px, transparent 2px 10px); padding: clamp(16px, 3vw, 48px) var(--pad) clamp(40px, 6vw, 96px); overflow: hidden; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(112deg, rgba(53, 36, 28, 0.2) 0%, rgba(53, 36, 28, 0) 42%, rgba(53, 36, 28, 0.1) 100%); }
+.pair { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 24px); margin-inline: auto; width: min(100%, calc(2 * (100svh - 130px) * 0.714 + 24px)); min-width: 0; }
+@media (max-width: 640px) { .pair { grid-template-columns: minmax(0, 1fr); width: 100%; } }
+
+.poster { position: relative; aspect-ratio: 5 / 7; container-type: inline-size; overflow: hidden; border: clamp(6px, 0.9vw, 14px) solid #1e140f; box-shadow: 12px 16px 0 0 rgba(53, 36, 28, 0.25); }
+.posterDark { background: var(--chocolate); color: var(--beige); }
+.posterLight { background: var(--beige); color: var(--ink); }
+.posterArt { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.posterStrip { position: absolute; right: 0; top: 2%; width: 42%; height: 93%; max-width: none; }
+.posterBody { position: absolute; inset: 0; }
+.posterTitle { position: absolute; left: 8cqw; top: 8cqw; margin: 0; font-weight: 400; font-size: 8.4cqw; line-height: 1.04; letter-spacing: -0.02em; }
+.posterDark .posterTitle { color: var(--beige); }
+.mask { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.posterText { position: absolute; top: 53%; width: 38cqw; margin: 0; font-size: clamp(10.5px, 1.85cqw, 14px); line-height: 1.45; letter-spacing: -0.005em; }
+.posterDark .posterText { left: 50cqw; width: 42cqw; }
+.posterLight .posterText { left: 8cqw; }
+.posterContacts { position: absolute; bottom: 7cqw; display: grid; gap: 2.2cqw; }
+.posterDark .posterContacts { left: 54cqw; }
+.posterLight .posterContacts { left: 8cqw; }
+.posterContacts :global(.contact) { font-size: clamp(9.5px, 1.8cqw, 13px); }
+.posterMark { position: absolute; left: 8cqw; bottom: 7cqw; width: 7.4cqw; height: auto; color: var(--sand); }
+
+/* ---------- Intro ---------- */
+.intro { display: grid; gap: 18px; justify-items: start; padding-block: clamp(72px, 10vw, 160px) clamp(24px, 4vw, 64px); }
+.introText { max-width: 32em; }
+
+/* ---------- Story: two pinned visuals that swap ---------- */
+.story { padding-inline: var(--pad); max-width: 1680px; margin-inline: auto; }
+.story > .pin { flex-direction: column; display: flex; align-items: center; justify-content: center; gap: 18px; }
+.pinFrame { position: relative; height: min(70vh, 740px); aspect-ratio: 4 / 5; max-width: 100%; overflow: hidden; box-shadow: 12px 14px 0 0 rgba(53, 36, 28, 0.18); background: var(--chocolate); }
+.layer { position: absolute; inset: 0; }
+.visual { width: 100%; height: 100%; max-width: none; }
+.layerBrick { clip-path: inset(100% 0 0 0); transition: clip-path var(--dur-5) var(--ease-in-out); }
+.layerOn { clip-path: inset(0 0 0 0); }
+.pinFoot { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.pinBtn { border: 0; background: transparent; border-radius: 999px; padding: 8px 14px; font-size: 13px; color: var(--ink); box-shadow: inset 0 0 0 var(--hair) var(--line-strong); transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.pinBtn:hover { background: var(--sand-20); }
+.pinBtn:active { transform: translateY(1px); }
+.pinBtn[aria-pressed="true"] { background: var(--chocolate); color: var(--beige); box-shadow: none; }
+.steps { align-content: start; }
+.step { opacity: 0.5; transition: opacity var(--dur-3) var(--ease-out); }
+.stepOn { opacity: 1; }
+.stepRule { display: block; height: 1px; background: var(--line-strong); margin: 12px 0 22px; transform-origin: 0 50%; }
+.lead { font-size: clamp(18px, 1.6vw, 24px); line-height: 1.5; letter-spacing: -0.012em; text-wrap: pretty; }
+.leadAfter { margin-top: 22px; color: var(--muted); }
+@media (max-width: 900px) {
+  .pinFrame { height: 38vh; }
+  .step { opacity: 1; }
+}
+
+/* ---------- Divider: the sun moving on a wall ---------- */
+.sun { position: relative; overflow: hidden; height: clamp(110px, 16.7vw, 260px); }
+.sunTrack { width: 130%; height: 100%; will-change: transform; }
+.sunArt { width: 100%; height: 100%; max-width: none; }
+
+/* ---------- The framed poster of m14 ---------- */
+.framed { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 96px); align-items: center; padding-block: clamp(72px, 10vw, 160px); }
+.framedArt { max-width: 760px; box-shadow: 14px 18px 0 0 rgba(53, 36, 28, 0.2); }
+.framedArt svg { width: 100%; height: auto; }
+.framedText { display: grid; gap: clamp(20px, 3vw, 40px); justify-items: start; }
+@media (max-width: 900px) { .framed { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- The white card ---------- */
+.card { padding-block: clamp(72px, 10vw, 160px); }
+.cardGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 96px); align-items: center; }
+.cardText { display: grid; gap: 24px; max-width: 34em; }
+.cardArt { max-width: 560px; justify-self: end; width: 100%; }
+.cardArt svg { width: 100%; height: auto; }
+@media (max-width: 900px) { .cardGrid { grid-template-columns: minmax(0, 1fr); } .cardArt { justify-self: start; } }
+
+/* ---------- Small screens: taller posters, text re-set inside them, the pin sits above the passing text ---------- */
+@media (max-width: 640px) { .poster { aspect-ratio: 4 / 7; } }
+@container (max-width: 480px) {
+  .posterTitle { font-size: 9.4cqw; }
+  .posterText { top: 41%; font-size: 10.5px; line-height: 1.42; }
+  .posterDark .posterText { left: 8cqw; width: 84cqw; }
+  .posterLight .posterText { width: 46cqw; }
+  .posterDark .posterBody::before { content: ""; position: absolute; left: 0; right: 0; top: 36%; height: 40%; background: linear-gradient(180deg, rgba(30, 20, 15, 0), rgba(30, 20, 15, 0.82) 30%, rgba(30, 20, 15, 0.82)); }
+  .posterContacts { gap: 1.6cqw; }
+  .posterContacts :global(.contact) { font-size: 9.5px; line-height: 1.3; }
+}
+@media (max-width: 900px) {
+  .story > .pin { height: auto; z-index: 3; background: var(--beige); padding-block: 8px 6px; }
+}
+
+/* ---------- Light on a wall: one slider moves the sun ---------- */
+.light { padding-block: 0 clamp(72px, 10vw, 160px); }
+.dial { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(24px, 5vw, 96px); align-items: center; }
+.dialArt { border-radius: var(--r-card-sm); overflow: hidden; }
+.dialArt svg { width: 100%; height: auto; }
+.dialText { display: grid; gap: clamp(24px, 3vw, 44px); }
+.dialControl { display: grid; gap: 10px; }
+.dialRange { width: 100%; accent-color: var(--tribal); height: 28px; cursor: pointer; }
+.dialRange:active { accent-color: var(--chocolate); }
+@media (max-width: 900px) { .dial { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Counter, hover and active states ---------- */
+.pinCount { margin: 0; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--muted); letter-spacing: 0.02em; }
+.poster { transition: transform var(--dur-4) var(--ease-out), box-shadow var(--dur-4) var(--ease-out); }
+.poster:hover { transform: translateY(-4px); box-shadow: 14px 20px 0 0 rgba(53, 36, 28, 0.25); }
+.framedArt, .cardArt { transition: transform var(--dur-4) var(--ease-out); }
+.framedArt:hover, .cardArt:hover { transform: translateY(-3px); }
+.dialRange:focus-visible { outline: 2px solid var(--tribal); outline-offset: 4px; border-radius: 4px; }
+.pinBtn:focus-visible { outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .poster:hover, .framedArt:hover, .cardArt:hover { transform: none; } }
