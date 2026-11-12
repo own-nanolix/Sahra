@@ -1,0 +1,29 @@
+/* use-product: page-only styles. Plates are tiles holding one exportable SVG each. */
+.head { padding-block: clamp(36px, 6vw, 96px) clamp(20px, 3vw, 40px); display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+.headRow { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; }
+.lineMask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.line { display: block; animation: use-product-line var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 120ms + 80ms); }
+@keyframes use-product-line { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
+.sub { max-width: 44ch; animation: use-product-fade var(--dur-4) var(--ease-out) 480ms both; }
+@keyframes use-product-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+.heroPlate { margin-bottom: var(--gap); }
+.plate { margin: 0; display: flex; flex-direction: column; background: var(--beige-60); }
+.plate :global(.mock) { flex: 1 1 auto; }
+.cap { padding: 12px 16px 14px; }
+.cap span { font-size: 13px; color: var(--muted); }
+.block { margin-top: var(--gap); }
+
+.ladderTile { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; background: var(--beige); }
+.ladder { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px 26px; padding: clamp(8px, 1.4vw, 20px) 0; }
+.rung { display: grid; gap: 8px; justify-items: start; animation: use-product-fade var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 100ms + 200ms); }
+.iconSvg { display: block; max-width: none; }
+.rung .iconSvg { flex: none; }
+.ladderNote { margin: 0; }
+
+@media (max-width: 900px) {
+  .headRow { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .ladder { gap: 18px 20px; }
+}
