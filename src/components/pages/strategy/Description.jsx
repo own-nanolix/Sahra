@@ -1,5 +1,5 @@
 import Reveal from '@/components/site/Reveal';
-import Play from '@/components/pages/overview/Play';
+import Play from './Play';
 import { DESCRIPTION } from '@/lib/brand';
 import DescriptionArt from './DescriptionArt';
 import s from './strategy.module.css';
@@ -31,7 +31,6 @@ export default function Description() {
                 <div className="ruled-row">
                   <span className="t-num">{c.no}</span>
                   <span className="ruled-row-label">{c.label}</span>
-                  <span className="ruled-row-plus" aria-hidden="true" />
                 </div>
               </li>
             ))}

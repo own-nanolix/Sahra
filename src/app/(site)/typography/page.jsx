@@ -1,9 +1,9 @@
 import { pageMeta } from '@/lib/pages';
 import Reveal from '@/components/site/Reveal';
 import TypeSlide from '@/components/pages/typography/TypeSlide';
-import { CharsetArt, PrimaryArt, ScaleArt, SecondaryArt } from '@/components/pages/typography/FaceArt';
+import { CharsetArt, METRICS, MetricsArt, PrimaryArt, ScaleArt, SecondaryArt } from '@/components/pages/typography/FaceArt';
 import { BoxesArt, BreaksArt, ContactsArt, LeadingArt, UrlArt } from '@/components/pages/typography/HabitArt';
-import { BeigePoster, HierarchyArt } from '@/components/pages/typography/PosterArt';
+import { BeigePoster, HierarchyArt, NOTES } from '@/components/pages/typography/PosterArt';
 import { Lines } from '@/components/ui/Card';
 import RuledRows from '@/components/ui/RuledRows';
 import { ABOUT } from '@/lib/brand';
@@ -63,10 +63,10 @@ export default function Page() {
           The serif in four weights; the sans in the three it needs. Headlines are sentence case, never all capitals.
         </Head>
         <div className="bento">
-          <Reveal className="tile tile-flush span-7">
+          <Reveal className="tile tile-flush span-8 rows-2">
             <Scroll label="Primary typeface sheet"><PrimaryArt /></Scroll>
           </Reveal>
-          <Reveal className="tile tile-flush span-5" delay={100}>
+          <Reveal className="tile tile-flush tile-beige span-4 rows-2" delay={100}>
             <Scroll label="Secondary typeface sheet"><SecondaryArt /></Scroll>
           </Reveal>
         </div>
@@ -104,32 +104,62 @@ export default function Page() {
           </Reveal>
         </div>
 
-        <Head no="04" title="Hierarchy in use">
-          Two posters rebuilt: the black poster with its four levels marked, and the beige poster of the pair.
+        <Head no="04" title="Metrics and hierarchy">
+          The specimen of the slide measured line by line, then the black poster with its four levels numbered.
         </Head>
         <div className="bento">
-          <Reveal className="tile tile-flush tile-print span-8">
-            <Scroll label="Hierarchy poster"><HierarchyArt /></Scroll>
+          <Reveal className={`tile span-7 rows-4 ${s.metrics}`}>
+            <Scroll label="Metrics study"><MetricsArt /></Scroll>
+            <table className={s.metricTable}>
+              <caption className="sr-only">Metrics measured on the printed specimen</caption>
+              <thead>
+                <tr><th scope="col">Line</th><th scope="col">Height above the baseline</th><th scope="col">Of the cap height</th></tr>
+              </thead>
+              <tbody>
+                {METRICS.map((m) => (
+                  <tr key={m.name}>
+                    <th scope="row">{m.name}</th>
+                    <td>{m.value}</td>
+                    <td>{(m.value / 278).toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="t-small">Units of the 1600 wide slide. The lines are drawn where the printed glyphs sit.</p>
           </Reveal>
-          <Reveal className="tile tile-flush tile-print span-4" delay={100}>
-            <BeigePoster />
+          <Reveal className={`tile tile-beige span-5 rows-4 ${s.hierarchy}`} delay={100}>
+            <div className={s.poster}><HierarchyArt /></div>
+            <ol className={s.notes} aria-label="The four levels of the poster">
+              {NOTES.map((n) => (
+                <li key={n.no}>
+                  <span className="t-num">{n.no}</span>
+                  <span>
+                    <b className="t-serif">{n.title}</b>
+                    <span className="t-small">{n.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
           </Reveal>
         </div>
 
         <Head no="05" title="The voices on a page">
-          The About page of the case study, set live: label, headline, text and ruled rows in the two voices.
+          The About page of the case study set live, label, headline, text and ruled rows, beside the beige poster of the pair: the two voices on one page.
         </Head>
         <div className="bento">
-          <Reveal className="tile span-5 span-m-6">
+          <Reveal className="tile span-4 span-m-6">
             <p className="t-label">{ABOUT.label}</p>
             <Lines rows={ABOUT.headline.rows} as="p" className="t-h1" />
             <p className="t-body muted" style={{ marginTop: 16 }}>{ABOUT.text}</p>
           </Reveal>
-          <Reveal className="tile tile-beige span-7 span-m-6" delay={100}>
+          <Reveal className="tile tile-beige span-4 span-m-6" delay={100}>
             <RuledRows id="typography-about" rows={ABOUT.rows} />
             <p className="t-small" style={{ marginTop: 16 }}>
               Number and label are small sans; the row title is the serif at 24 px; the plus is drawn, not typed.
             </p>
+          </Reveal>
+          <Reveal className="tile tile-flush tile-print span-4 span-m-6" delay={160}>
+            <BeigePoster />
           </Reveal>
         </div>
 

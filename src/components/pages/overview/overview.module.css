@@ -1,10 +1,16 @@
 /* Overview: the intro slide (m02) rebuilt, then the bento, principles and the two ruled indexes.
    Page-only styles. Keyframes are named overview-*. */
 
-/* ---------- Opening: the intro slide ---------- */
+/* ---------- Opening: the intro slide (m02), measured on the 1600 px slide ----------
+   Title at 5 % with its rule at 2.6 %, about 1.95 vw; body column from 29.7 % to 70.3 %; sheet values one
+   third of the body width in; 17.8 vw of white between the body and the sheet; badges level with "Date". */
+.ground {
+  margin-bottom: clamp(40px, 6vw, 96px);
+}
+
 .opening {
-  padding-top: clamp(40px, 6vw, 96px);
-  padding-bottom: clamp(56px, 8vw, 128px);
+  padding-top: clamp(40px, 3.6vw, 72px);
+  padding-bottom: clamp(48px, 6vw, 112px);
 }
 
 .slide {
@@ -12,19 +18,18 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--gap);
   grid-template-areas:
-    "title title title title body body body body body body . ."
+    "title title title body body body body body body . . ."
     ". . . . . . . . . . . ."
-    "credits credits credits credits sheet sheet sheet sheet sheet sheet . .";
-  row-gap: clamp(56px, 11vw, 200px);
+    "credits credits credits sheet sheet sheet sheet sheet sheet sheet . .";
+  row-gap: clamp(48px, 8.9vw, 170px);
   align-items: start;
 }
 
 .title {
   grid-area: title;
   position: relative;
-  padding-left: clamp(16px, 2.6vw, 40px);
-  padding-top: 2px;
-  min-height: 84px;
+  padding-left: clamp(16px, 2.4vw, 40px);
+  padding-block: 2px 6px;
 }
 
 .rule {
@@ -39,8 +44,8 @@
 
 .h1 {
   margin: 0;
-  font-size: clamp(30px, 3.1vw, 50px);
-  line-height: 1.08;
+  font-size: clamp(28px, 1.95vw, 40px);
+  line-height: 1.1;
 }
 
 .mask {
@@ -55,24 +60,21 @@
   will-change: transform;
 }
 
-.kicker {
-  margin: 18px 0 0;
-}
-
 .body {
   grid-area: body;
   display: grid;
-  gap: clamp(18px, 2vw, 28px);
-  /* the slide sets its body a little under the title's first line */
-  padding-top: clamp(0px, 3.4vw, 56px);
+  gap: clamp(16px, 1.45vw, 26px);
+  /* the slide sets its body just under the title's second line */
+  padding-top: clamp(0px, 4.2vw, 76px);
 }
 
 .para {
   margin: 0;
-  font-size: clamp(14px, 1.05vw, 16px);
-  line-height: 1.62;
-  letter-spacing: -0.02em;
+  font-size: clamp(13px, 0.92vw, 16px);
+  line-height: 1.64;
+  letter-spacing: -0.025em;
   color: var(--ink);
+  hyphens: manual;
   text-wrap: pretty;
 }
 
@@ -80,12 +82,12 @@
   grid-area: credits;
   align-self: end;
   display: grid;
-  gap: 14px;
+  gap: 18px;
   outline: none;
 }
 
 .badges {
-  width: 132px;
+  width: clamp(76px, 5.6vw, 110px);
 }
 
 .badges svg {
@@ -103,18 +105,20 @@
 
 .sheet {
   grid-area: sheet;
+  align-self: end;
   margin: 0;
   display: grid;
-  gap: 4px;
+  gap: 0;
 }
 
+/* the value column starts one third of the body width in (6 of the sheet's 7 columns) */
 .sheetRow {
   display: grid;
-  grid-template-columns: minmax(7.4em, 17em) minmax(0, 1fr);
+  grid-template-columns: minmax(7.4em, 28.5%) minmax(0, 1fr);
   gap: 12px;
-  font-size: clamp(14px, 1.05vw, 16px);
-  line-height: 1.55;
-  letter-spacing: -0.02em;
+  font-size: clamp(13px, 0.92vw, 16px);
+  line-height: 1.64;
+  letter-spacing: -0.025em;
 }
 
 .sheetRow dt {
@@ -222,18 +226,14 @@
   width: min(100%, 230px);
 }
 
+/* the 3 x 1 tiles are narrow: the drawing sits under the title at full tile width, so its labels stay legible */
 .compact {
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.compact .pText {
-  flex: 1 1 46%;
-}
-
 .compact .pArt {
-  flex: 1 1 50%;
+  width: 100%;
 }
 
 /* ---------- Indexes ---------- */

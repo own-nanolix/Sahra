@@ -1,7 +1,9 @@
 // The primary lockup (m04), the four colour versions (m09), the lockup family and the mark with its tile.
 import Art from '@/components/art/Art';
-import { WordmarkG, MarkG, MarkTileG, LockupLineG, LockupUrlG, WordmarkVerticalG, LOCKUP_LINE, LOCKUP_VERTICAL, LOCKUP_URL, MARK_W, MARK_H } from '@/components/art/Mark';
+import { WordmarkG, MarkG, MarkTileG, LockupLineG, LockupUrlG, WordmarkVerticalG, LOCKUP_LINE, LOCKUP_VERTICAL, LOCKUP_URL, MARK_W, MARK_H, WM } from '@/components/art/Mark';
 import { HEX } from '@/lib/brand';
+import { DRAWING } from '@/components/art/KeyArt';
+import { r2 } from '@/lib/charts';
 import { FIELD } from './data';
 
 // m04: the word-mark in Sand on Dark Chocolate Brown, centred, about half the width (810 of 1600).
@@ -81,3 +83,37 @@ export function MarkPlate({ item }) {
   );
 }
 
+
+// The mark on its own construction (as m03 draws the word-mark): the four guides of the S (top, the two edges of
+// the gap y, the baseline), the cuts on the diagonal labelled 42° as printed, and the unit y beside the gap.
+export function MarkConstructionPlate() {
+  const S = 1000, mh = 560, k = mh / MARK_H, mw = MARK_W * k;
+  const x0 = (S - mw) / 2, y0 = 230;
+  const gy = (MARK_H - WM.GAP) / 2; // 83: the top edge of the gap
+  const guides = [0, gy, gy + WM.GAP, MARK_H].map((g) => r2(y0 + g * k));
+  // The two cut lines, x + y = 235 and x + y = 150 in mark units (the S is point-symmetric), drawn 48 units
+  // either side of the cut they run through.
+  const cut = (c, yc) => {
+    const [ya, yb] = [yc - 48, yc + 48];
+    return `M${r2(x0 + (c - ya) * k)} ${r2(y0 + ya * k)}L${r2(x0 + (c - yb) * k)} ${r2(y0 + yb * k)}`;
+  };
+  return (
+    <Art viewBox={`0 0 ${S} ${S}`} title="Construction of the mark: guides, the gap y between its halves and the cuts at 42 degrees" exportName="logo-mark-construction">
+      <rect width={S} height={S} fill={DRAWING.paper} />
+      <g stroke={DRAWING.guide} strokeWidth="1.2">
+        {guides.map((g) => <path key={g} d={`M60 ${g}H${S - 60}`} />)}
+        {[0, MARK_W].map((g) => <path key={g} d={`M${r2(x0 + g * k)} 120V${S - 120}`} />)}
+      </g>
+      <g className="settle"><MarkG x={x0} y={y0} size={mw} fill={HEX.tribal} /></g>
+      <g stroke={DRAWING.angle} strokeWidth="2" fill="none">
+        <path d={cut(235, 67)} pathLength="1" className="draw" style={{ '--len': 1, '--i': 4 }} />
+        <path d={cut(150, 134)} pathLength="1" className="draw" style={{ '--len': 1, '--i': 5 }} />
+      </g>
+      <rect x={r2(x0 - 70)} y={guides[1]} width="16" height={r2(WM.GAP * k)} fill={DRAWING.unit} />
+      <g className="sans" fontSize="30" fill={DRAWING.ink}>
+        <text x={r2(x0 - 100)} y={r2(guides[1] + (WM.GAP * k) / 2 + 10)} textAnchor="end">y</text>
+        <text x={r2(x0 + mw + 24)} y={r2(guides[1] - 40)} fill={DRAWING.angle}>{'42°'}</text>
+      </g>
+    </Art>
+  );
+}

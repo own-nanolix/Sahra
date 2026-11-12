@@ -1,5 +1,6 @@
 import Art from '@/components/art/Art';
 import { HEX, PALETTE, TINT_STEPS } from '@/lib/brand';
+import { contrast } from '@/lib/site';
 import { LADDERS } from './data';
 import s from './color.module.css';
 
@@ -14,9 +15,23 @@ const CELLS = [
   { token: 'beige', x: 800, y: 571, w: 682, h: 286, name: 653, rows: 710 },
   { token: 'white', x: 800, y: 857, w: 800, h: 286, name: 942, rows: 999 },
 ];
-// Type colour on each field: white on the dark ones, black on the light ones; Sand takes Dark Chocolate so
-// that its small lines reach 4.5:1.
-const INK = { black: '#FFFFFF', chocolate: '#FFFFFF', tribal: '#FFFFFF', sand: HEX.chocolate, beige: '#000000', white: '#000000' };
+// Type colour on each field as printed: white on the dark fields and on Sand, black on the light ones.
+// Accessibility (the smallest change that works): on Sand, the printed white fails for the small value lines
+// (2.9:1), so only those four lines are set in Dark Chocolate Brown (5.0:1); the name "Sand" is display type and
+// keeps its printed white. Every other field keeps its printed colours.
+const INK = { black: HEX.white, chocolate: HEX.white, tribal: HEX.white, sand: HEX.white, beige: HEX.black, white: HEX.black };
+const VALUE_INK = { ...INK, sand: HEX.chocolate };
+// The tint labels are printed in a mid grey (about #555555) that fails on the darker tints. Each label takes the
+// lightest grey on the way from the printed grey to black that reaches 4.5:1 on its own tint.
+const PRINTED_GREY = 0x55;
+function labelInk(bg) {
+  for (let t = 0; t <= 1; t += 0.05) {
+    const v = Math.round(PRINTED_GREY * (1 - t)).toString(16).padStart(2, '0');
+    const hex = `#${v}${v}${v}`;
+    if (contrast(hex, bg) >= 4.5) return hex;
+  }
+  return HEX.black;
+}
 const KEYS = ['HEX', 'RGB', 'HSB', 'CMYK'];
 const TINT_X = 1482;
 const TINT_W = 118;
@@ -28,6 +43,7 @@ export default function PaletteSlide({ exportName = 'color-palette' }) {
       {CELLS.map((c, i) => {
         const p = by[c.token];
         const ink = INK[c.token];
+        const valueInk = VALUE_INK[c.token];
         const values = [p.hex, p.rgb, p.hsb, p.cmyk];
         const lx = c.x + 50;
         return (
@@ -41,8 +57,8 @@ export default function PaletteSlide({ exportName = 'color-palette' }) {
               </text>
               {KEYS.map((k, r) => (
                 <g key={k}>
-                  <text className="sans" x={lx} y={c.rows + r * 13.8} fontSize="12" fill={ink}>{k}</text>
-                  <text className="sans" x={lx + 56} y={c.rows + r * 13.8} fontSize="12" fill={ink}>{values[r]}</text>
+                  <text className="sans" x={lx} y={c.rows + r * 13.8} fontSize="12" fill={valueInk}>{k}</text>
+                  <text className="sans" x={lx + 56} y={c.rows + r * 13.8} fontSize="12" fill={valueInk}>{values[r]}</text>
                 </g>
               ))}
             </g>
@@ -57,7 +73,7 @@ export default function PaletteSlide({ exportName = 'color-palette' }) {
             {LADDERS[t].slice(1).map((tint, k) => (
               <g key={tint.id} className="grow-x" style={{ '--i': 8 + gi * 4 + k }}>
                 <rect x={TINT_X} y={cell.y + k * h} width={TINT_W} height={h + 0.5} fill={tint.hex} />
-                <text className="sans" x={TINT_X + TINT_W / 2} y={cell.y + k * h + h / 2 + 4} fontSize="12" textAnchor="middle" fill={HEX.ink}>
+                <text className="sans" x={TINT_X + 43} y={cell.y + k * h + h / 2 + 4} fontSize="12" textAnchor="middle" fill={labelInk(tint.hex)}>
                   {TINT_STEPS[k]}
                 </text>
               </g>

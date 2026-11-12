@@ -90,7 +90,7 @@ export default function Page() {
         </div>
 
         <Head no="03" title="Proportion">
-          A suggested balance for a surface: mostly Beige and White, the browns as structure, Sand and Black as accents.
+          How much of each colour the case study itself shows, measured across its sixteen images: Beige and White carry the light, Dark Chocolate Brown and Black the depth, Tribal Brown and Sand the warmth.
         </Head>
         <div className="bento bento-6">
           <Reveal className="tile tile-flush span-6">

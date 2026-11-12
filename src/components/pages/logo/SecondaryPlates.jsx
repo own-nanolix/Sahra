@@ -3,7 +3,7 @@
 import Art from '@/components/art/Art';
 import { ArchWindowG, BrandDefs, QuarterArchG } from '@/components/art/KeyArt';
 import { WordmarkCropG, WordmarkDebossG, MarkDebossG } from '@/components/art/Mark';
-import { HEX, LINES } from '@/lib/brand';
+import { HEX, TINTS, LINES } from '@/lib/brand';
 
 // The quarter arch as a window onto timber (the white card, m01 and m10).
 export function ArchWindowPlate() {
@@ -36,7 +36,7 @@ export function CropPlate() {
     <Art viewBox="0 0 1600 1000" title="The whole word-mark enlarged and cropped by the left edge, debossed on Sand" exportName="logo-crop">
       <rect width="1600" height="1000" fill={HEX.sand} />
       <WordmarkCropG idp="logo-crop" w={1600} h={1000}>
-        <WordmarkDebossG idp="logo-crop-deb" x={-1080} y={217} width={3200} tone="#BF9A77" depth={7} />
+        <WordmarkDebossG idp="logo-crop-deb" x={-1080} y={217} width={3200} tone={TINTS.sand[0]} depth={7} />
       </WordmarkCropG>
     </Art>
   );

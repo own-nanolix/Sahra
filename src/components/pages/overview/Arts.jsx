@@ -3,7 +3,7 @@
 import Art from '@/components/art/Art';
 import { WordmarkG, WordmarkOutlineG, MarkG } from '@/components/art/Mark';
 import { BrandDefs, QuarterArchG, DRAWING } from '@/components/art/KeyArt';
-import { HEX, FIELDS, CONTACT, PROJECT_TITLE, DESIGNER, SHEET } from '@/lib/brand';
+import { HEX, TINTS, FIELDS, CONTACT, PROJECT_TITLE, DESIGNER, SHEET } from '@/lib/brand';
 import { r2, hbarPath } from '@/lib/charts';
 
 // Draw-on props: the path is measured as 1, so one rule fits every line.
@@ -73,11 +73,11 @@ export function AboutArt() {
 // ---------- Credit badges: the case study's round badges "FS" and "93" (the portraits are not reproduced) ----------
 export function CreditBadges() {
   return (
-    <Art viewBox="0 0 132 60" title="Round badges FS and 93, the two agencies" exportName="overview-credits">
+    <Art viewBox="0 0 118 60" title="Round badges FS and 93, the two agencies" exportName="overview-credits">
       {[['FS', 'sans'], ['93', 'serif']].map(([t, face], i) => (
         <g key={t} className="settle" style={{ '--i': i * 2 }}>
-          <circle cx={30 + i * 62} cy="30" r="28" fill={HEX.black} />
-          <text x={30 + i * 62} y="38" textAnchor="middle" className={face} fontSize="22" fill={HEX.beige}>{t}</text>
+          <circle cx={30 + i * 58} cy="30" r="28" fill={HEX.black} />
+          <text x={30 + i * 58} y="38" textAnchor="middle" className={face} fontSize="22" fill={HEX.white}>{t}</text>
         </g>
       ))}
     </Art>
@@ -91,7 +91,7 @@ export function ClarityArt() {
   const rings = [
     { r: 18, R: 78, word: 'clarity', fill: HEX.tribal },
     { r: 88, R: 148, word: 'trust', fill: HEX.sand },
-    { r: 158, R: 218, word: 'elegance', fill: '#D3BCA6' },
+    { r: 158, R: 218, word: 'elegance', fill: TINTS.sand[1] },
   ];
   return (
     <Art viewBox="0 0 260 250" title="Clarity, trust and elegance as three nested quarter arches" exportName="overview-principle-clarity">

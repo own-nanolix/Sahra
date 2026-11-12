@@ -1,6 +1,6 @@
 // Typography page data. The family, weights, character set and paragraphs are the published ones (m06) from
 // @/lib/brand. The scale values mirror the shared classes in globals.css (t-display ... t-label).
-import { TYPE } from '@/lib/brand';
+import { TYPE, HEX } from '@/lib/brand';
 
 export const FAMILY = TYPE.family;
 export const SERIF_WEIGHTS = [
@@ -33,9 +33,30 @@ export const SCALE = [
 export const CHARSET = TYPE.charset;
 export const SPECIMEN = TYPE.specimen;
 export const PARAGRAPHS = TYPE.text;
+// The two paragraphs with the line breaks printed on the slide (m06), read from the full-size original.
+export const PARAGRAPH_LINES = [
+  [
+    'Typography at Sahra is treated as a structural element',
+    'rather than decoration. It defines hierarchy, guides',
+    'attention and reinforces clarity across every touchpoint.',
+    'The balance between serif and sans-serif creates a',
+    'dialogue between elegance and precision, reflecting the',
+    'architectural language of the brand.',
+  ],
+  [
+    'Each typographic decision is intentional, from',
+    'spacing to weight and proportion. The system is',
+    'designed to remain consistent yet flexible, allowing',
+    'it to adapt seamlessly across digital and physical',
+    'applications while maintaining a refined and',
+    'cohesive presence.',
+  ],
+];
 export const WEIGHT_LINES = TYPE.weights;
 export const GLYPH_ROWS = [CHARSET[0], CHARSET[1], CHARSET[2], CHARSET[3]];
 
 // Ink on white and Beige, used inside the artwork.
-export const INK = '#1E140F';
-export const GREY = '#767676'; // the grey of the three lighter weights on the slide, 4.5:1 on white
+export const INK = HEX.ink;
+// The three lighter weights are printed in a pale grey (about #B0B0B0, 2.1:1 on white). #767676 is the lightest
+// grey that reaches 4.5:1 on white: the smallest change that makes them readable.
+export const GREY = '#767676';

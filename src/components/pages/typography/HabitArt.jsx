@@ -39,7 +39,7 @@ export function BreaksArt({ exportName = 'typography-breaks' }) {
   const rows = LINES.designing.rows;
   return (
     <Art viewBox="0 0 1200 560" title="Line-breaking habits: one long line against two or three short lines, and a line pushed to both ends" exportName={exportName}>
-      <rect width="1200" height="560" fill="#FFFFFF" />
+      <rect width="1200" height="560" fill={HEX.white} />
       <text className="sans" x="24" y="40" fontSize="13" fill={MUTED}>One long line</text>
       <text className="serif" x="24" y="84" fontSize="30" letterSpacing="-0.4" fill={INK} opacity="0.55">{LINES.elevate.text}</text>
       <line x1="24" x2="1176" y1="108" y2="108" stroke={HEX.chocolate} strokeOpacity="0.3" />
@@ -76,7 +76,7 @@ export function BoxesArt({ exportName = 'typography-line-boxes' }) {
   const xs = widths.map((_, i) => 24 + widths.slice(0, i).reduce((a, b) => a + b + 40, 0));
   return (
     <Art viewBox="0 0 1200 330" title="Line boxes: how much room each step gives a line" exportName={exportName}>
-      <rect width="1200" height="330" fill="#FFFFFF" />
+      <rect width="1200" height="330" fill={HEX.white} />
       {picks.map((p, c) => {
         const lh = p.size * p.lh;
         return (
@@ -126,7 +126,7 @@ export function ContactsArt({ exportName = 'typography-contacts' }) {
   const blocks = [CONTACT_BLOCKS.office, CONTACT_BLOCKS.service, CONTACT_BLOCKS.online];
   return (
     <Art viewBox="0 0 900 260" title="Contact blocks: short stacked lines set very small" exportName={exportName}>
-      <rect width="900" height="260" fill="#FFFFFF" />
+      <rect width="900" height="260" fill={HEX.white} />
       <rect y="150" width="900" height="110" fill={HEX.chocolate} />
       {blocks.map((b, i) => (
         <g key={i} className="slide-up" style={{ '--i': i }}>

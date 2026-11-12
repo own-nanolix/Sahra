@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Reveal from '@/components/site/Reveal';
-import Play from '@/components/pages/overview/Play';
+import Play from './Play';
 import { Lines } from '@/components/ui/Card';
 import { INTRO, LINES, URL_LINE } from '@/lib/brand';
 import { previous, next, href } from '@/lib/pages';
@@ -9,15 +9,17 @@ import s from './strategy.module.css';
 
 // The six intro paragraphs as six bento rows that change shape: 8 + 4, 4 + 8, 6 + 6, 12, 3 + 9, 9 + 3.
 // Each row sets one paragraph beside (or above) a diagram drawn from that paragraph's own words.
-// `kind` and `heading` are short labels of ours; `quote` is a verbatim fragment of the paragraph.
+// `kind` names the paragraph: "Problem" plainly names what the first paragraph describes; the others are a word
+// the paragraph itself uses ("This positioning", "vision meets reality", "a clear purpose", "we create
+// connections", "we create places"). `quote` is a verbatim fragment of the paragraph.
 const P = INTRO.paragraphs;
 const ROWS = [
-  { id: 'problem', kind: 'Problem', quote: 'redefining how people connect with spaces', text: P[0], text_span: 'span-8', art_span: 'span-4', Art: ProblemArt, ground: 'field-white', artFirst: false },
-  { id: 'positioning', kind: 'Solution', quote: 'clarity, trust and elegance', text: P[1], text_span: 'span-4', art_span: 'span-8', Art: ScopeArt, ground: 'field-beige', artFirst: false },
-  { id: 'vision', kind: 'Solution', quote: 'where vision meets reality', text: P[2], text_span: 'span-6', art_span: 'span-6', Art: VisionArt, ground: 'field-white', artFirst: false },
-  { id: 'purpose', kind: 'Impact', quote: 'a journey of discovery, belonging and aspiration', text: P[3], text_span: 'span-12', art_span: 'span-12', Art: JourneyArt, ground: 'field-beige', artFirst: false },
-  { id: 'connections', kind: 'Impact', quote: 'transparency, care and long-term vision', text: P[4], text_span: 'span-9', art_span: 'span-3', Art: SheetArt, ground: 'field-white', artFirst: true },
-  { id: 'unfolds', kind: 'Impact', quote: 'we create places where life unfolds', text: P[5], text_span: 'span-9', art_span: 'span-3', Art: RowsArt, ground: 'field-beige', artFirst: false },
+  { id: 'problem', kind: 'Problem', quote: 'complexity, rigidity and overwhelming choices', text: P[0], text_span: 'span-8', art_span: 'span-4', Art: ProblemArt, ground: 'field-white', artFirst: false },
+  { id: 'positioning', kind: 'Positioning', quote: 'clarity, trust and elegance', text: P[1], text_span: 'span-4', art_span: 'span-8', Art: ScopeArt, ground: 'field-beige', artFirst: false },
+  { id: 'vision', kind: 'Vision', quote: 'where vision meets reality', text: P[2], text_span: 'span-6', art_span: 'span-6', Art: VisionArt, ground: 'field-white', artFirst: false },
+  { id: 'purpose', kind: 'Purpose', quote: 'a journey of discovery, belonging and aspiration', text: P[3], text_span: 'span-12', art_span: 'span-12', Art: JourneyArt, ground: 'field-beige', artFirst: false },
+  { id: 'connections', kind: 'Connections', quote: 'transparency, care and long-term vision', text: P[4], text_span: 'span-9', art_span: 'span-3', Art: SheetArt, ground: 'field-white', artFirst: true },
+  { id: 'unfolds', kind: 'Places', quote: 'we create places where life unfolds', text: P[5], text_span: 'span-9', art_span: 'span-3', Art: RowsArt, ground: 'field-beige', artFirst: false },
 ];
 
 function TextBlock({ n, row }) {

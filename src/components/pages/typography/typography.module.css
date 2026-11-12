@@ -33,3 +33,21 @@
 @media (max-width: 600px) {
   .pair { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Metrics and hierarchy: the measured specimen with its table, the numbered poster beside its notes. */
+.metrics { display: grid; gap: 16px; align-content: start; }
+.metrics .scrollX > svg { min-width: 560px; }
+.metricTable { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.metricTable th, .metricTable td { text-align: left; padding: 8px 6px; border-top: var(--hair) solid var(--line); font-weight: 400; color: var(--ink); }
+.metricTable thead th { color: var(--muted); border-top: 0; font-size: 12px; }
+.metricTable tbody th { font-family: var(--font-serif); font-size: 15px; }
+.hierarchy { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: clamp(14px, 1.6vw, 24px); align-items: start; align-content: start; }
+.poster { line-height: 0; }
+.poster svg { display: block; width: 100%; height: auto; }
+.notes { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.notes li { display: grid; grid-template-columns: 1.6em minmax(0, 1fr); gap: 8px; padding: 10px 0; border-top: var(--hair) solid var(--line-strong); }
+.notes li > span:last-child { display: grid; gap: 4px; }
+.notes b { font-weight: 400; font-size: 18px; color: var(--ink); }
+@media (max-width: 600px) {
+  .hierarchy { grid-template-columns: minmax(0, 1fr); }
+}

@@ -98,14 +98,16 @@ export const SEMANTIC = {
   },
 };
 
-// The suggested balance of the six colours across a surface (our own guide, not published).
+// The balance of the six colours as the case study itself shows them: the share of the pixels of its sixteen images
+// (downsampled to 400 px wide) that sit within a small distance (14 RGB units) of each published value. Measured by
+// us from the reference images, not published; the off-white studio ground of the flat lays counts as Beige.
 export const BALANCE = [
-  { token: 'beige', name: 'Beige', share: 38 },
-  { token: 'white', name: 'White', share: 12 },
-  { token: 'chocolate', name: 'Dark Chocolate Brown', share: 22 },
-  { token: 'tribal', name: 'Tribal Brown', share: 16 },
-  { token: 'sand', name: 'Sand', share: 8 },
-  { token: 'black', name: 'Black', share: 4 },
+  { token: 'beige', name: 'Beige', share: 31.7 },
+  { token: 'white', name: 'White', share: 20.8 },
+  { token: 'chocolate', name: 'Dark Chocolate Brown', share: 20.7 },
+  { token: 'black', name: 'Black', share: 14.1 },
+  { token: 'tribal', name: 'Tribal Brown', share: 8.8 },
+  { token: 'sand', name: 'Sand', share: 3.9 },
 ];
 
 // Every colour a tester can pick (published six plus the four inks).

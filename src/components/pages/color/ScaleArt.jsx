@@ -61,13 +61,14 @@ export function TintLadder({ token, exportName }) {
   );
 }
 
-// The suggested balance of the six colours: one bar of widths in proportion.
+// The balance of the six colours as measured on the case study (data.js): one bar of widths in proportion.
+// A segment too narrow for its figure carries it in the label rows below instead.
 export function ProportionBar({ exportName = 'color-proportion' }) {
   const total = BALANCE.reduce((a, b) => a + b.share, 0);
   const widths = BALANCE.map((b) => r2((b.share / total) * 1200));
   const starts = widths.map((_, i) => r2(widths.slice(0, i).reduce((a, b) => a + b, 0)));
   return (
-    <Art viewBox="0 0 1200 230" title="Colour proportion: a suggested balance of the six colours" exportName={exportName}>
+    <Art viewBox="0 0 1200 230" title="Colour proportion: the share of each of the six colours in the case study images" exportName={exportName}>
       <rect width="1200" height="230" fill={HEX.white} />
       {BALANCE.map((b, i) => {
         const w = widths[i];
@@ -77,10 +78,10 @@ export function ProportionBar({ exportName = 'color-proportion' }) {
           <g key={b.token}>
             <g className="grow-x" style={{ '--i': i }}>
               <rect x={x} y="0" width={w} height="150" fill={hex} stroke={HEX.chocolate} strokeOpacity="0.16" />
-              <text className="serif" x={x + 14} y="44" fontSize="30" fill={onFill(hex)}>{b.share}%</text>
+              {w >= 96 ? <text className="serif" x={x + 14} y="44" fontSize="30" fill={onFill(hex)}>{b.share}%</text> : null}
             </g>
             <text className="sans" x={i === widths.length - 1 ? x + w - 2 : x + 2} textAnchor={i === widths.length - 1 ? 'end' : 'start'} y="178" fontSize="14" fill={HEX.ink}>{b.name}</text>
-            <text className="sans" x={i === widths.length - 1 ? x + w - 2 : x + 2} textAnchor={i === widths.length - 1 ? 'end' : 'start'} y="198" fontSize="12" fill={HEX.muted}>{hex}</text>
+            <text className="sans" x={i === widths.length - 1 ? x + w - 2 : x + 2} textAnchor={i === widths.length - 1 ? 'end' : 'start'} y="198" fontSize="12" fill={HEX.muted}>{w >= 96 ? hex : `${b.share}%  ${hex}`}</text>
           </g>
         );
       })}

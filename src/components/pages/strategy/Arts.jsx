@@ -6,7 +6,7 @@ import Art from '@/components/art/Art';
 import { MarkG } from '@/components/art/Mark';
 import { QuarterArchG, DRAWING } from '@/components/art/KeyArt';
 import { wrap } from '@/components/art/Devices';
-import { HEX, SCOPE, SHEET, ABOUT } from '@/lib/brand';
+import { HEX, TINTS, SCOPE, SHEET, ABOUT } from '@/lib/brand';
 import { r2, smoothPath, barPath, seeded } from '@/lib/charts';
 
 // A line that draws on: its length is measured as 1 so one rule fits every path.
@@ -70,7 +70,7 @@ export function ScopeArt() {
   const gap = 16;
   const x0 = 40;
   const heights = [74, 126, 178, 230];
-  const fills = [HEX.tribal, '#D3BCA6', '#E1D2C4', '#F0E9E1'];
+  const fills = [HEX.tribal, TINTS.sand[1], TINTS.sand[2], TINTS.sand[3]];
   const ink = [HEX.beige, HEX.chocolate, HEX.chocolate, HEX.chocolate];
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="The scope of work as four rising steps: Positioning, Visual Identity, Art Direction, Brand Communication" exportName="strategy-scope">

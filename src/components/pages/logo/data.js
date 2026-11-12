@@ -44,4 +44,5 @@ export const MISUSES = [
 ];
 
 // The two inks of the drawing plates, for text drawn inside the artwork.
-export const PLATE_INK = { dark: '#35241C', muted: '#5C4A3E', alert: '#A3301E' };
+// alert is the shared --error-ink (globals.css); HEX has no key for it.
+export const PLATE_INK = { dark: HEX.chocolate, muted: HEX.muted, alert: '#A3301E' };
