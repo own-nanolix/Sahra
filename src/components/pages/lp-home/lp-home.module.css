@@ -1,0 +1,81 @@
+/* lp-home: page-only styles. Shared tokens only (--ease-*, --dur-*, colours). */
+
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(20px, 5vw, 80px) clamp(56px, 8vw, 128px); }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 96px); align-items: center; }
+.heroText { display: grid; gap: clamp(20px, 2.4vw, 36px); align-content: start; }
+.heroText h1 { font-weight: 500; font-size: clamp(38px, 4.8vw, 80px); }
+.heroCard { width: 100%; max-width: 640px; justify-self: end; }
+.heroCard svg { width: 100%; height: auto; filter: drop-shadow(10px 12px 0 rgba(53, 36, 28, 0.12)); }
+.fillWrap { width: 100%; }
+.cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; }
+
+/* The arch fills along its length: --lp-fill (0 to 1) is set on the wrapper; with no variable it is complete. */
+.archStroke { stroke-dashoffset: calc(520px * (1 - var(--lp-fill, 1))); }
+:global(html.exporting) .archStroke { stroke-dashoffset: 0 !important; }
+
+@media (max-width: 900px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr); }
+  .heroCard { justify-self: stretch; max-width: 560px; }
+}
+
+/* ---------- Story ---------- */
+.storyWrap { padding-block: 0 clamp(24px, 6vw, 96px); }
+.stage { position: relative; width: 100%; height: 100%; }
+.slide { padding-bottom: 22px; position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transform: translateY(28px); pointer-events: none; transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-4) var(--ease-out); }
+.slide[data-active="true"] { opacity: 1; transform: none; }
+.slide > svg { width: 100%; height: 100%; max-height: 100%; filter: drop-shadow(10px 12px 0 rgba(53, 36, 28, 0.12)); }
+.dots { position: absolute; left: 0; right: 0; bottom: 4px; display: flex; justify-content: center; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.dots li { width: 18px; height: 2px; background: var(--line-strong); transition: width var(--dur-3) var(--ease-out), background-color var(--dur-3) var(--ease-out); }
+.dots li[data-active="true"] { width: 44px; background: var(--tribal); }
+.step { display: grid; align-content: center; min-height: 40vh; }
+.stepIn { display: grid; gap: clamp(14px, 1.6vw, 22px); }
+.stepIn h2 { font-weight: 500; }
+@media (max-width: 900px) {
+  .storyWrap .pin { z-index: 2; background: var(--beige); top: 0; height: 52vh; }
+  .step { min-height: 0; }
+  .stepIn { background: var(--beige); padding: 22px 18px 26px; border-radius: var(--r-card-sm); box-shadow: inset 0 0 0 var(--hair) var(--line-strong); }
+  .slide > svg { width: 100%; height: 100%; }
+}
+
+/* ---------- The phone ---------- */
+.phoneBand { padding-block: clamp(56px, 9vw, 144px); border-top: var(--hair) solid var(--line-strong); }
+.phoneHead { display: grid; gap: 12px; margin-bottom: clamp(32px, 5vw, 72px); }
+.phoneGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 6vw, 112px); align-items: start; }
+.phoneCol, .artCol { display: grid; justify-items: center; gap: 16px; }
+.phone { width: min(100%, 380px); }
+.artFrame { width: min(100%, 360px); background: var(--beige); border-radius: 12.3% / 5.7%; box-shadow: inset 0 0 0 var(--hair) var(--line-strong), 10px 12px 0 rgba(53, 36, 28, 0.1); overflow: hidden; }
+.artFrame svg { width: 100%; height: auto; }
+.capC { text-align: center; }
+@media (max-width: 760px) { .phoneGrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* The live screen: everything is sized from --u, one unit of the 390 px wide artboard. */
+.screen { --u: calc(100cqw / 390); position: relative; width: 100%; height: 100%; background: var(--beige); color: var(--chocolate); overflow: hidden; }
+.scrWord { position: absolute; height: auto; color: var(--tribal); }
+.scrBar { position: absolute; height: calc(2 * var(--u)); background: var(--chocolate); }
+.scrLabel { position: absolute; margin: 0; font-size: 12px; line-height: 1.2; color: var(--muted); }
+.scrHead { position: absolute; width: calc(334 * var(--u)); font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.02em; color: var(--chocolate); }
+.scrText { position: absolute; margin: 0; letter-spacing: -0.01em; color: var(--ink); }
+.scrRow { position: absolute; border-top: 1px solid rgba(53, 36, 28, 0.4); }
+.scrNo { position: absolute; left: 0; color: var(--muted); font-variant-numeric: tabular-nums; }
+.scrRowLabel { position: absolute; font-family: var(--font-serif); letter-spacing: -0.01em; }
+.scrPlus { position: absolute; }
+.scrPlus::before, .scrPlus::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.2px; background: var(--chocolate); }
+.scrPlus::after { transform: rotate(90deg); }
+.scrEnd { position: absolute; border-top: 1px solid rgba(53, 36, 28, 0.4); }
+
+/* ---------- Closing ---------- */
+.closing { padding-block: clamp(56px, 9vw, 144px); border-top: var(--hair) solid var(--line-strong); }
+.closingGrid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 112px); align-items: end; }
+@media (max-width: 900px) { .closingGrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Word-mark band ---------- */
+.markBand { padding-block: clamp(40px, 7vw, 112px); border-top: var(--hair) solid var(--line-strong); display: grid; gap: clamp(24px, 4vw, 56px); }
+.markHead { display: flex; justify-content: space-between; align-items: end; gap: 16px 40px; flex-wrap: wrap; }
+.markBand svg { width: 100%; height: auto; }
+.hold { width: 100%; }
+.hold[data-hold="true"] * { animation-play-state: paused !important; }
+
+/* ---------- Poster pair ---------- */
+.pairBand { padding-block: clamp(40px, 7vw, 112px); border-top: var(--hair) solid var(--line-strong); display: grid; gap: clamp(24px, 4vw, 56px); }
+.pairBand svg { width: 100%; height: auto; }
