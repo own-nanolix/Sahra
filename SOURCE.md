@@ -35,7 +35,7 @@ Everything learned from the case study. Images are in `reference/` (local only, 
   carrying the black word-mark and contacts. Tribal-brown slipcase book: "We Build Spaces of Imagination",
   "→ sahra.sa", word-mark debossed bottom right. White card: "Spaces that elevate everyday living with
   intention", "A refined approach to real estate, where design meets functionality.", "→ sahra.sa", a quarter
-  arch cut of a timber photograph. Sand folder with the Arabic half of the word-mark debossed very large. Business
+  arch cut of a timber photograph. Sand folder with the whole word-mark debossed very large and cropped by the folder's left edge (corrected in step 4: it is not the Arabic half alone; the crop shows "hra" onwards). Business
   card stack: "Abdelazez Faysal", "Interior Designer", contacts, sand mark top right. Dark folder: sand mark,
   "We Build Spaces of Imagination", "From: Sahra Brand, Riyadh, Saudi Arabia, +966 55 123 4567, info@sahra.sa",
   "→ sahra.sa", a photo tile (desert wall and sky). Letter: "Sahra Developement" (as printed), "From: Sahra
@@ -192,8 +192,8 @@ timber about #A8743F).
 
 - **Word-mark:** Latin "Sahra" and Arabic "صحراء" joined into one line of equal-weight strokes on a grid. Stroke
   width is the unit **x**; counters and gaps are x; small steps are **y**; all diagonal cuts are at **42°**;
-  corners are quarter circles on a grid of concentric radii; the Arabic letters carry two short bars above; a
-  small ring with a dot sits above the join.
+  corners are quarter circles on a grid of concentric radii; (measured in step 4 on m04 at 2800 px: stroke 32 px, cut-topped stems 35, bowl and corner radii 72.5 / 40.5, the hah's corners 54 / 22; the cuts drawn and labelled "42°" in m03 measure 45° on the artwork itself, and the red guide lines in m03 also run at 45°) the Arabic letters carry two short bars above; a
+  small ring with an open centre sits above the join.
 - **Mark:** the "S" of the word-mark alone: two interlocking brackets, a rounded top-left corner and a rounded
   bottom-right corner, each arm ending in a 42° cut, with a gap of y between them. Also used inside a rounded
   beige tile as the profile icon.
@@ -229,6 +229,12 @@ profile card and the About web page (m12), the presentation box and plan sheet (
 extension in the same language: icons, charts, the dashboard, the app, the seven landing pages (the first built
 from the About page, the posters and the hoarding), campaign pieces, apparel (the mark on a jacket back is shown
 in m07), accessories, packaging, event and signage.
+
+## Step 4 re-reading
+
+The letter (m10), the poster body (m11), the plan text (m13), the About page and the profile card (m12) were
+re-read from the full-size originals: every word matches the text above. The ring over the hamza is a ring with
+an open centre (no dot inside).
 
 ## Illegible list
 
