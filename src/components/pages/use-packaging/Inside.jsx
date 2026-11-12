@@ -10,11 +10,13 @@ import { Scene, MarkGrid, PlainBars, WordmarkG, MarkG, ContactText, poly, C } fr
 const BOX = { x: 70, y: 60, w: 660, h: 470 };
 const CAV = { x: 102, y: 92, w: 596, h: 406 };
 
-function OpenBox({ idp, tone, children }) {
+// view: the camera on each plate (the tissue square-on; the seal close and turned; the label further off, turned
+// the other way), so the three open boxes never share one arrangement.
+function OpenBox({ idp, tone, view, children }) {
   const fill = `url(#${idp}-${tone === 'sand' ? 'board-sand' : tone === 'choc' ? 'board-dark' : 'board'})`;
   const { x, y, w, h } = BOX;
   return (
-    <g>
+    <g transform={view}>
       <g className="sun-shadow"><CastRectG x={x} y={y} w={w} h={h} len={30} opacity={0.22} /></g>
       <rect x={x} y={y} width={w} height={h} fill={fill} filter={`url(#${idp}-fibre)`} />
       <rect x={x} y={y} width={w} height="12" fill="#fff" opacity="0.2" />
@@ -77,7 +79,7 @@ export function SealSticker() {
   return (
     <Scene name="seal" title="Round Dark Chocolate seal sticker with the sand mark, closing tissue in an open Sand box, top view" w={800} h={600} horizon={0.9} wall={C.tribal20} floor={C.sand40}>
       {(idp) => (
-        <OpenBox idp={idp} tone="sand">
+        <OpenBox idp={idp} tone="sand" view="translate(400 300) scale(1.45) rotate(-8) translate(-400 -295)">
           <Tissue idp={idp} k="a" />
           <path d={poly([CAV.x + 8, CAV.y + 150], [CAV.x + CAV.w - 8, CAV.y + 70], [CAV.x + CAV.w - 8, CAV.y + 82], [CAV.x + 8, CAV.y + 164])} fill="#000" opacity="0.14" />
           <g className="mock-place" style={{ '--i': 2 }}>
@@ -129,7 +131,7 @@ export function ShippingLabelPlate() {
   return (
     <Scene name="label" title="Shipping label with the word-mark, the From and To blocks and pale bars, in an open Dark Chocolate box" w={800} h={600} horizon={0.9} wall={C.sand} floor={C.tribal40}>
       {(idp) => (
-        <OpenBox idp={idp} tone="choc">
+        <OpenBox idp={idp} tone="choc" view="translate(420 290) rotate(6) scale(0.84) translate(-400 -295)">
           <Tissue idp={idp} k="a" />
           <g className="mock-place" style={{ '--i': 2 }}><ShippingLabel idp={idp} /></g>
         </OpenBox>

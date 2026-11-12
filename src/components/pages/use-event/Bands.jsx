@@ -24,14 +24,14 @@ function Pattern({ kind }) {
   if (kind === 'tribal') {
     return (
       <g fill={C.beige}>
-        {Array.from({ length: 10 }, (_, c) => <Mark key={c} x={26 + c * 74} y={-19} size={38} fill={C.beige} />)}
+        {Array.from({ length: 7 }, (_, c) => <Mark key={c} x={26 + c * 74} y={-19} size={38} fill={C.beige} />)}
       </g>
     );
   }
   if (kind === 'sand') {
     return (
       <text className="sans" fontSize="40" fill={C.chocolate} y="14" letterSpacing="-0.3">
-        {[0, 1, 2].map((c) => <tspan key={c} x={30 + c * 260}>{URL_LINE}</tspan>)}
+        {[0, 1].map((c) => <tspan key={c} x={40 + c * 270}>{URL_LINE}</tspan>)}
       </text>
     );
   }
@@ -67,11 +67,13 @@ function Strip({ p, m, kind, i }) {
   );
 }
 
+// Dark and Beige fan out from a rivet (from different corners, three and four bands); Tribal lies as three
+// parallel bands sliding off one another; Sand has two bands crossed and one lying apart.
 const FANS = {
   dark: { px: 150, py: 790, angles: [-64, -40, -16] },
-  tribal: { px: 850, py: 190, angles: [108, 134, 160] },
-  sand: { px: 130, py: 170, angles: [8, 30, 52] },
   beige: { px: 110, py: 500, angles: [-34, -12, 10, 32] },
+  tribal: { free: [[90, 250, -9], [60, 440, -9], [120, 630, -9]] },
+  sand: { free: [[130, 250, 27], [150, 640, -27], [200, 800, 2]] },
 };
 const DESKS = {
   dark: [C.sand40, C.tribal],
@@ -88,14 +90,23 @@ export function FabricBand({ kind }) {
       {(p, m) => (
         <>
           <DeskEdgeG y={900} w={980} thickness={26} edge={edge} top={desk} />
-          {fan.angles.map((a, i) => (
+          {fan.free && fan.free.map(([x, y, a], i) => (
+            <PlaceG key={i} i={i} x={x} y={y} rotate={a}>
+              <Strip p={p} m={m} kind={kind} i={i} />
+            </PlaceG>
+          ))}
+          {fan.angles && fan.angles.map((a, i) => (
             <PlaceG key={a} i={i} x={fan.px} y={fan.py} rotate={a}>
               <Strip p={p} m={m} kind={kind} i={i} />
             </PlaceG>
           ))}
-          <circle cx={fan.px + 5} cy={fan.py + 6} r="22" fill={SHADOW_INK} opacity="0.25" />
-          <circle cx={fan.px} cy={fan.py} r="20" fill={`url(#${m}-metal)`} />
-          <circle cx={fan.px} cy={fan.py} r="9" fill={`url(#${m}-metal-dark)`} />
+          {fan.angles && (
+            <g>
+              <circle cx={fan.px + 5} cy={fan.py + 6} r="22" fill={SHADOW_INK} opacity="0.25" />
+              <circle cx={fan.px} cy={fan.py} r="20" fill={`url(#${m}-metal)`} />
+              <circle cx={fan.px} cy={fan.py} r="9" fill={`url(#${m}-metal-dark)`} />
+            </g>
+          )}
         </>
       )}
     </Scene>
@@ -108,21 +119,43 @@ const SIL = {
   sand: { fill: 'board-sand', tone: '#C9A682', name: 'Sand', desk: [C.tribal40, C.sand], rings: [[330, 330, 12], [440, 460, -6], [560, 590, 4]] },
 };
 
+// A silicone band lying flat, seen from above at an angle: a thin top rim, the outer wall facing the viewer
+// (where the word-mark is debossed), the inner wall seen through the opening at the far side, and the desk
+// showing through the hole (cut out with a mask, so a band below shows through it).
+const RX = 290, RY = 190, BAND = 74, RIM = 22;
+const ell = (cx, cy, rx, ry) => `M${cx - rx} ${cy}A${rx} ${ry} 0 1 0 ${cx + rx} ${cy}A${rx} ${ry} 0 1 0 ${cx - rx} ${cy}Z`;
+
 function Ring({ p, m, kind, cx, cy, rot, i, top }) {
   const s = SIL[kind];
-  const rx = 300;
-  const ry = 205;
-  const ring = (dy) => `M${cx - rx} ${cy + dy}A${rx} ${ry} 0 1 0 ${cx + rx} ${cy + dy}A${rx} ${ry} 0 1 0 ${cx - rx} ${cy + dy}ZM${cx - rx + 64} ${cy + dy}A${rx - 64} ${ry - 48} 0 1 1 ${cx + rx - 64} ${cy + dy}A${rx - 64} ${ry - 48} 0 1 1 ${cx - rx + 64} ${cy + dy}Z`;
+  const irx = RX - RIM, iry = RY - RIM * (RY / RX);
+  const id = `${p}-ring${i}`;
+  const silhouette = `M${cx - RX} ${cy}A${RX} ${RY} 0 0 1 ${cx + RX} ${cy}V${cy + BAND}A${RX} ${RY} 0 0 1 ${cx - RX} ${cy + BAND}Z`;
   return (
     <PlaceG i={i} x={0} y={0}>
       <g transform={`rotate(${rot} ${cx} ${cy})`}>
-        <CastG d={ring(0)} len={26} opacity={0.22} fillRule="evenodd" />
-        <path d={ring(14)} fill="#000000" opacity="0.5" fillRule="evenodd" />
-        <path d={ring(0)} fill={`url(#${m}-${s.fill})`} fillRule="evenodd" />
-        <path d={ring(0)} fill={`url(#${m}-shade-v)`} fillRule="evenodd" />
-        <path d={ring(0)} fill={`url(#${m}-shade)`} fillRule="evenodd" opacity="0.7" />
-        {top && <WordmarkDebossG idp={`${p}-d${i}`} x={cx - 100} y={cy + ry - 40} width={200} tone={s.tone} depth={2.5} />}
-        <ContactShadowG idp={`${p}-r${i}`} cx={cx + 10} cy={cy + ry + 14} rx={rx * 0.8} ry={6} opacity="0.12" />
+        <defs>
+          <clipPath id={`${id}-open`}><path d={ell(cx, cy, irx, iry)} /></clipPath>
+          <mask id={`${id}-hole`} maskUnits="userSpaceOnUse" x={cx - RX - 60} y={cy - RY - 60} width={2 * RX + 120} height={2 * RY + BAND + 120}>
+            <rect x={cx - RX - 60} y={cy - RY - 60} width={2 * RX + 120} height={2 * RY + BAND + 120} fill="#FFFFFF" />
+            <path d={ell(cx, cy + BAND, irx, iry)} fill="#000000" clipPath={`url(#${id}-open)`} />
+          </mask>
+        </defs>
+        <ContactShadowG idp={id} cx={cx + 10} cy={cy + RY + BAND - 6} rx={RX * 0.86} ry={12} opacity="0.3" />
+        <g mask={`url(#${id}-hole)`}>
+          <CastG d={silhouette} len={22} opacity={0.2} />
+          {/* outer wall and top, one solid */}
+          <path d={silhouette} fill={`url(#${m}-${s.fill})`} />
+          <path d={silhouette} fill="#000000" opacity="0.26" />
+          <path d={`M${cx - RX} ${cy}A${RX} ${RY} 0 0 0 ${cx + RX} ${cy}V${cy + BAND}A${RX} ${RY} 0 0 1 ${cx - RX} ${cy + BAND}Z`} fill={`url(#${m}-shade)`} opacity="0.55" />
+          {/* the inner wall seen across the opening, darker */}
+          <path d={ell(cx, cy, irx, iry)} fill={`url(#${m}-${s.fill})`} />
+          <path d={ell(cx, cy, irx, iry)} fill="#000000" opacity="0.42" />
+          {/* the rim on top, lit from the upper left */}
+          <path d={`${ell(cx, cy, RX, RY)}${ell(cx, cy, irx, iry)}`} fill={`url(#${m}-${s.fill})`} fillRule="evenodd" />
+          <path d={`${ell(cx, cy, RX, RY)}${ell(cx, cy, irx, iry)}`} fill={`url(#${m}-shade)`} fillRule="evenodd" opacity="0.4" />
+          <path d={`M${cx - RX + 2} ${cy}A${RX - 2} ${RY - 2} 0 0 1 ${cx} ${cy - RY + 2}`} fill="none" stroke="#FFFFFF" strokeOpacity="0.35" strokeWidth="2.5" />
+          {top && <WordmarkDebossG idp={`${id}-d`} x={cx - 110} y={cy + RY + BAND / 2 - 26} width={220} tone={s.tone} depth={2.5} />}
+        </g>
       </g>
     </PlaceG>
   );

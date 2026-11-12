@@ -6,9 +6,40 @@ import { WordmarkDebossG } from '@/components/art/Mark';
 import { quarterArch, cornerCut } from '@/components/art/KeyArt';
 import { Scene, PosterArt, C } from './kit';
 
+// One-point perspective: the vanishing point sits at the eye height in the middle of the back wall. A point on
+// the side wall at scale s (1 at the back wall's edge, growing towards the viewer) and at height dy (back-wall
+// units from the eye line) lands at (VX + 450 s, EYE + dy s).
 const EYE = 325;
-const f = (x) => (0.07 * (x - 1150)) / 300;
-const edge = (x, dy) => Math.round((EYE + dy * (1 + f(x))) * 10) / 10;
+const VX = 700;
+const S_FRONT = 1.4;
+const at = (s, dy) => [Math.round((VX + 450 * s) * 10) / 10, Math.round((EYE + dy * s) * 10) / 10];
+const r1 = (v) => Math.round(v * 1000) / 1000;
+
+// The poster (local 500 x 700) laid onto the side wall between scales s0 and s1, in vertical strips, each strip
+// with its own affine map, so the artwork narrows and grows with the wall.
+function WallPoster({ p, s0, s1, top, bottom, strips = 14 }) {
+  const id = `${p}-wposter`;
+  return (
+    <g>
+      <defs>
+        <g id={id}><PosterArt p={p} x={0} y={0} w={500} /></g>
+      </defs>
+      {Array.from({ length: strips }, (_, i) => {
+        const u0 = (500 * i) / strips, u1 = (500 * (i + 1)) / strips;
+        const sa = s0 + ((s1 - s0) * i) / strips, sb = s0 + ((s1 - s0) * (i + 1)) / strips;
+        const [x0, y0] = at(sa, top), [x1, y1] = at(sb, top), [, yb] = at(sa, bottom);
+        const a = (x1 - x0) / (u1 - u0), b = (y1 - y0) / (u1 - u0), d = (yb - y0) / 700;
+        const e = x0 - a * u0, f = y0 - b * u0;
+        return (
+          <g key={i} transform={`matrix(${r1(a)} ${r1(b)} 0 ${r1(d)} ${r1(e)} ${r1(f)})`} clipPath={`url(#${id}-c${i})`}>
+            <clipPath id={`${id}-c${i}`}><rect x={u0 - 0.6} y="0" width={u1 - u0 + 1.2} height="700" /></clipPath>
+            <use href={`#${id}`} />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
 
 function Stool({ p, x, y, i }) {
   return (
@@ -26,8 +57,10 @@ function Stool({ p, x, y, i }) {
 }
 
 export default function Booth() {
-  const sideTop = `M1150 90L1450 ${edge(1450, -235)}V${edge(1450, 235)}L1150 560Z`;
-  const post = [[1236, -110], [1384, -110], [1384, 100], [1236, 100]].map(([x, d]) => `${x} ${edge(x, d)}`);
+  const [fx, fTop] = at(S_FRONT, -235), [, fBot] = at(S_FRONT, 235);
+  const sideTop = `M1150 90L${fx} ${fTop}V${fBot}L1150 560Z`;
+  const PS = [1.1, 1.3], PT = -120, PB = 92;
+  const post = [at(PS[0], PT), at(PS[1], PT), at(PS[1], PB), at(PS[0], PB)].map(([x, y]) => `${x} ${y}`);
   const seams = [475, 700, 925];
   return (
     <Scene name="booth" title="Exhibition booth" w={1600} h={700} horizon={0.8} wall={C.beige} floor={C.sand}>
@@ -37,7 +70,6 @@ export default function Booth() {
             {[600, 645, 695].map((y) => <path key={y} d={`M0 ${y}H1600`} />)}
           </g>
           <CastRectG x={250} y={540} w={900} h={20} len={60} />
-          <CastRectG x={1150} y={548} w={300} h={14} len={44} opacity="0.16" />
           {/* back wall */}
           <rect x="250" y="90" width="900" height="470" fill={`url(#${m}-board-dark)`} filter={`url(#${m}-fibre)`} />
           {seams.map((x) => (
@@ -59,15 +91,14 @@ export default function Booth() {
           {/* side wall with the poster */}
           <path d={sideTop} fill={`url(#${m}-board)`} filter={`url(#${m}-fibre)`} />
           <path d={sideTop} fill={C.chocolate} opacity="0.3" />
+          <path d={`M1150 90L${fx} ${fTop}`} stroke="#1E140F" strokeWidth={18} strokeOpacity="0.9" />
+          <path d={`M1150 560L${fx} ${fBot}`} stroke="#1E140F" strokeOpacity="0.35" strokeWidth="4" />
           <path d="M1150 90V560" stroke="#000000" strokeOpacity="0.4" strokeWidth="3" />
+          {/* the poster's own hard shadow on the wall, then the poster in perspective */}
+          <path d={`M${[at(PS[0] + 0.012, PT + 8), at(PS[1] + 0.012, PT + 8), at(PS[1] + 0.012, PB + 8), at(PS[0] + 0.012, PB + 8)].map(([x, y]) => `${x} ${y}`).join('L')}Z`} fill={SHADOW_INK} opacity="0.3" />
           <g className="mock-lit">
             <path d={`M${post.join('L')}Z`} fill={C.beige} />
-            <clipPath id={`${p}-pclip`}>
-              <path d={`M${post.join('L')}Z`} />
-            </clipPath>
-            <g clipPath={`url(#${p}-pclip)`}>
-              <PosterArt p={p} x={1236} y={edge(1236, -110)} w={148} />
-            </g>
+            <WallPoster p={p} s0={PS[0]} s1={PS[1]} top={PT} bottom={PB} />
             <path d={`M${post.join('L')}Z`} fill={`url(#${m}-glass)`} opacity="0.5" />
           </g>
           <ContactShadowG idp={`${p}-wall`} cx={700} cy={561} rx={430} ry={5} opacity="0.22" blur={4} />

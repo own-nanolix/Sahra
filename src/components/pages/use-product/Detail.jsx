@@ -55,17 +55,23 @@ export function RingDetail() {
       <rect x="318" y="-10" width="620" height="600" fill="#D9D3C8" />
       <rect x="320" y="-10" width="618" height="592" fill="#FFFFFF" filter={`url(#${id}-paper-grain)`} />
       <text x="388" y="70" fontSize="24" className="sans" fill="#875D41">{SENDER.developement}</text>
-      <path d="M388 100H860" stroke="#35241C" strokeOpacity="0.5" strokeWidth="1.6" />
-      <path d="M388 122H760M388 144H820" stroke="#35241C" strokeOpacity="0.16" strokeWidth="6" strokeLinecap="round" />
-      {/* the punched holes and the rings */}
-      <circle cx="352" cy="196" r="15" fill="#0A0705" />
-      <circle cx="352" cy="458" r="15" fill="#0A0705" />
-      <g transform={`translate(${-846 * k + 130} ${196 - 453 * k}) scale(${k})`}>
-        <Ring y={453} />
+      {/* the corner of the floor plan (no figures, no labels) */}
+      <g fill="none" stroke="#35241C" strokeLinecap="square">
+        <path d="M640 250H938M640 250V560M640 380H938M760 250V380" strokeWidth="3" strokeOpacity="0.75" />
+        <path d="M600 210H938M600 210V570" strokeWidth="1" strokeOpacity="0.35" strokeDasharray="22 6 3 6" />
+        <path d="M680 380A54 54 0 0 1 734 326M800 380A44 44 0 0 1 844 336" strokeWidth="1.2" strokeOpacity="0.5" />
+        <rect x="660" y="272" width="44" height="30" strokeWidth="1.2" strokeOpacity="0.5" />
       </g>
-      <g transform={`translate(${-846 * k + 130} ${458 - 453 * k}) scale(${k})`}>
-        <Ring y={453} />
-      </g>
+      {/* the punched holes, each taking the end of a ring */}
+      {[196, 458].map((y) => (
+        <g key={y}>
+          <circle cx="500" cy={y - 6} r="15" fill="#0A0705" />
+          <circle cx="498" cy={y - 8} r="15" fill="none" stroke="#FFFFFF" strokeOpacity="0.5" strokeWidth="1.2" />
+          <g transform={`translate(${-846 * k + 130} ${y - 453 * k}) scale(${k})`}>
+            <Ring y={453} />
+          </g>
+        </g>
+      ))}
     </Art>
   );
 }

@@ -1,6 +1,6 @@
 // A vehicle wrap: a neutral, generic panel van seen from the side, on a street with a kerb in front. Dark Chocolate
 // body, the sand word-mark large along the side, the quarter arch wrapping over the rear wheel arch, and the brand
-// line and "→ sahra.sa" on the rear panel. Wheels with rims, door seams, a sliding-door rail, windows with a sheen.
+// line and "→ sahra.sa" under it on the load side; rear edge, lamp, hinges and bumpers in profile. Wheels with rims, door seams, a sliding-door rail, windows with a sheen.
 import Art from '@/components/art/Art';
 import { BackdropG, WallRibsG, MaterialDefs, SheenG, CastRectG, ContactShadowG, SCENE, SHADOW_INK } from '@/components/art/Mockup';
 import { quarterArch } from '@/components/art/KeyArt';
@@ -67,6 +67,7 @@ export default function Van() {
       <WallRibsG x={0} y={0} w={1400} h={560} pitch={46} rib={20} fill="#B58F6B" opacity="0.7" />
       <rect y="0" width="1400" height="560" fill="#000000" opacity="0.06" />
 
+      <g transform="translate(64 0)">
       {/* hard shadow and contact shadow on the road */}
       <g className="sun-shadow">
         <CastRectG x={110} y={620} w={1040} h={14} len={34} opacity={0.2} />
@@ -79,8 +80,13 @@ export default function Van() {
         <rect x="100" y="180" width="1060" height="400" fill="#35241C" />
         <path d={archBand} fill="#B58F6B" />
         <path d={archBand} fill={`url(#${P}-m-shade)`} opacity="0.35" />
-        <WordmarkG x={548} y={236} width={560} fill="#B58F6B" />
-        <WordmarkG x={548} y={236} width={560} fill={`url(#${P}-m-shade)`} opacity="0.3" />
+        <WordmarkG x={566} y={232} width={520} fill="#B58F6B" />
+        <WordmarkG x={566} y={232} width={520} fill={`url(#${P}-m-shade)`} opacity="0.3" />
+        <text className="serif" fontSize="25" letterSpacing="-0.4" fill="#E1D2C4">
+          {lines.map((t, i) => <tspan key={t} x="568" y={358 + i * 28}>{t}</tspan>)}
+        </text>
+        <rect x="568" y="404" width="118" height="32" rx="8" fill="#875D41" />
+        <text className="sans" x="584" y="426" fontSize="16" fill="#F5F0E3">{URL_LINE}</text>
         {/* door seams, the sliding-door rail and handles */}
         {[286, 528, 904].map((x) => (
           <g key={x}>
@@ -107,9 +113,16 @@ export default function Van() {
         {/* a lamp at the front, a lamp at the rear edge */}
         <path d="M104 428Q104 414 126 410L158 406V452H104Z" fill="#E1D2C4" />
         <path d="M104 428Q104 414 126 410L158 406V430H104Z" fill="#FFFFFF" opacity="0.5" />
-        <rect x="1136" y="262" width="14" height="86" fill="#875D41" />
-        <rect x="1136" y="262" width="5" height="86" fill="#FFFFFF" opacity="0.4" />
+        <rect x="1138" y="250" width="12" height="96" rx="3" fill="#875D41" />
+        <rect x="1138" y="250" width="4" height="96" fill="#FFFFFF" opacity="0.4" />
+        {/* the rear door's seam and hinge seen edge-on */}
+        <rect x="1120" y="214" width="2" height="320" fill="#000000" opacity="0.5" />
+        {[260, 470].map((y) => <rect key={y} x="1112" y={y} width="10" height="22" rx="2" fill="#120C09" />)}
       </g>
+      {/* bumpers in profile, front and rear */}
+      <path d="M96 520H170V548Q170 560 158 560H108Q96 560 96 548Z" fill="#120C09" />
+      <path d="M1100 520H1160Q1166 520 1166 528V552Q1166 560 1158 560H1100Z" fill="#120C09" />
+      <rect x="1100" y="520" width="66" height="3" fill="#FFFFFF" opacity="0.2" />
 
       {/* the cab window with a sheen, the mirror */}
       <path d={cabWindow} fill={`url(#${P}-win)`} />
@@ -121,27 +134,9 @@ export default function Van() {
       <rect x="246" y="316" width="22" height="44" rx="6" fill="#120C09" />
       <rect x="246" y="316" width="22" height="5" rx="2" fill="#FFFFFF" opacity="0.3" />
 
-      {/* the rear panel: a slightly turned face with two windows, the brand line and the web address */}
-      <g transform="translate(1150 188) skewY(5.9)">
-        <rect width="172" height="378" fill={`url(#${P}-m-board-dark)`} />
-        <rect width="172" height="378" fill="#35241C" opacity="0.5" />
-        <rect x="14" y="26" width="66" height="96" rx="6" fill={`url(#${P}-win)`} />
-        <rect x="92" y="26" width="66" height="96" rx="6" fill={`url(#${P}-win)`} />
-        <path d="M30 122L52 26H66L44 122Z" fill="#FFFFFF" opacity="0.14" />
-        <rect x="85" y="140" width="2.5" height="236" fill="#000000" opacity="0.65" />
-        <rect x="76" y="226" width="7" height="26" rx="3" fill="#120C09" />
-        <text className="serif" fontSize="19" letterSpacing="-0.4" fill="#B58F6B">
-          {lines.map((t, i) => <tspan key={t} x="16" y={176 + i * 22}>{t}</tspan>)}
-        </text>
-        <rect x="16" y="292" width="92" height="28" rx="8" fill="#875D41" />
-        <text className="sans" x="28" y="311" fontSize="14" fill="#F5F0E3">{URL_LINE}</text>
-        <rect x="0" y="336" width="172" height="42" fill="#120C09" opacity="0.75" />
-        <rect x="160" y="62" width="12" height="76" fill="#875D41" />
-        <rect x="0" y="0" width="3" height="378" fill="#FFFFFF" opacity="0.18" />
-      </g>
-
       {/* the wheels, over the arches */}
       {WHEELS.map((cx) => <Wheel key={cx} cx={cx} />)}
+      </g>
 
       {/* the kerb in front, then the pavement */}
       <rect y="706" width="1400" height="16" fill="#FFFFFF" opacity="0.75" />

@@ -9,7 +9,8 @@ import { Bolts } from './parts';
 
 const P = 'use-world-rc';
 const WX = 70, WY = 132, WW = 540;
-const SECTIONS = ['About Sahra', 'Philosophy', 'Our Process', 'Our Vision'];
+// Plain wayfinding words only (the case study's web-page headings are not places in a building).
+const SECTIONS = ['Lifts', 'Stairs', 'Lounge', 'Exit'];
 const FACILITIES = [['key', 'Reception'], ['door', 'Meeting room'], ['car', 'Parking']];
 const TURN = [0, -90, 180, 90]; // arrow right, up, left, down
 

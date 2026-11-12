@@ -100,7 +100,7 @@ export function PosterArt({ p, x, y, w }) {
       <text className="serif" fontSize="48" fill={INK} letterSpacing="-1">
         {LINES.elevate.rows.map((row, i) => <tspan key={row} x="40" y={92 + i * 54}>{row}</tspan>)}
       </text>
-      <Mark x={422} y={40} size={38} fill={C.tribal} />
+      <Mark x={422} y={652} size={36} fill={C.tribal} />
       <CornerCutG idp={`${p}-pc`} x={40} y={300} w={420} h={340} rad={96} corner="br">
         <TimberG idp={`${p}-pt`} x={40} y={300} w={420} h={340} lines={70} />
         <path d="M40 300H250L460 520V640H40Z" fill={`url(#${p}-pt-wall)`} opacity="0.9" />
@@ -137,7 +137,7 @@ export function HoardingArt({ p, x, y, w }) {
       <text className="sans" fontSize="25" fill={INK}>
         {LINES.cleanArchitecture.rows.map((row, i) => <tspan key={row} x="968" y={244 + i * 32}>{row}</tspan>)}
       </text>
-      <rect x="968" y="447" width="140" height="42" rx="21" fill={C.tribal} />
+      <rect x="968" y="447" width="140" height="42" rx="10" fill={C.tribal} />
       <text className="sans" fontSize="22" fill={C.beige} x="987" y="475">{URL_LINE}</text>
     </g>
   );

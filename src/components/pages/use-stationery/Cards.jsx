@@ -25,9 +25,10 @@ export function CardG({ m, kind = 'front', idp }) {
       <T x={44} y={72} size={30} serif fill={ink} text={PEOPLE.card.name} ls="-0.4" />
       <T x={44} y={98} size={13} fill={soft} text={PEOPLE.card.role} />
       <MarkG x={568} y={38} size={48} fill={C.sand} />
-      <T x={44} y={318} size={11.5} fill={ink} text={CONTACT_BLOCKS.office} lh={1.5} />
-      <T x={254} y={318} size={11.5} fill={ink} text={CONTACT_BLOCKS.online} lh={1.5} />
-      <T x={456} y={318} size={11.5} fill={ink} text={CONTACT_BLOCKS.service} lh={1.5} />
+      {/* as m08: office and online blocks stacked in the left column, the service block at the right */}
+      <T x={44} y={244} size={11.5} fill={ink} text={CONTACT_BLOCKS.office} lh={1.5} />
+      <T x={44} y={312} size={11.5} fill={ink} text={CONTACT_BLOCKS.online} lh={1.5} />
+      <T x={456} y={196} size={11.5} fill={ink} text={CONTACT_BLOCKS.service} lh={1.5} />
     </g>
   );
 }

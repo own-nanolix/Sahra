@@ -55,6 +55,14 @@ function Ticket({ p, m, v, k }) {
   );
 }
 
+// Each colourway lies differently: Beige as a staggered stack, Dark Chocolate fanned from one corner, Sand as a
+// loose column of three, apart.
+function place(kind, v, k) {
+  if (kind === 'dark') return { x: 230, y: 470, rotate: -20 + k * 12 };
+  if (kind === 'sand') return { x: 250 + (k % 2) * 60, y: 230 + k * 240, rotate: k % 2 ? 4 : -5 };
+  return { x: v.at[0] + k * v.step[0], y: v.at[1] + k * v.step[1] + 120 };
+}
+
 export function TicketPlate({ kind }) {
   const v = VARIANTS[kind];
   return (
@@ -62,7 +70,7 @@ export function TicketPlate({ kind }) {
       {(p, m) => (
         <>
           {[0, 1, 2].map((k) => (
-            <PlaceG key={k} i={k} x={v.at[0] + k * v.step[0]} y={v.at[1] + k * v.step[1] + 120}>
+            <PlaceG key={k} i={k} {...place(kind, v, k)}>
               <g transform={TILT}>
                 <Ticket p={p} m={m} v={v} k={k} />
                 {k === 2 && <SheenG idp={m} d={ticketPath(TW, TH, 16, PX, 13)} opacity={0.3} />}

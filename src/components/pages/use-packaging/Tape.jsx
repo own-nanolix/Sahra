@@ -10,16 +10,16 @@ function DarkPrint() {
   return <WordmarkRun x={28} y={34} width={150} gap={34} cols={2} rows={3} rowGap={18} stagger={96} fill={C.sand} />;
 }
 
-function KraftPrint() {
-  const rows = [0, 1, 2];
+function KraftPrint({ n = 3, y0 = 32, dy = 62 }) {
+  const rows = Array.from({ length: n }, (_, i) => i);
   return (
     <g fill={C.tribal}>
       {rows.map((i) => [0, 1].map((c) => {
         const x = 18 + c * 196 + (i % 2) * 70;
         return (
           <g key={`${i}-${c}`}>
-            <MarkG x={x} y={32 + i * 62} size={24} fill={C.tribal} />
-            <text className="sans" x={x + 36} y={52 + i * 62} fontSize="21" fill={C.tribal}>→ sahra.sa</text>
+            <MarkG x={x} y={y0 + i * dy} size={24} fill={C.tribal} />
+            <text className="sans" x={x + 36} y={y0 + 20 + i * dy} fontSize="21" fill={C.tribal}>→ sahra.sa</text>
           </g>
         );
       }))}
@@ -55,12 +55,13 @@ export function TapeDark() {
 
 export function TapeKraft() {
   return (
-    <Scene name="tape-kraft" title="Sand kraft tape roll with the tribal-brown mark and web address repeated, on a desk" w={800} h={600} horizon={0.46} wall={C.choc} floor={C.tribal}>
+    <Scene name="tape-kraft" title="Sand kraft tape roll standing on its side on a desk, the tribal-brown mark and web address repeated" w={800} h={600} horizon={0.46} wall={C.choc} floor={C.tribal}>
       {(idp) => (
         <g>
-          <ContactShadowG idp={`${idp}-s1`} cx={420} cy={462} rx={230} ry={16} opacity={0.36} />
+          {/* unlike the dark roll (lying on its edge), this one stands upright: its top face towards the camera */}
+          <ContactShadowG idp={`${idp}-s1`} cx={392} cy={438} rx={170} ry={14} opacity={0.4} />
           <g className="mock-place" style={{ '--i': 1 }}>
-            <Roll idp={idp} k="a" cx={300} cy={330} r={140} d={[146, -46]} tape="#B58F6B" edge="#A68261" coreInk="#E1D2C4" print={<KraftPrint />} len={34} />
+            <Roll idp={idp} k="a" cx={380} cy={250} r={150} d={[0, 112]} tape="#B58F6B" edge="#A68261" coreInk="#E1D2C4" print={<KraftPrint n={2} y0={22} dy={50} />} len={34} />
           </g>
           <DeskFront y={520} w={800} h={600} top="#9A6E50" front="#2B1D17" idp={idp} />
         </g>

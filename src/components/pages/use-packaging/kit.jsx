@@ -154,6 +154,7 @@ export function Roll({ idp, k, cx, cy, r, d, tape, edge, coreInk, print, len = 3
         {[outline, arc(f), arc(bk)].map((q, i) => <CastG key={i} d={q} len={len} steps={16} opacity={1} />)}</g>
       </g>
       {ell(bk, minor, r, { fill: tape })}
+      {ell(bk, minor, r, { fill: '#000', opacity: 0.22 })}
       <path d={band} fill={tape} />
       <clipPath id={`${idp}-${k}-band`}><path d={band} /></clipPath>
       <g clipPath={`url(#${idp}-${k}-band)`}>

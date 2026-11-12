@@ -3,8 +3,8 @@ import Reveal from '@/components/site/Reveal';
 import Plate from '@/components/pages/use-packaging/Plate';
 import { TapeDark, TapeKraft, TapeStrips } from '@/components/pages/use-packaging/Tape';
 import { ShippingSand, ShippingChocolate } from '@/components/pages/use-packaging/Shipping';
-import { ProductDark, ProductTall, Tube } from '@/components/pages/use-packaging/Products';
-import { BagDark, BagTribal, BagBeige } from '@/components/pages/use-packaging/Bags';
+import { ProductPair, Tube } from '@/components/pages/use-packaging/Products';
+import BagTrio from '@/components/pages/use-packaging/Bags';
 import { TissuePaper, SealSticker, ShippingLabelPlate } from '@/components/pages/use-packaging/Inside';
 import s from '@/components/pages/use-packaging/use-packaging.module.css';
 
@@ -12,8 +12,8 @@ export const metadata = pageMeta('use-packaging');
 
 // Two columns of tall and short tiles, alternating down each column (tall = 4:5, short = 4:3).
 const COLS = [
-  [['Tape, Dark Chocolate', TapeDark], ['Tape strips', TapeStrips], ['Shipping box, Sand', ShippingSand], ['Product box, dark', ProductDark], ['Shopping bag, Dark Chocolate', BagDark], ['Cream tube', Tube], ['Shopping bag, Tribal Brown', BagTribal]],
-  [['Tape, Sand', TapeKraft], ['Shipping box, Dark Chocolate', ShippingChocolate], ['Tissue paper', TissuePaper], ['Product box, tall', ProductTall], ['Seal sticker', SealSticker], ['Shopping bag, Beige', BagBeige], ['Shipping label', ShippingLabelPlate]],
+  [['Tape, Dark Chocolate', TapeDark], ['Tape strips', TapeStrips], ['Shipping box, Sand', ShippingSand], ['Product boxes', ProductPair], ['Tissue paper', TissuePaper], ['Shipping label', ShippingLabelPlate]],
+  [['Tape, Sand', TapeKraft], ['Shipping box, Dark Chocolate', ShippingChocolate], ['Shopping bags', BagTrio], ['Cream tube', Tube], ['Seal sticker', SealSticker]],
 ];
 
 function Tile({ name, Art, delay }) {

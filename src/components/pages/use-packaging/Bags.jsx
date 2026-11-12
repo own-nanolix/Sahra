@@ -40,9 +40,9 @@ function Lip({ w, lip = 28 }) {
   );
 }
 
-function Bag({ idp, k, wl, h, tone, art, rope, eyelet, counterY }) {
+function Bag({ idp, k, cx, wl, h, tone, art, rope, eyelet, counterY }) {
   const L = [-wl * 0.97, -24], R = [GUS * 0.92, -36];
-  const B = [400 + (wl * 0.97 - GUS * 0.92) / 2, counterY + 4];
+  const B = [cx + (wl * 0.97 - GUS * 0.92) / 2, counterY + 4];
   const T0 = [B[0], B[1] - h];
   const TL = add(T0, L), TR = add(T0, R), F = add(TL, R);
   const at = (a, b, t) => add(a, sc([b[0] - a[0], b[1] - a[1]], t));
@@ -53,7 +53,7 @@ function Bag({ idp, k, wl, h, tone, art, rope, eyelet, counterY }) {
   const rise = Math.min(210, h * 0.46);
   return (
     <g>
-      <ContactShadowG idp={`${idp}-s1`} cx={B[0] - wl * 0.45} cy={B[1] + 2} rx={wl * 0.62} ry={7} opacity={0.4} />
+      <ContactShadowG idp={`${idp}-${k}-s1`} cx={B[0] - wl * 0.45} cy={B[1] + 2} rx={wl * 0.62} ry={7} opacity={0.4} />
       <Handle x1={back[0][0]} x2={back[1][0]} y={back[0][1]} y2={back[1][1]} rise={rise} {...cord} lean={6} />
       <Box3 idp={idp} k={k} B={B} L={L} R={R} H={h} Wl={wl} Wr={GUS} tone={tone} len={74}
         left={<g><Lip w={wl} />{art}{ts.map((t) => <Eyelet key={t} x={wl * t} y={16} dark={eyelet} />)}</g>}
@@ -73,68 +73,39 @@ function Eyelet({ x, y, dark }) {
   );
 }
 
-function BagScene({ name, title, wall, floor, children }) {
+// The three bags on one counter, front view, in rising height from left to right.
+export default function BagTrio() {
+  const y = 866;
   return (
-    <Scene name={name} title={title} w={800} h={1000} horizon={0.8} wall={wall} floor={floor}>
+    <Scene name="bags" title="Three shopping bags on a counter in rising height: the dark bag of the case study, a Tribal Brown bag and a Beige bag" w={1500} h={1000} horizon={0.8} wall={C.sand40} floor={C.tribal40}>
       {(idp) => (
         <g>
-          {children(idp, 866)}
-          <CounterG y={866} w={800} h={134} slab={20} top="#F5F0E3" front="#35241C" />
+          <g className="mock-place" style={{ '--i': 1 }}>
+            <Bag idp={idp} k="a" cx={290} wl={440} h={330} tone="chocolate" counterY={y} eyelet
+              art={(
+                <g>
+                  <LineText x={30} y={68} size={22} fill="#CDBBA6" />
+                  <UrlText x={412} y={58} size={14} fill={C.sand} anchor="end" />
+                  <WordmarkDebossG idp={`${idp}-a-w`} x={32} y={214} width={376} tone="#9C7050" depth={5} />
+                </g>
+              )} />
+          </g>
+          <g className="mock-place" style={{ '--i': 2 }}>
+            <Bag idp={idp} k="b" cx={790} wl={360} h={470} tone="tribal" counterY={y} rope="#F5F0E3"
+              art={(
+                <g>
+                  <MarkG x={120} y={170} size={120} fill={C.beige} />
+                  <UrlText x={180} y={430} size={14} fill={C.beige} anchor="middle" />
+                </g>
+              )} />
+          </g>
+          <g className="mock-place" style={{ '--i': 3 }}>
+            <Bag idp={idp} k="c" cx={1230} wl={300} h={590} tone="beige" counterY={y} rope="#35241C"
+              art={<WordmarkG x={34} y={300} width={232} fill={C.tribal} />} />
+          </g>
+          <CounterG y={y} w={1500} h={134} slab={20} top="#F5F0E3" front="#35241C" />
         </g>
       )}
     </Scene>
-  );
-}
-
-export function BagDark() {
-  const w = 440;
-  return (
-    <BagScene name="bag-dark" title="Dark Chocolate shopping bag with black ribbon handles and the debossed word-mark" wall={C.sand40} floor={C.tribal40}>
-      {(idp, y) => (
-        <g className="mock-place" style={{ '--i': 1 }}>
-          <Bag idp={idp} k="a" wl={w} h={330} tone="chocolate" counterY={y} eyelet
-            art={(
-              <g>
-                <LineText x={30} y={68} size={22} fill="#CDBBA6" />
-                <UrlText x={w - 28} y={58} size={14} fill={C.sand} anchor="end" />
-                <WordmarkDebossG idp={`${idp}-w`} x={32} y={214} width={w - 64} tone="#9C7050" depth={5} />
-              </g>
-            )} />
-        </g>
-      )}
-    </BagScene>
-  );
-}
-
-export function BagTribal() {
-  const w = 360;
-  return (
-    <BagScene name="bag-tribal" title="Tribal Brown shopping bag with the beige mark and rope handles" wall={C.choc} floor={C.sand}>
-      {(idp, y) => (
-        <g className="mock-place" style={{ '--i': 1 }}>
-          <Bag idp={idp} k="a" wl={w} h={470} tone="tribal" counterY={y} rope="#F5F0E3"
-            art={(
-              <g>
-                <MarkG x={(w - 120) / 2} y={170} size={120} fill={C.beige} />
-                <UrlText x={w / 2} y={430} size={14} fill={C.beige} anchor="middle" />
-              </g>
-            )} />
-        </g>
-      )}
-    </BagScene>
-  );
-}
-
-export function BagBeige() {
-  const w = 300;
-  return (
-    <BagScene name="bag-beige" title="Beige shopping bag with the tribal-brown word-mark and rope handles" wall={C.sand40} floor={C.tribal40}>
-      {(idp, y) => (
-        <g className="mock-place" style={{ '--i': 1 }}>
-          <Bag idp={idp} k="a" wl={w} h={590} tone="beige" counterY={y} rope="#35241C"
-            art={<WordmarkG x={34} y={300} width={w - 68} fill={C.tribal} />} />
-        </g>
-      )}
-    </BagScene>
   );
 }
