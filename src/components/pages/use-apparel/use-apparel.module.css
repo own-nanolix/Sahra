@@ -13,6 +13,9 @@
 
 /* The hoodies and tees: the plates keep their own proportions; tiles hug them. */
 .tile { align-self: start; }
+.column { display: grid; gap: var(--gap); align-content: start; min-width: 0; }
+.colHead { padding-top: clamp(20px, 3vw, 48px); }
+.colHead h2 { font-weight: 500; }
 
 /* The spec sheet is a wide technical drawing: it scrolls inside its own wrapper on narrow screens. */
 .scroll { overflow-x: auto; overscroll-behavior-x: contain; background: var(--beige); }

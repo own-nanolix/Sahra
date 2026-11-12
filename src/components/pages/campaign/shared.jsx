@@ -34,13 +34,42 @@ export function Para({ text, x, y, size = 16, lh = 1.45, max = 46, fill, anchor 
     </text>
   );
 }
-export const paraHeight = (text, max, size, lh = 1.45) => wrap(text, max).length * size * lh;
+// Split a printed text into lines before each of the given starting words (the reference's own breaks), so the
+// words stay verbatim and only the breaks are set.
+export function splitAt(text, starts) {
+  const rows = [];
+  let rest = text;
+  for (const s of starts) {
+    const at = rest.indexOf(s);
+    if (at <= 0) continue;
+    rows.push(rest.slice(0, at).trim());
+    rest = rest.slice(at);
+  }
+  rows.push(rest.trim());
+  return rows;
+}
+
+// A justified paragraph, as on the posters (m11): every line but the last is set to the column width.
+export function Justified({ rows, x, y, size, lh, width, fill }) {
+  return (
+    <g className="sans" fontSize={size} fill={fill}>
+      {rows.map((r, i) => (
+        <text key={i} x={x} y={r2(y + i * lh)} {...(i < rows.length - 1 ? { textLength: width, lengthAdjust: 'spacing' } : {})}>{r}</text>
+      ))}
+    </g>
+  );
+}
+const r2 = (v) => Math.round(v * 100) / 100;
+
+export const paraHeight =(text, max, size, lh = 1.45) => wrap(text, max).length * size * lh;
 
 // The three contact blocks of the posters, stacked, very small (the linkedin line is never printed here).
-export function Contacts({ x, y, size = 15, gap = 22, fill, anchor = 'start', blocks, i = 5 }) {
+// pitch (optional) places the blocks at a fixed distance, as printed: the first block keeps the room of the
+// left-out linkedin line.
+export function Contacts({ x, y, size = 15, gap = 22, fill, anchor = 'start', blocks, i = 5, pitch, lh: lhIn }) {
   const list = blocks || [CONTACT_BLOCKS.online, CONTACT_BLOCKS.service, CONTACT_BLOCKS.office];
-  const lh = size * 1.4;
-  const tops = list.map((_, bi) => y + list.slice(0, bi).reduce((a, b) => a + b.length * lh + gap, 0));
+  const lh = lhIn || size * 1.4;
+  const tops = list.map((_, bi) => (pitch ? y + bi * pitch : y + list.slice(0, bi).reduce((a, b) => a + b.length * lh + gap, 0)));
   return (
     <g className="fade-in" style={{ '--i': i }}>
       {list.map((b, bi) => {

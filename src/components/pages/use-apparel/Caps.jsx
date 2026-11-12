@@ -1,8 +1,8 @@
 // The three caps on a counter, three-quarter view, in a row of falling size (one SVG each; the scale falls
-// from the first plate to the last).
+// from the first plate to the last), each plate arranged differently.
 import Art from '@/components/art/Art';
 import { BackdropG, CounterG, SCENE } from '@/components/art/Mockup';
-import { GDefs, WAYS } from './parts';
+import { GDefs, HookG, WAYS } from './parts';
 import Cap, { CAP_W } from './Cap';
 
 const W = 900;
@@ -24,7 +24,21 @@ export function CapPlate({ n }) {
       <GDefs idp={P} />
       <BackdropG idp={P} w={W} h={H} horizon={0.62} wall={cp.wall} floor={cp.floor} />
       <CounterG x={-20} y={TOP} w={W + 40} h={H - TOP + 30} top={cp.slab} front={cp.front} />
-      <Cap idp={P} id={`${P}-cap`} x={W / 2 - (CAP_W * k) / 2 - 10 * k} y={TOP - 152 * k} k={k} c={WAYS[cp.way]} ink={cp.ink} lit />
+      {/* three arrangements: one cap set down alone; two caps nested in a stack; one hanging from a hook
+          above the counter */}
+      {n === 0 && <Cap idp={P} id={`${P}-cap`} x={W / 2 - (CAP_W * k) / 2 - 10 * k} y={TOP - 152 * k} k={k} c={WAYS[cp.way]} ink={cp.ink} lit />}
+      {n === 1 && (
+        <>
+          <Cap idp={P} id={`${P}-low`} x={W / 2 - (CAP_W * k) / 2 + 14 * k} y={TOP - 152 * k} k={k} c={WAYS[cp.way]} ink={cp.ink} i={0} />
+          <Cap idp={P} id={`${P}-cap`} x={W / 2 - (CAP_W * k) / 2 - 4 * k} y={TOP - 152 * k - 24 * k} k={k} c={WAYS[cp.way]} ink={cp.ink} lit />
+        </>
+      )}
+      {n === 2 && (
+        <>
+          <HookG idp={P} x={W / 2 - 8} y={78} />
+          <Cap idp={P} id={`${P}-cap`} x={W / 2 - 124 * k - 8} y={96} k={k} c={WAYS[cp.way]} ink={cp.ink} lit hang />
+        </>
+      )}
     </Art>
   );
 }

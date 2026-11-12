@@ -29,13 +29,14 @@ function Embroidery({ idp, size, ink }) {
   );
 }
 
-export default function Cap({ idp, id, x = 0, y = 0, k = 1, c, ink, part = 'both', lit = false, i = 0 }) {
+// hang: the cap hangs on a wall hook, so it throws a longer shadow on the wall and has no contact shadow.
+export default function Cap({ idp, id, x = 0, y = 0, k = 1, c, ink, part = 'both', lit = false, i = 0, hang = false }) {
   return (
     <g transform={`translate(${r2(x)} ${r2(y)}) scale(${k})`}>
       {part !== 'body' && (
         <>
-          <ContactShadowG idp={`${id}-cs`} cx={170} cy={156} rx={170} ry={12} opacity={0.34} blur={6} />
-          <CastG d={`${CROWN}${PEAK}`} len={30} opacity={0.2} className="sun-shadow" />
+          {!hang && <ContactShadowG idp={`${id}-cs`} cx={170} cy={156} rx={170} ry={12} opacity={0.34} blur={6} />}
+          <CastG d={`${CROWN}${PEAK}`} len={hang ? 40 : 30} opacity={hang ? 0.24 : 0.2} className="sun-shadow" />
         </>
       )}
       {part !== 'shadow' && (

@@ -33,7 +33,37 @@ const HOODIES = [
   { way: 'tribal', ink: '#F5F0E3', other: 'chocolate', wall: SCENE.chocolate, floor: SCENE.tribal, shelf: SCENE.sand, name: 'tribal-brown', title: 'Tribal Brown hoodie' },
 ];
 
+// The second plate is arranged differently: two hoodies (Tribal Brown and Sand) hanging side by side from two
+// hooks on a ribbed wall, the Sand one a little lower, so the page shows three hoodies.
+function HoodiePair() {
+  const P = 'use-apparel-hoodie-tribal-brown';
+  const pair = [
+    { c: WAYS.tribal, ink: '#F5F0E3', x: 92, y: 132, k: 1.04, i: 0 },
+    { c: WAYS.sand, ink: '#35241C', x: 478, y: 168, k: 1.0, i: 1 },
+  ];
+  const hz = Math.round(H * 0.9);
+  return (
+    <Art viewBox={`0 0 ${W} ${H}`} title="Tribal Brown and Sand hoodies hanging side by side on two hooks" exportName="use-apparel-hoodie-tribal-brown">
+      <GDefs idp={P} />
+      <BackdropG idp={P} w={W} h={H} horizon={0.9} wall={SCENE.chocolate} floor={SCENE.tribal} />
+      <WallRibsG w={W} h={hz} pitch={30} rib={12} fill={SCENE.chocolate} shade="#000000" />
+      {pair.map((p, j) => (
+        <Hoodie key={`s${j}`} idp={P} id={`${P}-h${j}`} x={p.x} y={p.y} k={p.k} c={p.c} part="shadow" shadow={24} />
+      ))}
+      {pair.map((p, j) => (
+        <g key={`b${j}`}>
+          <HookG idp={P} x={p.x + 160 * p.k} y={p.y - 10} />
+          <Hoodie idp={P} id={`${P}-h${j}`} x={p.x} y={p.y} k={p.k} c={p.c} part="body" lit={j === 0} i={p.i}>
+            <MarkG idp={P} x={137} y={150} size={46} fill={p.ink} />
+          </Hoodie>
+        </g>
+      ))}
+    </Art>
+  );
+}
+
 export function HoodiePlate({ n }) {
+  if (n === 1) return <HoodiePair />;
   const h = HOODIES[n];
   const P = `use-apparel-hoodie-${h.name}`;
   const c = WAYS[h.way];

@@ -64,7 +64,9 @@ export function MockFins() {
   }
   const k = 0.4, fw = PW * k, fh = PH * k;
   const fx = 560, fy = 190;
-  const skew = 'translate(0 -56) matrix(1 0.07 0 1 0 0)';
+  // the poster hangs square to the wall: an affine skew read as a tilted frame, not as a view from the left;
+  // the angle is carried by the fins, which widen towards the right
+  const skew = 'translate(0 -20)';
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Mockup: one framed poster on a wall of vertical fins" exportName="campaign-mock-fins">
       <MaterialDefs idp={idp} />
@@ -107,7 +109,7 @@ export function MockHoarding() {
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Mockup: the hoarding on a street" exportName="campaign-mock-hoarding">
       <MaterialDefs idp={idp} />
-      <BackdropG idp={idp} w={W} h={H} horizon={hz / H} wall={SCENE.sand20} floor={SCENE.sand20} />
+      <BackdropG idp={idp} w={W} h={H} horizon={hz / H} wall={SCENE.tribal20} floor={SCENE.sand40} />
       <path d={`M0 0H420L900 ${hz}H0Z`} fill="#FFFFFF" opacity="0.4" />
       <PlaceG i={1}>
         <path className="sun-shadow" d={castRect(hx, hy, 1400, 700, 34)} fill={SHADOW_INK} opacity="0.16" />

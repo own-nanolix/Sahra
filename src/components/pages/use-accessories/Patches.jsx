@@ -29,6 +29,18 @@ function Thread({ id, color, angle = 35 }) {
   );
 }
 
+// The fabric is laid on a desk: it fills most of the frame and its cut edge meets the desk at a hard line,
+// with the cloth's own thickness and a shadow falling towards the viewer.
+const FABRIC = 344;
+function FabricEdge() {
+  return (
+    <g>
+      <rect y={FABRIC} width="800" height="4" fill="#000000" opacity="0.22" />
+      <rect y={FABRIC + 4} width="800" height="9" fill={SHADOW_INK} opacity="0.16" />
+    </g>
+  );
+}
+
 const SHAPES = {
   circle: 'M250 200A150 150 0 1 0 550 200A150 150 0 1 0 250 200Z',
   square: rrect(260, 60, 280, 280, 36),
@@ -37,24 +49,26 @@ const SHAPES = {
 };
 
 const PATCHES = [
-  { id: 'patch-chocolate', title: 'Embroidered patch, the mark on Dark Chocolate', cap: 'Patch, mark on Dark Chocolate', shape: 'circle', field: C.sand, base: C.chocolate, edge: C.sand, ink: C.sand, art: 'mark' },
-  { id: 'patch-sand', title: 'Embroidered patch, the mark on Sand', cap: 'Patch, mark on Sand', shape: 'square', field: C.chocolate, base: C.sand, edge: C.beige, ink: C.beige, art: 'mark' },
-  { id: 'patch-wordmark', title: 'Embroidered patch, the word-mark', cap: 'Patch, word-mark', shape: 'pill', field: C.tribal, base: C.beige, edge: C.chocolate, ink: C.tribal, art: 'wordmark' },
-  { id: 'patch-arch', title: 'Embroidered patch, the quarter arch', cap: 'Patch, quarter arch', shape: 'arch', field: C.black, base: C.tribal, edge: C.sand, ink: C.beige, art: 'arch' },
+  { id: 'patch-chocolate', title: 'Embroidered patch, the mark on Dark Chocolate', cap: 'Patch, mark on Dark Chocolate', shape: 'circle', field: C.sand, base: C.chocolate, edge: C.sand, ink: C.sand, art: 'mark', desk: C.tribal, at: [330, 178, -7] },
+  { id: 'patch-sand', title: 'Embroidered patch, the mark on Sand', cap: 'Patch, mark on Sand', shape: 'square', field: C.chocolate, base: C.sand, edge: C.beige, ink: C.beige, art: 'mark', desk: C.sand40, at: [470, 190, 5] },
+  { id: 'patch-wordmark', title: 'Embroidered patch, the word-mark', cap: 'Patch, word-mark', shape: 'pill', field: C.tribal, base: C.beige, edge: C.chocolate, ink: C.tribal, art: 'wordmark', desk: C.chocolate, at: [400, 168, -3] },
+  { id: 'patch-arch', title: 'Embroidered patch, the quarter arch', cap: 'Patch, quarter arch', shape: 'arch', field: C.black, base: C.tribal, edge: C.sand, ink: C.beige, art: 'arch', desk: C.sand, at: [440, 186, 9] },
 ];
 
 function Patch({ cw, order }) {
   const d = SHAPES[cw.shape];
   return (
-    <Stage id={cw.id} title={cw.title} w={800} h={400} horizon={0.01} wall={cw.field} floor={cw.field} line={false} order={order}>
+    <Stage id={cw.id} title={cw.title} w={800} h={400} horizon={FABRIC / 400} wall={cw.field} floor={cw.desk} order={order}>
       {(idp) => (
         <g>
           <defs>
             <Thread id={`${idp}-tb`} color={cw.base} />
             <Thread id={`${idp}-ti`} color={cw.ink} angle={-25} />
           </defs>
-          <Field idp={idp} color={cw.field} />
-          <g transform="translate(400 200) scale(0.76) translate(-400 -200)">
+          <Field idp={idp} color={cw.field} h={FABRIC} />
+          <FabricEdge />
+          {/* a loose row: each patch lies at its own place and turn on its cloth */}
+          <g transform={`translate(${cw.at[0]} ${cw.at[1]}) rotate(${cw.at[2]}) scale(0.76) translate(-400 -200)`}>
           <CastG d={d} len={16} opacity={0.3} />
           <path d={d} fill={`url(#${idp}-tb)`} />
           <path d={d} fill="none" stroke={SHADOW_INK} strokeOpacity="0.2" strokeWidth="18" />
@@ -95,7 +109,7 @@ export const PATCH_PLATES = PATCHES.map((cw, i) => ({ key: cw.id, cap: cw.cap, c
 function Keychain() {
   const k = 170 / 184;
   return (
-    <Stage id="keychain" title="Keychain with the mark cut from brass on a black ring" w={800} h={400} horizon={0.01} wall={C.chocolate} floor={C.chocolate} line={false} order={1}>
+    <Stage id="keychain" title="Keychain with the mark cut from brass on a black ring" w={800} h={400} horizon={FABRIC / 400} wall={C.chocolate} floor={C.sand40} order={1}>
       {(idp) => (
         <g>
           <defs>
@@ -109,7 +123,8 @@ function Keychain() {
               <path d={MARK_D} />
             </clipPath>
           </defs>
-          <Field idp={idp} color={C.chocolate} />
+          <Field idp={idp} color={C.chocolate} h={FABRIC} />
+          <FabricEdge />
           <g transform="translate(380 170) scale(0.84) translate(-340 -150)">
           <rect x="314" y="-4" width="30" height="62" fill={SHADOW_INK} opacity="0.35" transform="translate(10 8)" />
           <rect x="314" y="-4" width="30" height="62" fill="#0E0907" filter={`url(#${idp}-fabric)`} />

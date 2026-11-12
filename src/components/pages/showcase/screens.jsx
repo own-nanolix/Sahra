@@ -223,27 +223,31 @@ export function PlanCardG({ idp, w = 340, h = 370 }) {
 // ---------- The hoarding artwork of m16, to fit a wide screen ----------
 
 // field with the word-mark and "We Build Spaces of Imagination", the rounded corner, the beige panel
+// Re-measured from m16 at full size: the photograph takes 57 % of the width and its corner radius is about a
+// tenth of the height; the line half starts 3.4 % of the width after it; line at 15 %, sub line at 46 %,
+// button at 85 % of the height.
 export function HoardingG({ idp, w = 1260, h = 420 }) {
-  const pw = Math.round(w * 0.66);
-  const rows = ['Refined living spaces', 'designed for comfort', 'and simplicity'];
+  const pw = Math.round(w * 0.571);
+  const tx = Math.round(pw + w * 0.034);
+  const u = h / 526; // one pixel of m16's 526 px tall hoarding
   return (
     <g>
       <rect width={w} height={h} fill={BEIGE} />
-      <CornerCutG idp={`${idp}-hc`} x={0} y={0} w={pw} h={h} rad={Math.round(h * 0.17)} corner="br">
+      <CornerCutG idp={`${idp}-hc`} x={0} y={0} w={pw} h={h} rad={Math.round(h * 0.098)} corner="br">
         <SkyPatchG idp={`${idp}-hp`} x={0} y={0} w={pw} h={h} />
       </CornerCutG>
-      <WordmarkG x={28} y={30} width={196} fill={BEIGE} opacity="0.95" />
-      <text className="serif" fontSize="34" fill={BEIGE} opacity="0.95" letterSpacing="-0.4">
-        {LINES.imagination.rows.map((r, i) => <tspan key={r} x="28" y={h - 82 + i * 40}>{r}</tspan>)}
+      <WordmarkG x={Math.round(50 * u)} y={Math.round(45 * u)} width={Math.round(280 * u)} fill={BEIGE} opacity="0.95" />
+      <text className="serif" fontSize={Math.round(36 * u)} fill={BEIGE} opacity="0.95" letterSpacing="-0.4">
+        {LINES.imagination.rows.map((r, i) => <tspan key={r} x={Math.round(52 * u)} y={Math.round((438 + i * 42) * u)}>{r}</tspan>)}
       </text>
-      <text className="serif" fontSize="40" fill={INK} letterSpacing="-0.6">
-        {rows.map((r, i) => <tspan key={r} x={pw + 46} y={92 + i * 46}>{r}</tspan>)}
+      <text className="serif" fontSize={Math.round(50 * u)} fill={INK} letterSpacing="-0.6">
+        {LINES.refinedLiving.rows.map((r, i) => <tspan key={r} x={tx} y={Math.round((78 + i * 53) * u)}>{r}</tspan>)}
       </text>
-      <text fontSize="16" className="sans" fill={INK}>
-        {LINES.cleanArchitecture.rows.map((r, i) => <tspan key={r} x={pw + 46} y={h * 0.6 + i * 22}>{r}</tspan>)}
+      <text fontSize={Math.round(22 * u)} className="sans" fill={INK}>
+        {LINES.cleanArchitecture.rows.map((r, i) => <tspan key={r} x={tx} y={Math.round((235 + i * 31) * u)}>{r}</tspan>)}
       </text>
-      <rect x={pw + 46} y={h - 84} width="146" height="42" rx="10" fill={TRIBAL} />
-      <text x={pw + 119} y={h - 57} fontSize="17" className="sans" fill={BEIGE} textAnchor="middle">{URL_LINE}</text>
+      <rect x={tx} y={Math.round(445 * u)} width={Math.round(139 * u)} height={Math.round(41 * u)} rx={Math.round(9 * u)} fill={TRIBAL} />
+      <text x={Math.round(tx + 69.5 * u)} y={Math.round(472 * u)} fontSize={Math.round(20 * u)} className="sans" fill={BEIGE} textAnchor="middle">{URL_LINE}</text>
     </g>
   );
 }
@@ -256,7 +260,7 @@ export function ScreenPlanTabletG() {
     <g>
       <rect width="1180" height="820" fill={INK} />
       <g transform="translate(76 34) scale(1.1)">
-        <SheetG tone="beige" />
+        <SheetG tone="white" />
       </g>
       <text x="720" y="86" fontSize="15" className="sans" fill={SAND}>{SENDER.developement}</text>
       {ABOUT.rows.map((r, i) => (

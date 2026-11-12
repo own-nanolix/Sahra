@@ -12,17 +12,17 @@ export const metadata = pageMeta('use-apparel');
 
 // Plain names for the captions.
 const TEE_CAPS = ['Beige t-shirt', 'Dark Chocolate t-shirt', 'Sand t-shirt'];
-const TEE_SIDES = ['Front and back', 'Front and back', 'Front and back'];
+const TEE_SIDES = ['Front and back, side by side', 'Front over back', 'Front and back, fanned'];
 const HOODIE_CAPS = [
-  [<JacketPlate key="j" />, 'Dark jacket, back', 'Mark, tone on tone'],
   [<HoodiePlate key="a" n={0} />, 'Dark Chocolate hoodie', 'Stack and hook'],
-  [<HoodiePlate key="b" n={1} />, 'Tribal Brown hoodie', 'Stack and hook'],
+  [<HoodiePlate key="b" n={1} />, 'Tribal Brown and Sand hoodies', 'Two hooks'],
+  [<JacketPlate key="j" />, 'Dark jacket, back', 'Mark, tone on tone'],
 ];
 const CAP_CAPS = ['Dark Chocolate cap', 'Beige cap', 'Tribal Brown cap'];
 
 function Plate({ span, delay = 0, name, note, children }) {
   return (
-    <Reveal as="figure" delay={delay} className={`tile tile-flush ${s.tile} ${s.plate} ${span}`}>
+    <Reveal as="figure" delay={delay} className={`tile tile-flush ${s.tile} ${s.plate} ${span || ''}`}>
       {children}
       <figcaption className={`${s.cap} t-small`}>
         <span>{name}</span>
@@ -50,23 +50,27 @@ export default function Page() {
         </Reveal>
 
         <div className="bento">
-          <div className={s.section}>
-            <h2 className="t-h2">T-shirts</h2>
+          {/* LAYOUTS: t-shirts 6 x 3 beside hoodies 6 x 3: two columns of three plates each */}
+          <div className={`span-6 ${s.column}`}>
+            <div className={s.colHead}>
+              <h2 className="t-h2">T-shirts</h2>
+            </div>
+            {TEE_CAPS.map((name, n) => (
+              <Plate key={name} delay={n * 80} name={name} note={TEE_SIDES[n]}>
+                <TeePlate n={n} />
+              </Plate>
+            ))}
           </div>
-          {TEE_CAPS.map((name, n) => (
-            <Plate key={name} span="span-6" delay={n * 80} name={name} note={TEE_SIDES[n]}>
-              <TeePlate n={n} />
-            </Plate>
-          ))}
-
-          <div className={s.section}>
-            <h2 className="t-h2">Hoodies</h2>
+          <div className={`span-6 ${s.column}`}>
+            <div className={s.colHead}>
+              <h2 className="t-h2">Hoodies</h2>
+            </div>
+            {HOODIE_CAPS.map(([art, name, note], n) => (
+              <Plate key={name} delay={n * 80 + 40} name={name} note={note}>
+                {art}
+              </Plate>
+            ))}
           </div>
-          {HOODIE_CAPS.map(([art, name, note], n) => (
-            <Plate key={name} span="span-6" delay={n * 80} name={name} note={note}>
-              {art}
-            </Plate>
-          ))}
 
           <div className={s.section}>
             <h2 className="t-h2">Caps</h2>
