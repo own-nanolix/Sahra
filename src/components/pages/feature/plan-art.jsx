@@ -221,30 +221,50 @@ export function PlanG({ x = 0, y = 0, scale = 1, ink = '#35241C', layers = ALL_O
 
 export const SHEET_SIZE = { w: 480, h: 690 };
 export const SHEET_PLAN = { x: 36, y: 90, k: 0.92 };
+// m13 prints the sheet on white paper; the Dark version is the extension.
 export const TONES = {
-  beige: { paper: '#F5F0E3', ink: '#35241C', accent: '#875D41', mark: '#B58F6B', name: 'Beige' },
+  white: { paper: '#FFFFFF', ink: '#35241C', accent: '#875D41', mark: '#B58F6B', name: 'White, as printed' },
   dark: { paper: '#35241C', ink: '#F5F0E3', accent: '#B58F6B', mark: '#B58F6B', name: 'Dark Chocolate' },
 };
 
-export function SheetG({ tone = 'beige', layers = ALL_ON, transition = false, animate = false }) {
+// Header, mark and paragraph placed as on m13 (re-measured on the full-size image, sheet 460 x 650 there):
+// sender at the left, the service lines from 38 % and the office block from 77 % of the width; the mark at the
+// lower left and the paragraph in five small lines from 38 %.
+export function SheetG({ tone = 'white', layers = ALL_ON, transition = false, animate = false }) {
   const t = TONES[tone];
-  const lines = wrap(PLAN.text, 96);
+  const lines = wrap(PLAN.text, 100);
   return (
     <g>
       <rect width={SHEET_SIZE.w} height={SHEET_SIZE.h} fill={t.paper} />
-      <text x="36" y="44" fontSize="10" fill={t.accent} className="sans">{SENDER.developement}</text>
-      <text fontSize="8.6" fill={t.ink} className="sans">
-        <tspan x="196" y="44">{CONTACT.support}</tspan>
-        <tspan x="196" y="55">{CONTACT.partnerships}</tspan>
-        <tspan x="360" y="44">{CONTACT.city}</tspan>
-        <tspan x="360" y="55">{CONTACT.phone}</tspan>
-        <tspan x="360" y="66">{CONTACT.info}</tspan>
+      <text x="28" y="36.5" fontSize="8" fill={t.accent} className="sans">{SENDER.developement}</text>
+      <text fontSize="7.6" fill={t.ink} className="sans">
+        <tspan x="180" y="36.5">{CONTACT.support}</tspan>
+        <tspan x="180" y="47">{CONTACT.partnerships}</tspan>
+        <tspan x="368" y="36.5">{CONTACT.city}</tspan>
+        <tspan x="368" y="47">{CONTACT.phone}</tspan>
+        <tspan x="368" y="57.5">{CONTACT.info}</tspan>
       </text>
       <PlanG x={SHEET_PLAN.x} y={SHEET_PLAN.y} scale={SHEET_PLAN.k} ink={t.ink} layers={layers} transition={transition} animate={animate} />
-      <MarkG x={36} y={610} size={30} fill={t.mark} />
-      <text fontSize="6.8" fill={t.ink} className="sans">
-        {lines.map((l, i) => <tspan key={i} x="100" y={616 + i * 10.2}>{l}</tspan>)}
+      <MarkG x={28} y={622} size={32} fill={t.mark} />
+      <text fontSize="5.3" fill={t.ink} className="sans">
+        {lines.map((l, i) => <tspan key={i} x="182" y={r2(629 + i * 8.4)}>{l}</tspan>)}
       </text>
+    </g>
+  );
+}
+
+// The two black rings that hold the sheet in the tray (m13), in sheet coordinates.
+export const RING_Y = [222, 462];
+export function RingsG() {
+  return (
+    <g fill="none" stroke="#000000">
+      {RING_Y.map((y) => (
+        <g key={y}>
+          <circle cx="52" cy={y} r="5.5" fill="#000000" stroke="none" />
+          <ellipse cx="6" cy={y} rx="50" ry="13" strokeWidth="6.5" />
+          <path d={`M-44 ${y}a50 13 0 0 0 100 0`} strokeWidth="6.5" stroke="#2B1D17" strokeOpacity="0.6" />
+        </g>
+      ))}
     </g>
   );
 }
@@ -253,7 +273,7 @@ export function SheetArt({ tone, ...rest }) {
   const t = TONES[tone];
   return (
     <Art viewBox="0 0 520 730" title={`Plan sheet, flat artwork on ${t.name}`} exportName={`feature-sheet-${tone}`} style={{ width: '100%', height: 'auto' }} {...rest}>
-      <rect width="520" height="730" fill={tone === 'dark' ? SCENE.black : SCENE.studio} />
+      <rect width="520" height="730" fill={tone === 'dark' ? SCENE.black : SCENE.beige} />
       <CastRectG x={20} y={20} w={480} h={690} len={14} opacity={tone === 'dark' ? 0.5 : 0.2} />
       <g transform="translate(20 20)">
         <SheetG tone={tone} animate />
@@ -358,6 +378,44 @@ export function SpineG({ idp, x = 0, y = 0 }) {
       ))}
       <MarkG x={sw / 2 - 18} y={h - 64} size={36} fill="#F5F0E3" />
     </g>
+  );
+}
+
+// The box open, top view, as m13: lid at the left, spine, and the tray (dark inside) with the sheet in two rings.
+export function TrayG({ idp, x = 0, y = 0, tone = 'white', animate = false }) {
+  const { w, h } = BOX.lid;
+  const k = 0.954;
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <rect width={w} height={h} fill={`url(#${idp}-board)`} filter={`url(#${idp}-fibre)`} />
+      <rect x="26" y="20" width={w - 52} height={h - 40} fill="#1E140F" />
+      <rect x={w - 60} y="60" width="34" height={h - 80} fill="#35241C" opacity="0.8" />
+      <CastRectG x={68} y={95} w={r2(SHEET_SIZE.w * k)} h={r2(SHEET_SIZE.h * k)} len={10} opacity={0.6} />
+      <g transform={`translate(68 95) scale(${k})`}>
+        <SheetG tone={tone} animate={animate} />
+        <RingsG />
+      </g>
+    </g>
+  );
+}
+
+export function BoxOpenArt() {
+  const idp = 'feature-boxo';
+  const { lid, spine } = BOX;
+  const x0 = 40;
+  const y0 = 40;
+  const W = lid.w * 2 + spine;
+  return (
+    <Art viewBox={`0 0 ${W + 80} ${lid.h + 100}`} title="The presentation box, open, seen from above: lid, spine and the plan sheet held by two rings in the tray" exportName="feature-box-open" style={{ width: '100%', height: 'auto' }}>
+      <MaterialDefs idp={idp} />
+      <rect width={W + 80} height={lid.h + 100} fill={SCENE.studio} />
+      <CastRectG x={x0} y={y0} w={W} h={lid.h} len={34} opacity={0.26} />
+      <g className="mock-place" style={{ '--i': 0 }}>
+        <LidG idp={idp} x={x0} y={y0} />
+        <SpineG idp={idp} x={x0 + lid.w} y={y0} />
+        <TrayG idp={idp} x={x0 + lid.w + spine} y={y0} animate />
+      </g>
+    </Art>
   );
 }
 

@@ -13,13 +13,14 @@ import s from './mobile-a.module.css';
 
 const LINK_TO = [2, 3, 4];
 
-// 1 About (faithful)
+// 1 About (faithful). Re-measured from the deskewed full-size crop of m12: 24 px margins, word-mark 160 wide at
+// the top, the headline at 34 px, the paragraph wrapping after "long-term", and three 99 px ruled rows from 488 px.
+// m12 shows no status bar on this page, so none is drawn.
 export function ScreenAbout({ go }) {
   return (
     <div className={`${s.scr} ${s.beige}`}>
-      <StatusBar />
-      <Word className="fade-in" style={{ left: 28, top: 74, width: 118 }} />
-      <MenuButton onClick={() => go(7)} />
+      <Word className="fade-in" style={{ left: 24, top: 59, width: 160 }} />
+      <MenuButton onClick={() => go(7)} className={s.abMenu} />
       <p className={`${s.abLabel} slide-up`} style={{ '--i': 1 }}>{ABOUT.label}</p>
       <h2 className={`${s.abHead} slide-up`} style={{ '--i': 2 }}>
         <Lines as="span" rows={ABOUT.headline.rows} />
@@ -27,7 +28,7 @@ export function ScreenAbout({ go }) {
       <p className={`${s.abText} slide-up`} style={{ '--i': 3 }}>{ABOUT.text}</p>
       <div className={`${s.abRows} slide-up`} style={{ '--i': 4 }}>
         {ABOUT.rows.map((r, i) => (
-          <Row key={r.no} no={r.no} label={r.label} onClick={() => go(LINK_TO[i])} />
+          <Row key={r.no} no={r.no} label={r.label} about onClick={() => go(LINK_TO[i])} />
         ))}
       </div>
     </div>

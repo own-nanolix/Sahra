@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ABOUT, CONTACT_BLOCKS, LINES, PALETTE, PEOPLE } from '@/lib/brand';
 import { copy } from '@/lib/site';
 import { toast } from '@/components/site/Toast';
 import CopyValue from '@/components/site/CopyValue';
-import { Contact } from '@/components/ui/Card';
+import { Contact, Lines } from '@/components/ui/Card';
 import { MarkTileG } from '@/components/art/Mark';
 import { StatusBar, Word, MenuButton, BackButton, Row } from './Parts';
 import s from './mobile-a.module.css';
@@ -15,9 +15,10 @@ import s from './mobile-a.module.css';
 // 7 Menu: Dark Chocolate, the ruled rows, the sign-off.
 export function ScreenMenu({ go }) {
   const rows = [
-    ...ABOUT.rows.map((r, i) => ({ ...r, to: [2, 3, 4][i] })),
-    { no: '04', label: 'Contact', to: 8 },
-    { no: '05', label: 'Brand', to: 9 },
+    ...ABOUT.rows.map((r, i) => ({ ...r, key: r.no, to: [2, 3, 4][i] })),
+    // only the case study's three rows are numbered; the two screens added here carry plain labels
+    { key: 'contact', no: '', label: 'Contact', to: 8 },
+    { key: 'brand', no: '', label: 'Brand', to: 9 },
   ];
   return (
     <div className={`${s.scr} ${s.dark}`}>
@@ -29,7 +30,7 @@ export function ScreenMenu({ go }) {
       <button type="button" className={`${s.mLabel} slide-up`} onClick={() => go(1)}>{ABOUT.label}</button>
       <div className={s.menuRows}>
         {rows.map((r, i) => (
-          <div key={r.no} className="slide-up" style={{ '--i': i + 1 }}>
+          <div key={r.key} className="slide-up" style={{ '--i': i + 1 }}>
             <Row no={r.no} label={r.label} tall onClick={() => go(r.to)} />
           </div>
         ))}
@@ -39,27 +40,24 @@ export function ScreenMenu({ go }) {
   );
 }
 
-const BLOCKS = [
-  { key: 'office', name: 'Office' },
-  { key: 'service', name: 'Support' },
-  { key: 'online', name: 'Online' },
-];
+// the three printed blocks, without invented headings: each is named only by its first line
+const BLOCKS = ['office', 'service', 'online'];
 
-function CopyBlock({ name, lines }) {
+function CopyBlock({ lines }) {
   const [done, setDone] = useState(false);
+  const t = useRef(0);
+  useEffect(() => () => clearTimeout(t.current), []);
   const onCopy = async () => {
     const ok = await copy(lines.join('\n'));
-    toast(ok ? `Copied ${name.toLowerCase()} contact` : 'Could not copy');
+    toast(ok ? `Copied: ${lines[0]}` : 'Could not copy');
     setDone(true);
-    setTimeout(() => setDone(false), 1600);
+    clearTimeout(t.current);
+    t.current = setTimeout(() => setDone(false), 1600);
   };
   return (
     <div className={s.cBlock}>
-      <div>
-        <p className={s.cName}>{name}</p>
-        <Contact lines={lines} className={s.cLines} />
-      </div>
-      <button type="button" className={`${s.copyBtn} ${done ? s.copyDone : ''}`} onClick={onCopy} aria-label={`Copy ${name.toLowerCase()} contact`}>
+      <Contact lines={lines} className={s.cLines} />
+      <button type="button" className={`${s.copyBtn} ${done ? s.copyDone : ''}`} onClick={onCopy} aria-label={`Copy the block ${lines[0]}`}>
         {done ? 'Copied' : 'Copy'}
       </button>
     </div>
@@ -75,9 +73,9 @@ export function ScreenContact({ go }) {
       <MenuButton onClick={() => go(7)} />
       <h2 className={s.cTitle}>Contact</h2>
       <div className={s.cList}>
-        {BLOCKS.map((b, i) => (
-          <div key={b.key} className="slide-up" style={{ '--i': i + 1 }}>
-            <CopyBlock name={b.name} lines={CONTACT_BLOCKS[b.key]} />
+        {BLOCKS.map((k, i) => (
+          <div key={k} className="slide-up" style={{ '--i': i + 1 }}>
+            <CopyBlock lines={CONTACT_BLOCKS[k]} />
           </div>
         ))}
       </div>
@@ -113,7 +111,7 @@ export function ScreenBrand({ go }) {
       <svg className={s.tile} viewBox="0 0 100 100" role="img" aria-label="The mark in its tile">
         <MarkTileG size={100} />
       </svg>
-      <p className={s.brandLine}>{LINES.imagination.text}</p>
+      <Lines as="p" rows={LINES.imagination.rows} className={s.brandLine} />
     </div>
   );
 }

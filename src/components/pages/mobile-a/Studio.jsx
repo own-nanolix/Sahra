@@ -42,7 +42,7 @@ export default function Studio() {
       if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       const t = e.target;
-      if (t instanceof HTMLElement && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.closest('[role="region"]'))) return;
+      if (t instanceof HTMLElement && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.closest('[role="region"], [role="dialog"], [role="radiogroup"], [role="tablist"], [role="slider"]'))) return;
       const d = e.key === 'ArrowRight' ? 1 : -1;
       setN((v) => ((v - 1 + d + COUNT) % COUNT) + 1);
     };

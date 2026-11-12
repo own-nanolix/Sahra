@@ -13,6 +13,7 @@ import { copy } from '@/lib/site';
 import { tEnter } from '@/lib/motion';
 import { ABOUT, CONTACT, CONTACT_BLOCKS, INTRO, LINES, NAV_LINKS, PEOPLE, PROFILE, SENDER } from '@/lib/brand';
 import { Board, StatusBar, MarkHtml, WordHtml, NavBar, TabBar, Seg, Bars } from './Board';
+import { PC_ARCH, PC_BIO } from './data';
 import s from './mobile-b.module.css';
 
 // The quarter arch as a decorative corner (HTML screens; the exportable versions live in Flat.jsx).
@@ -38,7 +39,7 @@ function S10({ name }) {
           className={s.form}
           onSubmit={(e) => {
             e.preventDefault();
-            toast('Signed in');
+            toast('Preview only: nothing is sent');
           }}
         >
           <Field id={`${name}-email`} label="Email" type="email" autoComplete="email" />
@@ -88,7 +89,7 @@ function S11({ name }) {
               className={`ruled-row ${s.radio}`}
               onClick={() => setSel(i)}
             >
-              <span className="t-num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="t-num">{ABOUT.rows.find((r) => r.label === l.label)?.no}</span>
               <span className="ruled-row-label">{l.label}</span>
               <span className={s.tick} aria-hidden="true">{i === sel && <Icon name="check" size={18} />}</span>
             </button>
@@ -196,7 +197,8 @@ function S15({ name, go }) {
 // 16  Files
 function S16({ name, go }) {
   const [sel, setSel] = useState(0);
-  const items = ['Plan sheet', 'File 2', 'File 3', 'File 4'];
+  // one real file; the other rows are quiet placeholders
+  const items = ['Plan sheet', 'Placeholder row 1', 'Placeholder row 2', 'Placeholder row 3'];
   return (
     <Board name={name}>
       <StatusBar />
@@ -213,7 +215,7 @@ function S16({ name, go }) {
             </li>
           ))}
         </ul>
-        <button type="button" className="btn btn-block" onClick={() => toast('Nothing to download in this preview')}>
+        <button type="button" className="btn btn-block" onClick={() => toast('Preview only: nothing is downloaded')}>
           <Icon name="download" size={20} /> Download
         </button>
       </div>
@@ -222,33 +224,53 @@ function S16({ name, go }) {
   );
 }
 
+// The profile card of m12, re-measured from the full-size crop (896 x 716 there, 334 x 267 here): the header
+// gradient with the quarter arch ending in a 45 degree cut, the line at the right, the mark tile over the header's
+// edge, the black "Follow", a sans name and handle, and the bio in three lines. No platform tick or logo.
+export function ProfileCardHtml({ idp }) {
+  const [follow, setFollow] = useState(false);
+  return (
+    <article className={s.pcard} aria-label={PROFILE.name}>
+      <div className={s.pheadBox}>
+      <svg className={s.phead} viewBox="0 0 334 111.1" aria-hidden="true">
+        <defs>
+          <linearGradient id={`${idp}-hd`} x1="0" x2="334" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#35241C" />
+            <stop offset="1" stopColor="#875D41" />
+          </linearGradient>
+          <linearGradient id={`${idp}-ar`} x1="40" x2="320" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#35241C" stopOpacity="0" />
+            <stop offset="0.6" stopColor="#35241C" stopOpacity="0.45" />
+            <stop offset="1" stopColor="#35241C" stopOpacity="0.3" />
+          </linearGradient>
+        </defs>
+        <rect width="334" height="111.1" fill={`url(#${idp}-hd)`} />
+        <path d={PC_ARCH} fill="#875D41" />
+        <path d={PC_ARCH} fill={`url(#${idp}-ar)`} />
+      </svg>
+      <Lines as="p" rows={PROFILE.header.rows} className={s.pline} />
+      </div>
+      <span className={s.ptile}><MarkHtml size={31.7} /></span>
+      <button type="button" className={`btn btn-black ${s.pfollow}`} aria-pressed={follow} onClick={() => setFollow(!follow)}>{PROFILE.action}</button>
+      <h3 className={s.pname}>{PROFILE.name}</h3>
+      <p className={s.phandle}>{PROFILE.handle}</p>
+      <p className={s.pbio}>{PC_BIO.map((l) => <span key={l}>{l}</span>)}</p>
+    </article>
+  );
+}
+
 // 17  Share (the profile card of m12, no platform tick or logo)
 function S17({ name, go }) {
-  const [follow, setFollow] = useState(false);
   return (
     <Board name={name} dark>
       <StatusBar />
       <NavBar title="Share" back onBack={() => go && go(16)} />
       <div className={s.body}>
-        <article className={s.pcard} aria-label={PROFILE.name}>
-          <div className={`card-hero ${s.phead}`}>
-            <Arch size={130} quadrant="bl" className={s.archTR2} />
-            <Lines as="p" rows={PROFILE.header.rows} className={s.pline} />
-          </div>
-          <div className={s.pbody}>
-            <div className={s.ptop}>
-              <span className={s.ptile}><MarkHtml size={34} /></span>
-              <button type="button" className="btn btn-black btn-sm" aria-pressed={follow} onClick={() => setFollow(!follow)}>{PROFILE.action}</button>
-            </div>
-            <h3 className={s.pname}>{PROFILE.name}</h3>
-            <p className="t-small">{PROFILE.handle}</p>
-            <p className={s.pbio}>{PROFILE.bio}</p>
-          </div>
-        </article>
+        <ProfileCardHtml idp={`${name}-pc`} />
         <button
           type="button"
           className="btn btn-beige btn-block"
-          onClick={async () => toast((await copy(CONTACT.web)) ? `Link copied: ${CONTACT.web}` : 'Copy is not available here')}
+          onClick={async () => toast((await copy(CONTACT.web)) ? `Copied: ${CONTACT.web}` : 'Could not copy')}
         >
           <Icon name="copy" size={20} /> Copy link
         </button>
@@ -264,18 +286,22 @@ function S18({ name, go }) {
       <StatusBar />
       <NavBar title="Profile" label={SENDER.brand} />
       <div className={s.body}>
-        <article className={s.bcard} aria-label={PEOPLE.card.name}>
-          <MarkHtml size={34} className={s.sand2} />
+        {/* the front of the business card of m08, landscape 85 x 55: name and role top left, the sand mark top
+            right, the office and online blocks bottom left, the service block bottom right (the printed
+            "linkedin.com/company/sahra" line is left out, as everywhere on the site) */}
+        <article className={s.bcard} aria-label={`${PEOPLE.card.name}, ${PEOPLE.card.role}`}>
+          <MarkHtml size={22} className={s.bmark} />
           <h3 className={s.bname}>{PEOPLE.card.name}</h3>
-          <p className="t-small">{PEOPLE.card.role}</p>
-          <div className={s.bcontacts}>
-            {['office', 'service', 'online'].map((k) => <Contact key={k} lines={CONTACT_BLOCKS[k]} />)}
+          <p className={s.brole}>{PEOPLE.card.role}</p>
+          <div className={s.bleft}>
+            <Contact lines={CONTACT_BLOCKS.office} />
+            <Contact lines={CONTACT_BLOCKS.online} />
           </div>
-          <SiteUrl>sahra.sa</SiteUrl>
+          <Contact lines={CONTACT_BLOCKS.service} className={s.bright} />
         </article>
         <div className={s.ctl}>
           <button type="button" className="btn btn-outline btn-sm" onClick={() => go && go(17)}><Icon name="share" size={18} /> Share</button>
-          <button type="button" className="btn btn-ghost btn-sm" onClick={() => toast('Logged out')}>Log out</button>
+          <SiteUrl>sahra.sa</SiteUrl>
         </div>
       </div>
       <TabBar current={18} go={go} />

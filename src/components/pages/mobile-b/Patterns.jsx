@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useDragControls } from 'framer-motion';
 import Icon from '@/components/site/Icon';
 import Toggle from '@/components/ui/Toggle';
 import RuledRows from '@/components/ui/RuledRows';
-import { ABOUT, NAV_LINKS } from '@/lib/brand';
+import { ABOUT } from '@/lib/brand';
 import { listV, itemV, tEnter, tMove, tDraw } from '@/lib/motion';
 import { TABS } from './data';
 import { Bars } from './Board';
@@ -54,7 +54,7 @@ function Pull() {
           <span className={s.spin} data-busy={busy ? 'true' : undefined} style={{ transform: busy ? undefined : `rotate(${dy * 4}deg)` }}><Icon name="arrow-down" size={18} /></span>
         </div>
         <motion.ul key={gen} className="rows" variants={listV} initial="hidden" animate="show">
-          {ABOUT.rows.concat({ no: '04' }).map((r) => (
+          {ABOUT.rows.map((r) => (
             <motion.li key={r.no} variants={itemV} className={s.prow}>
               <span className="t-num">{r.no}</span>
               <Bars widths={[8]} />
@@ -71,7 +71,7 @@ function Pull() {
 function Swipe() {
   const [i, setI] = useState(0);
   const [dir, setDir] = useState(1);
-  const items = NAV_LINKS.slice(1);
+  const items = ABOUT.rows;
   const go = (k) => {
     const n = Math.min(items.length - 1, Math.max(0, k));
     setDir(n >= i ? 1 : -1);
@@ -95,14 +95,14 @@ function Swipe() {
           initial={{ opacity: 0, x: dir * 48 }}
           animate={{ opacity: 1, x: 0, transition: tEnter }}
         >
-          <p className="t-num">{String(i + 2).padStart(2, '0')}</p>
+          <p className="t-num">{items[i].no}</p>
           <p className="t-h3">{items[i].label}</p>
           <Bars widths={[12, 8]} />
         </motion.div>
       </div>
       <div className={s.dotsRow}>
         <button type="button" className="btn btn-ghost btn-sm" disabled={i === 0} onClick={() => go(i - 1)}>Previous</button>
-        <span className={s.dots} aria-hidden="true">{items.map((x, k) => <i key={x.id} data-on={k === i ? 'true' : undefined} />)}</span>
+        <span className={s.dots} aria-hidden="true">{items.map((x, k) => <i key={x.no}data-on={k === i ? 'true' : undefined} />)}</span>
         <button type="button" className="btn btn-ghost btn-sm" disabled={i === items.length - 1} onClick={() => go(i + 1)}>Next</button>
       </div>
     </Demo>

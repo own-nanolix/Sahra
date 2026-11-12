@@ -63,7 +63,6 @@ button.navBtn:active { transform: translateY(1px); background: rgba(135, 93, 65,
 .form { display: grid; gap: 18px; }
 .foot { margin-top: 12px; }
 .archTR { position: absolute; right: 0; top: 0; color: var(--tribal); opacity: 0.55; }
-.archTR2 { position: absolute; right: 0; top: 0; color: #9a6b4b; opacity: 0.8; }
 
 .tabbar { flex: none; height: 88px; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 6px 8px 24px; border-top: var(--hair) solid var(--line-strong); }
 .dark .tabbar { border-color: var(--line-on-dark); }
@@ -104,18 +103,26 @@ button.navBtn:active { transform: translateY(1px); background: rgba(135, 93, 65,
 .answer { margin: 0; font-size: 14px; line-height: 1.55; }
 .rr :global(.ruled-row-body) { padding-left: 2px; }
 /* Screen 17 */
-.pcard { border-radius: 32px; overflow: hidden; background: var(--beige); color: var(--ink); }
-.phead { position: relative; height: 150px; padding: 26px 22px; display: flex; align-items: flex-start; border-radius: 0; }
-.pline { margin: 0; font-family: var(--font-serif); font-size: 24px; line-height: 1.15; letter-spacing: -0.015em; position: relative; }
-.pbody { padding: 0 22px 24px; display: grid; gap: 4px; }
-.ptop { display: flex; justify-content: space-between; align-items: flex-end; margin-top: -34px; margin-bottom: 8px; }
-.ptile { width: 68px; height: 68px; display: grid; place-items: center; border-radius: 15px; background: var(--beige); color: var(--tribal); }
-.pname { margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; }
-.pbio { margin: 10px 0 0; font-size: 13px; line-height: 1.5; }
+/* the profile card of m12 at 334 x 267, every position measured from the full-size crop */
+.pcard { position: relative; width: 334px; height: 267px; border-radius: 37.3px; overflow: hidden; background: var(--white); color: var(--ink); }
+.pheadBox { position: absolute; left: 0; top: 0; width: 334px; height: 111.1px; background: linear-gradient(90deg, var(--chocolate), var(--tribal)); }
+.phead { position: absolute; left: 0; top: 0; width: 334px; height: 111.1px; max-width: none; }
+.pline { position: absolute; left: 152.8px; top: 37px; margin: 0; font-family: var(--font-serif); font-size: 19.2px; line-height: 20.1px; color: var(--beige); }
+.ptile { position: absolute; left: 30.9px; top: 84.2px; width: 67.1px; height: 67.1px; display: grid; place-items: center; border-radius: 15.6px; background: var(--beige); color: var(--tribal); }
+.pfollow { position: absolute; left: 196.8px; top: 125.3px; width: 105.1px; height: 29.8px; min-height: 0; padding: 0; border-radius: 4.5px; font-size: 13px; justify-content: center; }
+.pname { position: absolute; left: 28.3px; top: 166.7px; margin: 0; font-family: var(--font-sans); font-weight: 400; font-size: 16.5px; line-height: 20px; letter-spacing: 0; }
+.phandle { position: absolute; left: 28.3px; top: 186.6px; margin: 0; font-size: 13px; line-height: 16px; color: var(--muted); }
+.pbio { position: absolute; left: 28.3px; top: 209.3px; margin: 0; font-size: 7.3px; line-height: 12.1px; white-space: nowrap; }
+.pbio span { display: block; }
 /* Screen 18 */
-.bcard { position: relative; background: var(--white); border-radius: 24px; padding: 24px 24px 28px; display: grid; gap: 4px; min-height: 410px; align-content: start; }
-.bname { margin: 60px 0 0; font-family: var(--font-serif); font-weight: 400; font-size: 30px; line-height: 1.05; letter-spacing: -0.015em; }
-.bcontacts { display: grid; gap: 16px; margin: 26px 0 18px; }
+/* the business card of m08: a print piece, so square corners and a hard shadow to the lower right */
+.bcard { position: relative; width: 334px; height: 216px; background: var(--white); box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.25); color: var(--ink); }
+.bmark { position: absolute; left: 288px; top: 22px; color: var(--sand); }
+.bname { position: absolute; left: 22px; top: 29px; margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: 19px; line-height: 22px; letter-spacing: -0.01em; }
+.brole { position: absolute; left: 22px; top: 52px; margin: 0; font-size: 9px; line-height: 12px; color: var(--muted); }
+.bleft { position: absolute; left: 22px; top: 132px; display: grid; gap: 7px; }
+.bright { position: absolute; left: 226px; top: 166px; }
+.bcard :global(.contact) { font-size: 7.5px; line-height: 9px; }
 
 /* ---------- Component specimens ---------- */
 .spec { display: grid; gap: 14px; }
@@ -191,4 +198,3 @@ button.navBtn:active { transform: translateY(1px); background: rgba(135, 93, 65,
 .lp[aria-pressed="true"] .lpRing { stroke: var(--beige); stroke-dashoffset: 0; }
 @keyframes mobile-b-hold { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) { .spin[data-busy="true"] { animation: none; } }
-.pcard :global(.t-small) { color: var(--muted); }

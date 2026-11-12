@@ -57,6 +57,7 @@
 .tBeige { grid-column: span 4; }
 .tDark { grid-column: span 4; }
 .tBox { grid-column: span 4; }
+.tOpen { grid-column: span 12; }
 @media (max-width: 900px) { .tPlan, .tLayers { grid-column: span 12; } .tBeige, .tDark { grid-column: span 6; } .tBox { grid-column: span 12; } }
 @media (max-width: 600px) { .tBeige, .tDark { grid-column: span 12; } }
 .tile { padding: 0; overflow: hidden; }

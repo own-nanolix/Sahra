@@ -64,9 +64,9 @@ export function StatusBar({ dark }) {
   );
 }
 
-export function MenuButton({ onClick, style }) {
+export function MenuButton({ onClick, style, className = '' }) {
   return (
-    <button type="button" className={s.menuBtn} aria-label="Menu" onClick={onClick} style={style}>
+    <button type="button" className={`${s.menuBtn} ${className}`} aria-label="Menu" onClick={onClick} style={style}>
       <i /><i /><i />
     </button>
   );
@@ -81,7 +81,7 @@ export function BackButton({ onClick, label = 'Back to About Sahra', style }) {
 }
 
 // The row of a ruled list: number, serif label, "+" (or "-"). Used as a button when onClick is given.
-export function Row({ no, label, onClick, open, ph, tall }) {
+export function Row({ no, label, onClick, open, ph, tall, about }) {
   const inner = (
     <>
       <span className={s.rowNo}>{no}</span>
@@ -89,7 +89,7 @@ export function Row({ no, label, onClick, open, ph, tall }) {
       <span className={`${s.rowPlus} ${open ? s.rowOpen : ''}`} aria-hidden="true" />
     </>
   );
-  const cls = `${s.row} ${tall ? s.rowTall : ''} ${onClick ? s.rowBtn : ''}`;
+  const cls = `${s.row} ${tall ? s.rowTall : ''} ${about ? s.rowAbout : ''} ${onClick ? s.rowBtn : ''}`;
   if (!onClick) return <div className={cls}>{inner}</div>;
   return (
     <button type="button" className={cls} onClick={onClick} aria-expanded={open === undefined ? undefined : open}>

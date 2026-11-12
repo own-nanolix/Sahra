@@ -1,11 +1,11 @@
 import Art from '@/components/art/Art';
 import { WordmarkG, MarkG, MarkTileG } from '@/components/art/Mark';
-import { BrandDefs, quarterArch } from '@/components/art/KeyArt';
+import { quarterArch } from '@/components/art/KeyArt';
 import { IconUse } from '@/components/site/Icon';
 import { range } from '@/lib/site';
+import { r2 } from '@/lib/charts';
 import { ABOUT, CONTACT_BLOCKS, LINES, NAV_LINKS, PEOPLE, PROFILE } from '@/lib/brand';
-import { wrap } from '@/components/art/Devices';
-import { TABS } from './data';
+import { TABS, PC, PC_ARCH, PC_BIO } from './data';
 import s from './mobile-b.module.css';
 
 // Flat, exportable artwork of the screens and of two components. Every screen is a 390 x 844 artboard.
@@ -82,7 +82,7 @@ export function FlatSheet() {
       {NAV_LINKS.map((l, i) => (
         <g key={l.id}>
           <rect x="28" y={478 + i * 78} width="334" height="1" fill={H.choc} opacity="0.42" />
-          <text className="sans" x="30" y={522 + i * 78} fontSize="13" fill={H.muted}>{String(i + 1).padStart(2, '0')}</text>
+          <text className="sans" x="30" y={522 + i * 78} fontSize="13" fill={H.muted}>{ABOUT.rows.find((r) => r.label === l.label)?.no}</text>
           <text className="serif" x="76" y={524 + i * 78} fontSize="22" fill={H.choc}>{l.label}</text>
           {i === 0 && <IconUse name="check" x={338} y={506} size={22} fill={H.tribal} />}
         </g>
@@ -115,42 +115,63 @@ export function FlatFiles() {
 }
 
 // The profile card of m12, rebuilt: no platform tick, no logo.
+// The profile card of m12 at its measured proportions (334 x 267): no platform tick, no logo.
 export function FlatProfileCard() {
   const idp = 'mobile-b-pc';
-  const bio = wrap(PROFILE.bio, 38);
   return (
-    <Art viewBox="0 0 342 470" title="Profile card" exportName="mobile-b-profile-card">
-      <BrandDefs idp={idp} />
-      <clipPath id={`${idp}-clip`}><rect width="342" height="470" rx="32" /></clipPath>
+    <Art viewBox={`0 0 ${PC.w} ${PC.h}`} title="Profile card" exportName="mobile-b-profile-card">
+      <defs>
+        <clipPath id={`${idp}-clip`}><rect width={PC.w} height={PC.h} rx={PC.r} /></clipPath>
+        <clipPath id={`${idp}-head`}><rect width={PC.w} height={PC.head} /></clipPath>
+        <linearGradient id={`${idp}-hd`} x1="0" x2={PC.w} y1="0" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={H.choc} />
+          <stop offset="1" stopColor={H.tribal} />
+        </linearGradient>
+        <linearGradient id={`${idp}-ar`} x1="40" x2="320" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={H.choc} stopOpacity="0" />
+          <stop offset="0.6" stopColor={H.choc} stopOpacity="0.45" />
+          <stop offset="1" stopColor={H.choc} stopOpacity="0.3" />
+        </linearGradient>
+      </defs>
       <g clipPath={`url(#${idp}-clip)`}>
-        <rect width="342" height="470" fill={H.beige} />
-        <rect width="342" height="150" fill={`url(#${idp}-hero)`} />
-        <path d={quarterArch(342, 0, 52, 132, 'bl')} fill={`url(#${idp}-arch)`} />
-        {PROFILE.header.rows.map((l, i) => <text key={l} className="serif" x="22" y={62 + i * 28} fontSize="24" fill={H.beige}>{l}</text>)}
+        <rect width={PC.w} height={PC.h} fill={H.white} />
+        <rect width={PC.w} height={PC.head} fill={`url(#${idp}-hd)`} />
+        <g clipPath={`url(#${idp}-head)`}>
+          <path d={PC_ARCH} fill={H.tribal} />
+          <path d={PC_ARCH} fill={`url(#${idp}-ar)`} />
+        </g>
+        {PROFILE.header.rows.map((l, i) => <text key={l} className="serif" x="152.8" y={r2(52.6 + i * 20.1)} fontSize="19.2" fill={H.beige}>{l}</text>)}
       </g>
-      <MarkTileG x={22} y={118} size={68} tile={H.beige} fill={H.tribal} />
-      <rect x="236" y="168" width="84" height="34" rx="7" fill="#000000" />
-      <text className="sans" x="278" y="190" fontSize="14" textAnchor="middle" fill="#FFFFFF">{PROFILE.action}</text>
-      <text className="serif" x="22" y="244" fontSize="24" fill={H.choc}>{PROFILE.name}</text>
-      <text className="sans" x="22" y="266" fontSize="13" fill={H.muted}>{PROFILE.handle}</text>
-      {bio.map((l, i) => <text key={i} className="sans" x="22" y={302 + i * 20} fontSize="13" fill={H.ink}>{l}</text>)}
+      <MarkTileG x={30.9} y={84.2} size={67.1} radius={15.6} tile={H.beige} fill={H.tribal} />
+      <rect x="196.8" y="125.3" width="105.1" height="29.8" rx="4.5" fill="#000000" />
+      <text className="sans" x="249.4" y="144.6" fontSize="13" textAnchor="middle" fill="#FFFFFF">{PROFILE.action}</text>
+      <text className="sans" x="28.3" y="182.7" fontSize="16.5" fill={H.ink}>{PROFILE.name}</text>
+      <text className="sans" x="28.3" y="199.4" fontSize="13" fill={H.muted}>{PROFILE.handle}</text>
+      {PC_BIO.map((l, i) => <text key={l} className="sans" x="28.3" y={r2(218 + i * 12.1)} fontSize="7.3" fill={H.ink}>{l}</text>)}
     </Art>
   );
 }
 
+// Screen 18: the business card of m08, landscape, as the live screen draws it.
 export function FlatProfile() {
+  const block = (lines, x, y) => lines.map((l, j) => <text key={l} className="sans" x={x} y={y + j * 9} fontSize="7.5" fill={H.ink}>{l}</text>);
   return (
     <Art viewBox="0 0 390 844" title="Screen 18, Profile" exportName="mobile-b-screen-profile">
       <Ground fill={H.beige} />
       <Status fill={H.choc} />
-      <text className="serif" x="28" y="120" fontSize="32" fill={H.choc}>Profile</text>
-      <rect x="28" y="158" width="334" height="470" rx="24" fill={H.white} />
-      <MarkG x={300} y={186} size={34} fill={H.sand} />
-      <text className="serif" x="52" y="290" fontSize="30" fill={H.choc}>{PEOPLE.card.name}</text>
-      <text className="sans" x="52" y="314" fontSize="13" fill={H.muted}>{PEOPLE.card.role}</text>
-      {['office', 'service', 'online'].map((k, i) =>
-        CONTACT_BLOCKS[k].map((l, j) => <text key={l} className="sans" x="52" y={368 + i * 70 + j * 17} fontSize="12" fill={H.ink}>{l}</text>))}
-      <text className="sans" x="52" y="590" fontSize="13" fill={H.sand}>→ sahra.sa</text>
+      <text className="sans" x="92" y="98" fontSize="12" fill={H.muted}>Sahra Brand</text>
+      <text className="serif" x="92" y="130" fontSize="32" fill={H.choc}>Profile</text>
+      <g transform="translate(28 162)">
+        <rect x="6" y="7" width="334" height="216" fill="#000000" opacity="0.25" />
+        <rect width="334" height="216" fill={H.white} />
+        <MarkG x={288} y={22} size={22} fill={H.sand} />
+        <text className="serif" x="22" y="46" fontSize="19" fill={H.ink}>{PEOPLE.card.name}</text>
+        <text className="sans" x="22" y="61" fontSize="9" fill={H.muted}>{PEOPLE.card.role}</text>
+        {block(CONTACT_BLOCKS.office, 22, 139)}
+        {block(CONTACT_BLOCKS.online, 22, 173)}
+        {block(CONTACT_BLOCKS.service, 226, 173)}
+      </g>
+      <text className="sans" x="28" y="440" fontSize="13" fill={H.tribal}>→ sahra.sa</text>
       <Tabs y={756} current={18} fill={H.choc} on={H.tribal} />
     </Art>
   );

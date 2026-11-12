@@ -12,7 +12,7 @@ import Typewriter from '@/components/site/Typewriter';
 import { MaterialDefs, CastRectG } from '@/components/art/Mockup';
 import { ABOUT, PLAN } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
-import { LAYER_KEYS, LAYER_LABELS, ALL_ON, SHEET_SIZE, SHEET_PLAN, SheetG, LidG, BOX } from './plan-art';
+import { LAYER_KEYS, LAYER_LABELS, ALL_ON, SHEET_SIZE, SHEET_PLAN, SheetG, LidG, RingsG, BOX } from './plan-art';
 import s from './feature.module.css';
 
 const VW = BOX.lid.w;
@@ -60,7 +60,7 @@ const holdFor = (i) => STEPS[i].text.length * SPEED + 1900;
 export default function Explorer() {
   const [view, setView] = useState(FIT);
   const [layers, setLayers] = useState(ALL_ON);
-  const [ground, setGround] = useState('beige');
+  const [ground, setGround] = useState('white');
   const [step, setStep] = useState(-1);
   const [tour, setTour] = useState('idle'); // idle | playing | paused | done
   const [lid, setLid] = useState('none'); // none | closed | open
@@ -184,7 +184,7 @@ export default function Explorer() {
   };
 
   const status = step < 0 ? 'Plan sheet at full view' : `Row ${STEPS[step].no}, ${STEPS[step].label}`;
-  const playLabel = tour === 'playing' ? 'Pause' : tour === 'done' ? 'Replay' : tour === 'paused' ? 'Play' : 'Play tour';
+  const playLabel = tour === 'playing' ? 'Pause' : tour === 'done' ? 'Replay' : tour === 'paused' ? 'Resume' : 'Play tour';
   const motion = view.m === 'none' ? s.glideNone : view.m === 'fast' ? s.glideFast : s.glideSlow;
   const lidClass = lid === 'closed' ? s.lidClosed : lid === 'open' ? s.lidOpen : s.lidNone;
 
@@ -219,6 +219,7 @@ export default function Explorer() {
                   <CastRectG x={0} y={0} w={SHEET_SIZE.w} h={SHEET_SIZE.h} len={12} opacity={0.5} />
                   <SheetG tone={ground} layers={layers} transition />
                   <rect width={SHEET_SIZE.w} height={SHEET_SIZE.h} fill="none" stroke="#F5F0E3" strokeOpacity="0.28" strokeWidth={r2(1 / view.k)} />
+                  <RingsG />
                 </g>
               </g>
               <rect x="26" y="26" width={VW - 52} height={VH - 52} fill="none" stroke="#000000" strokeOpacity="0.5" strokeWidth="4" />
@@ -266,7 +267,7 @@ export default function Explorer() {
 
         <section className={s.group} aria-labelledby="feature-g-ground">
           <h3 id="feature-g-ground" className="t-label">Sheet ground</h3>
-          <Segmented id="feature-ground" label="Sheet ground" options={['Beige', 'Dark']} value={ground === 'dark' ? 'Dark' : 'Beige'} onChange={(o) => setGround(o === 'Dark' ? 'dark' : 'beige')} />
+          <Segmented id="feature-ground" label="Sheet ground" options={['White', 'Dark']} value={ground === 'dark' ? 'Dark' : 'White'} onChange={(o) => setGround(o === 'Dark' ? 'dark' : 'white')} />
         </section>
 
         <section className={s.group} aria-labelledby="feature-g-rows">
