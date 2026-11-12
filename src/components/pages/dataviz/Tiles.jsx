@@ -4,7 +4,7 @@ import Art from '@/components/art/Art';
 import { scale, linePath, segments, barPath } from '@/lib/charts';
 import { range } from '@/lib/site';
 import { C, useTip, Tip, T, pathLen } from './kit';
-import { introWords, letterWords, charLines, glyphAnchors, weights, groupCounts, pageCount, cut, contactLines, colours, RING_COLORS, offsets } from './data';
+import { introWords, letterWords, charLines, glyphAnchors, weights, groupCounts, pageCount, cut, tinted, colours, RING_COLORS, offsets } from './data';
 
 const V = '0 0 240 150';
 
@@ -30,11 +30,11 @@ export function StatWeights() {
       <rect width="240" height="150" fill={C.chocolate} />
       <text x="20" y="72" fontSize="64" fill={C.sand} className="serif slide-up">{weights.length}</text>
       <T x="70" y="50" anchor="start" size="13" fill={C.beige}>type weights</T>
-      <T x="70" y="66" anchor="start" size="12" fill="#CDBBA6">Test Tiempos Text</T>
+      <T x="70" y="66" anchor="start" size="12" fill={C.beigeMuted}>Test Tiempos Text</T>
       {seg.map((sg, i) => (
         <g key={i}>
-          <path d={barPath(20 + sg.x, 94, sg.w, 22, { round: 'tr', radius: 11 })} fill={[C.sand, C.tribal, '#CFBEB3', C.beige][i]} className="grow-x" style={{ '--i': i }} />
-          <T x={20 + sg.x + sg.w / 2} y="134" size="10.5" fill="#CDBBA6">{weights[i].replace('Test Tiempos Text ', '')}</T>
+          <path d={barPath(20 + sg.x, 94, sg.w, 22, { round: 'tr', radius: 11 })} fill={[C.sand, C.tribal, C.tribal40, C.beige][i]} className="grow-x" style={{ '--i': i }} />
+          <T x={20 + sg.x + sg.w / 2} y="134" size="10.5" fill={C.beigeMuted}>{weights[i].replace('Test Tiempos Text ', '')}</T>
         </g>
       ))}
     </Art>
@@ -45,7 +45,7 @@ export function StatWeights() {
 export function StatCut() {
   return (
     <Art viewBox={V} title="Cut angle: 42 degrees labelled, 45 degrees measured" exportName="dataviz-stat-cut">
-      <rect width="240" height="150" fill="#F0E9E1" />
+      <rect width="240" height="150" fill={C.sand20} />
       <path d="M130 0H240V150H85Z" fill={C.sand} className="fade-in" />
       <text x="16" y="84" fontSize="50" fill={C.chocolate} className="serif slide-up">{cut.drawn}°</text>
       <T x="18" y="106" anchor="start" size="12" fill={C.ink}>labelled</T>
@@ -56,18 +56,19 @@ export function StatCut() {
   );
 }
 
-// STAT CARD 4: a ledger of the contact blocks, as ruled rows.
+// STAT CARD 4: a ledger of the colours printed with tints (m05), as ruled rows with their tint strips.
 export function StatLedger() {
   return (
-    <Art viewBox={V} title={`${contactLines.length} contact blocks, with their lines`} exportName="dataviz-stat-ledger">
+    <Art viewBox={V} title={`${tinted.length} colours printed with ${tinted[0].tints.length} tints each`} exportName="dataviz-stat-ledger">
       <rect width="240" height="150" fill={C.beige} />
-      <text x="20" y="52" fontSize="44" fill={C.chocolate} className="serif slide-up">{contactLines.length}</text>
-      <T x="62" y="44" anchor="start" size="13" fill={C.ink}>contact blocks</T>
-      {contactLines.map((c, i) => (
-        <g key={c.name}>
-          <rect x="20" y={68 + i * 25} width="200" height="1" fill={C.chocolate} className="grow-x" style={{ '--i': i }} />
-          <T x="20" y={87 + i * 25} anchor="start" size="13" serif fill={C.ink}>{c.name}</T>
-          <T x="220" y={87 + i * 25} anchor="end" size="12" fill={C.ink}>{c.n} lines</T>
+      <text x="18" y="52" fontSize="44" fill={C.chocolate} className="serif slide-up">{tinted.length}</text>
+      <T x="48" y="34" anchor="start" size="13" fill={C.ink}>colours with</T>
+      <T x="48" y="50" anchor="start" size="13" fill={C.ink}>printed tints</T>
+      {tinted.map((c, i) => (
+        <g key={c.token}>
+          <rect x="18" y={66 + i * 26} width="204" height="1" fill={C.chocolate} className="grow-x" style={{ '--i': i }} />
+          <T x="18" y={85 + i * 26} anchor="start" size="13" serif fill={C.ink}>{c.name}</T>
+          {c.tints.map((t, k) => <rect key={t} x={150 + k * 18} y={73 + i * 26} width="16" height="14" fill={t} stroke={C.rule} strokeWidth="0.5" className="fade-in" style={{ '--i': i + k }} />)}
         </g>
       ))}
     </Art>
@@ -88,12 +89,12 @@ export function KpiPages() {
       {groupCounts.map((g, i) => {
         const w = (g.n / pageCount) * 208, px = 16 + (off[i] / pageCount) * 208;
         return (
-          <g key={g.name} {...on(px + w / 2, 76, `${g.name}: ${g.n} pages`)}>
+          <g key={g.name} {...on(px + w / 2, 76, g.n === 1 ? `${g.name}: 1 page` : `${g.name}: ${g.n} pages`)}>
             <rect x={px + 1} y="76" width={Math.max(2, w - 2)} height="24" fill={RING_COLORS[i]} className="grow-x" style={{ '--i': i }} />
           </g>
         );
       })}
-      <Tip tip={tip} w={240} />
+      <Tip tip={tip} w={240} size={11} />
     </Art>
   );
 }
@@ -145,17 +146,17 @@ export function Sparklines() {
     <Art viewBox={`0 0 ${W} ${H}`} title="Sparklines of four counted series" exportName="dataviz-sparklines">
       <rect width={W} height={H} fill={C.white} />
       {rows.map(([nm, vals, col], r) => {
-        const x = scale(0, vals.length - 1, 128, 280), y = scale(Math.min(...vals), Math.max(...vals), 28 + r * 40, 8 + r * 40);
+        const x = scale(0, vals.length - 1, 150, 272), y = scale(Math.min(...vals), Math.max(...vals), 28 + r * 40, 8 + r * 40);
         const pts = vals.map((v, i) => [x(i), y(v)]);
         const last = pts[pts.length - 1];
         return (
           <g key={nm}>
             <rect x="12" y={36 + r * 40} width={W - 24} height="1" fill={C.rule} />
-            <T x="12" y={24 + r * 40} anchor="start" size="12" fill={C.ink}>{nm}</T>
+            <T x="12" y={25 + r * 40} anchor="start" size="14" fill={C.ink}>{nm}</T>
             <path d={linePath(pts)} fill="none" stroke={col} strokeWidth="2.5" className="draw" style={{ '--len': pathLen(pts), '--i': r }} />
-            <g {...on(last[0], last[1], `${nm}: last value ${vals[vals.length - 1]} of ${vals.length}`)}>
+            <g {...on(last[0], last[1], `${nm}: ${vals.length} values, the last is ${vals[vals.length - 1]}`)}>
               <circle cx={last[0]} cy={last[1]} r="4" fill={col} className="fade-in" style={{ '--i': 10 }} />
-              <T x="300" y={24 + r * 40} serif size="13" fill={C.chocolate}>{vals[vals.length - 1]}</T>
+              <T x="300" y={25 + r * 40} serif size="16" fill={C.chocolate}>{vals[vals.length - 1]}</T>
             </g>
           </g>
         );

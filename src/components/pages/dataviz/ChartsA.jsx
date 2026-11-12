@@ -9,7 +9,7 @@ import { introWords, letterWords, introCumulative, charLines, CHAR_NAMES, groupC
 // 1. TREND: a line over paragraph order (words per paragraph).
 export function TrendChart({ series, exportName, title }) {
   const [tip, on] = useTip();
-  const W = 560, H = 300, L = 46, R = 18, Tp = 26, B = 44;
+  const W = 560, H = 310, L = 50, R = 18, Tp = 30, B = 52;
   const n = Math.max(...series.map((q) => q.values.length));
   const tk = nice(Math.max(...series.flatMap((q) => q.values)), 4);
   const top = tk[tk.length - 1];
@@ -18,10 +18,10 @@ export function TrendChart({ series, exportName, title }) {
     <Art viewBox={`0 0 ${W} ${H}`} title={title} exportName={exportName}>
       <Bg w={W} h={H} />
       {tk.map((t) => (
-        <g key={t}><HLine x1={L} x2={W - R} y={y(t)} /><T x={L - 8} y={y(t) + 4} anchor="end" serif>{t}</T></g>
+        <g key={t}><HLine x1={L} x2={W - R} y={y(t)} /><T x={L - 10} y={y(t) + 5} anchor="end" serif size={16}>{t}</T></g>
       ))}
-      {range(n).map((i) => <T key={i} x={x(i)} y={H - B + 20} serif>{i + 1}</T>)}
-      <T x={(L + W - R) / 2} y={H - 8}>Paragraph, in the order printed</T>
+      {range(n).map((i) => <T key={i} x={x(i)} y={H - B + 24} serif size={16}>{i + 1}</T>)}
+      <T x={(L + W - R) / 2} y={H - 6} size={16}>Paragraph, in the order printed</T>
       {series.map((q, k) => {
         const pts = q.values.map((v, i) => [x(i), y(v)]);
         return (
@@ -35,7 +35,7 @@ export function TrendChart({ series, exportName, title }) {
           </g>
         );
       })}
-      <Tip tip={tip} w={W} />
+      <Tip tip={tip} w={W} size={16} />
     </Art>
   );
 }
@@ -51,7 +51,7 @@ export function StepArea() {
     <Art viewBox={`0 0 ${W} ${H}`} title="Running total of words across the intro paragraphs" exportName="dataviz-trend-steps">
       <Bg w={W} h={H} />
       {tk.map((t) => <g key={t}><HLine x1={L} x2={W - R} y={y(t)} /><T x={L - 8} y={y(t) + 4} anchor="end" serif>{t}</T></g>)}
-      <path d={areaPath(pts, H - B, 'step')} fill="#E1D2C4" className="fade-in" />
+      <path d={areaPath(pts, H - B, 'step')} fill={C.sand40} className="fade-in" />
       <path d={stepPath(pts)} fill="none" stroke={C.tribal} strokeWidth="3" className="draw" style={{ '--len': 1200 }} />
       {pts.map(([px, py], i) => (
         <g key={i} {...on(px, py, `After paragraph ${i + 1}: ${introCumulative[i]} words`)}>
@@ -107,12 +107,12 @@ export function ChannelBars() {
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Red, green and blue values of the six palette colours" exportName="dataviz-compare-channels">
       <Bg w={W} h={H} />
-      {[0, 128, 255].map((t) => <g key={t}><HLine x1={L} x2={W - R} y={y(t)} /><T x={L - 6} y={y(t) + 4} anchor="end" serif>{t}</T></g>)}
+      {[0, 128, 255].map((t) => <g key={t}><HLine x1={L} x2={W - R} y={y(t)} /><T x={L - 6} y={y(t) + 4} anchor="end" serif size={15}>{t}</T></g>)}
       {colours.map((c, i) => {
         const gx = L + i * gw + gw * 0.14;
         return (
           <g key={c.token}>
-            <T x={L + i * gw + gw / 2} y={H - B + 18}>{c.short.split(' ')[0]}</T>
+            <T x={L + i * gw + gw / 2} y={H - B + 22} size={16}>{c.short.split(' ')[0]}</T>
             {cols.map(([nm, col, key], k) => (
               <g key={key} {...on(gx + k * (bw + 4) + bw / 2, y(c[key]), `${c.name}, ${nm}: ${c[key]}`)}>
                 <path d={barPath(gx + k * (bw + 4), y(c[key]) - 0.01, bw, Math.max(1, H - B - y(c[key])), { cut: true })} fill={col} className="rise" style={{ '--i': i + k }} />
@@ -122,9 +122,9 @@ export function ChannelBars() {
         );
       })}
       {cols.map(([nm, col], k) => (
-        <g key={nm}><rect x={L + k * 70} y="8" width="10" height="10" fill={col} /><T x={L + k * 70 + 16} y="17" anchor="start">{nm}</T></g>
+        <g key={nm}><rect x={L + k * 70} y="8" width="12" height="12" fill={col} /><T x={L + k * 70 + 18} y="19" anchor="start" size={15}>{nm}</T></g>
       ))}
-      <Tip tip={tip} w={W} />
+      <Tip tip={tip} w={W} size={15} />
     </Art>
   );
 }
@@ -142,7 +142,7 @@ export function ArchShare() {
         const lx = cx - rm;
         return (
           <g key={CHAR_NAMES[i]} {...on(cx - rm * 0.72, cy - rm * 0.72, `${CHAR_NAMES[i]} line: ${v} characters`)}>
-            <path d={bandPath(cx, cy, r1 - ringW, r1, 270, 360)} fill="#F0E9E1" />
+            <path d={bandPath(cx, cy, r1 - ringW, r1, 270, 360)} fill={C.sand20} />
             <path d={arcPath(cx, cy, rm, 270, 270 + ang)} fill="none" stroke={RING_COLORS[i]} strokeWidth={ringW} className="draw" style={{ '--len': arcLength(rm, 270, 270 + ang) + 4, '--i': i }} />
             <T x={lx} y={cy + 17 + (i % 2) * 14} size={11}>{CHAR_NAMES[i]}</T>
             <T x={cx - rm + 0} y={cy - 8} size={13} serif fill={i < 2 ? C.beige : C.chocolate}>{v}</T>
@@ -178,24 +178,24 @@ export function RingShare() {
 }
 
 // 7. HEATMAP: the printed CMYK values of the six colours, in the published tints.
-const bucket = (v) => (v === 0 ? [C.beige, C.chocolate] : v <= 30 ? ['#E1D2C4', C.chocolate] : v <= 60 ? [C.sand, C.chocolate] : v <= 80 ? [C.tribal, C.beige] : [C.chocolate, C.beige]);
+const bucket = (v) => (v === 0 ? [C.beige, C.chocolate] : v <= 30 ? [C.sand40, C.chocolate] : v <= 60 ? [C.sand, C.chocolate] : v <= 80 ? [C.tribal, C.beige] : [C.chocolate, C.beige]);
 export function Heat() {
   const [tip, on] = useTip();
-  const W = 420, H = 270, L = 96, Tp = 34, cw = 76, ch = 34;
+  const W = 420, H = 270, L = 112, Tp = 34, cw = 72, ch = 34;
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Printed CMYK values of the six palette colours" exportName="dataviz-heat-cmyk">
       <Bg w={W} h={H} />
-      {['C', 'M', 'Y', 'K'].map((k, c) => <T key={k} x={L + c * (cw + 4) + cw / 2} y="22" serif>{k}</T>)}
+      {['C', 'M', 'Y', 'K'].map((k, c) => <T key={k} x={L + c * (cw + 4) + cw / 2} y="22" serif size={15}>{k}</T>)}
       {colours.map((col, r) => (
         <g key={col.token}>
-          <T x={L - 10} y={Tp + r * (ch + 4) + 22} anchor="end">{col.short}</T>
+          <T x={L - 10} y={Tp + r * (ch + 4) + 22} anchor="end" size={15}>{col.short}</T>
           {['c', 'm', 'y', 'k'].map((k, c) => {
             const [bg, fg] = bucket(col[k]);
             const px = L + c * (cw + 4), py = Tp + r * (ch + 4);
             return (
               <g key={k} {...on(px + cw / 2, py, `${col.name}, ${k.toUpperCase()}: ${col[k]}`)}>
                 <rect x={px} y={py} width={cw} height={ch} rx="3" fill={bg} stroke={C.rule} strokeWidth="0.5" className="fade-in" style={{ '--i': r * 4 + c }} />
-                <text x={px + cw / 2} y={py + 22} textAnchor="middle" fontSize="14" fill={fg} className="serif">{col[k]}</text>
+                <text x={px + cw / 2} y={py + 22} textAnchor="middle" fontSize="16" fill={fg} className="serif">{col[k]}</text>
               </g>
             );
           })}

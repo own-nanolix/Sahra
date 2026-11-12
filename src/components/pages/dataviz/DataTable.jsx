@@ -6,21 +6,21 @@ import s from './dataviz.module.css';
 
 const COLS = [
   ['name', 'Colour', (c) => c.name],
-  ['hex', 'HEX', (c) => c.hex.toUpperCase()],
+  ['hex', 'HEX', (c) => c.hex],
   ['r', 'RGB', (c) => c.rgb],
-  ['k', 'CMYK', (c) => c.cmyk],
+  ['c', 'CMYK', (c) => c.cmyk],
 ];
 
-// The six published colours, sortable by every column. Values are as printed on the palette sheet.
+// The six published colours, sortable by every column (RGB by red, CMYK by cyan). Values are as printed on m05.
 export default function DataTable() {
   const [sort, setSort] = useState({ key: 'name', dir: 1 });
   const rows = [...colours].sort((a, b) => {
-    const [x, y] = [a[sort.key], b[sort.key]];
+    const [x, y] = sort.key === 'hex' ? [a.hex.toUpperCase(), b.hex.toUpperCase()] : [a[sort.key], b[sort.key]];
     return (typeof x === 'string' ? x.localeCompare(y) : x - y) * sort.dir;
   });
   const pick = (key) => setSort((o) => ({ key, dir: o.key === key ? -o.dir : 1 }));
   return (
-    <div className={s.tableWrap}>
+    <div className={s.tableWrap} role="region" aria-label="Palette values table" tabIndex={0}>
       <table className={s.table}>
         <caption className="t-small">The six published colours. Click a heading to sort.</caption>
         <thead>

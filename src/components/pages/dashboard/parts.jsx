@@ -21,6 +21,7 @@ export function useTip() {
     onMouseLeave: () => setTip(null),
     onFocus: () => setTip({ x, y, text }),
     onBlur: () => setTip(null),
+    onClick: () => setTip({ x, y, text }),
     onKeyDown: (e) => { if (e.key === 'Escape') setTip(null); },
   });
   return [tip, on];
@@ -99,7 +100,7 @@ export function SheetTable({ d, dense, limit = 99 }) {
     );
   };
   return (
-    <div className={s.tableWrap}>
+    <div className={s.tableWrap} role="region" aria-label="Sheets table" tabIndex={0}>
       <table className={`${s.table} ${dense ? s.dense : ''}`}>
         <caption className="sr-only">Sheets</caption>
         <thead><tr>{th('no', 'Sheet')}{th('status', 'Status')}<th scope="col">Layers</th><th scope="col">Updated</th><th scope="col"><span className="sr-only">Open</span></th></tr></thead>

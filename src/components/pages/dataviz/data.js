@@ -1,12 +1,13 @@
 // Every number charted on the data page. Each is counted in code from the case study's own text, the published
 // palette, the traced word-mark or the site's own structure (pages.json). Nothing here is invented.
-import { INTRO, LETTER, TYPE, PLAN, POSTER_BODY, ABOUT, PALETTE, SCOPE, CONTACT_BLOCKS, HEX } from '@/lib/brand';
+import { INTRO, LETTER, TYPE, PLAN, POSTER_BODY, ABOUT, PALETTE, SCOPE, HEX, TINTS, TINT_STEPS } from '@/lib/brand';
 import { pages, groups } from '@/lib/pages';
 import { GLYPHS, WM } from '@/components/art/Mark';
 
 // Prefix sums: offsets([3, 2, 4]) -> [0, 3, 5]
 export const offsets = (vals) => vals.map((_, i) => vals.slice(0, i).reduce((x, y) => x + y, 0));
-export const words =(t) => t.trim().split(/\s+/).length;
+// Words are counted between spaces (a word joined by an em dash, as "asset—it", counts once).
+export const words = (t) => t.trim().split(/\s+/).length;
 const sum = (a) => a.reduce((x, y) => x + y, 0);
 
 export const introWords = INTRO.paragraphs.map(words); // 6 paragraphs
@@ -57,13 +58,9 @@ export const rankedAnchors = [...glyphAnchors].sort((a, b) => b.n - a.n).slice(0
 export const cut = { drawn: WM.CUT_DRAWN, measured: WM.CUT_MEASURED };
 
 export const scope = SCOPE;
-export const contactLines = Object.entries(CONTACT_BLOCKS).map(([k, v]) => ({ name: k[0].toUpperCase() + k.slice(1), n: v.length }));
+// The colours printed with a strip of tints (m05), each with its tints in the printed order.
+export const tinted = PALETTE.filter((p) => p.tints).map((p) => ({ name: p.name, token: p.token, hex: p.hex, steps: TINT_STEPS, tints: TINTS[p.token] }));
 export const weights = TYPE.weights;
 
 // Series colours: the published palette and tints only.
-export const RING_COLORS = [HEX.chocolate, HEX.tribal, HEX.sand, '#CFBEB3', '#E1D2C4', HEX.black];
-
-export const CAPTIONS = {
-  intro: 'Counts the words in each of the six intro-slide paragraphs.',
-  letter: 'Counts the words in each of the five letter paragraphs.',
-};
+export const RING_COLORS = [HEX.chocolate, HEX.tribal, HEX.sand, TINTS.tribal[2], TINTS.sand[2], HEX.black];

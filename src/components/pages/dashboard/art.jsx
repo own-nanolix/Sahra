@@ -2,7 +2,7 @@
 // `on` (optional) returns the props that make a mark focusable with a tooltip; `tip` is the tooltip node.
 import Art from '@/components/art/Art';
 import { HEX, TINTS } from '@/lib/brand';
-import { areaPath, arcLength, bandPath, linePath, r2, scale, stepPath, archShares } from '@/lib/charts';
+import { areaPath, bandPath, r2, scale, stepPath, archShares } from '@/lib/charts';
 import { ALL_LAYERS, pad } from './data';
 
 const RULE = '#C9BBAE';
@@ -137,7 +137,7 @@ export function Thumb({ kind, exportName }) {
   return (
     <Art viewBox="0 0 160 100" title={`Structure of option ${k.toUpperCase()}`} exportName={exportName}>
       <rect width="160" height="100" fill={HEX.beige} />
-      {k === 'a' && <><rect width="160" height="12" fill={HEX.chocolate} /><path d={bandPath(8, 70, 18, 52, 0, 90)} fill={HEX.tribal} /><path d="M70 62H150" stroke={HEX.chocolate} strokeWidth="2" /><path d={linePath([[70, 56], [90, 44], [112, 48], [150, 22]])} stroke={HEX.chocolate} strokeWidth="2" fill="none" />{[8, 46, 84, 122].map((x) => <rect key={x} x={x} y="80" width="30" height="14" fill={HEX.white} />)}</>}
+      {k === 'a' && <><rect width="160" height="12" fill={HEX.chocolate} /><path d={bandPath(8, 74, 22, 58, 0, 90)} fill={HEX.tribal} /><rect x="80" y="22" width="50" height="6" fill={HEX.chocolate} />{[44, 54, 64].map((y) => <g key={y}>{line(80, y, 70)}</g>)}{[8, 46, 84, 122].map((x) => <rect key={x} x={x} y="80" width="30" height="14" fill={HEX.white} />)}</>}
       {k === 'b' && <><rect width="40" height="100" fill={HEX.chocolate} />{[14, 26, 38, 50, 62, 74].map((y) => line(6, y, 28, HEX.beige))}<rect x="50" y="10" width="100" height="80" fill={HEX.white} /><rect x="62" y="24" width="76" height="52" fill="none" stroke={HEX.chocolate} strokeWidth="3" /></>}
       {k === 'c' && <>{[[6, 6, 52, 60, HEX.white], [64, 6, 90, 36, HEX.white], [64, 48, 42, 18, HEX.beige], [112, 48, 42, 46, HEX.chocolate], [6, 72, 52, 22, HEX.beige], [64, 72, 42, 22, HEX.tribal]].map(([x, y, w, h, f], i) => <rect key={i} x={x} y={y} width={w} height={h} fill={f} stroke={HEX.chocolate} strokeOpacity=".25" />)}</>}
       {k === 'd' && <>{[8, 46, 84, 122].map((x) => <rect key={x} x={x} y="8" width="30" height="16" fill={HEX.white} />)}{Array.from({ length: 7 }, (_, i) => <g key={i}>{line(8, 36 + i * 9, 144)}</g>)}</>}

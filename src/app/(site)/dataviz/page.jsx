@@ -27,7 +27,7 @@ const STRIP = [
   [StatNumeral, 'Counts the paragraphs of the intro slide.'],
   [StatWeights, 'Counts the four type weights printed on the type slide.'],
   [StatCut, 'The cut angle as labelled and as measured.'],
-  [StatLedger, 'Counts the lines in each contact block.'],
+  [StatLedger, 'Counts the colours printed with a strip of tints.'],
   [KpiPages, 'Counts the pages of the site, by group.'],
   [KpiYear, 'The one printed date.'],
   [KpiColours, 'Counts the published colours.'],
@@ -53,7 +53,7 @@ export default function Page() {
             <p className="t-small">Hover, tap or tab to a mark for its value.</p>
           </div>
           <div className="bento">
-            <Fig span={7} title="Words per paragraph" caption="Counts the words of each paragraph on the intro slide and the letter. The tabs choose the series.">
+            <Fig span={7} title="Words per paragraph">
               <Explorer />
             </Fig>
             <Fig span={5} title="Characters per line" caption="Counts the characters in each line of the type slide's character set. Each ring is one line, against the longest.">
@@ -78,34 +78,34 @@ export default function Page() {
               <Scatter />
             </Fig>
 
-            <Fig span={3} title="Export targets" caption="Counts how many pages share each minimum-export band in the site's page list.">
+            <Fig span={3} title="Artworks per page" caption="Counts how many pages of this site ask for each number of SVG artworks, from its page list.">
               <Histogram />
             </Fig>
-            <Fig span={5} title="Paragraph lengths" caption="Places every paragraph of three text blocks on one words scale.">
+            <Fig span={5} title="Paragraph lengths" caption="Places every paragraph of the intro slide, the letter and the type slide on one words scale. Equal counts stack.">
               <Strip />
             </Fig>
             <Fig span={4} title="The cut" caption="Draws the 42 degrees printed on the construction drawing against the 45 degrees measured on the artwork.">
               <Angle />
             </Fig>
 
-            <Fig span={5} title="Plan zones" caption="Draws the plan sheet's zones as shapes. The case study prints no areas, so there are no figures.">
+            <Fig span={5} title="Plan sheet" caption="Draws the floor plan on the presentation-box sheet as its two parts, the building and the car park. Its figures are illegible, so none are shown.">
               <Place />
             </Fig>
-            <Fig span={7} title="Where the words sit" caption="Counts the words of each copy block of the case study, flowing into the total.">
+            <Fig span={7} title="Where the words sit" caption="Counts the words of six copy blocks of the case study, flowing into their total.">
               <Sankey />
             </Fig>
 
-            <Fig span={5} title="Largest export targets" caption="Ranks the eight pages with the highest minimum-export count in the site's page list.">
+            <Fig span={5} title="Most artworks" caption="Ranks the eight pages of this site that ask for the most SVG artworks, from its page list. Equal counts in title order.">
               <Rank />
             </Fig>
-            <Fig span={4} title="Anchor points" caption="Counts the anchor points in each letter of the traced word-mark.">
+            <Fig span={4} title="Anchor points" caption="Ranks the seven letters of the traced word-mark with the most anchor points.">
               <Anchors />
             </Fig>
-            <Fig span={3} title="Sparklines" caption="Four counted series, each drawn small with its last value.">
+            <Fig span={3} title="Sparklines" caption="Words per intro and letter paragraph, characters per character-set line and anchors per letter, each with its last value.">
               <Sparklines />
             </Fig>
 
-            <Fig span={6} title="Scope of work, 2026" caption="Places the one printed date and the four scope-of-work steps in the order printed.">
+            <Fig span={6} title="Scope of work, 2026" caption="Places the one printed date over the four scope-of-work items, in the order printed.">
               <Timeline />
             </Fig>
             <Fig span={6} title="Palette print values" caption="Shows the printed cyan, magenta, yellow and black values of the six colours, shaded in the palette's own tones.">

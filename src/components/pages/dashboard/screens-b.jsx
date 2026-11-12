@@ -4,7 +4,7 @@
 import Icon from '@/components/site/Icon';
 import Button from '@/components/ui/Button';
 import RuledRows from '@/components/ui/RuledRows';
-import { LINES, PLAN } from '@/lib/brand';
+import { PLAN } from '@/lib/brand';
 import { LayerDiagram, PlanDrawing, Thumb } from './art';
 import { OPTIONS, STATUSES, LAYERS } from './data';
 import { AccountChip, Brand, Filters, Kpi, LayerChips, Search, SheetTable, StatusMark } from './parts';
@@ -79,7 +79,17 @@ export function Overview({ d }) {
               </button>
             </li>
           ))}
-          <li className={`${s.ovText} slide-up`} style={{ '--i': 7 }}><p className={s.ovLine}>{LINES.refined.text}</p></li>
+          <li className={`${s.ovText} slide-up`} style={{ '--i': 7 }}>
+            <table className={s.ovCompare}>
+              <caption className="t-label">The five compared</caption>
+              <thead><tr><th scope="col">Option</th><th scope="col">Navigation</th><th scope="col">Leads with</th></tr></thead>
+              <tbody>
+                {OPTIONS.map((o) => (
+                  <tr key={o.id}><th scope="row"><button type="button" className={s.ovPick} onClick={() => d.go(o.id)} aria-label={`Open option ${o.id.toUpperCase()}`}>{o.id.toUpperCase()}</button></th><td>{o.nav}</td><td>{o.lead}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </li>
         </ul>
       </div>
     </Board>

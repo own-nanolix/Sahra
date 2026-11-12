@@ -39,7 +39,12 @@ function Stage({ id, d }) {
 
 export default function Shell() {
   const [screen, setScreen] = useState('overview');
-  const d = useDash(setScreen);
+  // Buttons inside a screen switch screens; focus then moves to the new screen so keyboard users keep their place.
+  const go = (id) => {
+    setScreen(id);
+    requestAnimationFrame(() => { const el = document.getElementById('dashboard-screens-panel'); if (el) el.focus({ preventScroll: true }); });
+  };
+  const d = useDash(go);
   const tabs = SCREEN_TABS.map((t) => ({ ...t, content: t.id === screen ? <Stage id={t.id} d={d} /> : null }));
   return <Tabs id="dashboard-screens" label="Dashboard screens" tabs={tabs} value={screen} onChange={setScreen} panelClassName={s.panel} />;
 }

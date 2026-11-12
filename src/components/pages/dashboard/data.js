@@ -18,12 +18,13 @@ export const LAYERS = [
 ];
 export const ALL_LAYERS = { grid: true, walls: true, doors: true, parking: true };
 
+// The five home structures. nav and lead are what the overview compares: where navigation sits, what leads.
 export const OPTIONS = [
-  { id: 'a', name: 'Top navigation', note: 'Navigation bar over one hero chart, small tiles below.' },
-  { id: 'b', name: 'Left rail', note: 'A ruled list of sheets beside a sheet preview.' },
-  { id: 'c', name: 'Bento', note: 'Six tiles of unequal size.' },
-  { id: 'd', name: 'Ledger', note: 'A table first, with a summary strip.' },
-  { id: 'e', name: 'Split view', note: 'Plan drawing left, ruled detail rows right.' },
+  { id: 'a', name: 'Top navigation', note: 'Navigation bar over one hero chart, small tiles below.', nav: 'Top bar', lead: 'One hero chart' },
+  { id: 'b', name: 'Left rail', note: 'A ruled list of sheets beside a sheet preview.', nav: 'Left rail', lead: 'Sheet list' },
+  { id: 'c', name: 'Bento', note: 'Six tiles of unequal size.', nav: 'Tiles', lead: 'Six tiles' },
+  { id: 'd', name: 'Ledger', note: 'A table first, with a summary strip.', nav: 'Header', lead: 'Table' },
+  { id: 'e', name: 'Split view', note: 'Plan drawing left, ruled detail rows right.', nav: 'Sheet picker', lead: 'Plan drawing' },
 ];
 export const SCREEN_TABS = [
   { id: 'overview', label: 'Options' },

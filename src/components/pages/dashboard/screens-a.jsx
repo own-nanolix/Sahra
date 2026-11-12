@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import { ABOUT, LINES } from '@/lib/brand';
 import { PlanDrawing, TileArt } from './art';
 import { NAV, STATUSES, pad } from './data';
-import { AccountChip, ArchLive, Brand, Filters, Kpi, LayerChips, LineLive, Search, StatusMark } from './parts';
+import { AccountChip, ArchLive, Brand, Kpi, LayerChips, LineLive, Search, StatusMark } from './parts';
 import s from './dashboard.module.css';
 
 export const Board = ({ id, tone = '', children }) => <div className={`${s.board} ${tone}`} data-screen={`dashboard-${id}`}>{children}</div>;
@@ -29,12 +29,22 @@ export function ScreenA({ d }) {
         <div className={s.heroSide}>
           <p className="t-label">Sheets</p>
           <h3 className={s.heroTitle}>{d.counts.Final} of {d.total} sheets are Final</h3>
-          <div className={`${s.heroLine} slide-up`} style={{ '--i': 2 }}><LineLive d={d} /></div>
-          <Filters d={d} />
+          <p className="t-body muted">One segment of the arch for each sheet; a filled segment is a Final sheet. Change a status on any screen and the arch follows.</p>
+          <ul className={`rows ${s.heroKey}`} aria-label="Status key: choose a status to filter">
+            {STATUSES.map((st, i) => (
+              <li key={st} className="slide-up" style={{ '--i': i + 2 }}>
+                <button type="button" className="ruled-row" aria-pressed={d.filter === st} onClick={() => d.setFilter(d.filter === st ? 'All' : st)}>
+                  <span className="t-num">{pad(i + 1)}</span><span className="ruled-row-label"><StatusMark status={st} /></span><span className={s.keyNum}>{d.counts[st]}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
       <div className={s.tiles4}>
-        {STATUSES.map((st, i) => <div key={st} className="slide-up" style={{ '--i': i + 3 }}><Kpi label={st} value={d.counts[st]} hint="sheets" active={d.filter === st} onClick={() => d.setFilter(d.filter === st ? 'All' : st)} /></div>)}
+        <div className="slide-up" style={{ '--i': 3 }}><Kpi label="All sheets" value={d.total} hint="in the list" active={d.filter === 'All' && !d.q} onClick={() => { d.setFilter('All'); d.setQ(''); }} /></div>
+        <div className="slide-up" style={{ '--i': 4 }}><Kpi label="Shown" value={d.visible.length} hint={`of ${d.total}, by filter and search`} onClick={() => d.go('d')} /></div>
+        <div className="slide-up" style={{ '--i': 5 }}><Kpi label="Selected" value={pad(d.cur.id)} hint={d.cur.status} onClick={() => d.go('record')} /></div>
         <div className="slide-up" style={{ '--i': 6 }}><Kpi label="Layers on" value={d.layersOn} hint={`of ${d.layerList.length}`} onClick={() => d.go('viewer')} /></div>
       </div>
     </Board>

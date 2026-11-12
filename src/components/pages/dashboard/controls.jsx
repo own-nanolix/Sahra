@@ -30,9 +30,9 @@ export function DateRange({ id, preset }) {
 
 const STATES = ['Default', 'Hover', 'Selected', 'Focus', 'Disabled'];
 // One state of a component. Hover and focus are shown by data-force; the copy is inert.
-function Strip({ render, states = STATES, dark }) {
+function Strip({ render, states = STATES, dark, wide }) {
   return (
-    <div className={`${s.strip5} ${dark ? `${s.darkPane} on-dark` : ''}`}>
+    <div className={`${s.strip5} ${wide ? s.wide : ''} ${dark ? `${s.darkPane} on-dark` : ''}`}>
       {states.map((st) => (
         <figure key={st} className={s.state} data-force={st.toLowerCase()}>
           <div inert>{render({ on: st === 'Selected', disabled: st === 'Disabled' })}</div>
@@ -60,7 +60,6 @@ export default function Components() {
   const d = useDash(() => toast('Opens the sheet record'));
   const [side, setSide] = useState(0);
   const [rail, setRail] = useState(1);
-  const [kpi, setKpi] = useState('Final');
   const [sheet, setSheet] = useState(3);
   const items = [['plan', 'Plans'], ['document', 'Sheets'], ['grid', 'Layers']];
   return (
@@ -72,9 +71,10 @@ export default function Components() {
         <ul className={`rows ${s.railDemo}`}>{[1, 2, 3].map((n) => <li key={n}><RailItem no={pad(n)} label={`Sheet ${pad(n)}`} status={d.sheets[n - 1].status} on={rail === n} onClick={() => setRail(n)} /></li>)}</ul>
       </Spec>
       <Spec no="03" title="KPI tile" note="A count taken from the list. It filters the list." strip={<Strip render={(p) => <Kpi label="Final" value={d.counts.Final} hint="sheets" active={p.on} disabled={p.disabled} />} />}>
-        <div className={s.kpiRow}>{STATUSES.map((st) => <Kpi key={st} label={st} value={d.counts[st]} hint="sheets" active={kpi === st} onClick={() => setKpi(st)} />)}</div>
+        <div className={s.kpiRow}>{STATUSES.map((st) => <Kpi key={st} label={st} value={d.counts[st]} hint="sheets" active={d.filter === st} onClick={() => d.setFilter(d.filter === st ? 'All' : st)} />)}</div>
+        <p className="t-small" aria-live="polite">{d.visible.length} of {d.total} sheets shown in the table below</p>
       </Spec>
-      <Spec no="04" title="Table header and row" note="Click a header to sort. Click a status to change it. Rows select." strip={<Strip states={['Default', 'Hover', 'Selected', 'Focus']} render={(p) => <table className={`${s.table} ${s.dense}`}><tbody><tr aria-current={p.on ? 'true' : undefined}><td><span className={s.cellBtn}><span className="t-num">01</span><span className={s.serifCell}>Sheet 01</span></span></td><td><StatusMark status="Draft" /></td></tr></tbody></table>} />}>
+      <Spec no="04" title="Table header and row" note="Click a header to sort. Click a status to change it. Rows select." strip={<Strip wide states={['Default', 'Hover', 'Selected', 'Focus']} render={(p) => <table className={`${s.table} ${s.dense}`}><tbody><tr aria-current={p.on ? 'true' : undefined}><td><span className={s.cellBtn}><span className="t-num">01</span><span className={s.serifCell}>Sheet 01</span></span></td><td><StatusMark status="Draft" /></td></tr></tbody></table>} />}>
         <SheetTable d={d} dense limit={5} />
       </Spec>
       <Spec no="05" title="Filter chip" note="Chips filter the list by status." strip={<Strip render={(p) => <Chip size="sm" pressed={p.on} disabled={p.disabled}>Draft</Chip>} />}>
@@ -90,7 +90,7 @@ export default function Components() {
       <Spec no="07" title="Search field" note="Filters the table and the charts as you type." strip={<Strip states={['Default', 'Focus', 'Disabled']} render={(p) => <label className={s.search}><Icon name="search" size={18} /><input placeholder="Search" aria-label="Search example" disabled={p.disabled} tabIndex={-1} /></label>} />}>
         <Search d={d} id="dashboard-spec-search" label="Search sheets in the components sheet" />
       </Spec>
-      <Spec no="08" title="Date range" note="Pick a first day, then a last day." strip={<Strip states={['Default', 'Selected']} render={(p) => <DateRange preset={p.on ? [1, 3] : undefined} />} />}>
+      <Spec no="08" title="Date range" note="Pick a first day, then a last day." strip={<Strip wide states={['Default', 'Selected']} render={(p) => <DateRange preset={p.on ? [1, 3] : undefined} />} />}>
         <DateRange id="dashboard-spec-range" />
       </Spec>
       <Spec no="09" title="Account chip" note="Opens a small menu of two plain choices." strip={<Strip states={['Default', 'Hover', 'Focus', 'Disabled']} render={(p) => <AccountChip disabled={p.disabled} />} />}>

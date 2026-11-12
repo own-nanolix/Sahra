@@ -12,9 +12,9 @@ const SER = {
   letter: { name: 'Letter', color: C.tribal, values: letterWords },
 };
 const CAPTION = {
-  intro: 'Counts the words in each of the six intro-slide paragraphs.',
-  letter: 'Counts the words in each of the five letter paragraphs.',
-  both: 'Counts the words per paragraph of the intro slide and the letter, side by side.',
+  intro: 'Counts the words in each of the six intro-slide paragraphs. The tabs choose the series.',
+  letter: 'Counts the words in each of the five letter paragraphs. The tabs choose the series.',
+  both: 'Counts the words per paragraph of the intro slide and the letter, on one scale. The tabs choose the series.',
 };
 
 // The hero trend: tabs pick the series; the legend names them; marks answer to hover and keyboard focus.
@@ -37,7 +37,7 @@ export default function Explorer() {
         ]}
       />
       <Legend label="Series" items={tab === 'both' ? Object.values(SER) : [SER[tab]]} />
-      <p className="t-small">{CAPTION[tab]}</p>
+      <p className="t-small" aria-live="polite">{CAPTION[tab]}</p>
     </div>
   );
 }

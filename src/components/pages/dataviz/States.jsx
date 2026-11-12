@@ -48,11 +48,11 @@ export function ErrorState() {
     timer.current = setTimeout(() => setBusy(false), 900);
   };
   return (
-    <Frame title="Error" role="alert">
+    <Frame title="Error">
       <div className={s.stateBars} aria-hidden="true">
         {range(6).map((i) => <span key={i} className={busy ? 'skeleton' : s.quiet} style={{ height: `${BARS[i]}%`, opacity: busy ? 1 : 0.5 }} />)}
       </div>
-      <p className={`t-small ${s.err}`}>{busy ? 'Trying again.' : 'The chart could not be drawn.'}</p>
+      <p className={`t-small ${s.err}`} aria-live="polite">{busy ? 'Trying again.' : 'The chart could not be drawn.'}</p>
       <Button variant="outline" size="sm" onClick={retry}>Try again</Button>
     </Frame>
   );
