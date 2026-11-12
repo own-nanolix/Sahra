@@ -1,0 +1,198 @@
+/* mobile-a: nine phone screens. Each screen is a 390 x 844 artboard drawn in pixels and scaled with a CSS transform. */
+
+/* ---------- Artboard ---------- */
+.fitBox { position: absolute; inset: 0; overflow: hidden; }
+.fixedBox { position: relative; overflow: hidden; }
+.board { position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform-origin: 0 0; }
+.swap { position: absolute; inset: 0; }
+.scr { position: relative; width: 390px; height: 844px; overflow: hidden; font-size: 13px; line-height: 1.4; }
+.scr * { box-sizing: border-box; }
+.beige { background: var(--beige); color: var(--chocolate); }
+.dark { background: var(--chocolate); color: var(--beige); }
+.dark :focus-visible { outline-color: var(--sand); }
+:where(.scr) :where(h2, p) { margin: 0; font-weight: 400; }
+
+/* ---------- Shared screen parts ---------- */
+.word { position: absolute; height: auto; color: var(--tribal); max-width: none; }
+.sandWord { color: var(--sand); }
+.status { position: absolute; left: 0; top: 0; width: 390px; height: 50px; color: var(--chocolate); }
+.statusDark { color: var(--beige); }
+.status span { position: absolute; background: currentColor; opacity: 0.5; }
+.stA { left: 28px; top: 22px; width: 34px; height: 8px; border-radius: 4px; }
+.stB { left: 330px; top: 20px; width: 26px; height: 12px; border-radius: 4px; }
+.stC { left: 306px; top: 22px; width: 14px; height: 8px; border-radius: 4px; }
+.stD { left: 282px; top: 22px; width: 14px; height: 8px; border-radius: 4px; }
+.menuBtn { position: absolute; left: 328px; top: 66px; width: 38px; height: 32px; padding: 8px 6px 0; display: flex; flex-direction: column; gap: 5px; border: 0; border-radius: 6px; background: transparent; color: inherit; transition: background-color var(--dur-1) var(--ease-out); }
+.menuBtn i { display: block; width: 26px; height: 2px; background: currentColor; transition: width var(--dur-2) var(--ease-out); }
+.menuBtn:hover { background: rgba(135, 93, 65, 0.12); }
+.menuBtn:hover i:nth-child(2) { width: 16px; }
+.menuBtn:active { background: rgba(135, 93, 65, 0.24); }
+.dark .menuBtn:hover { background: rgba(245, 240, 227, 0.14); }
+.backBtn, .closeBtn { position: absolute; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 8px; background: transparent; color: inherit; transition: background-color var(--dur-1) var(--ease-out), transform var(--dur-2) var(--ease-out); }
+.closeBtn { left: 322px; top: 62px; }
+.backBtn:hover, .closeBtn:hover { background: rgba(135, 93, 65, 0.12); transform: translateX(-2px); }
+.closeBtn:hover { transform: none; }
+.backBtn:active, .closeBtn:active { background: rgba(135, 93, 65, 0.24); }
+.dark .backBtn:hover, .dark .closeBtn:hover { background: rgba(245, 240, 227, 0.14); }
+
+/* The ruled row of m12: number, serif label, "+" */
+.row { position: relative; display: block; width: 100%; height: 74px; padding: 0; border: 0; border-top: 1px solid rgba(53, 36, 28, 0.4); background: transparent; color: inherit; text-align: left; font: inherit; }
+.rowBtn { cursor: pointer; transition: background-color var(--dur-2) var(--ease-out); }
+.rowBtn:hover { background: rgba(135, 93, 65, 0.07); }
+.rowBtn:active { background: rgba(135, 93, 65, 0.16); }
+.rowNo { position: absolute; left: 0; top: 31px; font-size: 13px; line-height: 16px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rowLabel { position: absolute; left: 70px; top: 21px; font-family: var(--font-serif); font-size: 20px; line-height: 28px; letter-spacing: -0.01em; transition: transform var(--dur-3) var(--ease-out); }
+.rowBtn:hover .rowLabel { transform: translateX(6px); }
+.rowBar { position: absolute; left: 70px; top: 31px; width: 120px; height: 12px; border-radius: 2px; background: currentColor; opacity: 0.14; }
+.rowPlus { position: absolute; left: 320px; top: 33px; width: 12px; height: 12px; }
+.rowPlus::before, .rowPlus::after { content: ""; position: absolute; background: currentColor; }
+.rowPlus::before { left: 0; top: 5.5px; width: 12px; height: 1px; }
+.rowPlus::after { left: 5.5px; top: 0; width: 1px; height: 12px; transition: transform var(--dur-3) var(--ease-out); }
+.rowOpen::after { transform: scaleY(0); }
+.rowTall { height: 96px; }
+.rowTall .rowNo { top: 40px; }
+.rowTall .rowLabel { top: 26px; font-size: 32px; line-height: 40px; }
+.rowTall .rowPlus { top: 42px; }
+.dark .row { border-top-color: rgba(245, 240, 227, 0.2); }
+.dark .rowNo { color: var(--beige-muted); }
+.dark .rowBtn:hover { background: rgba(245, 240, 227, 0.07); }
+
+.pill { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: rgba(135, 93, 65, 0.12); color: var(--chocolate); transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), opacity var(--dur-2) var(--ease-out); }
+.pill:hover { background: rgba(135, 93, 65, 0.24); }
+.pill:active { background: var(--tribal); color: var(--beige); }
+.pillDark { background: transparent; color: var(--beige); }
+.pillDark:hover { background: rgba(245, 240, 227, 0.14); }
+.pillDark:active { background: var(--sand); color: var(--chocolate); }
+.pill:disabled { opacity: 0.35; pointer-events: none; }
+
+/* ---------- 1 About (m12) ---------- */
+.abLabel { position: absolute; left: 28px; top: 183px; font-size: 12px; line-height: 16px; color: var(--muted); }
+.abHead { position: absolute; left: 28px; top: 209px; font-family: var(--font-serif); font-size: 33px; line-height: 38px; letter-spacing: -0.6px; }
+.abText { position: absolute; left: 28px; top: 363px; width: 334px; font-size: 13px; line-height: 20px; }
+.abRows { position: absolute; left: 28px; top: 560px; width: 334px; border-bottom: 1px solid rgba(53, 36, 28, 0.4); }
+
+/* ---------- 2 Philosophy ---------- */
+.archBand { position: absolute; left: 0; top: 106px; width: 390px; height: 190px; max-width: none; }
+.phHead { position: absolute; left: 28px; top: 296px; width: 334px; }
+.scroll { position: absolute; left: 0; right: 0; bottom: 0; overflow-y: auto; padding: 18px 28px 60px; scrollbar-width: none; }
+.scroll:focus-visible { outline-offset: -4px; }
+.scroll::-webkit-scrollbar { display: none; }
+.para { margin: 0 0 18px; font-size: 14px; line-height: 22px; }
+.bars { display: grid; gap: 10px; margin: 6px 0 22px; }
+.bars > span { display: block; height: 9px; }
+
+/* ---------- 3 Our Process ---------- */
+.pTitle { position: absolute; left: 28px; top: 106px; font-family: var(--font-serif); font-size: 34px; line-height: 1.05; letter-spacing: -0.015em; }
+.planCard { position: absolute; left: 28px; top: 160px; width: 334px; height: 250px; padding: 14px; display: flex; align-items: center; gap: 10px; border-radius: 18px; background: var(--white); }
+.planCard > svg { flex: 1; min-width: 0; height: 100%; }
+.zone { transition: x var(--dur-3) var(--ease-in-out), y var(--dur-3) var(--ease-in-out), width var(--dur-3) var(--ease-in-out), height var(--dur-3) var(--ease-in-out); }
+.stepNums { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.stepNums li { padding: 6px 10px; border-radius: 6px; font-size: 13px; color: var(--muted); transition: background-color var(--dur-3) var(--ease-in-out), color var(--dur-3) var(--ease-in-out); }
+.stepNums .numOn { background: var(--chocolate); color: var(--beige); }
+.steps { position: absolute; left: 28px; top: 428px; width: 334px; margin: 0; padding: 0; list-style: none; }
+.step { display: grid; grid-template-columns: 34px minmax(0, 1fr); width: 100%; padding: 14px 10px 14px 0; border: 0; border-top: 1px solid rgba(53, 36, 28, 0.4); background: transparent; color: var(--chocolate); text-align: left; font: inherit; font-size: 13px; line-height: 19px; transition: background-color var(--dur-3) var(--ease-in-out), color var(--dur-3) var(--ease-in-out), padding var(--dur-3) var(--ease-out); }
+.stepNo { color: var(--muted); font-variant-numeric: tabular-nums; }
+.step:hover { background: rgba(135, 93, 65, 0.08); }
+.step:active { background: rgba(135, 93, 65, 0.18); }
+.stepOn, .stepOn:hover { padding-left: 12px; background: var(--chocolate); color: var(--beige); }
+.stepOn .stepNo { color: var(--beige-muted); }
+
+/* ---------- 4 Our Vision ---------- */
+.fieldTop { position: absolute; left: 0; top: 0; width: 390px; height: 430px; max-width: none; }
+.vLabel { position: absolute; left: 28px; top: 424px; font-size: 12px; line-height: 16px; color: var(--beige-muted); }
+.vHead { position: absolute; left: 28px; top: 448px; font-family: var(--font-serif); font-size: 38px; line-height: 42px; letter-spacing: -0.6px; }
+.vText { position: absolute; left: 28px; top: 552px; width: 334px; font-size: 13.5px; line-height: 21px; color: var(--beige-muted); }
+.vUrl, .mUrl { position: absolute; left: 28px; top: 770px; padding: 8px 0; border: 0; background: transparent; font-size: 15px; cursor: pointer; transition: opacity var(--dur-1) var(--ease-out); }
+.vUrl:hover, .mUrl:hover { opacity: 0.8; }
+
+/* ---------- 5 Spaces ---------- */
+.pager { position: absolute; left: 0; top: 100px; width: 390px; height: 744px; overflow: hidden; touch-action: pan-x; user-select: none; }
+.pagerTrack { transition: transform var(--dur-3) var(--ease-in-out); }
+.card { height: 744px; padding: 40px 28px 56px; display: flex; flex-direction: column; }
+.cardBeige { background: var(--beige); color: var(--ink); }
+.cardLine { font-family: var(--font-serif); font-size: 46px; line-height: 1.04; letter-spacing: -0.02em; }
+.cardSub { margin-top: 26px; font-size: 14px; line-height: 21px; max-width: 250px; }
+.cardBody { margin-top: auto; padding-right: 56px; font-size: 13px; line-height: 20px; color: var(--beige-muted); }
+.pagerCtl { position: absolute; right: 14px; bottom: 24px; display: flex; flex-direction: column; align-items: center; padding: 4px; border-radius: 14px; background: var(--chocolate); box-shadow: 0 0 0 1px rgba(245, 240, 227, 0.22); color: var(--beige); }
+.dot { width: 44px; height: 24px; border: 0; background: transparent; display: grid; place-items: center; }
+.dot::after { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--beige); opacity: 0.45; transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out); }
+.dot:hover::after { opacity: 0.8; }
+.dotOn::after { opacity: 1; background: var(--sand); transform: scale(1.4); }
+
+/* ---------- 6 Plan sheet ---------- */
+.sheet { position: absolute; left: 28px; top: 108px; width: 334px; height: 440px; padding: 14px; display: flex; flex-direction: column; border-radius: 18px; background: var(--white); }
+.sheetHead { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.sheetName { font-size: 12px; color: var(--tribal); }
+.sheetCt { font-size: 11px; line-height: 15px; text-align: right; color: var(--muted); }
+.viewport { flex: 1; min-height: 0; overflow: auto; padding: 6px; border-radius: 8px; background: var(--beige-60); scrollbar-width: none; }
+.viewport:focus-visible { outline-offset: -3px; }
+.planSvg { display: block; margin: 0 auto; height: auto; max-width: none; transition: width var(--dur-3) var(--ease-in-out); }
+.zoomBar { position: absolute; left: 28px; top: 562px; width: 334px; display: flex; align-items: center; gap: 8px; }
+.zoomVal { flex: 1; text-align: center; font-size: 13px; }
+.reset { height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: var(--chocolate); color: var(--beige); font-size: 13px; transition: background-color var(--dur-1) var(--ease-out), opacity var(--dur-2) var(--ease-out); }
+.reset:hover { background: var(--tribal); }
+.reset:active { background: var(--black); }
+.reset:disabled { opacity: 0.35; pointer-events: none; }
+.layers { position: absolute; left: 28px; top: 632px; width: 334px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.layers :global(.toggle) { font-size: 14px; min-height: 44px; }
+
+/* ---------- 7 Menu ---------- */
+.mLabel { position: absolute; left: 28px; top: 168px; padding: 6px 0; border: 0; background: transparent; color: var(--beige-muted); font-size: 12px; line-height: 16px; text-align: left; transition: color var(--dur-1) var(--ease-out); }
+.mLabel:hover { color: var(--beige); }
+.menuRows { position: absolute; left: 28px; top: 200px; width: 334px; border-bottom: 1px solid rgba(245, 240, 227, 0.2); }
+
+/* ---------- 8 Contact ---------- */
+.cTitle { position: absolute; left: 28px; top: 108px; font-family: var(--font-serif); font-size: 36px; line-height: 1.05; letter-spacing: -0.015em; }
+.cList { position: absolute; left: 28px; top: 168px; width: 334px; display: grid; gap: 10px; }
+.cBlock { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 14px 14px 16px; border-radius: 18px; background: var(--white); }
+.cName { margin-bottom: 4px; font-size: 12px; color: var(--muted); }
+.cLines { color: var(--ink); }
+.copyBtn { min-width: 70px; height: 44px; padding: 0 14px; border: 0; border-radius: 8px; background: var(--tribal); color: var(--beige); font-size: 13px; transition: background-color var(--dur-2) var(--ease-out), transform var(--dur-1) var(--ease-out); }
+.copyBtn:hover { background: #774f36; transform: translateY(-1px); }
+.copyBtn:active { background: var(--chocolate); transform: translateY(1px); }
+.copyDone { background: var(--chocolate); }
+.bizCard { position: absolute; left: 28px; top: 524px; width: 334px; height: 206px; padding: 22px; border-radius: 18px; background: var(--white); box-shadow: 6px 7px 0 rgba(53, 36, 28, 0.1); }
+.bizMark { position: absolute; right: 22px; top: 20px; width: 30px; height: auto; color: var(--sand); }
+.bizName { margin-top: 30px; font-family: var(--font-serif); font-size: 22px; line-height: 26px; }
+.bizRole { margin-top: 2px; font-size: 12px; color: var(--muted); }
+.bizLines { position: absolute; left: 22px; bottom: 20px; color: var(--ink); }
+
+/* ---------- 9 Brand ---------- */
+.brandTop { position: absolute; left: 0; top: 0; width: 390px; height: 200px; }
+.bands { position: absolute; left: 0; top: 200px; width: 390px; margin: 0; padding: 0; list-style: none; }
+.band { height: 66px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
+.bandName { font-family: var(--font-serif); font-size: 17px; }
+.band :global(.copy) { font-size: 13px; }
+.tile { position: absolute; left: 28px; top: 644px; width: 100px; height: 100px; max-width: none; }
+.brandLine { position: absolute; left: 152px; top: 652px; width: 210px; font-family: var(--font-serif); font-size: 22px; line-height: 26px; color: var(--beige); }
+
+/* ---------- Page layout ---------- */
+.liveTile { display: flex; justify-content: center; align-items: flex-start; }
+.liveBox { width: 100%; max-width: 438px; }
+.livePhone { margin: 0 auto; }
+@media (min-width: 901px) { .liveTile { position: sticky; top: 16px; align-self: start; } }
+.capTile { display: grid; gap: 14px; align-content: start; }
+.capName { margin: 0; }
+.capList { margin-top: 6px; }
+.capRow[aria-current="true"] { background: rgba(135, 93, 65, 0.1); box-shadow: inset 3px 0 0 var(--tribal); }
+.stripHead { margin: 0; color: var(--beige-muted); }
+.stripTile { display: flex; flex-direction: column; gap: 14px; }
+.strip { display: flex; gap: 20px; margin: 0; padding: 4px 4px 14px; list-style: none; overflow-x: auto; scrollbar-color: var(--sand) transparent; }
+.thumbItem { flex: none; display: grid; gap: 8px; }
+.thumb { position: relative; box-sizing: border-box; overflow: hidden; border: 3px solid #3a302a; border-radius: 22px; background: #000; transition: transform var(--dur-2) var(--ease-out); }
+.thumb:hover { transform: translateY(-3px); }
+.thumbOn { outline: 2px solid var(--sand); outline-offset: 3px; }
+.thumbBtn { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; transition: background-color var(--dur-1) var(--ease-out); }
+.thumbBtn:hover { background: rgba(245, 240, 227, 0.07); }
+.thumbBtn:active { background: rgba(245, 240, 227, 0.16); }
+.thumbBtn:focus-visible { outline: 2px solid var(--sand); outline-offset: -5px; }
+.thumbCap { font-size: 12px; color: var(--beige-muted); }
+.artTile { margin-top: var(--gap); }
+.figs { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); margin-top: 16px; }
+.fig { margin: 0; min-width: 0; grid-column: span var(--span, 4); grid-row: span var(--rows, 1); display: flex; flex-direction: column; gap: 8px; }
+.fig > svg { width: 100%; height: auto; }
+.fig figcaption { font-size: 12px; color: var(--muted); }
+@media (max-width: 900px) {
+  .figs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fig { grid-column: span 2; grid-row: auto; }
+}
