@@ -144,7 +144,7 @@ export function Storyboard() {
   );
 }
 
-// The reference frames of the construction animation (m03_1 to m03_4), redrawn. Cuts are labelled "42°" as printed.
+// The reference frames of the construction animation (m03_1 to m03_4), redrawn. Cuts are labelled as printed: "34°" on the Latin cuts, "42°" on the Arabic cuts.
 const REFS = [
   { n: 1, vb: VB, name: 'Guides, outlines and anchor points', cfg: { units: false, angles: false } },
   { n: 2, vb: '-40 -40 780 340', name: 'Close-up of Sahra, x and y units', cfg: { units: true, angles: true } },

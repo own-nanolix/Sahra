@@ -11,7 +11,7 @@ export const PROJECT_TITLE = 'Sahra Development | Branding';
 export const SENDER = { brand: 'Sahra Brand', developement: 'Sahra Developement', realEstate: 'Sahra Real Estate' };
 
 // The designers, as credited on the case study page.
-export const DESIGNER = 'FAST Studio and Ninety Three©';
+export const DESIGNER = 'FAST Studio and Ninety Three';
 // The credit lines exactly as printed under the case study.
 export const CREDITS = [
   'Visual Direction & Project management',
@@ -21,7 +21,7 @@ export const CREDITS = [
   'Agency: NinetyThree',
   'Agency Director: Mohamed Sanad',
 ];
-export const OWNERS = ['FAST Studio', 'Ninety Three©', 'Hessein Yousef', 'Mohamed Sanad'];
+export const OWNERS = ['FAST Studio', 'Ninety Three', 'Hessein Yousef', 'Mohamed Sanad'];
 export const OWNERS_CITY = 'Cairo, Egypt';
 export const FIELDS = ['Branding', 'Graphic Design', 'Logo Design'];
 export const TAGS = ['branding', 'brand identity', 'Logo Design', 'logo', 'visual identity', 'Saudi Arabia', 'realestate', 'logos', 'Brand Design', 'typography'];
@@ -49,7 +49,7 @@ export const TINTS = {
 export const HEX = {
   black: '#000000', chocolate: '#35241C', tribal: '#875D41', sand: '#B58F6B', beige: '#F5F0E3', white: '#FFFFFF',
   // accessibility inks (not published; see globals.css)
-  ink: '#1E140F', muted: '#5C4A3E', sandInk: '#7A5A3F', beigeMuted: '#CDBBA6',
+  ink: '#1E140F', muted: '#5C4A3E', sandInk: '#7A5A3F', beigeMuted: '#CDBBA6', error: '#A3301E', // error ink: 6.1:1 on Beige, 7.0:1 on White
   // sampled, not published
   studio: '#F7F3EA', wall: '#C9772E', sky: '#7FA6C4', timber: '#A8743F',
 };
@@ -180,8 +180,8 @@ export const LETTER = {
 // The folder and envelope sender block (m01, m10).
 export const FROM_BLOCK = ['From:', SENDER.brand, CONTACT.city, CONTACT.phone, CONTACT.info];
 
-// ---------- Construction (m03) ----------
-export const CONSTRUCTION = { labels: { x: 'x', y: 'y', angle: '42°' } };
+// ---------- Construction (m03): the stills print "34°" on the Latin cuts (m03_2) and "42°" on the Arabic cuts (m03_3) ----------
+export const CONSTRUCTION = { labels: { x: 'x', y: 'y', angle: '42°', angleLatin: '34°' } };
 
 // ---------- Landing navigation: only the case study's own words ----------
 export const NAV_LINKS = [

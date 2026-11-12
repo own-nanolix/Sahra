@@ -3,7 +3,7 @@ import './globals.css';
 import Providers from '@/components/site/Providers';
 import ExportMode from '@/components/site/ExportMode';
 
-// The brand serif is Test Tiempos Text (commercial, by Klim). The closest free Google face is Source Serif 4: a
+// The brand serif is Test Tiempos Text. The closest free Google face is Source Serif 4: a
 // sturdy text serif with a large x-height, wedge serifs and the same calm, slightly condensed rhythm; its optical
 // size axis keeps headlines tight. "Test Tiempos Text" stays first in the CSS stack (globals.css).
 // The sans is an unnamed light grotesque, set slightly tight: Inter Tight is the closest free match.

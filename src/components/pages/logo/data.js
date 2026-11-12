@@ -30,7 +30,7 @@ export const MEASURES = [
   { n: '03', label: 'Bowls and corners, outer / inner radius', value: `${WM.R} / ${WM.r}` },
   { n: '04', label: 'Corners of the hah, outer / inner radius', value: `${WM.RS} / ${WM.rs}` },
   { n: '05', label: 'Gap between the halves of the S, y', value: `${WM.GAP}` },
-  { n: '06', label: 'Cut ends, labelled as printed', value: '42°' },
+  { n: '06', label: 'Cut ends, labelled as printed (Latin / Arabic)', value: '34° / 42°' },
 ];
 
 // The six misuses. `kind` picks the treatment in MisusePlates.
@@ -44,5 +44,5 @@ export const MISUSES = [
 ];
 
 // The two inks of the drawing plates, for text drawn inside the artwork.
-// alert is the shared --error-ink (globals.css); HEX has no key for it.
-export const PLATE_INK = { dark: HEX.chocolate, muted: HEX.muted, alert: '#A3301E' };
+// alert is the shared error ink (--error-ink in globals.css, HEX.error).
+export const PLATE_INK = { dark: HEX.chocolate, muted: HEX.muted, alert: HEX.error };

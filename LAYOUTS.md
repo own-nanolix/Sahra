@@ -32,22 +32,22 @@ against them.
 | 11 | lp-home | The About page (m12) as the spine: hero is the phone page grown to desktop ("About Sahra", headline, paragraph) with the profile card's header arch at the right; then a story scroll with the pinned visual on the RIGHT that changes per step: the three ruled rows (Philosophy, Our Process, Our Vision), the intro paragraphs, the poster lines, the hoarding pair, the plan sheet, the contacts; footer |
 | 12 | lp-philosophy | Hero: "Designing spaces / that connect purpose, / design … and / modern living" set huge on Black as m14 right; then a story scroll with a pinned quarter arch on the LEFT that fills step by step while the intro paragraphs scroll at the right; a closing full-bleed curved-wall field |
 | 13 | lp-process | Hero split in thirds: plan sheet (m13) on the left third, headline centre, contacts right; then a story scroll with a pinned floor plan in the CENTRE column and steps alternating left and right of it; each step highlights one part of the plan |
-| 14 | lp-vision | Hero: full-bleed sky patch (m14) with "We Build Spaces of Imagination" bottom left in Beige; then a horizontal-feeling story: a pinned wide band at the TOP (the hoarding field) whose crop slides while text blocks rise under it; ends on the posters pair |
-| 15 | lp-spaces | Hero: the two posters of m11 as two tall panels side by side; then a story scroll with TWO pinned visuals that swap (curved wall / curved brick) beside a single text column of the poster lines and body; a stepped-shadow divider |
+| 14 | lp-vision | Hero: the timber court full bleed under the navigation, with "We Build Spaces of Imagination" bottom left in Beige; then "Our Vision" with the intro paragraphs over the drawing-on construction of the word-mark; the project sheet as ruled rows; the brand lines as ruled rows each beside a flat field; a story with a pinned wide band at the TOP (the hoarding field) whose crop slides while text blocks rise under it; the m14 spread (poster lines on Beige beside the black statement); the court as a line drawing with the three ruled rows; ends on the two posters staggered on a flat field |
+| 15 | lp-spaces | Hero: the two posters of m11 as two tall panels side by side; the case study's description centred between two rules; a story scroll with TWO pinned visuals that swap (curved wall / curved brick) beside a single text column of the poster lines, body and card lines; a stepped-shadow divider; the m14 poster as the print itself beside the hoarding line; "light on a wall", one slider that moves the sun and lengthens the stair's shadow; the white card of m10 beside the letter's words |
 | 16 | lp-plans | Hero: a tablet with the plan screen, tilted, on Tribal Brown; then a story scroll where the pinned visual is the presentation box (m13) opening in stages (lid, spine, sheet) at the LEFT, with the plan text and the ruled rows on the right |
 | 17 | lp-contact | Hero: the business card (m08) front and back flipping, beside the three contact blocks set large; then a short story scroll with the envelope (m10) pinned at the right while the letter's paragraphs scroll; a contact form on Beige; footer |
-| 18 | dashboard | A: top navigation bar over one hero chart filling the screen (a quarter-arch progress chart and a trend line), small tiles below. B: left rail with a ruled list of plans and a sheet preview. C: a bento of six unequal tiles. D: a table-first ledger of placeholder rows with a summary strip. E: a split view, plan drawing left and ruled detail rows right. Overview compares the five as thumbnails; inner screens are a plan record and a sheet view |
+| 18 | dashboard | A: top navigation bar over one hero chart filling the screen (a quarter-arch progress chart), small tiles below. B: left rail with a ruled list of plans and a sheet preview. C: a bento of six unequal tiles. D: a table-first ledger of placeholder rows with a summary strip. E: a split view, plan drawing left and ruled detail rows right. Overview compares the five as thumbnails; inner screens are a plan record and a sheet view |
 | 19 | mobile-a | A 12-column bento: the live phone in a 4 x 4 tile pinned at the left, the nine screens' captions as ruled rows in an 8 x 4 tile; the row of nine phones as one 12 x 2 strip on Dark Chocolate |
 | 20 | mobile-b | A 6-column bento: the live phone in a 2 x 4 tile on the RIGHT; component sets in a 4 x 3 tabbed tile; the nine screens as a 3 x 3 of small phones in a 4 x 3 tile; interaction patterns as seven 2 x 1 / 3 x 1 tiles |
 | 21 | feature | The plan explorer: the presentation sheet as a working viewer: zoom and pan the plan, step through the three ruled rows, switch Beige / Dark grounds; the plan text reveals beside it; the box lid closes over it at the end |
 | 22 | showcase | Four full-width scenes of different ratios (16:9, 21:9, 4:3 pair, 3:1), each on a different flat-field pair |
 | 23 | campaign | Posts as a 2 x 2 bento on the left, posters as three tall tiles of different heights on the right, stories as a row of four 9:16 tiles, the profile grid as a 3 x 3 on Dark Chocolate |
-| 24 | use-apparel | Collection scene full width; then garments in a 12-column bento (t-shirts 6 x 3, hoodies 6 x 3, caps 4 x 2 x 3), spec sheet last as a 12 x 3 technical tile |
+| 24 | use-apparel | Collection scene full width; then a 12-column bento: t-shirts (three plates) 6 beside hoodies (hoodie plates and the dark jacket, back) 6 as two columns; caps 4 x 3; the t-shirt colourways and the print artwork each 12 wide; the print specification last as a 12-wide scrolling drawing |
 | 25 | use-accessories | A dense 8-column bento of mockup tiles of mixed sizes (4 x 3, 2 x 2, 2 x 1, 3 x 2 ...) so that small objects get small tiles and the desk mat a wide one |
 | 26 | use-stationery | The flat lay rebuilt as the opening plate (m10, top view, three columns), then single-object tiles in a 3-column bento where each row has one double-wide tile |
-| 27 | use-packaging | The box (m13) as the opening plate, then a 2-column bento of tall and short tiles alternating by column |
+| 27 | use-packaging | The presentation box (m13) as the opening plate, then a 2-column bento of tall (4:5) and short (4:3) tiles alternating down each column: tape (dark, sand, strips), shipping boxes (sand, dark), product boxes, shopping bags, cream tube, tissue paper, seal sticker, shipping label |
 | 28 | use-event | Booth as the opening wide plate; then a 12-column bento with the lanyard tall (3 x 4) and the rest of the event kit filling around it |
-| 29 | use-world | The hoarding (m16) full width on a street; then four scenes as a 7 + 5 / 5 + 7 bento |
+| 29 | use-world | The hoarding (m16) full width on a street; then six scenes as a 7 + 5 / 5 + 7 / 7 + 5 bento: citylight and roll-ups, room plaque, reception and wayfinding, vehicle wrap, posters in frames, site fence panel |
 | 30 | use-product | The presentation box hero plate full width (m13); turn-to-the-light study 8 x 3 beside the side view 4 x 3; card colourways as three 4 x 2 tiles; devices 8 x 3; app icon ladder 4 x 3 |
 
 ## Mockups (arrangement and camera)
@@ -65,10 +65,10 @@ soft contact shadow where it stands (`ContactShadowG`). The arrangement and came
 | campaign | Posters in frames | The m11 composition: two posters in a dark double frame on a ribbed wall, front view, floor strip below |
 | campaign | Poster on fins | The m14 composition: one framed poster on a wall of vertical fins, slight angle from the left |
 | use-apparel | Collection | Garments on a wall rail, front view, hanging at one height; counter at the right |
-| use-apparel | T-shirts | Flat on a table top, top view, front and back side by side |
-| use-apparel | Hoodies | Folded stack on a shelf and one hanging on a hook beside it, front view |
-| use-apparel | Caps | Three caps on a counter, three-quarter view, in a row of falling size |
-| use-apparel | Print-spec sheet | Technical drawing on Beige; no scene |
+| use-apparel | T-shirts | Flat on a table top, top view: Beige, Dark Chocolate and Sand shirts, front and back side by side, front over back, and fanned |
+| use-apparel | Hoodies | Dark Chocolate hoodie as a stack with one on a hook, Tribal Brown and Sand hoodies on two hooks, and the dark jacket seen from the back |
+| use-apparel | Caps | Three embroidered caps (Dark Chocolate, Beige, Tribal Brown), each on its own plate |
+| use-apparel | Colourways, artwork, print specification | T-shirt in five colourways flat on a table; the mark and word-mark in five colour versions; a technical drawing of front and back with print areas; no scene |
 | use-accessories | Tote bags | Two totes hanging from pegs on a wall, front view |
 | use-accessories | Mugs | Two mugs on a desk edge, front view, one with its handle to the light |
 | use-accessories | Bottles | Two bottles standing on a shelf, front view, one shorter |
@@ -84,11 +84,11 @@ soft contact shadow where it stands (`ContactShadowG`). The arrangement and came
 | use-stationery | Pen and notebooks | Notebooks standing on a shelf, pen lying on the shelf edge |
 | use-stationery | Tri-fold brochure | Open on a counter, front-three-quarter, standing |
 | use-stationery | Report and slides | Report cover leaning on a wall, the five slides on a monitor beside it |
-| use-packaging | Tape | Rolls on a desk, front view, one strip pulled across the desk edge |
-| use-packaging | Shipping boxes | Two boxes stacked on the floor field against a wall, front-three-quarter |
-| use-packaging | Product boxes | The presentation box and the tall box (m10) side by side on a shelf |
+| use-packaging | Tape | Dark Chocolate roll on a desk, a Sand kraft roll standing on its side, and two printed strips pulled across the desk edge |
+| use-packaging | Shipping boxes | Sand boxes stacked against a wall, and Dark Chocolate boxes with the word-mark cropped very large round the corner |
+| use-packaging | Product boxes | The dark box and the tall Tribal Brown box (m10) side by side on a shelf; the cream tube lying on a desk |
 | use-packaging | Shopping bags | Three bags on a counter, front view, rising height (m10's dark bag first) |
-| use-packaging | Tissue, seal, label | Top view in an open box |
+| use-packaging | Tissue, seal, label | Top view, each in its own open box: tissue paper, the round seal sticker, the shipping label |
 | use-event | Booth | Wide front view, back wall with the word-mark, counter in front |
 | use-event | Lanyard and badge | Hanging from a hook on a ribbed wall, front view |
 | use-event | Staff IDs | In a holder on a counter, front view |
@@ -96,10 +96,12 @@ soft contact shadow where it stands (`ContactShadowG`). The arrangement and came
 | use-event | Tickets and pass | On a counter, three-quarter top view, staggered |
 | use-event | Flags and banner | Street scene: three flags on the pavement, banner on the wall behind |
 | use-world | Hoarding | The m16 composition on a street with a kerb, front view |
-| use-world | Citylight and roll-ups | Pavement, front view, citylight at left and two roll-ups at right |
+| use-world | Citylight and roll-ups | Pavement, front view, the citylight poster and two roll-up banners |
 | use-world | Reception and wayfinding | Counter in front of a wall with the word-mark, wayfinding plaques at the right |
 | use-world | Room plaque | Close front view of a wall with ribs and one plaque |
-| use-world | Vehicle wrap | Side view of a van on the street, kerb in front |
+| use-world | Vehicle wrap | Side view of a delivery van on the street, kerb in front |
+| use-world | Posters in frames | Two posters in a dark double frame on a ribbed concrete wall, front view |
+| use-world | Site fence panel | A fence panel on concrete feet, front view |
 | use-product | Presentation box | As m13: open, top view, lid left, spine, tray with rings and the plan sheet |
 | use-product | Box front and side | Closed box on a desk, front view and side view side by side, slow turn to the light |
 | use-product | Card colourways | Three cards standing in a counter display, front over back |

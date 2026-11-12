@@ -30,21 +30,21 @@ export default function PhoneSection() {
               {MENU.map((d) => (
                 <span key={d} className={s.scrBar} style={{ left: u(M.x), top: u(M.y + d * M.gap), width: u(M.w) }} />
               ))}
-              <p className={s.scrLabel} style={{ left: u(28), top: u(L.y - 11), fontSize: u(L.size), lineHeight: u(14) }}>{ABOUT.label}</p>
-              <div className={s.scrHead} style={{ left: u(28), top: u(H.y - 27), fontSize: u(H.size), lineHeight: u(H.lh) }}>
+              <p className={s.scrLabel} style={{ left: u(SCREEN.mx), top: u(L.y - 11), fontSize: u(L.size), lineHeight: u(14) }}>{ABOUT.label}</p>
+              <div className={s.scrHead} style={{ left: u(SCREEN.mx), top: u(H.y - 28), fontSize: u(H.size), lineHeight: u(H.lh) }}>
                 <Lines as="span" rows={ABOUT.headline.rows} />
               </div>
-              <p className={s.scrText} style={{ left: u(28), top: u(T.y - 16), fontSize: u(T.size), lineHeight: u(T.lh) }}>
+              <p className={s.scrText} style={{ left: u(SCREEN.mx), top: u(T.y - 17), fontSize: u(T.size), lineHeight: u(T.lh) }}>
                 {wrap(ABOUT.text, T.wrap).map((l) => <span key={l} style={{ display: 'block', whiteSpace: 'nowrap' }}>{l}</span>)}
               </p>
               {ABOUT.rows.map((r, i) => (
-                <div key={r.no} className={s.scrRow} style={{ left: u(28), top: u(R.y + i * R.h), width: u(334), height: u(R.h), fontSize: u(14), lineHeight: u(17) }}>
+                <div key={r.no} className={s.scrRow} style={{ left: u(SCREEN.mx), top: u(R.y + i * R.h), width: u(R.w), height: u(R.h), fontSize: u(14), lineHeight: u(17) }}>
                   <span className={s.scrNo} style={{ top: u(R.noY - 13.5) }}>{r.no}</span>
-                  <span className={s.scrRowLabel} style={{ left: u(R.labelX), top: u(R.labelY - 19), fontSize: u(20), lineHeight: u(24) }}>{r.label}</span>
+                  <span className={s.scrRowLabel} style={{ left: u(R.labelX), top: u(R.labelY - 19), fontSize: u(R.labelSize), lineHeight: u(24) }}>{r.label}</span>
                   <span className={s.scrPlus} style={{ left: u(R.plusX - R.plus / 2), top: u(R.plusY - R.plus / 2), width: u(R.plus), height: u(R.plus) }} />
                 </div>
               ))}
-              <span className={s.scrEnd} style={{ left: u(28), top: u(R.y + 3 * R.h), width: u(334) }} />
+              <span className={s.scrEnd} style={{ left: u(SCREEN.mx), top: u(R.y + 3 * R.h), width: u(R.w) }} />
             </div>
           </Phone>
           <p className={`t-label ${s.capC}`}>Live page in the phone frame</p>

@@ -85,7 +85,7 @@ export function MarkPlate({ item }) {
 
 
 // The mark on its own construction (as m03 draws the word-mark): the four guides of the S (top, the two edges of
-// the gap y, the baseline), the cuts on the diagonal labelled 42° as printed, and the unit y beside the gap.
+// the gap y, the baseline), the cuts on the diagonal labelled 34° as printed on the Latin cuts, and the unit y beside the gap.
 export function MarkConstructionPlate() {
   const S = 1000, mh = 560, k = mh / MARK_H, mw = MARK_W * k;
   const x0 = (S - mw) / 2, y0 = 230;
@@ -98,7 +98,7 @@ export function MarkConstructionPlate() {
     return `M${r2(x0 + (c - ya) * k)} ${r2(y0 + ya * k)}L${r2(x0 + (c - yb) * k)} ${r2(y0 + yb * k)}`;
   };
   return (
-    <Art viewBox={`0 0 ${S} ${S}`} title="Construction of the mark: guides, the gap y between its halves and the cuts at 42 degrees" exportName="logo-mark-construction">
+    <Art viewBox={`0 0 ${S} ${S}`} title="Construction of the mark: guides, the gap y between its halves and the cuts at 34 degrees" exportName="logo-mark-construction">
       <rect width={S} height={S} fill={DRAWING.paper} />
       <g stroke={DRAWING.guide} strokeWidth="1.2">
         {guides.map((g) => <path key={g} d={`M60 ${g}H${S - 60}`} />)}
@@ -112,7 +112,7 @@ export function MarkConstructionPlate() {
       <rect x={r2(x0 - 70)} y={guides[1]} width="16" height={r2(WM.GAP * k)} fill={DRAWING.unit} />
       <g className="sans" fontSize="30" fill={DRAWING.ink}>
         <text x={r2(x0 - 100)} y={r2(guides[1] + (WM.GAP * k) / 2 + 10)} textAnchor="end">y</text>
-        <text x={r2(x0 + mw + 24)} y={r2(guides[1] - 40)} fill={DRAWING.angle}>{'42°'}</text>
+        <text x={r2(x0 + mw + 24)} y={r2(guides[1] - 40)} fill={DRAWING.angle}>{'34°'}</text>
       </g>
     </Art>
   );

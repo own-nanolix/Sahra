@@ -30,8 +30,8 @@ here from the start.
 - [x] 3. Study it and write `SOURCE.md`
 - [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
 - [x] 5. Build team, two waves; check reports 30 of 30 `ok`
-- [ ] 6. Review team; shared fixes applied
-- [ ] 7. Verify in the browser; SVG export
+- [x] 6. Review team; shared fixes applied
+- [x] 7. Verify in the browser; SVG export
 - [ ] 8. `REPORT.md` and `README.md`
 - [ ] 9. Final independent review, then one push (standing orders, points 5 and 6)
 
@@ -106,3 +106,9 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
 - R3, LAYOUTS.md row 18 (dashboard): drop "and a trend line" from option A (it now has one hero chart, the arch, as the rule file asks).
 - R1: add an error colour to the shared `HEX` map (`HEX.error`) so pages do not carry their own. An unused file `src/components/pages/strategy/ScopeMap.jsx` is kept (files are never deleted).
 - Accessibility changes that altered the look (R1): on the rebuilt palette slide Sand's four value lines are Dark Chocolate (5.0:1; the name stays white) and tint labels are darkened per tint; on the type slide the greyed weights are #767676.
+
+## Review round and verification (done)
+
+- 8 reviewers (Opus) reviewed and fixed all 30 pages; each committed locally. All pending shared fixes above were applied by a fixer (Sonnet): 14 icons corrected, the construction diagram prints "34°" on the Latin cuts and "42°" on the Arabic cuts as the stills do, the About phone screen re-measured once (margins 24, word-mark 160 wide, headline 34/35, rows 99 apart) and made to agree in all three places, pressed states of two buttons, neutral device frames, `HEX.error`, no cross-page imports, LAYOUTS.md lines brought in step with what is built.
+- Decisions: the designers' agency names stay on the overview as the case study's credits (the designer is the audience); the "©" in one agency's styled name is not printed. The dark jacket of m07 is drawn empty, as a garment, with the mark on its back.
+- Step 7: lint clean; build passes; check --strict 30 of 30 ok; audit 30 of 30 clean at 1440 and 390 px on the built site, no console errors; export-svg wrote 441 SVGs with 0 warnings.

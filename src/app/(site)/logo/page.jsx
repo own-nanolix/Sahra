@@ -75,7 +75,7 @@ export default function Page() {
         </Reveal>
       </div>
 
-      <Section n="01" id="construction" title="Construction" lead="One stroke, x, repeated everywhere. Corners are quarter circles on concentric radii and every cut end runs on the same diagonal, labelled 42° in the drawing as the designers printed it.">
+      <Section n="01" id="construction" title="Construction" lead="One stroke, x, repeated everywhere. Corners are quarter circles on concentric radii and every cut end runs on the same diagonal, labelled in the drawing as the designers printed it: 34° on the Latin cuts, 42° on the Arabic cuts.">
         <div className="bento bento-8">
           <Cell span="span-8">
             <Plate caption="The word-mark on its guides: outline, anchor points, unit bars and cut lines">
@@ -83,7 +83,7 @@ export default function Page() {
             </Plate>
           </Cell>
           <Cell span="span-5">
-            <Plate caption="Close-up of the S and the a: the unit bars x and y, the cuts at 42°">
+            <Plate caption="Close-up of the S and the a: the unit bars x and y, the cuts at 34°">
               <Scroll label="Construction close-up, scrolls sideways"><ConstructionDetailPlate /></Scroll>
             </Plate>
           </Cell>
@@ -172,7 +172,7 @@ export default function Page() {
             </Cell>
           ))}
           <Cell span="span-4 rows-2" className={s.stretch} delay={120}>
-            <Plate className={s.fill} ratio="1 / 1" ground="var(--beige)" caption="The mark on its construction: the gap y and the cuts at 42°"><MarkConstructionPlate /></Plate>
+            <Plate className={s.fill} ratio="1 / 1" ground="var(--beige)" caption="The mark on its construction: the gap y and the cuts at 34°"><MarkConstructionPlate /></Plate>
           </Cell>
           {MARK_PLATES.slice(2).map((item, i) => (
             <Cell key={item.id} span="span-2 span-m-3 span-s-1" delay={(i + 2) * 80}>

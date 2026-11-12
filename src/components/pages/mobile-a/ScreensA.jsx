@@ -13,13 +13,13 @@ import s from './mobile-a.module.css';
 
 const LINK_TO = [2, 3, 4];
 
-// 1 About (faithful). Re-measured from the deskewed full-size crop of m12: 24 px margins, word-mark 160 wide at
-// the top, the headline at 34 px, the paragraph wrapping after "long-term", and three 99 px ruled rows from 488 px.
-// m12 shows no status bar on this page, so none is drawn.
+// 1 About (faithful). Measured once from the straightened full-size crop of m12 (same values as ScreenAboutG and
+// lp-home's SCREEN): 24 px margins, word-mark 160 wide, headline 34 / 35, paragraph 13 / 24 wrapping after
+// "long-term", and three 99 px ruled rows from 480 px. m12 shows no status bar on this page, so none is drawn.
 export function ScreenAbout({ go }) {
   return (
     <div className={`${s.scr} ${s.beige}`}>
-      <Word className="fade-in" style={{ left: 24, top: 59, width: 160 }} />
+      <Word className="fade-in" style={{ left: 24, top: 58, width: 160 }} />
       <MenuButton onClick={() => go(7)} className={s.abMenu} />
       <p className={`${s.abLabel} slide-up`} style={{ '--i': 1 }}>{ABOUT.label}</p>
       <h2 className={`${s.abHead} slide-up`} style={{ '--i': 2 }}>

@@ -196,11 +196,12 @@ export const CONSTRUCTION_MARKS = {
   guides: [WM.TOP, WM.BAR_Y, WM.XH, WM.XH + WM.X, WM.CY, WM.BAR, WM.BASE, WM.DESC],
   xBars: [[0, 32], [314, 346], [468, 500], [697, 729], [920, 955], [979, 1011], [1158, 1190], [1387, 1419.5]],
   yBars: [[304, 314, WM.BAR - 16]],
-  angles: [[472 - 251, 251, 472 - 120, 120], [1023 - 200, 200, 1023 - 60, 60], [955 - 70, 70, 955 + 20, -20], [1398 - 200, 200, 1398 - 90, 90]],
+  // [x0, y0, x1, y1, label]: the construction still m03_2 prints "34°" on the Latin cuts, m03_3 "42°" on the Arabic cuts.
+  angles: [[472 - 251, 251, 472 - 120, 120, '34°'], [1023 - 200, 200, 1023 - 60, 60, '42°'], [955 - 70, 70, 955 + 20, -20, '42°'], [1398 - 200, 200, 1398 - 90, 90, '42°']],
 };
 
 // The word-mark's construction: guides, the outline, anchor points, x / y unit bars and the 45° cut lines
-// (labelled "42°" as printed). Drawn in word-mark units and scaled to `width`. Each layer can be switched off;
+// (labelled as printed: "34°" on the Latin cuts, "42°" on the Arabic cuts). Drawn in word-mark units and scaled to `width`. Each layer can be switched off;
 // draw={true} animates it (CSS: guides draw on, anchors fade in one by one).
 export function ConstructionG({ x = 0, y = 0, width = WM.W, guides = true, outline = true, anchors = true, units = true, angles = true, draw = false, ...rest }) {
   const k = width / WM.W;
@@ -234,10 +235,10 @@ export function ConstructionG({ x = 0, y = 0, width = WM.W, guides = true, outli
       {outline && <WordmarkOutlineG stroke={DRAWING.line} strokeWidth={1.2 * sw} />}
       {angles && (
         <g stroke={DRAWING.angle} strokeWidth={sw * 1.4}>
-          {M.angles.map(([x0, y0, x1, y1], i) => (
+          {M.angles.map(([x0, y0, x1, y1, label], i) => (
             <g key={i}>
               <path d={`M${x0} ${y0}L${x1} ${y1}`} className={draw ? 'draw' : undefined} style={draw ? { '--len': 400, '--i': i + 4 } : undefined} />
-              <text x={x0 + 14} y={y0 - 4} fontSize="20" stroke="none" fill={DRAWING.ink}>42°</text>
+              <text x={x0 + 14} y={y0 - 4} fontSize="20" stroke="none" fill={DRAWING.ink}>{label}</text>
             </g>
           ))}
         </g>

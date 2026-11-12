@@ -31,7 +31,7 @@ export function PhoneG({ idp, x = 0, y = 0, w = 300, children, screenFill = '#F5
       <g clipPath={`url(#${idp}-ph)`}>
         <g transform="translate(20 20)">{children}</g>
       </g>
-      <rect x="153" y="34" width="124" height="34" rx="17" fill="#000000" />
+      <rect x="187" y="34" width="56" height="6" rx="3" fill="#000000" />
       <path d="M66 6h298a60 60 0 0 1 60 60v60" fill="none" stroke="#FFFFFF" strokeOpacity="0.35" strokeWidth="2" />
     </g>
   );
@@ -74,10 +74,9 @@ export function LaptopG({ idp, x = 0, y = 0, w = 800, children, screenFill = '#F
       <g clipPath={`url(#${idp}-la)`}>
         <g transform="translate(200 30)">{children}</g>
       </g>
-      <path d="M830 30h180v16a12 12 0 0 1-12 12H842a12 12 0 0 1-12-12z" fill={BODY} />
+      <circle cx="920" cy="15" r="4" fill="#2A2420" />
       <path d="M0 960h1840v26a30 30 0 0 1-30 30H30a30 30 0 0 1-30-30z" fill={EDGE} />
       <path d="M0 960h1840v8H0z" fill="#5A4E46" />
-      <path d="M780 960h280v10a10 10 0 0 1-10 10H790a10 10 0 0 1-10-10z" fill={GLASS} />
       <path d="M200 4h1440" stroke="#FFFFFF" strokeOpacity="0.18" strokeWidth="2" />
     </g>
   );
@@ -179,31 +178,33 @@ export function FloorPlanG({ x = 0, y = 0, w = 400, h = 520, stroke = '#35241C',
 // ---------- Screens ----------
 
 // The About page on the phone (m12), rebuilt: word-mark top left, menu top right, "About Sahra", the headline,
-// the paragraph, and the three ruled rows with a "+". 390 x 844.
+// the paragraph, and the three ruled rows with a "+". 390 x 844. Measured once from a straightened full-size crop
+// of m12: 24 margins, word-mark 160 wide, headline 34 / 35, paragraph 13 / 24, rows 99 apart from y 480, no
+// status bar (lp-home's SCREEN and mobile-a's screen 1 carry the same values).
 export function ScreenAboutG({ idp, fill = '#F5F0E3', ink = '#35241C', accent = '#875D41' }) {
-  const lines = wrap(ABOUT.text, 46);
-  const ry = 560;
+  const lines = wrap(ABOUT.text, 44);
+  const ry = 480;
   return (
     <g data-idp={idp}>
       <rect width="390" height="844" fill={fill} />
-      <WordmarkG x={28} y={74} width={118} fill={accent} />
-      {[0, 7, 14].map((d) => <rect key={d} x="334" y={74 + d} width="26" height="2" fill={ink} />)}
-      <text x="28" y="196" fontSize="12" fill={ink} className="sans">{ABOUT.label}</text>
-      <text fontSize="33" className="serif" fill={ink} letterSpacing="-0.6">
-        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x="28" y={240 + i * 38}>{r}</tspan>)}
+      <WordmarkG x={24} y={58} width={160} fill={accent} />
+      {[0, 8, 16].map((d) => <rect key={d} x="336" y={67 + d} width="30" height="2" fill={ink} />)}
+      <text x="24" y="165" fontSize="12" fill={ink} className="sans">{ABOUT.label}</text>
+      <text fontSize="34" className="serif" fill={ink} letterSpacing="-0.4">
+        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x="24" y={210 + i * 35}>{r}</tspan>)}
       </text>
       <text fontSize="13" className="sans" fill={ink}>
-        {lines.map((l, i) => <tspan key={i} x="28" y={378 + i * 20}>{l}</tspan>)}
+        {lines.map((l, i) => <tspan key={i} x="24" y={322 + i * 24}>{l}</tspan>)}
       </text>
       {ABOUT.rows.map((r, i) => (
-        <g key={r.no} transform={`translate(28 ${ry + i * 74})`}>
-          <path d="M0 0H334" stroke={ink} strokeOpacity="0.4" strokeWidth="1" />
-          <text x="0" y="44" fontSize="13" className="sans" fill={ink}>{r.no}</text>
-          <text x="70" y="45" fontSize="20" className="serif" fill={ink}>{r.label}</text>
-          <path d="M320 39h12M326 33v12" stroke={ink} strokeWidth="1.2" />
+        <g key={r.no} transform={`translate(24 ${ry + i * 99})`}>
+          <path d="M0 0H342" stroke={ink} strokeOpacity="0.4" strokeWidth="1" />
+          <text x="0" y="56" fontSize="14" className="sans" fill={ink}>{r.no}</text>
+          <text x="57" y="56" fontSize="18" className="serif" fill={ink}>{r.label}</text>
+          <path d="M326 50h10M331 45v10" stroke={ink} strokeWidth="1.2" />
         </g>
       ))}
-      <path d={`M28 ${ry + 3 * 74}H362`} stroke={ink} strokeOpacity="0.4" strokeWidth="1" />
+      <path d={`M24 ${ry + 3 * 99}H366`} stroke={ink} strokeOpacity="0.4" strokeWidth="1" />
     </g>
   );
 }

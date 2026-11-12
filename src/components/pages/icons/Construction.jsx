@@ -124,7 +124,7 @@ const RULES = [
   ['Grid', `${ICON_GRID.size} px square, live area ${ICON_GRID.live[0]} to ${ICON_GRID.live[1]}: two units of clear space on every side.`],
   ['Equal stroke', `Every line is ${ICON_GRID.stroke} px, the unit x, as the word-mark's stroke is x.`],
   ['Quarter circles', `Corners are quarter circles of ${ICON_GRID.radius} px on the centre line: ${ICON_GRID.radius + ICON_GRID.stroke / 2} px outside, ${ICON_GRID.radius - ICON_GRID.stroke / 2} px inside.`],
-  ['Diagonal cut', 'Free ends are cut on the word-mark’s diagonal, labelled 42° in the construction drawing.'],
+  ['Diagonal cut', 'Free ends are cut on the word-mark’s diagonal, labelled 42° on the Arabic cuts of the construction drawing (34° on the Latin cuts).'],
 ];
 
 export default function Construction({ name, rules = [0, 1, 2, 3] }) {

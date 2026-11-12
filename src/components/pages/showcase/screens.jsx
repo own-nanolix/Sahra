@@ -4,7 +4,7 @@
 import { WordmarkG, MarkG, MarkTileG } from '@/components/art/Mark';
 import { QuarterArchG, ArchWindowG, CornerCutG, SkyPatchG } from '@/components/art/KeyArt';
 import { wrap } from '@/components/art/Devices';
-import { PlanG, SheetG } from '@/components/pages/feature/plan-art';
+import { PlanG, SheetG } from './showcase-plan-art';
 import { ABOUT, LINES, PALETTE, NAV_LINKS, PROFILE, PLAN, CONTACT_BLOCKS, URL_LINE, SENDER } from '@/lib/brand';
 import { contrast } from '@/lib/site';
 import { rr } from './kit';

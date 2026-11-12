@@ -29,7 +29,7 @@
   --muted: #5c4a3e;          /* small secondary text on Beige and White (7.3:1) */
   --sand-ink: #7a5a3f;       /* small "sand" text on light grounds */
   --beige-muted: #cdbba6;    /* small secondary text on Dark Chocolate (7.9:1) and Black */
-  --error-ink: #a3301e;      /* errors only */
+  --error-ink: #a3301e;      /* errors only: 6.1:1 on Beige, 7.0:1 on White; HEX.error in brand.js */
   --line: rgba(53, 36, 28, 0.16);
   --line-strong: rgba(53, 36, 28, 0.42);
   --line-on-dark: rgba(245, 240, 227, 0.2);
@@ -84,6 +84,7 @@
   --color-muted: var(--muted);
   --color-sand-ink: var(--sand-ink);
   --color-beige-muted: var(--beige-muted);
+  --color-error-ink: var(--error-ink);
   --color-line: var(--line);
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
@@ -276,11 +277,13 @@ button.chip[aria-pressed="true"] { background: var(--chocolate); color: var(--be
 .btn-dark:hover { background: #4a3328; }
 .btn-beige { background: var(--beige); color: var(--chocolate); }
 .btn-beige:hover { background: var(--white); }
+.btn-beige:active { background: var(--sand-20); color: var(--chocolate); }
 .btn-outline { background: transparent; color: inherit; box-shadow: inset 0 0 0 var(--hair) currentColor; }
 .btn-outline:hover { background: rgba(135, 93, 65, 0.08); }
 .btn-outline:active { background: rgba(135, 93, 65, 0.16); }
 .btn-ghost { background: transparent; color: inherit; padding-inline: 10px; }
 .btn-ghost:hover { background: rgba(135, 93, 65, 0.08); }
+.btn-ghost:active { background: rgba(135, 93, 65, 0.16); }
 .btn-url::before { content: "→"; display: inline-block; transition: transform var(--dur-2) var(--ease-out); }
 .btn-url:hover::before { transform: translateX(4px); }
 .btn-block { display: flex; width: 100%; }
@@ -455,6 +458,8 @@ textarea.input { padding: 12px 14px; min-height: 120px; resize: vertical; }
 :focus-visible { outline: 2px solid var(--tribal); outline-offset: 3px; }
 .on-dark :focus-visible, .field-chocolate :focus-visible, .field-black :focus-visible, .field-tribal :focus-visible, .field-dusk :focus-visible, .card-dark :focus-visible, .tile-dark :focus-visible, .tile-brown :focus-visible, .tile-black :focus-visible, .card-board :focus-visible, .site-dock :focus-visible, .site-index :focus-visible, .lp-footer :focus-visible, .site-toast :focus-visible { outline-color: var(--sand); }
 .btn:focus-visible { outline-offset: 2px; }
+/* Sand on Tribal Brown is only 1.9:1: rings on tribal grounds are Beige. */
+.field-tribal :focus-visible, .tile-brown :focus-visible, .card-board :focus-visible { outline-color: var(--beige); }
 
 /* ---------- Export mode and reduced motion ---------- */
 html.exporting *{animation:none!important;transition:none!important}

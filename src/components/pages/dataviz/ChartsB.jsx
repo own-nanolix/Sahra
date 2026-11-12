@@ -212,7 +212,7 @@ export function Anchors() {
   );
 }
 
-// 15. ANGLE: the cut labelled 42 degrees on the construction drawing against the 45 measured on the artwork.
+// 15. ANGLE: the cut labelled 42 degrees on the Arabic cuts of the construction drawing against the 45 measured on the artwork.
 export function Angle() {
   const [tip, on] = useTip();
   const W = 360, H = 260, ox = 40, oy = 214, len = 250;
@@ -224,7 +224,7 @@ export function Angle() {
       <Bg w={W} h={H} />
       <path d={`M${ox} ${oy}L${e45[0]} ${e45[1]}L${e42[0]} ${e42[1]}Z`} fill={C.sand40} className="fade-in" />
       <line x1={ox} y1={oy} x2={ox + len + 30} y2={oy} stroke={C.rule} strokeWidth="2" />
-      <g {...on(e42[0], e42[1], 'Labelled 42° on the construction drawing')}>
+      <g {...on(e42[0], e42[1], 'Labelled 42° on the Arabic cuts of the construction drawing')}>
         <line x1={ox} y1={oy} x2={e42[0]} y2={e42[1]} stroke={C.tribal} strokeWidth="3" className="draw" style={{ '--len': 270 }} />
         <path d={arc(120, cut.drawn)} fill="none" stroke={C.tribal} strokeWidth="2" />
         <T x={e42[0] + 12} y={e42[1] + 16} anchor="start" serif size={22} fill={C.tribal}>{cut.drawn}°</T>

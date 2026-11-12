@@ -23,30 +23,30 @@ function Fig({ children, name, span = 3, rows = 1 }) {
 }
 
 // Screen 1 as flat artwork: the About page on the phone (m12), with the same measured geometry as the live
-// screen (24 px margins, 34 px headline, the paragraph broken as printed, three 99 px rows from 488 px).
+// screen (24 px margins, 34 px headline, the paragraph broken as printed, three 99 px rows from 480 px).
 const ABOUT_LINES = wrap(ABOUT.text, 44);
 function AboutFlatG() {
   return (
     <g>
       <rect width="390" height="844" fill="#F5F0E3" />
-      <WordmarkG x={24} y={59} width={160} fill="#875D41" />
-      {[59, 66.5, 74].map((y) => <rect key={y} x="335" y={y} width="31" height="2" fill={INK} />)}
-      <text x="24" y="168.5" fontSize="12.5" className="sans" fill="#5C4A3E">{ABOUT.label}</text>
-      <text fontSize="34" className="serif" fill={INK} letterSpacing="-0.3">
-        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x="24" y={r2(214 + i * 35.3)}>{r}</tspan>)}
+      <WordmarkG x={24} y={58} width={160} fill="#875D41" />
+      {[67, 75, 83].map((y) => <rect key={y} x="336" y={y} width="30" height="2" fill={INK} />)}
+      <text x="24" y="165" fontSize="12" className="sans" fill="#5C4A3E">{ABOUT.label}</text>
+      <text fontSize="34" className="serif" fill={INK} letterSpacing="-0.4">
+        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x="24" y={210 + i * 35}>{r}</tspan>)}
       </text>
       <text fontSize="13" className="sans" fill={INK}>
-        {ABOUT_LINES.map((l, i) => <tspan key={l} x="24" y={328.5 + i * 24}>{l}</tspan>)}
+        {ABOUT_LINES.map((l, i) => <tspan key={l} x="24" y={322 + i * 24}>{l}</tspan>)}
       </text>
       {ABOUT.rows.map((r, i) => (
-        <g key={r.no} transform={`translate(24 ${488 + i * 99})`}>
+        <g key={r.no} transform={`translate(24 ${480 + i * 99})`}>
           <path d="M0 0.5H342" stroke={INK} strokeOpacity="0.4" />
-          <text x="0" y="54" fontSize="14" className="sans" fill="#5C4A3E">{r.no}</text>
-          <text x="62" y="54.5" fontSize="16" className="serif" fill={INK}>{r.label}</text>
-          <path d="M331 47.5H341M336 42.5V52.5" stroke={INK} />
+          <text x="0" y="56" fontSize="14" className="sans" fill="#5C4A3E">{r.no}</text>
+          <text x="57" y="56" fontSize="18" className="serif" fill={INK}>{r.label}</text>
+          <path d="M326 50H336M331 45V55" stroke={INK} />
         </g>
       ))}
-      <path d="M24 785.5H366" stroke={INK} strokeOpacity="0.4" />
+      <path d="M24 777.5H366" stroke={INK} strokeOpacity="0.4" />
     </g>
   );
 }

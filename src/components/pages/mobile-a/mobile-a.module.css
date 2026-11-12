@@ -66,16 +66,16 @@
 .pill:disabled { opacity: 0.35; pointer-events: none; }
 
 /* ---------- 1 About (m12) ---------- */
-.abMenu { left: 329px; top: 51px; width: 43px; height: 30px; padding: 8px 6px 0; gap: 5.5px; }
-.abMenu i { width: 31px; }
-.abLabel { position: absolute; left: 24px; top: 156px; font-size: 12.5px; line-height: 16px; color: var(--muted); }
-.abHead { position: absolute; left: 24px; top: 186px; font-family: var(--font-serif); font-size: 34px; line-height: 35.3px; letter-spacing: -0.3px; }
-.abText { position: absolute; left: 24px; top: 312px; width: 250px; font-size: 13px; line-height: 24px; }
-.abRows { position: absolute; left: 24px; top: 488px; width: 342px; border-bottom: 1px solid rgba(53, 36, 28, 0.4); }
+.abMenu { left: 330px; top: 59px; width: 42px; height: 30px; padding: 8px 6px 0; gap: 6px; }
+.abMenu i { width: 30px; }
+.abLabel { position: absolute; left: 24px; top: 153px; font-size: 12px; line-height: 16px; color: var(--muted); }
+.abHead { position: absolute; left: 24px; top: 182px; font-family: var(--font-serif); font-size: 34px; line-height: 35px; letter-spacing: -0.4px; }
+.abText { position: absolute; left: 24px; top: 306px; width: 250px; font-size: 13px; line-height: 24px; }
+.abRows { position: absolute; left: 24px; top: 480px; width: 342px; border-bottom: 1px solid rgba(53, 36, 28, 0.4); }
 .rowAbout { height: 99px; }
-.rowAbout .rowNo { left: 0; top: 40px; font-size: 14px; line-height: 16px; }
-.rowAbout .rowLabel { left: 62px; top: 38px; font-size: 16px; line-height: 20px; letter-spacing: 0; }
-.rowAbout .rowPlus { left: 331px; top: 42px; width: 10px; height: 10px; }
+.rowAbout .rowNo { left: 0; top: 43px; font-size: 14px; line-height: 16px; }
+.rowAbout .rowLabel { left: 57px; top: 38px; font-size: 18px; line-height: 24px; letter-spacing: 0; }
+.rowAbout .rowPlus { left: 326px; top: 45px; width: 10px; height: 10px; }
 .rowAbout .rowPlus::before { top: 4.5px; width: 10px; }
 .rowAbout .rowPlus::after { left: 4.5px; height: 10px; }
 

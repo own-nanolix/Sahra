@@ -73,7 +73,7 @@ function DebossArt() {
   );
 }
 
-// 4. The construction grid: guides, outline, anchors, x / y unit bars and the cut lines labelled "42°".
+// 4. The construction grid: guides, outline, anchors, x / y unit bars and the cut lines labelled as printed ("34°" Latin, "42°" Arabic).
 function GridArt() {
   return (
     <Art viewBox="0 0 800 552" title="Construction grid with units and cut lines" exportName="gradients-ka-construction-grid" preserveAspectRatio={SLICE}>

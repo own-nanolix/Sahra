@@ -84,7 +84,7 @@ export default function Page() {
             <Fig span={5} title="Paragraph lengths" caption="Places every paragraph of the intro slide, the letter and the type slide on one words scale. Equal counts stack.">
               <Strip />
             </Fig>
-            <Fig span={4} title="The cut" caption="Draws the 42 degrees printed on the construction drawing against the 45 degrees measured on the artwork.">
+            <Fig span={4} title="The cut" caption="Draws the 42 degrees printed on the Arabic cuts of the construction drawing against the 45 degrees measured on the artwork.">
               <Angle />
             </Fig>
 

@@ -71,17 +71,19 @@ export function ArchWindowArt() {
   );
 }
 
-// The About page on the phone (m12, right), re-measured from the full-size original (screen straightened, 390 x 844
-// artboard): word-mark 152 wide at the top left, the menu's three bars at the right, label baseline 165, headline
-// 31 / 35, paragraph 12 / 23.5 in five lines, three rows 99 apart with a fine rule, the number, the serif label
-// and a small "+".
+// The About page on the phone (m12, right), measured once from a straightened full-size crop of the original
+// (390 x 844 artboard; the screen is 543 px wide in the crop at the row level, so 1 unit = 1.39 px): 24 margins,
+// word-mark 160 wide, menu bars at the right margin, label baseline 165, headline 34 / 35, paragraph 13 / 24
+// in five lines from baseline 322, three rows 99 apart from y 480 with a fine rule, the number, the serif label
+// and a small "+". No status bar. ScreenAboutG (art/Devices) and mobile-a's screen 1 use the same values.
 export const SCREEN = {
-  word: { x: 26, y: 60, w: 152 },
-  menu: { x: 334, y: 63, w: 30, gap: 8 },
+  mx: 24,
+  word: { x: 24, y: 58, w: 160 },
+  menu: { x: 336, y: 67, w: 30, gap: 8 },
   label: { y: 165, size: 12 },
-  head: { y: 210, size: 31, lh: 35 },
-  text: { y: 324, size: 12, lh: 23.5, wrap: 44 },
-  rows: { y: 480, h: 99, noY: 62, labelX: 64, labelY: 60, plusX: 329, plusY: 46, plus: 11 },
+  head: { y: 210, size: 34, lh: 35 },
+  text: { y: 322, size: 13, lh: 24, wrap: 44 },
+  rows: { y: 480, h: 99, w: 342, noY: 56, labelX: 57, labelY: 56, labelSize: 18, plusX: 331, plusY: 50, plus: 10 },
 };
 
 export function PhoneScreenArt() {
@@ -96,22 +98,22 @@ export function PhoneScreenArt() {
       {[0, 1, 2].map((i) => (
         <rect key={i} x={menu.x} y={menu.y + i * menu.gap} width={menu.w} height="2" fill={ink} />
       ))}
-      <text x="28" y={label.y} fontSize={label.size} fill={ink} className="sans">{ABOUT.label}</text>
-      <text fontSize={head.size} fontWeight="500" className="serif" fill={ink} letterSpacing="-0.5">
-        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x="28" y={head.y + i * head.lh}>{r}</tspan>)}
+      <text x={SCREEN.mx} y={label.y} fontSize={label.size} fill={ink} className="sans">{ABOUT.label}</text>
+      <text fontSize={head.size} fontWeight="500" className="serif" fill={ink} letterSpacing="-0.4">
+        {ABOUT.headline.rows.map((r, i) => <tspan key={r} x={SCREEN.mx} y={head.y + i * head.lh}>{r}</tspan>)}
       </text>
       <text fontSize={text.size} className="sans" fill="#1E140F">
-        {wrap(ABOUT.text, text.wrap).map((l, i) => <tspan key={i} x="28" y={text.y + i * text.lh}>{l}</tspan>)}
+        {wrap(ABOUT.text, text.wrap).map((l, i) => <tspan key={i} x={SCREEN.mx} y={text.y + i * text.lh}>{l}</tspan>)}
       </text>
       {ABOUT.rows.map((r, i) => (
-        <g key={r.no} transform={`translate(28 ${rows.y + i * rows.h})`}>
-          <path d="M0 0H334" stroke={rule} strokeWidth="1" />
+        <g key={r.no} transform={`translate(${SCREEN.mx} ${rows.y + i * rows.h})`}>
+          <path d={`M0 0H${rows.w}`} stroke={rule} strokeWidth="1" />
           <text x="0" y={rows.noY} fontSize="14" className="sans" fill={ink}>{r.no}</text>
-          <text x={rows.labelX} y={rows.labelY} fontSize="20" className="serif" fill={ink}>{r.label}</text>
+          <text x={rows.labelX} y={rows.labelY} fontSize={rows.labelSize} className="serif" fill={ink}>{r.label}</text>
           <path d={`M${rows.plusX - half} ${rows.plusY}h${rows.plus}M${rows.plusX} ${rows.plusY - half}v${rows.plus}`} stroke={ink} strokeWidth="1" />
         </g>
       ))}
-      <path d={`M28 ${rows.y + 3 * rows.h}H362`} stroke={rule} strokeWidth="1" />
+      <path d={`M${SCREEN.mx} ${rows.y + 3 * rows.h}H${SCREEN.mx + rows.w}`} stroke={rule} strokeWidth="1" />
     </Art>
   );
 }

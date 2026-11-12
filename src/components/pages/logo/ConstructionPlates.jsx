@@ -1,5 +1,5 @@
 // The construction of the word-mark (m03): the whole line on its guides, then a close-up of the S and the "a"
-// with the unit bars x and y, the cut lines labelled "42°" as the designers printed them, and double-headed arrows.
+// with the unit bars x and y, the cut lines labelled "34°" on the Latin cuts as the designers printed them, and double-headed arrows.
 import Art from '@/components/art/Art';
 import { ConstructionG, GuideGridG, DRAWING, CONSTRUCTION_MARKS } from '@/components/art/KeyArt';
 import { WordmarkOutlineG, ANCHORS, WM, S_W } from '@/components/art/Mark';
@@ -59,7 +59,7 @@ export function ConstructionDetailPlate() {
   const vGuides = [0, 32, 152, 184, 202, 234, 314, 346];
   const yBar = WM.BASE + 14;
   return (
-    <Art viewBox={`0 0 ${SHOW.w * K} ${SHOW.h * K}`} title="Close-up of the S and the a: unit bars x and y, cut lines at 42 degrees" exportName="logo-construction-detail">
+    <Art viewBox={`0 0 ${SHOW.w * K} ${SHOW.h * K}`} title="Close-up of the S and the a: unit bars x and y, cut lines at 34 degrees" exportName="logo-construction-detail">
       <clipPath id="logo-detail-clip"><rect width={SHOW.w * K} height={SHOW.h * K} /></clipPath>
       <rect width={SHOW.w * K} height={SHOW.h * K} fill={DRAWING.paper} />
       <g clipPath="url(#logo-detail-clip)">
@@ -85,7 +85,7 @@ export function ConstructionDetailPlate() {
               <path d={`M${ext[0][0]} ${ext[0][1]}L${ext[1][0]} ${ext[1][1]}`} stroke={DRAWING.angle} strokeWidth={1.4 / K} />
               <path d={`M${v[0]} ${v[1]}H${v[0] + 34}`} stroke={DRAWING.angle} strokeWidth={0.9 / K} strokeDasharray={`${3 / K} ${3 / K}`} />
               <path d={`M${v[0] + 22} ${v[1]}A22 22 0 0 0 ${r2(v[0] + 15.56)} ${r2(v[1] - 15.56)}`} stroke={DRAWING.angle} strokeWidth={1 / K} fill="none" />
-              <text x={at[0]} y={at[1]} fontSize="14" fill={DRAWING.angle} className="sans">{CONSTRUCTION.labels.angle}</text>
+              <text x={at[0]} y={at[1]} fontSize="14" fill={DRAWING.angle} className="sans">{CONSTRUCTION.labels.angleLatin}</text>
             </g>
           ))}
           <g fill={DRAWING.anchor}>

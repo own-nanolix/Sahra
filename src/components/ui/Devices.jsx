@@ -28,8 +28,7 @@ export function Phone({ children, exportName, screen, className, style, screenSt
           <rect x="427" y="230" width="6" height="96" rx="2" fill="#2E2621" />
           <path fillRule="evenodd" fill="#3A302A" d="M66 0h298a66 66 0 0 1 66 66v752a66 66 0 0 1-66 66H66a66 66 0 0 1-66-66V66A66 66 0 0 1 66 0ZM68 20a48 48 0 0 0-48 48v748a48 48 0 0 0 48 48h294a48 48 0 0 0 48-48V68a48 48 0 0 0-48-48Z" />
           <path fillRule="evenodd" fill="#111111" d="M66 4h298a62 62 0 0 1 62 62v752a62 62 0 0 1-62 62H66a62 62 0 0 1-62-62V66A62 62 0 0 1 66 4ZM68 20a48 48 0 0 0-48 48v748a48 48 0 0 0 48 48h294a48 48 0 0 0 48-48V68a48 48 0 0 0-48-48Z" />
-          <rect x="153" y="34" width="124" height="34" rx="17" fill="#000000" />
-          <circle cx="254" cy="51" r="6" fill="#1A1512" />
+          <rect x="187" y="34" width="56" height="6" rx="3" fill="#000000" />
         </>
       }
     >
@@ -59,10 +58,9 @@ export function Laptop({ children, exportName, screen, className, style, screenS
       art={
         <>
           <path fillRule="evenodd" fill="#1B1B1F" d="M200 0h1440a30 30 0 0 1 30 30v930H170V30a30 30 0 0 1 30-30ZM200 30v900h1440V30Z" />
-          <path d="M830 30h180v16a12 12 0 0 1-12 12H842a12 12 0 0 1-12-12z" fill="#1B1B1F" />
+          <circle cx="920" cy="15" r="4" fill="#2A2A2F" />
           <path d="M0 960h1840v26a30 30 0 0 1-30 30H30a30 30 0 0 1-30-30z" fill="#2A2A2F" />
           <path d="M0 960h1840v8H0z" fill="#4A4A50" />
-          <path d="M780 960h280v10a10 10 0 0 1-10 10H790a10 10 0 0 1-10-10z" fill="#17171A" />
         </>
       }
     >
