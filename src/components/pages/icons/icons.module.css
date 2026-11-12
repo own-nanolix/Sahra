@@ -1,0 +1,92 @@
+/* Icons and illustration. Keyframes are named icons-xxx; animations play from a start state towards the base style. */
+
+.hero { padding-block: clamp(56px, 9vw, 140px) clamp(32px, 5vw, 72px); }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; }
+.heroLead { max-width: 34em; }
+.heroMark { width: 100%; max-width: 420px; justify-self: end; }
+.heroMark svg { width: 100%; height: auto; display: block; }
+
+.section { padding-top: clamp(48px, 7vw, 112px); }
+.sectionHead { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: end; margin-bottom: clamp(20px, 2.6vw, 40px); }
+
+/* ---- the sheet ---- */
+.sheet { display: block; }
+.sheetBar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-bottom: 16px; }
+.sheetCtl { display: flex; align-items: center; gap: 12px; }
+.cells {
+  list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr));
+  background: var(--white); border-radius: var(--r-card-sm); overflow: hidden;
+  transition: background-color var(--dur-4) var(--ease-in-out), color var(--dur-4) var(--ease-in-out);
+}
+.cellsDark { background: var(--chocolate); color: var(--beige); }
+.cell {
+  position: relative; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: inset 0 0 0 var(--hair) var(--line-strong); min-width: 0;
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+.cellsDark .cell { box-shadow: inset 0 0 0 var(--hair) var(--line-on-dark); }
+.cell:hover { background: var(--beige-60); }
+.cellsDark .cell:hover { background: rgba(245, 240, 227, 0.07); }
+.cell::before, .cell::after {
+  content: ""; position: absolute; left: 0; top: 0; height: var(--hair); width: 100%; background: var(--tribal);
+  transform-origin: 0 50%; transform: scaleX(0); transition: transform var(--dur-4) var(--ease-draw);
+}
+.cell::after { top: auto; bottom: 0; transform-origin: 100% 50%; }
+.cell:hover::before, .cell:hover::after { transform: scaleX(1); }
+.cellArt { display: flex; align-items: center; justify-content: center; min-height: 48px; }
+.cellArt svg { display: block; max-width: 100%; }
+.cellName { text-transform: none; max-width: 100%; padding-inline: 4px; overflow-wrap: anywhere; text-align: center; }
+
+.ink { animation: icons-ink var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--n, 0) * 55ms); }
+@keyframes icons-ink { from { opacity: 0; transform: translate(-3px, 3px); } to { opacity: 1; transform: none; } }
+.sheet[data-seen='off'] .ink { animation-play-state: paused; }
+.gate[data-seen='off'] svg * { animation-play-state: paused; }
+
+/* ---- construction ---- */
+.construct { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+.constructHead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+.constructArt { width: 100%; max-width: 460px; margin-inline: auto; }
+.constructArt svg { width: 100%; height: auto; display: block; border-radius: 4px; }
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; margin: 0; }
+.rules dd { margin: 4px 0 0; }
+.rules dt { color: var(--sand-ink); }
+.sizes { list-style: none; margin: auto 0 0; padding: 16px 0 0; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px; border-top: var(--hair) solid var(--line-strong); }
+.sizeItem { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.sizeItem svg { display: block; flex: none; }
+
+/* ---- in use ---- */
+.useTile { display: flex; flex-direction: column; gap: 16px; }
+.useStack { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.rowLabel { display: inline-flex; align-items: center; gap: 12px; }
+.contactIcons > span { display: flex; align-items: center; gap: 8px; }
+.contactIcons svg { flex: none; color: var(--tribal); }
+.plaqueTile { gap: 0; }
+.plaqueTile svg { width: 100%; height: auto; display: block; }
+.plaqueCap { padding: 16px 20px 8px; }
+
+/* ---- colour and usage ---- */
+.ways { max-width: 760px; }
+.way { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.wayArt { width: 100%; height: auto; display: block; }
+.split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: calc(var(--gap) * 2); align-items: start; }
+
+/* ---- illustrations ---- */
+.illusHead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; }
+.illusTile { display: flex; flex-direction: column; }
+.illus { width: 100%; height: auto; display: block; }
+.illusTag { padding: 10px 20px 14px; }
+.illusStack { display: flex; flex-direction: column; gap: calc(var(--gap) * 2.5); }
+
+@media (max-width: 900px) {
+  .heroGrid, .sectionHead, .split { grid-template-columns: minmax(0, 1fr); }
+  .heroMark { justify-self: start; max-width: 260px; }
+  .cells { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .rules { grid-template-columns: minmax(0, 1fr); }
+  .cellName { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cell::before, .cell::after { transition: none; }
+}
+.darkLabel { color: var(--beige-muted); }
