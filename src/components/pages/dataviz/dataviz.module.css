@@ -1,0 +1,62 @@
+/* Page-only styles for the data visualisation page. Chart geometry stays in the SVG attributes. */
+
+.hero { padding-top: clamp(40px, 7vw, 112px); padding-bottom: clamp(24px, 4vw, 56px); }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; }
+@media (max-width: 900px) { .heroGrid { grid-template-columns: minmax(0, 1fr); } .heroIn { overflow-wrap: anywhere; } }
+.heroLine { height: 1px; background: var(--line-strong); transform-origin: 0 50%; animation: dataviz-line var(--dur-4) var(--ease-draw) 200ms both; }
+.heroIn { animation: dataviz-in var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms + 100ms); }
+@keyframes dataviz-line { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes dataviz-in { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+.section { padding-block: clamp(28px, 4vw, 64px) 0; }
+.sectionHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: clamp(16px, 2vw, 28px); }
+
+.fig { display: flex; flex-direction: column; gap: 12px; margin: 0; }
+.figTitle { margin: 0; }
+.figArt { min-width: 0; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.figArt svg { width: 100%; height: auto; }
+.fig figcaption { margin-top: auto; }
+
+/* Interactive marks: hover, keyboard focus and press states. */
+.mark { cursor: pointer; outline: none; transition: opacity var(--dur-1) var(--ease-out); }
+.mark:hover, .mark:focus-visible { opacity: 0.72; }
+.mark:focus-visible { outline: 2px solid var(--tribal); outline-offset: 3px; }
+.mark:active { opacity: 1; }
+
+.explorer { display: grid; gap: 10px; }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--muted); }
+.legend li { display: inline-flex; align-items: center; gap: 8px; }
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(53, 36, 28, 0.25); flex: none; margin-right: 8px; vertical-align: -2px; }
+.legend .swatch { margin-right: 0; vertical-align: baseline; }
+
+.strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: var(--gap); }
+.strip > * { min-width: 0; }
+.stripItem { margin: 0; overflow: hidden; border-radius: var(--r-card-sm); background: var(--white); }
+.stripItem svg { width: 100%; height: auto; }
+@media (max-width: 1200px) { .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.counters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); margin-top: var(--gap); }
+.counter { display: grid; gap: 6px; padding: clamp(16px, 2vw, 28px); background: var(--chocolate); color: var(--beige); }
+.counter :global(.t-figure) { color: var(--sand); }
+.counter :global(.t-small) { color: var(--beige-muted); }
+@media (max-width: 600px) { .counters { grid-template-columns: minmax(0, 1fr); } }
+
+.tableWrap { overflow-x: auto; max-width: 100%; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 460px; }
+.table caption { text-align: left; padding-bottom: 12px; }
+.table th, .table td { text-align: left; padding: 14px 12px 14px 2px; border-top: 1px solid var(--line-strong); font-variant-numeric: tabular-nums; }
+.table tbody tr { transition: background-color var(--dur-2) var(--ease-out); }
+.table tbody tr:hover { background: rgba(135, 93, 65, 0.06); }
+.table tbody tr:last-child td { border-bottom: 1px solid var(--line-strong); }
+.table td:first-child { font-size: 18px; white-space: nowrap; }
+.sortBtn { border: 0; background: transparent; padding: 6px 4px; margin: -6px -4px; border-radius: 4px; font-size: 12px; font-weight: 400; color: var(--muted); transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out); }
+.sortBtn:hover { background: rgba(135, 93, 65, 0.1); color: var(--ink); }
+.sortBtn:active { background: var(--tribal); color: var(--beige); }
+
+.stateBars { display: flex; align-items: flex-end; gap: 8px; height: 120px; }
+.stateBars > span { flex: 1; border-radius: 0; border-top-right-radius: 14px; min-width: 0; }
+.quiet { background: var(--sand-40); opacity: 0.6; }
+.err { color: var(--error-ink); }
+
+.rulesHead { margin-bottom: 14px; }
