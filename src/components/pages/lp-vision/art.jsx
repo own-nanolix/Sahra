@@ -1,6 +1,6 @@
 // Artwork of the Our Vision landing page: abstract flat fields in the photo tones (never traced), the hoarding of
 // m16 as a long band, and the two posters of m11. Every component returns SVG groups; the pages wrap them in <Art>.
-import { r2, arcPath } from '@/lib/charts';
+import { r2 } from '@/lib/charts';
 import { WM, WordmarkG, MarkG } from '@/components/art/Mark';
 import { BrandDefs, CornerCutG, BrickCurveG, SteppedShadowG, CurvedWallG, GuideGridG, cornerCut, quarterArch, PHOTO, DRAWING } from '@/components/art/KeyArt';
 import { wrap } from '@/components/art/Devices';
@@ -78,64 +78,73 @@ export function CourtG({ idp, x = 0, y = 0, w = 1600, h = 900, ...rest }) {
 }
 
 // ---------- The hoarding of m16, drawn as a long band (4400 x 800) so that its crop can slide ----------
-// Field at the left (the word-mark top left, the line bottom left) cut by a large rounded corner; the beige
-// panel with the brand lines and the "→ sahra.sa" button; beyond it, quiet beige with a quarter arch.
+// 0 to 2415 is the hoarding as printed, re-measured from m16 at 2800 px (band height 928 px there = 800 here):
+// the field ends at 1379 with one rounded corner of radius 82 at its lower right, the seam between two printed
+// sheets at 707, the word-mark top left (x 78, width 426), "We Build Spaces / of Imagination" bottom left
+// (60 / 58), the beige panel's line at x 1461 (80 / 78), its sub-line (37 / 48) and the "→ sahra.sa" button
+// (209 x 62, radius 17). Beyond 2415 the beige runs on as quiet board with the shadows and a quarter arch.
+export const HOARD = { field: 1379, rad: 82, seam: 707, text: 1461, end: 2415 };
 export function HoardingG({ idp }) {
+  const { field, rad, seam, text, end } = HOARD;
   const shadows = [0, 1, 2, 3].map((i) => `M${3000 + i * 230} 0H${3140 + i * 230}L${3500 + i * 230} 800H${3360 + i * 230}Z`);
   return (
     <g>
       <BrandDefs idp={`${idp}-b`} />
       <rect width="4400" height="800" fill={HEX.beige} />
-      <rect x="1500" width="2900" height="800" fill={`url(#${idp}-b-paper)`} filter={`url(#${idp}-b-grain)`} />
+      <rect x={field - 200} width={4400 - field + 200} height="800" fill={`url(#${idp}-b-paper)`} filter={`url(#${idp}-b-grain)`} />
       {shadows.map((d, i) => (
         <g key={i} className="fade-in" style={{ '--i': 8 + i }}>
           <path d={d} fill={HEX.tribal} opacity={0.05 + (i % 2) * 0.03} />
         </g>
       ))}
+      <path d={`M${end} 0V800`} stroke={HEX.chocolate} strokeOpacity="0.08" strokeWidth="2" />
       <path d={quarterArch(4400, 800, 250, 380, 'tl')} fill="#E1D2C4" />
       <MarkG x={3980} y={110} size={70} fill={HEX.tribal} />
-      <CornerCutG idp={idp} x={0} y={0} w={1700} h={800} rad={170} corner="br">
-        <CourtG idp={`${idp}-c`} x={0} y={0} w={1700} h={800} />
+      <CornerCutG idp={idp} x={0} y={0} w={field} h={800} rad={rad} corner="br">
+        <CourtG idp={`${idp}-c`} x={0} y={0} w={field} h={800} />
       </CornerCutG>
-      {/* the thin seam where two printed sheets meet (m16) and the shade of the rounded corner */}
-      <path d="M940 0V800" stroke={HEX.chocolate} strokeOpacity="0.45" strokeWidth="2" />
-      <path d="M1700 630A170 170 0 0 1 1530 800H1700Z" fill={HEX.chocolate} opacity="0.1" />
-      <WordmarkG idp={idp} x={100} y={110} width={560} fill={HEX.beige} className="fade-in" style={{ '--i': 2 }} />
-      <text className="serif" fontSize="100" letterSpacing="-1.5" fill={HEX.beige}>
-        {HOARDING.photoLine.rows.map((r, i) => <tspan key={r} x="100" y={600 + i * 100}>{r}</tspan>)}
+      {/* the thin seam where two printed sheets meet (m16) */}
+      <path d={`M${seam} 0V800`} stroke={HEX.chocolate} strokeOpacity="0.45" strokeWidth="2" />
+      <WordmarkG idp={idp} x={78} y={70} width={426} fill={HEX.beige} className="fade-in" style={{ '--i': 2 }} />
+      <text className="serif" fontSize="60" letterSpacing="-0.8" fill={HEX.beige}>
+        {HOARDING.photoLine.rows.map((r, i) => <tspan key={r} x="78" y={664 + i * 58}>{r}</tspan>)}
       </text>
-      <text className="serif" fontSize="96" letterSpacing="-1.5" fill={HEX.chocolate}>
-        {HOARDING.line.rows.map((r, i) => <tspan key={r} x="1860" y={220 + i * 100}>{r}</tspan>)}
+      <text className="serif" fontSize="80" letterSpacing="-1.2" fill={HEX.chocolate}>
+        {HOARDING.line.rows.map((r, i) => <tspan key={r} x={text} y={125 + i * 78}>{r}</tspan>)}
       </text>
-      <text className="sans" fontSize="42" fill={HEX.muted}>
-        {HOARDING.sub.rows.map((r, i) => <tspan key={r} x="1860" y={500 + i * 56}>{r}</tspan>)}
+      <text className="sans" fontSize="37" letterSpacing="-0.4" fill={HEX.chocolate}>
+        {HOARDING.sub.rows.map((r, i) => <tspan key={r} x={text} y={367 + i * 48}>{r}</tspan>)}
       </text>
-      <rect x="1860" y="620" width="340" height="84" rx="16" fill={HEX.tribal} />
-      <text className="sans" x="2030" y="676" fontSize="38" fill={HEX.beige} textAnchor="middle">{HOARDING.button}</text>
+      <rect x={text} y="675" width="209" height="62" rx="17" fill={HEX.tribal} />
+      <text className="sans" x={text + 104.5} y="717" fontSize="33" fill={HEX.beige} textAnchor="middle">{HOARDING.button}</text>
     </g>
   );
 }
 
-// ---------- The two posters of m11 (600 x 840 each) ----------
-// The text blocks of a poster: body and the three contact blocks (the printed social line is left out).
-function PosterText({ x, bodyX, fill, soft, bodyMax }) {
-  const body = wrap(POSTER_BODY, bodyMax);
+// ---------- The two posters of m11 (600 x 840 each), re-measured from m11 at 2800 px ----------
+// Both posters: headline at x 36 with baselines 67 / 110 (45 / 43); contact blocks with first baselines 637,
+// 703 and 770 (the printed line naming a social network is left out, so the first block has two lines and the
+// gap where the third was). Left: justified body at x 287, 304 wide, from 330; contacts at x 385; mark at
+// (36, 746), 53 wide. Right: body at x 35, 246 wide, from 365; contacts at x 35; brick strip x 346, y 38, to the
+// right edge, 762 tall.
+// The body is printed justified; here it is set ranged left at the printed measure (stretching SVG lines to a
+// length pulls their letters apart).
+const BLOCK_Y = [637, 703, 770];
+function PosterText({ x, bodyX, bodyY, lead, max, fill, size = 10.4 }) {
+  const body = wrap(POSTER_BODY, max);
   const blocks = [CONTACT_BLOCKS.online, CONTACT_BLOCKS.service, CONTACT_BLOCKS.office];
-  let cy = 650;
   return (
     <g>
-      <text className="sans" fontSize="10.5" fill={soft}>
-        {body.map((l, i) => <tspan key={i} x={bodyX} y={430 + i * 14.5}>{l}</tspan>)}
+      <text className="sans" fontSize={size} fill={fill}>
+        {body.map((l, i) => (
+          <tspan key={i} x={bodyX} y={r2(bodyY + i * lead)}>{l}</tspan>
+        ))}
       </text>
-      {blocks.map((b, bi) => {
-        const y0 = cy;
-        cy += b.length * 13.5 + 14;
-        return (
-          <text key={bi} className="sans" fontSize="10.5" fill={fill}>
-            {b.map((l, i) => <tspan key={l} x={x} y={y0 + i * 13.5}>{l}</tspan>)}
-          </text>
-        );
-      })}
+      {blocks.map((b, bi) => (
+        <text key={bi} className="sans" fontSize="9.8" fill={fill}>
+          {b.map((l, i) => <tspan key={l} x={x} y={BLOCK_Y[bi] + i * 13.8}>{l}</tspan>)}
+        </text>
+      ))}
     </g>
   );
 }
@@ -146,16 +155,16 @@ export function PosterLeftG({ idp }) {
     <g>
       <rect width="600" height="840" fill={PHOTO.shade} />
       <g className="fade-in">
-        <CurvedWallG idp={idp} x={0} y={0} w={600} h={840} skyline={0.36} />
+        <CurvedWallG idp={idp} x={0} y={0} w={600} h={840} skyline={0.3} />
       </g>
-      <text className="serif" fontSize="46" letterSpacing="-0.8" fill={HEX.beige}>
-        {LINES.imagination.rows.map((r, i) => <tspan key={r} x="46" y={96 + i * 52}>{r}</tspan>)}
+      <text className="serif" fontSize="45" letterSpacing="-0.6" fill={HEX.beige}>
+        {LINES.imagination.rows.map((r, i) => <tspan key={r} x="36" y={67 + i * 43}>{r}</tspan>)}
       </text>
-      <PosterText x={330} bodyX={290} fill="#E8DFD0" soft="#E8DFD0" bodyMax={46} />
+      <PosterText x={385} bodyX={287} bodyY={330} lead={14.6} max={60} fill="#E8DFD0" />
       <g className="fade-in" style={{ '--i': 5 }}>
         <SteppedShadowG x={0} y={700} w={260} h={140} steps={5} fill="#3A2A20" shade={PHOTO.shade} />
       </g>
-      <MarkG x={46} y={742} size={46} fill={HEX.sand} />
+      <MarkG x={36} y={746} size={53} fill={HEX.sand} />
     </g>
   );
 }
@@ -165,26 +174,37 @@ export function PosterRightG({ idp }) {
   return (
     <g>
       <rect width="600" height="840" fill="#EFE8D8" />
-      <text className="serif" fontSize="46" letterSpacing="-0.8" fill={HEX.chocolate}>
-        {LINES.builtAround.rows.map((r, i) => <tspan key={r} x="46" y={96 + i * 52}>{r}</tspan>)}
+      <text className="serif" fontSize="45" letterSpacing="-0.6" fill={HEX.chocolate}>
+        {LINES.builtAround.rows.map((r, i) => <tspan key={r} x="35" y={66 + i * 43.5}>{r}</tspan>)}
       </text>
       <g className="fade-in" style={{ '--i': 2 }}>
-        <BrickCurveG idp={idp} x={348} y={14} w={252} h={786} courses={36} />
+        <BrickCurveG idp={idp} x={346} y={38} w={254} h={762} courses={36} />
       </g>
-      <path d="M46 440H300" stroke={HEX.chocolate} strokeOpacity="0.25" strokeWidth="1" />
-      <PosterText x={46} bodyX={46} fill={HEX.ink} soft={HEX.ink} bodyMax={44} />
+      <PosterText x={35} bodyX={35} bodyY={365} lead={13.6} max={47} fill={HEX.ink} />
     </g>
   );
 }
 
-// ---------- The quarter arch, filling ring by ring (a signature moment): 600 x 600, centre at the lower right ----------
-export function ArchRingsG({ cx = 600, cy = 600 }) {
-  const rings = [0, 1, 2, 3, 4].map((i) => ({ r: 96 + i * 88, c: [HEX.sand, '#9F7D67', HEX.sand, HEX.tribal, '#C4A589'][i] }));
+// ---------- The black statement of m14 (right half), re-measured: 800 x 1131 ----------
+// Four lines at x 63, baselines 130 / 203 / 275 / 348, set at 68 px; "design" and "and" at the two ends of the third
+// line (the end of "and" at 652; 68 px sets "purpose," ending near 658 as printed); the mark at (62, 1012), 56 wide; "www.sahra.sa" right-aligned at 731, 1066.
+export function BlackStatementG() {
+  const rows = LINES.designing.rows;
   return (
-    <g fill="none" strokeWidth="46">
-      {rings.map(({ r, c }, i) => (
-        <path key={r} d={arcPath(cx, cy, r, 270, 360)} stroke={c} className="draw" style={{ '--len': Math.ceil((r * Math.PI) / 2) + 4, '--i': i * 3 }} />
-      ))}
+    <g>
+      <rect width="800" height="1131" fill="#000000" />
+      <text className="serif" fontSize="68" letterSpacing="-1" fill="#EDE4D3">
+        {rows.map((r, i) => (Array.isArray(r) ? (
+          <tspan key={i}>
+            <tspan x="63" y={r2(130 + i * 72.7)}>{r[0]}</tspan>
+            <tspan x="652" y={r2(130 + i * 72.7)} textAnchor="end">{r[1]}</tspan>
+          </tspan>
+        ) : <tspan key={i} x="63" y={r2(130 + i * 72.7)}>{r}</tspan>))}
+      </text>
+      <g className="fade-in" style={{ '--i': 4 }}>
+        <MarkG x={62} y={1012} size={56} fill={HEX.sand} topClass="mark-top" bottomClass="mark-bottom" />
+      </g>
+      <text className="sans" x="731" y="1066" fontSize="21" fill="#EDE4D3" textAnchor="end">{CONTACT_BLOCKS.online[0]}</text>
     </g>
   );
 }

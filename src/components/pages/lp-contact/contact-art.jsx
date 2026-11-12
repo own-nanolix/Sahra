@@ -1,12 +1,12 @@
 // Artwork for the Contact landing page: the business card of m08 (front and back), the dark envelope of m10 in
-// three layers with the letter that rises out of it, the quarter arch and the word-mark sign-off. Every graphic
+// three layers with the letter that rises out of it, the dark folder, the quarter arch and the word-mark sign-off. Every graphic
 // is an exportable <Art>; layers share one viewBox so the page can stack them and move the wrappers around them.
 import Art from '@/components/art/Art';
 import { MarkG, WordmarkG, WordmarkDebossG } from '@/components/art/Mark';
-import { QuarterArchG } from '@/components/art/KeyArt';
+import { QuarterArchG, CurvedWallG } from '@/components/art/KeyArt';
 import { MaterialDefs, CastRectG } from '@/components/art/Mockup';
 import { wrap } from '@/components/art/Devices';
-import { PEOPLE, CONTACT, CONTACT_BLOCKS, LETTER, SENDER } from '@/lib/brand';
+import { PEOPLE, CONTACT, CONTACT_BLOCKS, LETTER, SENDER, LINES, FROM_BLOCK, URL_LINE } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 
 // ---------- The business card (m08): 700 x 400 ----------
@@ -51,9 +51,12 @@ export function CardBackArt() {
   );
 }
 
-// ---------- The dark envelope (m10) and the letter, in three layers (one viewBox 1000 x 900) ----------
+// ---------- The dark envelope (m10) and the letter, in three layers (one viewBox 1000 x 1300) ----------
+// The envelope sits low (880 x 440, 2 : 1 as printed); the letter stands in it, tall enough to rise fully out.
+// Envelope re-measured from m10 at 2800 px (553 px wide there): the mark at (56, 313), 60 wide; the second block
+// of lines at x 360 and the first at x 660, first baselines 336 below the top edge, 21.5 apart.
 
-export const ENV = { w: 1000, h: 900, x: 60, y: 400, width: 880, height: 440, pocket: 470 };
+export const ENV = { w: 1000, h: 1300, x: 60, y: 840, width: 880, height: 440, pocket: 900 };
 const EVB = `0 0 ${ENV.w} ${ENV.h}`;
 
 export function EnvelopeBackArt() {
@@ -64,7 +67,7 @@ export function EnvelopeBackArt() {
       <MaterialDefs idp={id} />
       <CastRectG x={x} y={y} w={width} h={height} len={30} />
       <rect x={x} y={y} width={width} height={height} fill={`url(#${id}-board-dark)`} filter={`url(#${id}-fibre)`} />
-      <rect x={x} y={y} width={width} height="70" fill="#120B08" opacity="0.7" />
+      <rect x={x} y={y} width={width} height="60" fill="#120B08" opacity="0.7" />
     </Art>
   );
 }
@@ -78,63 +81,107 @@ export function EnvelopeFrontArt() {
       <rect x={x} y={pocket} width={width} height={y + height - pocket} fill={`url(#${id}-board-dark)`} filter={`url(#${id}-fibre)`} />
       <rect x={x} y={pocket} width={width} height={y + height - pocket} fill={`url(#${id}-shade-v)`} />
       <path d={`M${x} ${pocket}H${x + width}`} stroke="#B58F6B" strokeOpacity="0.4" strokeWidth="2" />
-      <MarkG x={x + 56} y={720} size={62} fill="#B58F6B" />
-      <text fontSize="17" className="sans" fill="#F5F0E3">
-        {CONTACT_BLOCKS.service.map((l, i) => <tspan key={l} x="540" y={742 + i * 24}>{l}</tspan>)}
-        {CONTACT_BLOCKS.office.map((l, i) => <tspan key={l} x="760" y={742 + i * 24}>{l}</tspan>)}
+      <MarkG x={x + 56} y={y + 313} size={60} fill="#B58F6B" />
+      <text fontSize="16" className="sans" fill="#F5F0E3">
+        {CONTACT_BLOCKS.service.map((l, i) => <tspan key={l} x={x + 360} y={r2(y + 336 + i * 21.5)}>{l}</tspan>)}
+        {CONTACT_BLOCKS.office.map((l, i) => <tspan key={l} x={x + 660} y={r2(y + 336 + i * 21.5)}>{l}</tspan>)}
       </text>
     </Art>
   );
 }
 
-// The letter (m10): sender, the three contact blocks, From and To, five paragraphs verbatim, "Thanks".
-// `active` (1 to 5) quiets the other paragraphs; 0 shows all of them.
-export const LETTER_BOX = { x: 220, y: 40, w: 560, h: 760 };
+// The letter (m10), re-read and re-measured at 2800 px (528 x 743 there, 560 x 788 here): "Sahra Developement" at
+// (34, 36); the second block at x 209 and the first at x 427, baselines 36 / 50 / 63; From at (34, 120) and To at
+// (34, 208), 14.4 apart; five paragraphs at x 210, 278 wide, from 120, one empty line between them; "Thanks" at
+// 573; the foot: the mark at (34, 713), 37 wide, "@sahra.official" at (210, 736), the second block at x 427 from
+// 724 (the printed line naming a social network is left out). `active` (1 to 5) quiets the other paragraphs.
+export const LETTER_BOX = { x: 220, y: 140, w: 560, h: 788 };
+const LEAD = 14.4;
 
 export function LetterArt({ active = 0 }) {
   const id = 'lp-contact-lt';
   const { x, y, w, h } = LETTER_BOX;
   const paras = [];
   LETTER.paragraphs.forEach((p, n) => {
-    const lines = wrap(p, 70);
+    const lines = wrap(p, 64);
     const prev = paras[n - 1];
-    const top = prev ? prev.top + prev.lines.length * 11.6 + 11 : y + 150;
+    const top = prev ? prev.top + (prev.lines.length + 1) * LEAD : y + 120;
     paras.push({ lines, top });
   });
-  const last = paras[paras.length - 1];
-  const cursor = last.top + last.lines.length * 11.6 + 11;
   const tone = (n) => ({ opacity: !active || active === n ? 1 : 0.32, transition: 'opacity var(--dur-3) var(--ease-out)' });
   return (
     <Art viewBox={EVB} title="Letterhead letter with five paragraphs" exportName="lp-contact-letter" style={FILL}>
       <MaterialDefs idp={id} />
       <CastRectG x={x} y={y} w={w} h={h} len={14} opacity={0.26} />
       <rect x={x} y={y} width={w} height={h} fill={`url(#${id}-paper)`} filter={`url(#${id}-paper-grain)`} />
-      <text x={x + 28} y={y + 40} fontSize="10.5" className="sans" fill="#875D41">{SENDER.developement}</text>
-      <text fontSize="8.6" className="sans" fill="#1E140F">
-        <tspan x={x + 250} y={y + 40}>{CONTACT.support}</tspan>
-        <tspan x={x + 250} y={y + 51}>{CONTACT.partnerships}</tspan>
-        <tspan x={x + 420} y={y + 40}>{CONTACT.city}</tspan>
-        <tspan x={x + 420} y={y + 51}>{CONTACT.phone}</tspan>
-        <tspan x={x + 420} y={y + 62}>{CONTACT.info}</tspan>
+      <text x={x + 34} y={y + 36} fontSize="9.6" className="sans" fill="#875D41">{SENDER.developement}</text>
+      <text fontSize="9" className="sans" fill="#1E140F">
+        <tspan x={x + 209} y={y + 36}>{CONTACT.support}</tspan>
+        <tspan x={x + 209} y={y + 50}>{CONTACT.partnerships}</tspan>
+        <tspan x={x + 427} y={y + 36}>{CONTACT.city}</tspan>
+        <tspan x={x + 427} y={y + 50}>{CONTACT.phone}</tspan>
+        <tspan x={x + 427} y={y + 63}>{CONTACT.info}</tspan>
       </text>
-      <text fontSize="8.4" className="sans" fill="#1E140F">
-        {LETTER.from.map((l, i) => <tspan key={l} x={x + 28} y={y + 120 + i * 11.5} fontWeight={i === 0 ? 500 : 400}>{l}</tspan>)}
-        {LETTER.to.map((l, i) => <tspan key={l} x={x + 28} y={y + 200 + i * 11.5} fontWeight={i === 0 ? 500 : 400}>{l}</tspan>)}
+      <text fontSize="8.8" className="sans" fill="#1E140F">
+        {LETTER.from.map((l, i) => <tspan key={l} x={x + 34} y={r2(y + 120 + i * LEAD)} fontWeight={i === 0 ? 500 : 400}>{l}</tspan>)}
+        {LETTER.to.map((l, i) => <tspan key={l} x={x + 34} y={r2(y + 208 + i * LEAD)} fontWeight={i === 0 ? 500 : 400}>{l}</tspan>)}
       </text>
       {paras.map((p, n) => (
-        <text key={n} fontSize="8.6" className="sans" fill="#1E140F" style={tone(n + 1)}>
-          {p.lines.map((l, i) => <tspan key={i} x={x + 150} y={r2(p.top + i * 11.6)}>{l}</tspan>)}
+        <text key={n} fontSize="8.8" className="sans" fill="#1E140F" style={tone(n + 1)}>
+          {p.lines.map((l, i) => <tspan key={i} x={x + 210} y={r2(p.top + i * LEAD)}>{l}</tspan>)}
         </text>
       ))}
-      <text x={x + 150} y={r2(cursor + 6)} fontSize="8.6" className="sans" fill="#1E140F">{LETTER.close}</text>
-      <MarkG x={x + 28} y={y + h - 54} size={22} fill="#B58F6B" />
-      <text fontSize="7.8" className="sans" fill="#1E140F">
-        <tspan x={x + 150} y={y + h - 42}>{CONTACT.handle}</tspan>
-        {CONTACT_BLOCKS.service.map((l, i) => <tspan key={l} x={x + 420} y={y + h - 42 + i * 10}>{l}</tspan>)}
+      <text x={x + 210} y={y + 573} fontSize="8.8" className="sans" fill="#1E140F">{LETTER.close}</text>
+      <MarkG x={x + 34} y={y + 713} size={37} fill="#B58F6B" />
+      <text fontSize="8.8" className="sans" fill="#1E140F">
+        <tspan x={x + 210} y={y + 736}>{CONTACT.handle}</tspan>
+        {CONTACT_BLOCKS.service.map((l, i) => <tspan key={l} x={x + 427} y={r2(y + 724 + i * 13)}>{l}</tspan>)}
       </text>
     </Art>
   );
 }
+
+// ---------- The dark folder of m10 (800 x 564), re-measured at 2800 px (650 x 458 there) ----------
+// The mark at (44, 41), 44 wide; "We Build Spaces / of Imagination" at x 44, baselines 277 / 318 (40 px); the
+// From block at x 44 from 462, 15 apart; "→ sahra.sa" in Sand at (258, 522); the photo tile from x 474 to the
+// right edge, y 39 to 524 (a curved wall against the sky, drawn as flat fields).
+export function FolderArt() {
+  const id = 'lp-contact-fd';
+  return (
+    <Art viewBox="0 0 840 604" title="Dark folder: the mark, We Build Spaces of Imagination, the From block and a photo tile" exportName="lp-contact-folder" style={{ width: '100%', height: 'auto' }}>
+      <MaterialDefs idp={id} />
+      <CastRectG x={0} y={0} w={800} h={564} len={30} />
+      <rect width="800" height="564" fill={`url(#${id}-board-dark)`} filter={`url(#${id}-fibre)`} />
+      <g className="fade-in" style={{ '--i': 2 }}>
+        <ArchClipTile idp={id} />
+      </g>
+      <MarkG x={44} y={41} size={44} fill="#B58F6B" topClass="mark-top" bottomClass="mark-bottom" />
+      <text className="serif" fontSize="40" letterSpacing="-0.6" fill="#F5F0E3">
+        {LINES.imagination.rows.map((r, i) => <tspan key={r} x="44" y={277 + i * 41}>{r}</tspan>)}
+      </text>
+      <text className="sans" fontSize="12" fill="#F5F0E3">
+        {FROM_BLOCK.map((l, i) => <tspan key={l} x="44" y={462 + i * 15}>{l}</tspan>)}
+      </text>
+      <text className="sans" x="258" y="522" fontSize="12" fill="#B58F6B">{URL_LINE}</text>
+    </Art>
+  );
+}
+
+function ArchClipTile({ idp }) {
+  return (
+    <g>
+      <defs>
+        <clipPath id={`${idp}-tile`}>
+          <rect x="474" y="39" width="326" height="485" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${idp}-tile)`}>
+        <CurvedWallG idp={`${idp}-cw`} x={474} y={39} w={326} h={485} skyline={0.26} />
+      </g>
+    </g>
+  );
+}
+
 
 // ---------- The quarter arch for the dark contact section (decorative) ----------
 

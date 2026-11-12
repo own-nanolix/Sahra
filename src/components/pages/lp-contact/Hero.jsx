@@ -11,10 +11,12 @@ import s from './lp-contact.module.css';
 
 // Hero: the business card (m08) front and back, turning on a real button, beside the three contact blocks set
 // large as printed. The card is set down by turning once on entry; each press turns it half a turn and it lands.
+// The blocks carry no labels on any printed piece, so none are added here (the order is the card's: office,
+// online, then the second block of lines).
 const GROUPS = [
-  { key: 'service', label: 'Support', lines: CONTACT_BLOCKS.service },
-  { key: 'office', label: 'Office', lines: CONTACT_BLOCKS.office },
-  { key: 'online', label: 'Online', lines: CONTACT_BLOCKS.online },
+  { key: 'office', lines: CONTACT_BLOCKS.office },
+  { key: 'online', lines: CONTACT_BLOCKS.online },
+  { key: 'service', lines: CONTACT_BLOCKS.service },
 ];
 
 export default function Hero() {
@@ -87,7 +89,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...tEnter, delay: 0.45 + gi * 0.12 }}
               >
-                <span className="t-label">{g.label}</span>
+                <span className="t-num">{String(gi + 1).padStart(2, '0')}</span>
                 {g.lines.map((l) => (
                   <span key={l} className={`t-serif ${s.bigLine}`}>{l}</span>
                 ))}

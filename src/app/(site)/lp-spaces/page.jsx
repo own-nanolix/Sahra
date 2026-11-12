@@ -5,15 +5,26 @@ import LandingFooter from '@/components/ui/LandingFooter';
 import Button from '@/components/ui/Button';
 import { Lines } from '@/components/ui/Card';
 import Reveal from '@/components/site/Reveal';
-import { ABOUT, INTRO, LETTER, LINES, POSTER_BODY } from '@/lib/brand';
+import { DESCRIPTION, INTRO, LETTER, LINES, POSTER_BODY, PROJECT_TITLE } from '@/lib/brand';
 import Hero from '@/components/pages/lp-spaces/Hero';
 import Story from '@/components/pages/lp-spaces/Story';
 import Sun from '@/components/pages/lp-spaces/Sun';
 import SunDial from '@/components/pages/lp-spaces/SunDial';
-import { WallPinG, BrickPinG, SunStepsG, FramedPosterG, CardG } from '@/components/pages/lp-spaces/art';
+import { WallPinG, BrickPinG, SunStepsG, FlatPosterG, CardG } from '@/components/pages/lp-spaces/art';
 import s from '@/components/pages/lp-spaces/lp-spaces.module.css';
 
 export const metadata = pageMeta('lp-spaces');
+
+// Sections, in order (nav and footer shared):
+//   1 nav
+//   2 hero: the two posters of m11 as two tall panels, re-measured (headline, body column, three contact blocks, mark)
+//   3 the case study's own description, centred between two rules
+//   4 the story: TWO pinned visuals at the left (curved wall with sky, curved brick) that swap beside one text column
+//   5 the stepped-shadow divider, sliding like the sun along a wall
+//   6 the poster of m14 as the print itself, beside the hoarding's line and the fifth intro paragraph
+//   7 light on a wall: one plain slider moves the sun and the stair's shadow lengthens
+//   8 the white card of m10 (landscape, as printed) beside the letter's words
+//   9 footer
 
 // The text column of the story: the poster lines, the poster body and the white card's lines, in the order the
 // posters (m11) and the card (m10) print them. `visual` says which of the two pinned visuals is shown.
@@ -57,25 +68,20 @@ const STEPS = [
 
 export default function Page() {
   return (
-    <section className="page" id="p-lp-spaces" aria-label="Landing: Spaces">
+    <section className="page" id="p-lp-spaces" aria-label="Landing: Spaces" style={{ paddingBottom: 0 }}>
       {/* 1: navigation */}
       <LandingNav current="lp-spaces" />
 
       {/* 2: the two posters of m11 as two tall panels */}
       <Hero />
 
-      {/* 3: built with intention */}
+      {/* 3: the case study's own description, centred under the posters, between two rules */}
       <section className={`${s.intro} wrap`} aria-labelledby="lp-spaces-intro-title">
         <Reveal>
-          <p className="t-label">{ABOUT.label}</p>
+          <h2 id="lp-spaces-intro-title" className="t-label">{PROJECT_TITLE}</h2>
         </Reveal>
-        <Reveal delay={80}>
-          <h2 id="lp-spaces-intro-title" className="t-h1">
-            <Lines as="span" rows={ABOUT.headline.rows} />
-          </h2>
-        </Reveal>
-        <Reveal delay={160}>
-          <p className={`t-lead ${s.introText}`}>{ABOUT.text}</p>
+        <Reveal delay={120}>
+          <p className={s.introText}>{DESCRIPTION}</p>
         </Reveal>
       </section>
 
@@ -103,11 +109,11 @@ export default function Page() {
         </Art>
       </Sun>
 
-      {/* 6: the framed poster of m14 on a wall of fins */}
+      {/* 6: the poster of m14 as the print itself, flat in its thin black frame, beside the hoarding's line */}
       <section className={`${s.framed} wrap`} aria-labelledby="lp-spaces-framed-title">
         <Reveal from="scale" className={s.framedArt}>
-          <Art viewBox="0 0 800 1000" title="Framed poster on a wall of vertical fins" exportName="lp-spaces-framed-poster">
-            <FramedPosterG idp="lp-spaces-fp" />
+          <Art viewBox="0 0 524 829" title="Poster: Spaces that elevate everyday living with intention" exportName="lp-spaces-framed-poster">
+            <FlatPosterG idp="lp-spaces-fp" />
           </Art>
         </Reveal>
         <div className={s.framedText}>
@@ -145,7 +151,7 @@ export default function Page() {
             </Reveal>
           </div>
           <Reveal from="scale" className={s.cardArt}>
-            <Art viewBox="0 0 600 720" title="White card: Spaces that elevate everyday living with intention" exportName="lp-spaces-card">
+            <Art viewBox="0 0 680 520" title="White card: Spaces that elevate everyday living with intention" exportName="lp-spaces-card">
               <CardG idp="lp-spaces-cd" />
             </Art>
           </Reveal>

@@ -1,18 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SCOPE, SHEET } from '@/lib/brand';
+import { SHEET } from '@/lib/brand';
 import { ease, dur, stagger } from '@/lib/motion';
 import s from './lp-vision.module.css';
 
-// "Scope of work" from the project sheet of m02, as four columns under thin rules that draw on along the grid.
+// The project sheet of m02, as printed: five label / value rows. Here it is set as a narrow ledger in the right
+// two thirds of the page, the label small at the left of each row and the value in the serif; each rule draws on
+// along the grid, and the "/" separated scope of work breaks into its four parts, one under another.
 export default function Scope() {
   return (
     <section className={`${s.scope} wrap`} aria-labelledby="lp-vision-scope-title">
-      <h2 id="lp-vision-scope-title" className="t-label">{SHEET[0][0]}</h2>
-      <ol className={s.scopeList}>
-        {SCOPE.map((label, i) => (
-          <motion.li
+      <h2 id="lp-vision-scope-title" className={`t-label ${s.scopeHead}`}>{SHEET[1][1]}</h2>
+      <dl className={s.scopeList}>
+        {SHEET.map(([label, value], i) => (
+          <motion.div
             key={label}
             className={s.scopeItem}
             initial={{ opacity: 0, y: 18 }}
@@ -26,12 +28,15 @@ export default function Scope() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: dur.d4, ease: ease.draw, delay: i * stagger }}
+              aria-hidden="true"
             />
-            <span className="t-num">{String(i + 1).padStart(2, '0')}</span>
-            <span className="t-h3">{label}</span>
-          </motion.li>
+            <dt className="t-small muted">{label}</dt>
+            <dd className={s.scopeValue}>
+              {value.split(' / ').map((part) => <span key={part} className="t-h3">{part}</span>)}
+            </dd>
+          </motion.div>
         ))}
-      </ol>
+      </dl>
     </section>
   );
 }

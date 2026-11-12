@@ -24,7 +24,7 @@
 
 /* ---------- Letter story ---------- */
 .storySection { padding-block: clamp(24px, 4vw, 64px) 0; background: var(--white); }
-.envStage { position: relative; width: 100%; aspect-ratio: 1000 / 900; overflow: clip; }
+.envStage { position: relative; width: min(100%, 58vh); margin-inline: auto; aspect-ratio: 1000 / 1300; overflow: clip; }
 .layer { position: absolute; inset: 0; will-change: transform; }
 .layer svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 :global(.story) > .steps { gap: clamp(20vh, 26vh, 32vh); padding-block: 14vh 22vh; }
@@ -35,7 +35,7 @@
 .dot { width: 36px; height: 2px; background: var(--tribal); transform-origin: 0 50%; }
 @media (max-width: 900px) {
   :global(.story) > .pin { z-index: 2; background: var(--white); height: 42vh; align-content: center; }
-  .pin .envStage { width: min(100%, calc(32vh * 1.111)); margin-inline: auto; }
+  .pin .envStage { width: min(100%, calc(38vh * 0.769)); margin-inline: auto; }
   .storySection { padding-top: 12px; }
 }
 
@@ -77,3 +77,12 @@
 .signGrid { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
 .signSide { display: grid; gap: 20px; justify-items: start; }
 .signMark { margin-top: clamp(40px, 7vw, 112px); }
+
+/* ---------- The dark folder ---------- */
+.folder { background: var(--studio); padding-block: clamp(72px, 10vw, 160px); overflow-x: clip; }
+.folderGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(28px, 6vw, 110px); align-items: end; }
+.folderArt { min-width: 0; }
+.folderCopy { display: grid; gap: clamp(18px, 2.4vw, 32px); }
+.folderCopy :global(.t-h1) { margin: 0; }
+.folderFrom { font-style: normal; display: grid; gap: 2px; font-family: var(--font-serif); font-size: clamp(19px, 1.7vw, 26px); line-height: 1.2; }
+@media (max-width: 900px) { .folderGrid { grid-template-columns: minmax(0, 1fr); } }

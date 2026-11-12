@@ -10,22 +10,11 @@ import { ArchArt } from './contact-art';
 import s from './lp-contact.module.css';
 
 // Every printed contact line as a ruled row with a copy button (the shared CopyValue), on Dark Chocolate.
+// The three blocks as printed, unlabelled; each row is named only by what the line is.
 const GROUPS = [
-  {
-    key: 'office',
-    title: 'Office',
-    rows: [['Address', CONTACT.city], ['Phone', CONTACT.phone], ['Email', CONTACT.info]],
-  },
-  {
-    key: 'support',
-    title: 'Support',
-    rows: [['Phone', CONTACT.phone2], ['Support', CONTACT.support], ['Partnerships', CONTACT.partnerships]],
-  },
-  {
-    key: 'online',
-    title: 'Online',
-    rows: [['Web', CONTACT.web], ['Handle', CONTACT.handle]],
-  },
+  { key: 'office', rows: [['Address', CONTACT.city], ['Phone', CONTACT.phone], ['Email', CONTACT.info]] },
+  { key: 'service', rows: [['Phone', CONTACT.phone2], ['Email', CONTACT.support], ['Email', CONTACT.partnerships]] },
+  { key: 'online', rows: [['Web', CONTACT.web], ['Handle', CONTACT.handle]] },
 ];
 
 export default function CopyLines() {
@@ -47,7 +36,7 @@ export default function CopyLines() {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ ...tEnter, delay: gi * 0.1 }}
             >
-              <h3 className="t-h3">{g.title}</h3>
+              <p className="t-num">{String(gi + 1).padStart(2, '0')}</p>
               <ul className={s.lineList}>
                 {g.rows.map(([label, value]) => (
                   <li key={value} className={s.lineRow}>

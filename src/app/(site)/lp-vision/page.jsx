@@ -1,6 +1,6 @@
 import { pageMeta } from '@/lib/pages';
 import Art from '@/components/art/Art';
-import { WM, MarkG } from '@/components/art/Mark';
+import { WM } from '@/components/art/Mark';
 import { ConstructionG, DRAWING } from '@/components/art/KeyArt';
 import LandingNav from '@/components/ui/LandingNav';
 import LandingFooter from '@/components/ui/LandingFooter';
@@ -8,20 +8,27 @@ import Button from '@/components/ui/Button';
 import RuledRows from '@/components/ui/RuledRows';
 import { Lines } from '@/components/ui/Card';
 import Reveal from '@/components/site/Reveal';
-import { ABOUT, INTRO, LINES, CONTACT, CONTACT_BLOCKS } from '@/lib/brand';
-import { Contact } from '@/components/ui/Card';
+import { ABOUT, INTRO, LINES } from '@/lib/brand';
 import Hero from '@/components/pages/lp-vision/Hero';
 import Story from '@/components/pages/lp-vision/Story';
 import Wall from '@/components/pages/lp-vision/Wall';
 import Scope from '@/components/pages/lp-vision/Scope';
-import { HoardingG, PosterLeftG, PosterRightG, ArchRingsG, CourtLinesG, CONSTRUCTION_BOX } from '@/components/pages/lp-vision/art';
+import { HoardingG, PosterLeftG, PosterRightG, BlackStatementG, CourtLinesG, CONSTRUCTION_BOX } from '@/components/pages/lp-vision/art';
 import s from '@/components/pages/lp-vision/lp-vision.module.css';
 
 export const metadata = pageMeta('lp-vision');
 
+// Sections, in order (nav and footer shared):
+//   1 nav over the hero   2 hero: the court, full bleed   3 "Our Vision": the intro slide's first two paragraphs over
+//   the construction drawing   4 the project sheet as ruled label / value rows   5 the brand lines, each beside a
+//   flat field   6 the story: the hoarding band pinned at the TOP, its crop sliding   7 the m14 spread: the poster's
+//   lines on Beige beside the black statement   8 the court as a line drawing with the three ruled rows
+//   9 the two posters of m11, staggered on a flat field   10 footer.
+
 // Intro paragraphs 3, 4 and 6 of the intro slide (m02), verbatim.
 const STORY = [INTRO.paragraphs[2], INTRO.paragraphs[3], INTRO.paragraphs[5]];
-// The three ruled rows of the About page (m12) lead to the landing pages of the same names.
+// "Our Vision" is the third ruled row of the About page (m12): this page carries its name and number.
+const VISION = ABOUT.rows[2];
 // The brand lines, each beside a flat field in the photo tones (stand-ins for the photographs).
 const LINE_ROWS = [
   { line: LINES.imagination, field: 'field-wall' },
@@ -29,11 +36,12 @@ const LINE_ROWS = [
   { line: LINES.builtAround, field: 'field-desert' },
   { line: LINES.refinedLiving, field: 'field-dusk' },
 ];
+// The three ruled rows of the About page (m12) lead to the landing pages of the same names.
 const ROWS = ABOUT.rows.map((r, i) => ({ ...r, href: ['/lp-philosophy/', '/lp-process/', '/lp-vision/'][i] }));
 
 export default function Page() {
   return (
-    <section className="page" id="p-lp-vision" aria-label="Landing: Our Vision">
+    <section className="page" id="p-lp-vision" aria-label="Landing: Our Vision" style={{ paddingBottom: 0 }}>
       {/* 1 and 2: navigation over the hero */}
       <div className={s.stage}>
         <div className={s.navOver}>
@@ -42,20 +50,21 @@ export default function Page() {
         <Hero />
       </div>
 
-      {/* 3: built with intention, with the word-mark's construction drawing on */}
+      {/* 3: Our Vision, the intro slide's paragraphs justified in two columns, the construction drawing on */}
       <section className={`${s.intro} wrap`} aria-labelledby="lp-vision-intro-title">
         <div className={s.introHead}>
-          <Reveal>
-            <p className="t-label">{ABOUT.label}</p>
-            <h2 id="lp-vision-intro-title" className="t-h1" style={{ marginTop: 16 }}>
-              <Lines as="span" rows={ABOUT.headline.rows} />
-            </h2>
+          <Reveal className={s.introTitle}>
+            <p className="t-num">{VISION.no}</p>
+            <h2 id="lp-vision-intro-title" className="t-display">{VISION.label}</h2>
           </Reveal>
-          <Reveal delay={120}>
-            <p className="t-lead">{ABOUT.text}</p>
-            <p className={`t-body muted ${s.introMore}`}>{INTRO.paragraphs[0]}</p>
-            <p className={`t-body muted ${s.introMore}`}>{INTRO.paragraphs[1]}</p>
-          </Reveal>
+          <div className={s.introCols}>
+            <Reveal delay={120}>
+              <p className={`t-justify ${s.introMore}`}>{INTRO.paragraphs[0]}</p>
+            </Reveal>
+            <Reveal delay={200}>
+              <p className={`t-justify ${s.introMore}`}>{INTRO.paragraphs[1]}</p>
+            </Reveal>
+          </div>
         </div>
         <Reveal from="scale" className={s.construction}>
           <Art viewBox={CONSTRUCTION_BOX} title="Construction drawing of the word-mark, guides and anchors" exportName="lp-vision-construction">
@@ -65,10 +74,10 @@ export default function Page() {
         </Reveal>
       </section>
 
-      {/* 4: scope of work */}
+      {/* 4: the project sheet of m02 */}
       <Scope />
 
-      {/* 4b: the brand lines as ruled rows */}
+      {/* 5: the brand lines as ruled rows */}
       <section className={`${s.lines} wrap`} aria-labelledby="lp-vision-lines-title">
         <h2 id="lp-vision-lines-title" className="t-label">{LINES.imagination.text}</h2>
         <ul className={s.lineList}>
@@ -82,7 +91,7 @@ export default function Page() {
         </ul>
       </section>
 
-      {/* 5: the story: a pinned band whose crop slides while the intro paragraphs rise under it */}
+      {/* 6: the story: a pinned band whose crop slides while the intro paragraphs rise under it */}
       <section className={s.story} aria-label="Our Vision, in the brand's own words">
         <Story
           steps={STORY}
@@ -100,25 +109,36 @@ export default function Page() {
         />
       </section>
 
-      {/* 6: the poster lines on Dark Chocolate, the quarter arch filling */}
-      <section className={`${s.statement} on-dark`} aria-labelledby="lp-vision-statement-title">
-        <div className={`${s.statementGrid} wrap`}>
-          <Reveal className={s.statementText}>
-            <h2 id="lp-vision-statement-title" className="t-display">
-              <Lines as="span" rows={LINES.elevate.rows} />
-            </h2>
-            <p className={`t-lead ${s.statementSub}`}>{LINES.refined.text}</p>
-            <Button variant="beige" url href="/lp-contact/">sahra.sa</Button>
-          </Reveal>
-          <Reveal from="scale" className={s.arch}>
-            <Art viewBox="0 0 600 600" title="Quarter arch of five rings" exportName="lp-vision-arch" decorative>
-              <ArchRingsG />
+      {/* 7: the m14 spread: the poster's beige panel set large at the left, the black statement at the right */}
+      <section className={s.spread} aria-labelledby="lp-vision-spread-title">
+        <div className={`${s.spreadGrid} wrap`}>
+          <div className={s.spreadText}>
+            <Reveal>
+              <h2 id="lp-vision-spread-title" className="t-display">
+                <Lines as="span" rows={LINES.elevate.rows} />
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className={`t-lead ${s.spreadSub}`}>
+                <Lines as="span" rows={LINES.refined.rows} />
+              </p>
+            </Reveal>
+            <Reveal delay={200} className={s.spreadFoot}>
+              <p className={`t-serif ${s.spreadSign}`}>
+                <Lines as="span" rows={LINES.imagination.rows} />
+              </p>
+              <Button url href="/lp-contact/">sahra.sa</Button>
+            </Reveal>
+          </div>
+          <Reveal delay={80} className={s.spreadArt}>
+            <Art viewBox="0 0 800 1131" title="Designing spaces that connect purpose, design and modern living, on Black" exportName="lp-vision-black-statement">
+              <BlackStatementG />
             </Art>
           </Reveal>
         </div>
       </section>
 
-      {/* 7: the court as a line drawing, with the three ruled rows */}
+      {/* 8: the court as a line drawing, with the three ruled rows */}
       <section className={`${s.drawing} wrap`} aria-labelledby="lp-vision-drawing-title">
         <Reveal from="scale" className={s.drawingArt}>
           <Art viewBox="0 0 1600 700" title="The timber court drawn as lines: frame, slats, opening and stair" exportName="lp-vision-court-lines">
@@ -138,39 +158,19 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 8: Black, as the right poster of m14: the line with "design" and "and" at opposite ends */}
-      <section className={`${s.black} field-black`} aria-labelledby="lp-vision-black-title">
-        <div className={`${s.blackGrid} wrap`}>
-          <Reveal>
-            <h2 id="lp-vision-black-title" className="t-display">
-              <Lines as="span" rows={LINES.designing.rows} />
-            </h2>
-          </Reveal>
-          <div className={s.blackFoot}>
-            <Art viewBox="0 0 184 201" title="The mark, assembling from its two halves" exportName="lp-vision-mark" className={s.blackMark}>
-              <MarkG size={184} fill="#B58F6B" topClass="mark-top" bottomClass="mark-bottom" />
-            </Art>
-            <div className={s.blackContacts}>
-              <Contact lines={CONTACT_BLOCKS.office} />
-              <p className="t-body">{CONTACT.web}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9: the two posters of m11, side by side on a ribbed wall */}
-      <Wall>
-        <Reveal className={s.frame}>
+      {/* 9: the two posters of m11, staggered on a flat field with a hard horizon */}
+      <Wall
+        left={
           <Art viewBox="0 0 600 840" title="Poster: We Build Spaces of Imagination" exportName="lp-vision-poster-left">
             <PosterLeftG idp="lp-vision-pl" />
           </Art>
-        </Reveal>
-        <Reveal delay={140} className={s.frame}>
+        }
+        right={
           <Art viewBox="0 0 600 840" title="Poster: Built around how people live today" exportName="lp-vision-poster-right">
             <PosterRightG idp="lp-vision-pr" />
           </Art>
-        </Reveal>
-      </Wall>
+        }
+      />
 
       {/* 10: footer */}
       <LandingFooter />

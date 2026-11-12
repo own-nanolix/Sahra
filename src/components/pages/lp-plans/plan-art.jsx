@@ -134,24 +134,26 @@ export const TONES = {
   dark: { paper: '#35241C', ink: '#F5F0E3', accent: '#B58F6B', mark: '#B58F6B' },
 };
 
+// Re-measured from m13 at 2800 px: sender at (27, 34); the two-line block at x 172 and the three-line block at
+// x 352, 10 apart; the plan from (52, 92); the mark at (27, 595), 30 wide; the text at x 174 from 597, five lines.
 export function SheetG({ tone = 'white', animate = false }) {
   const t = TONES[tone];
-  const lines = wrap(PLAN.text, 80);
+  const lines = wrap(PLAN.text, 98);
   return (
     <g>
       <rect width={SHEET_SIZE.w} height={SHEET_SIZE.h} fill={t.paper} />
-      <text x="32" y="38" fontSize="9.5" fill={t.accent} className="sans">{SENDER.developement}</text>
-      <text fontSize="8.4" fill={t.ink} className="sans">
-        <tspan x="170" y="38">{CONTACT.support}</tspan>
-        <tspan x="170" y="49">{CONTACT.partnerships}</tspan>
-        <tspan x="340" y="38">{CONTACT.city}</tspan>
-        <tspan x="340" y="49">{CONTACT.phone}</tspan>
-        <tspan x="340" y="60">{CONTACT.info}</tspan>
+      <text x="27" y="34" fontSize="8.6" fill={t.accent} className="sans">{SENDER.developement}</text>
+      <text fontSize="7.6" fill={t.ink} className="sans">
+        <tspan x="172" y="34">{CONTACT.support}</tspan>
+        <tspan x="172" y="44">{CONTACT.partnerships}</tspan>
+        <tspan x="352" y="34">{CONTACT.city}</tspan>
+        <tspan x="352" y="44">{CONTACT.phone}</tspan>
+        <tspan x="352" y="54">{CONTACT.info}</tspan>
       </text>
-      <PlanG x={32} y={78} scale={0.97} ink={t.ink} animate={animate} />
-      <MarkG x={32} y={548} size={30} fill={t.mark} />
-      <text fontSize="7" fill={t.ink} className="sans">
-        {lines.map((l, i) => <tspan key={i} x="112" y={554 + i * 10.4}>{l}</tspan>)}
+      <PlanG x={41} y={81} scale={0.93} ink={t.ink} animate={animate} />
+      <MarkG x={27} y={595} size={30} fill={t.mark} />
+      <text fontSize="5.4" fill={t.ink} className="sans">
+        {lines.map((l, i) => <tspan key={i} x="174" y={r2(599 + i * 8.2)}>{l}</tspan>)}
       </text>
     </g>
   );
@@ -194,33 +196,68 @@ export function BoxLidArt() {
       <CastRectG x={lid.x} y={lid.y} w={lid.width} h={lid.height} len={34} />
       <rect {...lid} fill={`url(#${id}-board)`} filter={`url(#${id}-fibre)`} />
       <rect {...lid} fill={`url(#${id}-shade)`} />
-      <rect x={lid.x + 40} y={lid.y + 40} width={lid.width - 80} height={lid.height - 80} fill="none" stroke="#5E3F2B" strokeOpacity="0.55" strokeWidth="2" />
-      <rect x={lid.x + 42} y={lid.y + 42} width={lid.width - 80} height={lid.height - 80} fill="none" stroke="#C29C78" strokeOpacity="0.35" strokeWidth="2" />
-      <WordmarkDebossG idp={`${id}-wm`} x={lid.x + 60} y={lid.y + 92} width={700} vertical />
+      {/* the debossed frame, re-measured from m13: 13 in from the sides, 22 from the top, 12 from the foot */}
+      <rect x={lid.x + 13} y={lid.y + 22} width={lid.width - 25} height={lid.height - 34} fill="none" stroke="#5E3F2B" strokeOpacity="0.55" strokeWidth="2" />
+      <rect x={lid.x + 15} y={lid.y + 24} width={lid.width - 25} height={lid.height - 34} fill="none" stroke="#C29C78" strokeOpacity="0.35" strokeWidth="2" />
+      <WordmarkDebossG idp={`${id}-wm`} x={lid.x + 55} y={lid.y + 53} width={726} vertical />
       <path d={`M${lid.x} ${lid.y + 1}H${lid.x + lid.width}`} stroke="#C29C78" strokeOpacity="0.6" strokeWidth="2" />
     </Art>
+  );
+}
+
+// The spine (m13), re-measured: three blocks reading bottom to top, their first lines at x +28 / +41.5 / +55 from
+// the spine's edge, starting at y 198, 423 and 643 (the printed social line is left out of the middle block);
+// the beige mark at its foot, 37 wide at y 778. Drawn in the box's own coordinates.
+const SPINE_Y = [198, 423, 643];
+function SpineG({ id }) {
+  const { spine } = BOX;
+  const blocks = [CONTACT_BLOCKS.service, CONTACT_BLOCKS.online, CONTACT_BLOCKS.office];
+  return (
+    <g>
+      <rect {...spine} fill={`url(#${id}-board)`} filter={`url(#${id}-fibre)`} />
+      <rect {...spine} fill={`url(#${id}-shade-v)`} />
+      <path d={`M${spine.x + 1} ${spine.y}V${spine.y + spine.height}M${spine.x + spine.width - 1} ${spine.y}V${spine.y + spine.height}`} stroke="#3D2818" strokeOpacity="0.5" strokeWidth="2" />
+      {blocks.map((b, bi) =>
+        b.map((line, li) => (
+          <text key={line} className="sans" fontSize="11" fill="#F5F0E3" transform={`translate(${spine.x + 28 + li * 13.5} ${SPINE_Y[bi]}) rotate(-90)`}>
+            {line}
+          </text>
+        )),
+      )}
+      <MarkG x={spine.x + 23} y={778} size={37} fill="#F5F0E3" />
+    </g>
   );
 }
 
 export function BoxSpineArt() {
   const { spine } = BOX;
   const id = 'lp-plans-spine';
-  const blocks = [CONTACT_BLOCKS.service, CONTACT_BLOCKS.online, CONTACT_BLOCKS.office];
   return (
     <Art viewBox={VB} title="Box spine with the three contact blocks and the mark" exportName="lp-plans-box-spine" style={FILL}>
       <MaterialDefs idp={id} />
       <CastRectG x={spine.x} y={spine.y} w={spine.width} h={spine.height} len={30} />
-      <rect {...spine} fill={`url(#${id}-board)`} filter={`url(#${id}-fibre)`} />
-      <rect {...spine} fill={`url(#${id}-shade-v)`} />
-      <path d={`M${spine.x + 1} ${spine.y}V${spine.y + spine.height}M${spine.x + spine.width - 1} ${spine.y}V${spine.y + spine.height}`} stroke="#3D2818" strokeOpacity="0.5" strokeWidth="2" />
-      {blocks.map((b, bi) =>
-        b.map((line, li) => (
-          <text key={line} className="sans" fontSize="11.5" fill="#F5F0E3" transform={`translate(${spine.x + 24 + li * 15} ${230 + bi * 215}) rotate(-90)`}>
-            {line}
-          </text>
-        )),
-      )}
-      <MarkG x={spine.x + 24} y={790} size={36} fill="#F5F0E3" />
+      <SpineG id={id} />
+    </Art>
+  );
+}
+
+// The spine laid flat across the page, twice its size (1674 x 170): turned a quarter clockwise, so its lines
+// read left to right, the mark at the left end and the first block at the right. The band slides in from the
+// right and the hard shadow under it lengthens (CSS keyframes on inner groups only).
+export function SpineBandArt() {
+  const { spine } = BOX;
+  const id = 'lp-plans-band';
+  return (
+    <Art viewBox="0 0 1714 214" title="The box spine laid flat: the three contact blocks and the mark" exportName="lp-plans-spine-band" style={{ width: '100%', height: 'auto' }}>
+      <MaterialDefs idp={id} />
+      <g className="sun-shadow">
+        <rect x="34" y="40" width="1674" height="170" fill="#1E140F" opacity="0.22" />
+      </g>
+      <g className="slide-up">
+        <g transform={`translate(${1674 + 20} 20) rotate(90) scale(2) translate(${-spine.x} ${-spine.y})`}>
+          <SpineG id={id} />
+        </g>
+      </g>
     </Art>
   );
 }
@@ -235,7 +272,8 @@ export function BoxTrayArt() {
       <rect {...tray} fill={`url(#${id}-board)`} filter={`url(#${id}-fibre)`} />
       <rect x={tray.x + 24} y={tray.y + 24} width={tray.width - 48} height={tray.height - 48} fill="#120B08" />
       <rect x={tray.x + 24} y={tray.y + 24} width={tray.width - 48} height="26" fill="#000000" opacity="0.5" />
-      <rect x={tray.x + 56} y={tray.y + 90} width={tray.width - 108} height={tray.height - 150} fill={`url(#${id}-board-dark)`} filter={`url(#${id}-fibre)`} />
+      <rect x={tray.x + 33} y={tray.y + 61} width="500" height="717" fill={`url(#${id}-board-dark)`} filter={`url(#${id}-fibre)`} />
+      <rect x={tray.x + 40} y="238" width="25" height="385" rx="8" fill="#0B0705" />
       <path d={`M${tray.x} ${tray.y + 1}H${tray.x + tray.width}`} stroke="#C29C78" strokeOpacity="0.5" strokeWidth="2" />
     </Art>
   );
@@ -250,7 +288,7 @@ export function BoxSheetArt() {
         <SheetG tone="white" />
       </g>
       {rings.map((ry) => (
-        <circle key={ry} cx={sheet.x + 22} cy={ry} r="7" fill="#1E140F" />
+        <circle key={ry} cx={sheet.x + 50} cy={ry} r="7" fill="#1E140F" />
       ))}
     </Art>
   );
@@ -261,9 +299,9 @@ export function BoxRingsArt() {
   return (
     <Art viewBox={VB} title="The two black rings" exportName="lp-plans-box-rings" style={FILL}>
       {rings.map((ry) => (
-        <g key={ry} transform={`translate(${sheet.x + 22} ${ry})`}>
-          <ellipse cx="-30" cy="6" rx="52" ry="17" transform="rotate(-8 -30 6)" fill="none" stroke="#0B0705" strokeWidth="9" />
-          <ellipse cx="-30" cy="3" rx="50" ry="14" transform="rotate(-8 -30 3)" fill="none" stroke="#5A4A41" strokeWidth="1.6" strokeOpacity="0.6" />
+        <g key={ry} transform={`translate(${sheet.x + 50} ${ry})`}>
+          <ellipse cx="-52" cy="6" rx="56" ry="17" transform="rotate(-8 -52 6)" fill="none" stroke="#0B0705" strokeWidth="9" />
+          <ellipse cx="-52" cy="3" rx="54" ry="14" transform="rotate(-8 -52 3)" fill="none" stroke="#5A4A41" strokeWidth="1.6" strokeOpacity="0.6" />
           <circle r="10" fill="#0B0705" />
           <circle cx="-2" cy="-2" r="3" fill="#5A4A41" />
         </g>

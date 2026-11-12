@@ -72,12 +72,18 @@
 
 /* ---------- Closing ---------- */
 .closing { background: var(--chocolate); padding-block: clamp(72px, 10vw, 160px); position: relative; overflow-x: clip; }
-.closingGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 96px); align-items: center; }
-.closingArt { min-width: 0; max-width: 520px; margin-left: auto; width: 100%; }
-@media (max-width: 900px) {
-  .closingGrid { grid-template-columns: minmax(0, 1fr); }
-  .closingArt { margin-left: 0; }
-}
+.closingAxis { display: grid; justify-items: center; text-align: center; gap: clamp(24px, 3.4vw, 48px); }
+.closingAxis :global(.t-display) { margin: 0; }
+.closingArt { min-width: 0; width: min(64vw, 300px); }
+.closingBlocks { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px clamp(32px, 6vw, 96px); padding-top: clamp(20px, 3vw, 36px); border-top: var(--hair) solid var(--line-on-dark); width: min(100%, 760px); text-align: left; }
+
+/* ---------- The spine laid flat ---------- */
+.spine { background: var(--studio); padding-block: clamp(56px, 8vw, 128px); overflow-x: clip; }
+.spineHead { display: flex; align-items: center; gap: 16px; margin-bottom: clamp(20px, 3vw, 40px); }
+.spineHead :global(.t-label) { margin: 0; }
+.spineRule { flex: 1; height: 1px; background: var(--line-strong); }
+.spineBand { min-width: 0; }
+.spineBand svg { display: block; }
 
 /* At phone width the box stays pinned above and the text slides under it. */
 @media (max-width: 900px) {

@@ -1,8 +1,8 @@
 // Artwork of the Spaces landing page. Abstract flat fields and gradients in the photo tones (never traced), the
-// framed poster of m14 and the white card of m10 rebuilt. Every component returns SVG groups for <Art>.
+// poster of m14 and the white card of m10 rebuilt. Every component returns SVG groups for <Art>.
 import { r2 } from '@/lib/charts';
-import { WordmarkG, MarkG } from '@/components/art/Mark';
-import { BrandDefs, CurvedWallG, BrickCurveG, SkyPatchG, SteppedShadowG, ArchWindowG, TimberG, quarterArch, PHOTO } from '@/components/art/KeyArt';
+import { WordmarkG } from '@/components/art/Mark';
+import { CurvedWallG, BrickCurveG, SkyPatchG, SteppedShadowG, TimberG, quarterArch, PHOTO } from '@/components/art/KeyArt';
 import { HEX, LINES } from '@/lib/brand';
 
 // ---------- Hero fields: the two posters of m11 (600 x 840) ----------
@@ -104,77 +104,70 @@ export function SunStepsG({ idp }) {
   );
 }
 
-// ---------- The framed poster of m14, rebuilt (800 x 1000): a wall of vertical fins under a dark ceiling ----------
-export function FramedPosterG({ idp }) {
-  const fins = Array.from({ length: 40 }, (_, i) => i);
-  const perf = Array.from({ length: 8 * 40 }, (_, i) => [(i % 40) * 20 + 10, 18 + Math.floor(i / 40) * 12]);
+// ---------- The poster of m14 as the print (524 x 829): a thin black frame round a 500 x 805 poster ----------
+// Re-measured from m14 at 2800 px (poster 393 x 633 there): the photo field fills the top 50 %, the beige panel
+// the rest; the line at x 36 with baselines 459 / 497 / 535 (37 px); the sub-line at 577 / 590; the word-mark at
+// (36, 738), 159 wide; "We Build Spaces / of Imagination" right-aligned at 475, baselines 726 / 744.
+const P = { x: 12, y: 12, w: 500, h: 805, photo: 402 };
+export function FlatPosterG({ idp }) {
+  const { x, y, w, h, photo } = P;
+  const at = (dx, dy) => ({ x: x + dx, y: y + dy });
   return (
     <g>
-      <BrandDefs idp={idp} />
-      <defs>
-        <linearGradient id={`${idp}-light`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#000000" stopOpacity="0.05" />
-          <stop offset="0.7" stopColor="#000000" stopOpacity="0.3" />
-          <stop offset="1" stopColor="#000000" stopOpacity="0.5" />
-        </linearGradient>
-        <linearGradient id={`${idp}-floor`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#6A6259" />
-          <stop offset="1" stopColor="#4A433C" />
-        </linearGradient>
-      </defs>
-      <rect width="800" height="1000" fill="#2B241E" />
-      {perf.map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="1.6" fill="#4A4036" />)}
-      {fins.map((i) => (
-        <g key={i} className="rise" style={{ '--i': i % 20 }}>
-          <rect x={i * 20} y="110" width="20" height="780" fill={i % 2 ? '#7C6742' : '#6A5836'} />
-          <rect x={i * 20 + 14} y="110" width="6" height="780" fill="#000000" opacity="0.28" />
-        </g>
-      ))}
-      <rect y="110" width="800" height="780" fill={`url(#${idp}-light)`} />
-      <rect y="890" width="800" height="110" fill={`url(#${idp}-floor)`} />
-      {/* the frame, its soft shade on the fins, then the poster */}
-      <rect x="168" y="168" width="500" height="700" fill="#000000" opacity="0.28" />
-      <rect x="150" y="150" width="500" height="700" fill="#0A0806" />
-      <g className="fade-in" style={{ '--i': 6 }}>
-        <SkyPatchG idp={`${idp}-sky`} x={175} y={175} w={450} h={345} />
-        <rect x="175" y="520" width="450" height="305" fill="#F2EBDC" />
-        <text className="serif" fontSize="34" letterSpacing="-0.6" fill={HEX.chocolate}>
-          {LINES.elevate.rows.map((r, i) => <tspan key={r} x="205" y={578 + i * 38}>{r}</tspan>)}
-        </text>
-        <text className="sans" fontSize="10" fill={HEX.chocolate}>
-          {LINES.refined.rows.map((r, i) => <tspan key={r} x="205" y={706 + i * 14}>{r}</tspan>)}
-        </text>
-        <WordmarkG idp={idp} x={205} y={776} width={140} fill={HEX.tribal} />
-        <text className="serif" fontSize="12" fill={HEX.chocolate} textAnchor="end">
-          {LINES.imagination.rows.map((r, i) => <tspan key={r} x="595" y={778 + i * 15}>{r}</tspan>)}
-        </text>
+      <rect width={w + 2 * x} height={h + 2 * y} fill="#0A0806" />
+      <g className="fade-in" style={{ '--i': 2 }}>
+        <SkyPatchG idp={`${idp}-sky`} x={x} y={y} w={w} h={photo} />
       </g>
+      <rect x={x} y={y + photo} width={w} height={h - photo} fill="#F2EBDC" />
+      <text className="serif" fontSize="37" letterSpacing="-0.5" fill={HEX.chocolate}>
+        {LINES.elevate.rows.map((r, i) => <tspan key={r} {...at(36, 459 + i * 38)}>{r}</tspan>)}
+      </text>
+      <text className="sans" fontSize="10.5" fill={HEX.chocolate}>
+        {LINES.refined.rows.map((r, i) => <tspan key={r} {...at(36, 577 + i * 13)}>{r}</tspan>)}
+      </text>
+      <WordmarkG idp={idp} x={x + 36} y={y + 738} width={159} fill={HEX.tribal} />
+      <text className="serif" fontSize="16.5" fill={HEX.chocolate} textAnchor="end">
+        {LINES.imagination.rows.map((r, i) => <tspan key={r} {...at(475, 726 + i * 18)}>{r}</tspan>)}
+      </text>
     </g>
   );
 }
 
-// ---------- The white card of m10 / m01 (600 x 720): lines, "→ sahra.sa" and a timber cut by the quarter arch ----------
+// ---------- The white card of m10 (680 x 520): a landscape card 600 x 422 on the studio ground ----------
+// Re-measured from m10 at 2800 px: the line at x 37 with baselines 71 / 114 / 157 (41 px); the sub-line in
+// Tribal Brown at 205 / 226; "→ sahra.sa" at 386; the timber seen through a thick arch whose centre is at
+// (490, 347), radii 192 and 61, running straight down to the bottom edge and straight out to the right edge.
+// No mark is printed on this card.
+const C = { x: 40, y: 40, w: 600, h: 422, cx: 490, cy: 347, R: 192, r: 61 };
 export function CardG({ idp }) {
+  const { x, y, w, h, R, r } = C;
+  const cx = x + C.cx, cy = y + C.cy;
+  const arch = `M${cx - R} ${y + h}V${cy}A${R} ${R} 0 0 1 ${cx} ${cy - R}H${x + w}V${cy - r}H${cx}A${r} ${r} 0 0 0 ${cx - r} ${cy}V${y + h}Z`;
   return (
     <g>
-      <rect width="600" height="720" fill="#F7F3EA" />
+      <rect width="680" height="520" fill="#F7F3EA" />
       <g className="sun-shadow">
-        <rect x="84" y="86" width="480" height="600" fill="#35241C" opacity="0.14" />
+        <rect x={x + 18} y={y + 20} width={w} height={h} fill="#35241C" opacity="0.14" />
       </g>
-      <rect x="60" y="60" width="480" height="600" fill="#FFFFFF" />
-      <text className="serif" fontSize="36" letterSpacing="-0.6" fill={HEX.chocolate}>
-        {LINES.elevate.rows.map((r, i) => <tspan key={r} x="100" y={140 + i * 42}>{r}</tspan>)}
+      <rect x={x} y={y} width={w} height={h} fill="#FFFFFF" />
+      <text className="serif" fontSize="41" letterSpacing="-0.6" fill={HEX.chocolate}>
+        {LINES.elevate.rows.map((row, i) => <tspan key={row} x={x + 37} y={y + 71 + i * 43}>{row}</tspan>)}
       </text>
-      <text className="sans" fontSize="12" fill={HEX.muted}>
-        {LINES.refined.rows.map((r, i) => <tspan key={r} x="100" y={286 + i * 17}>{r}</tspan>)}
+      <text className="sans" fontSize="15.5" fill={HEX.tribal}>
+        {LINES.refined.rows.map((row, i) => <tspan key={row} x={x + 37} y={y + 205 + i * 21}>{row}</tspan>)}
       </text>
+      <defs>
+        <clipPath id={`${idp}-arch`}>
+          <path d={arch} />
+        </clipPath>
+      </defs>
       <g className="fade-in" style={{ '--i': 3 }}>
-        <ArchWindowG idp={idp} cx={540} cy={660} r={150} R={360} quadrant="tl">
-          <TimberG idp={`${idp}-tw`} x={180} y={300} w={360} h={360} lines={44} />
-        </ArchWindowG>
+        <g clipPath={`url(#${idp}-arch)`}>
+          <TimberG idp={`${idp}-tw`} x={cx - R} y={cy - R} w={x + w - (cx - R)} h={y + h - (cy - R)} lines={40} />
+          <path d={arch} fill={PHOTO.shade} opacity="0.35" />
+        </g>
       </g>
-      <text className="sans" x="100" y="624" fontSize="13" fill={HEX.sandInk}>{'→ sahra.sa'}</text>
-      <MarkG x={472} y={92} size={34} fill={HEX.sand} />
+      <text className="sans" x={x + 37} y={y + 386} fontSize="16.5" fill={HEX.tribal}>{'→ sahra.sa'}</text>
     </g>
   );
 }

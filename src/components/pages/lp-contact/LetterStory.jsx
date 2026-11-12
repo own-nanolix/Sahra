@@ -13,7 +13,7 @@ import s from './lp-contact.module.css';
 //   step 0 the From and To blocks   steps 1 to 5 the paragraphs   step 6 the close
 const STEPS = LETTER.paragraphs.length + 2;
 // How far the letter has risen (percent of the stage height) at each step: it comes out and stops.
-const RISE = [48, 26, 0, 0, 0, 0, 0];
+const RISE = [46, 24, 0, 0, 0, 0, 0];
 
 function Block({ lines }) {
   return (

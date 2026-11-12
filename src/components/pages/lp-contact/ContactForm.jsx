@@ -15,11 +15,11 @@ import s from './lp-contact.module.css';
 // A contact form on Beige with real states: required fields, an invalid email, and a sent state. The sent
 // state says plainly that no network request is made: nothing leaves the page.
 const TOPICS = [
-  { value: 'support', label: 'Support', to: CONTACT.support },
-  { value: 'partnerships', label: 'Partnerships', to: CONTACT.partnerships },
-  { value: 'info', label: 'Information', to: CONTACT.info },
+  { value: 'info', label: CONTACT.info, to: CONTACT.info },
+  { value: 'support', label: CONTACT.support, to: CONTACT.support },
+  { value: 'partnerships', label: CONTACT.partnerships, to: CONTACT.partnerships },
 ];
-const EMPTY = { name: '', email: '', topic: 'support', message: '' };
+const EMPTY = { name: '', email: '', topic: 'info', message: '' };
 
 function check(v) {
   const e = {};
@@ -90,7 +90,7 @@ export default function ContactForm() {
       <div className={`wrap ${s.formGrid}`}>
         <div className={s.formCopy}>
           <Reveal>
-            <p className="t-label sand-ink">Write to Sahra</p>
+            <p className="t-label sand-ink">Contact form</p>
             <Lines as="h2" id="lp-contact-form-h" rows={LINES.builtAround.rows} className="t-h1" />
           </Reveal>
           <Reveal delay={120}>
@@ -127,11 +127,10 @@ export default function ContactForm() {
                 </div>
                 <Field
                   id="lp-contact-topic"
-                  label="Topic"
+                  label="To"
                   as="select"
                   value={values.topic}
                   onChange={set('topic')}
-                  hint={`This goes to ${topic.to}.`}
                 >
                   {TOPICS.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
                 </Field>

@@ -5,13 +5,16 @@ import Hero from '@/components/pages/lp-plans/Hero';
 import BoxStory from '@/components/pages/lp-plans/BoxStory';
 import PlanStudy from '@/components/pages/lp-plans/PlanStudy';
 import Grounds from '@/components/pages/lp-plans/Grounds';
+import Spine from '@/components/pages/lp-plans/Spine';
 import Closing from '@/components/pages/lp-plans/Closing';
 import s from '@/components/pages/lp-plans/lp-plans.module.css';
 
 export const metadata = pageMeta('lp-plans');
 
-// Plans: a tilted tablet with the plan on Tribal Brown, then the presentation box opening in stages beside the
-// plan text, the plan enlarged, the sheet on Beige or Dark, and the closing call.
+// Plans, in order (nav and footer shared): 1 nav on Tribal Brown   2 hero: a tilted tablet with the plan
+// 3 the story: the presentation box (m13) pinned at the LEFT, opening in stages   4 the plan enlarged on its grid
+// with three details   5 the sheet on Beige or Dark, with its colours   6 the spine laid flat   7 the closing
+// call on one centre axis   8 footer.
 export default function Page() {
   return (
     <section className={`page ${s.page}`} style={{ paddingBottom: 0 }} id="p-lp-plans" aria-label="Landing: Plans">
@@ -22,6 +25,7 @@ export default function Page() {
       <BoxStory />
       <PlanStudy />
       <Grounds />
+      <Spine />
       <Closing />
       <LandingFooter />
     </section>
