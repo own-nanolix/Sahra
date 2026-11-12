@@ -104,3 +104,5 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
 - R7, `src/components/art/Devices.jsx` (and `src/components/ui` phone frame if it has one): the phone frame has a notch shaped like one maker's phone; make it a plain neutral bar or a small centred slot.
 - Cross-page dependency to remove: `showcase` imports from `src/components/pages/feature/plan-art` (it broke when the feature reviewer changed that file). Copy what showcase needs into its own folder.
 - R3, LAYOUTS.md row 18 (dashboard): drop "and a trend line" from option A (it now has one hero chart, the arch, as the rule file asks).
+- R1: add an error colour to the shared `HEX` map (`HEX.error`) so pages do not carry their own. An unused file `src/components/pages/strategy/ScopeMap.jsx` is kept (files are never deleted).
+- Accessibility changes that altered the look (R1): on the rebuilt palette slide Sand's four value lines are Dark Chocolate (5.0:1; the name stays white) and tint labels are darkened per tint; on the type slide the greyed weights are #767676.
