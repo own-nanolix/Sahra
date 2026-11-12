@@ -1,0 +1,44 @@
+/* The stationery page. Layout only: every graphic keeps its geometry in SVG attributes. */
+.page { padding-bottom: calc(var(--band) / 2); }
+
+.head { padding-block: clamp(36px, 6vw, 96px) clamp(20px, 3vw, 40px); display: grid; gap: 18px; max-width: 920px; }
+.head p { max-width: 62ch; }
+.enter { animation: use-stationery-rise var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 120ms + 80ms); }
+@keyframes use-stationery-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+.section { padding-top: clamp(28px, 4vw, 64px); display: grid; gap: clamp(14px, 2vw, 28px); }
+.sectionHead { display: grid; gap: 8px; border-top: var(--hair) solid var(--line-strong); padding-top: 16px; }
+.sectionHead p { max-width: 64ch; }
+
+.fig { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; height: 100%; }
+.plate { border-radius: var(--r-card-sm); overflow: hidden; line-height: 0; }
+.plate svg, .art svg { display: block; width: 100%; height: auto; }
+.cap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: 12px; color: var(--muted); }
+
+/* A tile of flat artwork sits on a light ground; its drawings keep their own proportions. */
+.flatTile { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+.flatTile .art { display: grid; place-items: center; flex: 1; }
+.flatTile .art svg { width: 100%; max-height: 100%; filter: drop-shadow(0 10px 14px rgba(53, 36, 28, 0.14)); }
+.stackArts { display: grid; gap: 14px; align-content: start; }
+.pairArts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pairArts .wide { grid-column: span 2; }
+.slim { max-width: 78%; margin-inline: auto; }
+
+/* The slide strip scrolls inside its own box. */
+.strip { overflow-x: auto; border-radius: var(--r-card-sm); background: var(--beige-60); padding: clamp(12px, 1.6vw, 24px); }
+.strip:focus-visible { outline: 2px solid var(--tribal); outline-offset: 3px; }
+.slides { display: flex; gap: var(--gap); width: max-content; min-width: 100%; }
+.slide { flex: none; width: clamp(280px, 38vw, 560px); margin: 0; display: grid; gap: 8px; }
+.slide svg { display: block; width: 100%; height: auto; box-shadow: 0 1px 0 var(--line-strong), 0 14px 24px -14px rgba(53, 36, 28, 0.35); }
+.slide span { font-size: 12px; color: var(--muted); }
+
+.bento3 > * { min-width: 0; }
+@media (max-width: 900px) {
+  .slim { max-width: 100%; }
+}
+.padCap { padding: 0 14px 12px; }
+
+/* The list of pieces: ruled rows in two columns. */
+.list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(20px, 4vw, 72px); }
+.list li { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: baseline; padding: 14px 0; border-bottom: var(--hair) solid var(--line-strong); }
+@media (max-width: 700px) { .list { grid-template-columns: minmax(0, 1fr); } }
