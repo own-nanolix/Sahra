@@ -83,3 +83,5 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
 - Steps 2 and 3 done: 16 images in reference/ (headed Chrome), stills cut from the animation, SOURCE.md written.
 - Step 4 done: LAYOUTS.md, pages.json, shared system, 30 stub routes, BRIEF.md. Lint clean, build passes, check
   lists 30 stubs and "/". The dev server is not left running (the lead starts it for the build team).
+- Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
+- Wave 1 done: 12 builders, 17 pages, each committed locally; lint clean, build passes, check 17 of 30 ok; every page is over 700 lines. Shared fix: the landing nav fits at phone width (brand shrinks, links wrap). Wave 2 launched (B13 to B24, Sonnet).

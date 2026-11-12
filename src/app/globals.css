@@ -359,6 +359,7 @@ textarea.input { padding: 12px 14px; min-height: 120px; resize: vertical; }
 .lp-actions { display: flex; gap: 8px; align-items: center; }
 .lp-menu { display: none; }
 @media (max-width: 900px) { .lp-nav { flex-wrap: wrap; } .lp-links { order: 3; width: 100%; } }
+@media (max-width: 640px) { .lp-nav { gap: 10px; } .lp-brand { min-width: 0; flex: 0 1 46vw; } .lp-brand svg { width: 100%; height: auto; } .lp-actions { flex: 0 0 auto; } .lp-links { flex-wrap: wrap; overflow-x: visible; } }
 .lp-footer { padding-block: clamp(48px, 7vw, 112px) 40px; background: var(--chocolate); color: var(--beige); }
 .lp-footer-grid { display: grid; grid-template-columns: minmax(0, 5fr) repeat(3, minmax(0, 2fr)); gap: var(--gap); align-items: start; }
 .lp-foot-head { font-size: 12px; margin-bottom: 12px; color: var(--beige-muted); }
