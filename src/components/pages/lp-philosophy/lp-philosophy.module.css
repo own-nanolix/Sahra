@@ -1,0 +1,221 @@
+/* lp-philosophy: Black hero as m14 (right), a story with the quarter arch pinned at the left, a dark pause,
+   a quiet type section (m06) and a closing curved-wall field. Keyframes are named lp-philosophy-*. */
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--black);
+  color: var(--beige);
+}
+.heroBody {
+  flex: 1;
+  width: 100%;
+  max-width: 1680px;
+  margin-inline: auto;
+  padding: clamp(36px, 7vw, 112px) var(--pad) 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(48px, 10vw, 160px);
+}
+.headline {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 8.4vw, 150px);
+  line-height: 1.04;
+  letter-spacing: -0.026em;
+  white-space: nowrap;
+}
+.mask { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.line {
+  display: block;
+  animation: lp-philosophy-line var(--dur-4) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 130ms + 240ms);
+}
+.spread { display: flex; justify-content: space-between; gap: 0.5em; }
+@keyframes lp-philosophy-line {
+  from { transform: translateY(108%); }
+  to { transform: none; }
+}
+.heroFoot { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.heroMark { width: clamp(40px, 4.4vw, 68px); height: auto; }
+.heroUrl {
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: var(--beige);
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 0 var(--line-on-dark);
+  transition: box-shadow var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
+  animation: lp-philosophy-fade var(--dur-4) var(--ease-out) 1.2s both;
+}
+.heroUrl:hover { color: var(--sand); box-shadow: inset 0 -1px 0 0 var(--sand); }
+.heroUrl:active { color: var(--beige); }
+.heroUrl:focus-visible { outline-color: var(--sand); }
+@keyframes lp-philosophy-fade { from { opacity: 0; } to { opacity: 1; } }
+.heroRule {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--sand);
+  transform-origin: 0 50%;
+  animation: lp-philosophy-rule var(--dur-5) var(--ease-draw) 0.4s both;
+}
+@keyframes lp-philosophy-rule { from { transform: scaleX(0); } to { transform: none; } }
+
+/* ---------- Story ---------- */
+.story { background: var(--beige); padding-block: clamp(64px, 9vw, 140px) 0; }
+.storyHead { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px clamp(24px, 4vw, 80px); align-items: end; margin-bottom: clamp(32px, 6vw, 96px); }
+.storyHead .t-label { grid-column: 1 / -1; }
+.storyLead { margin: 0; max-width: 34em; color: var(--muted); }
+.storyHead h2 { margin-top: 14px; }
+.storyGrid { align-items: start; }
+.pin { flex-direction: column; gap: 18px; }
+.archBox { position: relative; width: min(100%, 78vh); aspect-ratio: 1; }
+.archSvg { width: 100%; height: 100%; }
+.seg { fill: var(--sand-40); transition: fill var(--dur-4) var(--ease-sun); }
+.seg[data-on="true"] { fill: var(--sand); }
+.seg[data-now="true"] { fill: var(--tribal); }
+.counter { position: absolute; right: 7%; bottom: 7%; margin: 0; text-align: right; color: var(--chocolate); }
+.dots { display: flex; gap: 6px; }
+.dot {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  position: relative;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dot:focus-visible { outline: 2px solid var(--tribal); outline-offset: 1px; }
+.dot::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 12px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--sand);
+  opacity: 0.45;
+  transition: opacity var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out);
+}
+.dot:hover::before { opacity: 1; }
+.dot:active::before { background: var(--chocolate); }
+.dot[aria-current="true"]::before { background: var(--tribal); opacity: 1; }
+.steps { padding-block: 14vh 24vh; gap: clamp(26vh, 36vh, 44vh); }
+.step { opacity: 0.38; transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out); transform: translateX(10px); }
+.step[data-active="true"] { opacity: 1; transform: none; }
+.stepsEnd {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding-top: 4vh;
+}
+.stepText {
+  margin: 10px 0 0;
+  font-size: clamp(18px, 1.65vw, 26px);
+  line-height: 1.42;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* ---------- Statement ---------- */
+.statement { position: relative; overflow: hidden; padding-block: clamp(72px, 10vw, 160px); }
+.statementGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(32px, 6vw, 112px);
+  align-items: start;
+}
+.refined { margin-top: 28px; max-width: 24em; color: var(--beige-muted); }
+.rings { position: absolute; right: 0; bottom: 0; width: min(44vw, 520px); height: auto; opacity: 0.32; z-index: 0; pointer-events: none; }
+
+/* ---------- Poster on fins (m14, left) ---------- */
+.poster { background: #3a322a; color: var(--beige); }
+.posterSvg { width: 100%; height: auto; max-height: 92vh; margin-inline: auto; }
+.posterCap {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr) auto;
+  gap: 16px clamp(24px, 4vw, 72px);
+  align-items: start;
+  padding-block: 20px 28px;
+  font-size: 13px;
+  color: var(--beige-muted);
+  border-top: 1px solid var(--line-on-dark);
+}
+.poster .posterCap :global(a.site-url) { color: var(--beige); }
+.posterBody { margin: 0; max-width: 46em; font-size: 14px; line-height: 1.55; }
+.posterCap address { color: var(--beige-muted); }
+
+/* ---------- Scope of work ---------- */
+.scope { background: var(--beige); padding-block: clamp(56px, 8vw, 120px); }
+.scopeHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 40px); }
+.scopeNote { margin: 0; }
+.scopeSvg { width: 100%; height: auto; }
+
+/* ---------- Type (m06), quieter ---------- */
+.type { padding-block: clamp(64px, 8vw, 128px) clamp(24px, 3vw, 48px); }
+.typeTop { display: flex; justify-content: space-between; gap: 32px; align-items: flex-start; margin-bottom: clamp(32px, 5vw, 80px); }
+.charset { text-align: right; min-width: 0; overflow-wrap: anywhere; max-width: 36ch; }
+.charset p { letter-spacing: 0.04em; }
+.typeBody {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 3fr);
+  gap: clamp(20px, 3vw, 56px);
+  align-items: start;
+}
+.typePara { margin: 0; max-width: 30em; }
+.weights { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 14px; color: var(--muted); }
+.weightOn { color: var(--ink); }
+.specimen { width: 100%; height: auto; margin-top: clamp(32px, 5vw, 72px); }
+
+/* ---------- Closing field ---------- */
+.closing { position: relative; min-height: clamp(460px, 74vh, 760px); overflow: hidden; background: var(--chocolate); }
+.wallSvg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.shadeG { transform-box: fill-box; transform-origin: 0 100%; }
+.closing[data-in="true"] .shadeG { animation: lp-philosophy-shade var(--dur-5) var(--ease-sun) 200ms both; }
+@keyframes lp-philosophy-shade { from { opacity: 0; transform: scale(1, 0.4); } to { opacity: 1; transform: none; } }
+.closingShade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(53, 36, 28, 0) 38%, rgba(53, 36, 28, 0.88) 100%); }
+.closingText {
+  position: relative;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  padding-block: clamp(32px, 6vw, 96px);
+  color: var(--beige);
+}
+.closingFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 40px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-on-dark);
+}
+.closing[data-in="true"] .closingText > * { animation: lp-philosophy-rise var(--dur-4) var(--ease-out) 0.3s both; }
+@keyframes lp-philosophy-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 900px) {
+  .storyGrid .pin { z-index: 2; height: 44vh; background: var(--beige); gap: 8px; top: 0; }
+  .storyGrid .archBox { width: min(100%, 36vh); }
+  .counter { right: 6%; bottom: 6%; }
+  .storyGrid .steps { z-index: 1; padding-block: 8vh 16vh; gap: 28vh; }
+  .step { opacity: 1; transform: none; }
+  .statementGrid, .storyHead, .posterCap { grid-template-columns: minmax(0, 1fr); }
+  .typeBody { grid-template-columns: minmax(0, 1fr); }
+  .typeTop { flex-direction: column; }
+  .charset { text-align: left; }
+}
