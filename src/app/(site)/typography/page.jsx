@@ -45,8 +45,7 @@ export default function Page() {
               balance between them is the brand&apos;s dialogue between elegance and precision.
             </p>
             <p className="t-small slide-up" style={{ '--i': 4 }}>
-              The brand serif, Test Tiempos Text, is a commercial face. This site is set in the closest free match;
-              the font names are in the report.
+              The brand serif is a commercial face. This site is set in the closest free match.
             </p>
           </div>
         </header>

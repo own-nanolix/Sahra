@@ -69,8 +69,8 @@ Everything learned from the case study. Images are in `reference/` (local only, 
   "Client: Sahra Development"; "Industry: Real Estate"; "Location: Riyadh, Saudi Arabia"; "Date: 2026".
   Bottom left: four round credit badges ("FS", "93", two portraits: not reproduced).
 - **m03** (animation) The word-mark's construction on beige with fine grain: thin brown outlines, blue square
-  anchor points, a grid of fine vertical and horizontal guides; then a close-up with red 42° diagonals (labelled
-  "42°"), pink unit bars labelled "x" (stroke width, repeated under each stem and beside the bowls) and "y"
+  anchor points, a grid of fine vertical and horizontal guides; then a close-up with red diagonals (labelled
+  "34°" on the Latin cuts and "42°" on the Arabic cuts), pink unit bars labelled "x" (stroke width, repeated under each stem and beside the bowls) and "y"
   (the small gap / step), brown double-headed arrows.
 - **m04** The word-mark in Sand on Dark Chocolate Brown, centred, about half the width.
 - **m05** Palette. Left column: "Black" (HEX #000000, RGB 0, 0, 0, HSB 0, 0%, 0, CMYK 100, 0, 0, 0) over "Dark
@@ -191,11 +191,11 @@ timber about #A8743F).
 ## Shapes and components
 
 - **Word-mark:** Latin "Sahra" and Arabic "صحراء" joined into one line of equal-weight strokes on a grid. Stroke
-  width is the unit **x**; counters and gaps are x; small steps are **y**; all diagonal cuts are at **42°**;
-  corners are quarter circles on a grid of concentric radii; (measured in step 4 on m04 at 2800 px: stroke 32 px, cut-topped stems 35, bowl and corner radii 72.5 / 40.5, the hah's corners 54 / 22; the cuts drawn and labelled "42°" in m03 measure 45° on the artwork itself, and the red guide lines in m03 also run at 45°) the Arabic letters carry two short bars above; a
+  width is the unit **x**; counters and gaps are x; small steps are **y**; all diagonal cuts share one angle (the stills print "34°" on the Latin cuts and "42°" on the Arabic cuts; on the artwork they measure 45°);
+  corners are quarter circles on a grid of concentric radii; (measured in step 4 on m04 at 2800 px: stroke 32 px, cut-topped stems 35, bowl and corner radii 72.5 / 40.5, the hah's corners 54 / 22; the cuts drawn in m03, labelled "34°" (Latin) and "42°" (Arabic), measure 45° on the artwork itself, and the red guide lines in m03 also run at 45°) the Arabic letters carry two short bars above; a
   small ring with an open centre sits above the join.
 - **Mark:** the "S" of the word-mark alone: two interlocking brackets, a rounded top-left corner and a rounded
-  bottom-right corner, each arm ending in a 42° cut, with a gap of y between them. Also used inside a rounded
+  bottom-right corner, each arm ending in an angled cut, with a gap of y between them. Also used inside a rounded
   beige tile as the profile icon.
 - **Quarter arch:** a thick quarter ring, used as a window that crops a photograph, as the header shape of the
   profile card, and as the large rounded corner cutting the hoarding photo.
@@ -217,7 +217,7 @@ for moves; no overshoot.
 ## Brand idea (our words, from this case study only)
 
 Sahra treats real estate as careful architecture for living, not a transaction: every space is drawn with
-intention, the way its word-mark is drawn on a grid of equal strokes and exact 42° cuts. It turns the desert's
+intention, the way its word-mark is drawn on a grid of equal strokes and exact angled cuts. It turns the desert's
 own tones and hard light into calm, refined places, joining Arabic and Latin, heritage and modern life, in one
 line.
 

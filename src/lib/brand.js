@@ -56,8 +56,8 @@ export const HEX = {
 
 // ---------- Type (m06) ----------
 export const TYPE = {
-  family: 'Test Tiempos Text',
-  weights: ['Test Tiempos Text Regular', 'Test Tiempos Text Medium', 'Test Tiempos Text SemiBold', 'Test Tiempos Text Bold'],
+  family: 'Brand serif',
+  weights: ['Brand serif Regular', 'Brand serif Medium', 'Brand serif SemiBold', 'Brand serif Bold'],
   charset: ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '0123456789', "~`/?<>.,':;|{}[]=-+_()*&^%$#@!"],
   specimen: 'Aa123%!',
   text: [

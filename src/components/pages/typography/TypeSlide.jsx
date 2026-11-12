@@ -8,7 +8,7 @@ import { CHARSET, FAMILY, GREY, PARAGRAPH_LINES, SPECIMEN, WEIGHT_LINES } from '
 // The three lighter weights are set in a darker grey than the print so that they reach 4.5:1 (data.js).
 export default function TypeSlide({ exportName = 'typography-slide' }) {
   return (
-    <Art viewBox="0 0 1600 1143" title="Type slide: Test Tiempos Text, the character set, two paragraphs, four weights and Aa123%!" exportName={exportName}>
+    <Art viewBox="0 0 1600 1143" title="Type slide: Brand serif, the character set, two paragraphs, four weights and Aa123%!" exportName={exportName}>
       <rect width="1600" height="1143" fill={HEX.white} />
       <g className="fade-in">
         <text className="sans" x="56" y="74" fontSize="15" fill={HEX.black}>{FAMILY}</text>

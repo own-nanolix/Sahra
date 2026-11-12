@@ -316,8 +316,8 @@ Hex values for SVG attributes are in `HEX`, `PALETTE` and `TINTS` from `@/lib/br
 
 It is traced, not typeset: never imitate it with a font. Construction (`WM`): one stroke x = 32 units; the tall
 cut stems (h, alif) 35; bowls and corners outer radius 72.5, inner 40.5; the hah's small corners 54 / 22; every
-cut end on the same diagonal. **The construction drawing (m03) labels the cuts "42°"; on the artwork they
-measure 45°**: the trace follows the artwork, and construction diagrams print the label "42°" as the designers
+cut end on the same diagonal. **The construction drawing (m03) prints "34°" on the Latin cuts and "42°" on the Arabic cuts; on the artwork they
+measure 45°**: the trace follows the artwork, and construction diagrams print those labels as the designers
 did. Guides: top 0, x-height 56, centre 128.5, bar 169, baseline 201, descender 250.5. The trace matches m04
 within 2.5 % of its inked pixels. Colour versions are only the four of m09 plus the mark in Sand on Dark
 Chocolate (m04), black on white paper (the tube label, m01), and the blind deboss on board.

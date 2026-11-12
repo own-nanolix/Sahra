@@ -3,7 +3,7 @@ import { PEOPLE, CONTACT_BLOCKS } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { BackdropG, SCENE } from '@/components/art/Mockup';
 import { MarkG, WordmarkDebossG } from '@/components/art/Mark';
-import { ID, C, T, Sheet, Plate, Cast, EdgeFace } from './kit';
+import { ID, C, T, Sheet, Plate, Cast } from './kit';
 
 export const CARD = [660, 400];
 
@@ -45,16 +45,39 @@ export const CardFrontArt = () => <CardArt name="card-front" title="Business car
 export const CardDarkArt = () => <CardArt name="card-front-dark" title="Business card, front, Dark Chocolate" kind="dark" />;
 export const CardBackArt = () => <CardArt name="card-back" title="Business card, back, Tribal Brown with the word-mark debossed" kind="back" />;
 
-// The isometric map of a card face: u along the width goes right and up, v along the height goes right and down.
-const U = [0.9, -0.28], V = [0.5, 0.4];
+// The isometric map of a card face, measured on m08: the width runs right and up (a long edge of about 347 by -180 px
+// on the 1400 px plate), the height runs right and down (about 172 by 142 px).
+const U = [0.526, -0.273], V = [0.43, 0.355];
 const P = (ox, oy, u, v) => [r2(ox + U[0] * u + V[0] * v), r2(oy + U[1] * u + V[1] * v)];
+
+// One face of a stack of n cards: each card is its own painted Tribal Brown strip with a dark gap line under it.
+const EDGE_TONES = ['#875D41', '#7F563A', '#8C6244', '#80583C', '#885F42'];
+function Edges({ p0, p1, th, n, shade = 0 }) {
+  const [x0, y0] = p0, [x1, y1] = p1;
+  const h = th / n;
+  return (
+    <g>
+      {Array.from({ length: n }, (_, i) => {
+        const o = r2(h * i), o2 = r2(h * (i + 1));
+        return (
+          <g key={i}>
+            <path d={`M${x0} ${r2(y0 + o)}L${x1} ${r2(y1 + o)}V${r2(y1 + o2)}L${x0} ${r2(y0 + o2)}Z`} fill={EDGE_TONES[(i * 3) % EDGE_TONES.length]} />
+            <path d={`M${x0} ${r2(y0 + o2 - 0.6)}L${x1} ${r2(y1 + o2 - 0.6)}`} stroke="#2A1B14" strokeOpacity="0.62" strokeWidth="1.3" />
+            <path d={`M${x0} ${r2(y0 + o + 0.5)}L${x1} ${r2(y1 + o + 0.5)}`} stroke="#FFFFFF" strokeOpacity="0.09" strokeWidth="0.8" />
+          </g>
+        );
+      })}
+      {shade > 0 && <path d={`M${x0} ${y0}L${x1} ${y1}V${r2(y1 + th)}L${x0} ${r2(y0 + th)}Z`} fill="#2A1B14" opacity={shade} />}
+    </g>
+  );
+}
 
 function StackG({ m, idp, ox, oy, th, n, kind }) {
   const a = P(ox, oy, 0, 0), c = P(ox, oy, 660, 400), d = P(ox, oy, 0, 400);
   return (
     <g>
-      <EdgeFace p0={a} p1={d} th={th} n={n} fill="#7C5439" />
-      <EdgeFace p0={d} p1={c} th={th} n={n} fill="#6A452D" op={0.4} />
+      <Edges p0={a} p1={d} th={th} n={n} />
+      <Edges p0={d} p1={c} th={th} n={n} shade={0.28} />
       <g transform={`matrix(${U[0]} ${U[1]} ${V[0]} ${V[1]} ${ox} ${oy})`}>
         <CardG m={m} kind={kind} idp={idp} />
       </g>
@@ -63,16 +86,21 @@ function StackG({ m, idp, ox, oy, th, n, kind }) {
   );
 }
 
+// m08: two stacks of about 20 cards, the off-white one behind-left and the Tribal Brown one pushed against it
+// (its origin sits one card height plus a hair down the short axis and a little along the long axis).
 export function CardsPlate() {
   const m = `${ID}-cards-m`;
-  const th = 62, n = 26;
-  const A = [130, 480], B = [500, 650];
-  const base = ([ox, oy]) => [P(ox, oy, 0, 0), P(ox, oy, 660, 0), P(ox, oy, 660, 400), P(ox, oy, 0, 400)].map(([x, y]) => [x, y + th]);
+  const th = 120, n = 20;
+  const A = [257, 382], B = [522, 499];
+  const hull = ([ox, oy]) => {
+    const top = [P(ox, oy, 0, 0), P(ox, oy, 660, 0), P(ox, oy, 660, 400), P(ox, oy, 0, 400)];
+    return [...top, ...top.map(([x, y]) => [x, y + th])];
+  };
   return (
     <Plate name="business-cards" title="Two stacks of business cards with painted Tribal Brown edges" w={1400} h={1000} m={m}>
       <BackdropG idp={`${ID}-cards-bd`} w={1400} h={1000} horizon={0.07} wall={SCENE.sand40} floor={SCENE.beige} />
-      <Cast pts={base(A)} len={170} />
-      <Cast pts={base(B)} len={170} />
+      <Cast pts={hull(A)} len={250} />
+      <Cast pts={hull(B)} len={330} />
       <StackG m={m} idp={`${ID}-cards-a`} ox={A[0]} oy={A[1]} th={th} n={n} kind="front" />
       <StackG m={m} idp={`${ID}-cards-b`} ox={B[0]} oy={B[1]} th={th} n={n} kind="back" />
     </Plate>

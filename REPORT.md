@@ -169,4 +169,32 @@ Not verified:
 
 ## Final review
 
-Findings and fixes: to be completed
+An independent reviewer (Opus) who had not seen the work read both rule files and the standing orders, read the
+code, looked at all 30 pages at 1440 and 390 px after a slow scroll (no sideways scroll, no console errors, one
+`<h1>` and a different title on every page), used the dock, its keyboard shortcuts, the index and the 404 page,
+exercised controls on 17 pages, confirmed the pinned visuals on all seven landing pages, and compared the word-mark,
+construction, palette, type slide, intro slide, phone screen, posters, hoarding, flat lay, business cards and open
+box side by side with their reference images.
+
+Found and fixed before the push:
+- The brand serif's product name was printed on three pages (it is on the case study's type slide). Pages now say
+  "Brand serif"; the real name is only in the CSS font stack and in this report.
+- Four screenshots left by a builder had been committed in the project root. They are no longer tracked and were
+  moved out of the project; `/*.png` is ignored. They remain in the local commit history, which is never rewritten.
+- The starter template's five images in `public/` (two of them other companies' logos) were replaced with the
+  brand's own mark.
+- On lp-process the pinned plan did not change per step: the story now gives every step its own stretch of
+  scrolling, and the counter and the highlighted part of the plan follow it (01 to 06, checked at ten scroll stops).
+- The business-card plate was redrawn from the reference: two stacks of twenty cards, pushed together.
+- SOURCE.md and BRIEF.md still said every cut is at 42 degrees: corrected to what the stills print.
+- Two page-level hover colours moved to shared tokens.
+- This report: the push line and this section.
+
+Noted and left: `src/app/favicon.ico` is kept (drawn from the mark) for browsers that ask for that path, beside
+`icon.svg`; it is the one raster file in the project. The dashboard's row statuses (Draft / In review / Final) and
+counts of its own placeholder rows are plain structure, not published data. Gradients, strategy, showcase and the
+nine physical-brand pages have animation but no control. The card plate's shadow falls a little steeper than in the
+reference because all mockups share one shadow direction.
+
+After the fixes: eslint clean, build passes, `check.mjs --strict` 30 of 30 ok, `audit.mjs` 30 of 30 clean at 1440
+and 390 px, `export-svg.mjs` re-run with 0 warnings.

@@ -30,11 +30,11 @@ export function StatWeights() {
       <rect width="240" height="150" fill={C.chocolate} />
       <text x="20" y="72" fontSize="64" fill={C.sand} className="serif slide-up">{weights.length}</text>
       <T x="70" y="50" anchor="start" size="13" fill={C.beige}>type weights</T>
-      <T x="70" y="66" anchor="start" size="12" fill={C.beigeMuted}>Test Tiempos Text</T>
+      <T x="70" y="66" anchor="start" size="12" fill={C.beigeMuted}>Brand serif</T>
       {seg.map((sg, i) => (
         <g key={i}>
           <path d={barPath(20 + sg.x, 94, sg.w, 22, { round: 'tr', radius: 11 })} fill={[C.sand, C.tribal, C.tribal40, C.beige][i]} className="grow-x" style={{ '--i': i }} />
-          <T x={20 + sg.x + sg.w / 2} y="134" size="10.5" fill={C.beigeMuted}>{weights[i].replace('Test Tiempos Text ', '')}</T>
+          <T x={20 + sg.x + sg.w / 2} y="134" size="10.5" fill={C.beigeMuted}>{weights[i].replace('Brand serif ', '')}</T>
         </g>
       ))}
     </Art>

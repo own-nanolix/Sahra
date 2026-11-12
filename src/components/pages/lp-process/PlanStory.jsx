@@ -42,7 +42,7 @@ export default function PlanStory() {
           if (e.isIntersecting) setActive(Number(e.target.getAttribute('data-step')));
         });
       },
-      { rootMargin: '-42% 0px -42% 0px' },
+      { rootMargin: '-50% 0px -50% 0px' },
     );
     refs.current.filter(Boolean).forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -65,10 +65,15 @@ export default function PlanStory() {
           </div>
           <div className={s.steps}>
             {STEPS.map((st, i) => (
-              <article
+              <div
                 key={i}
                 ref={(el) => { refs.current[i] = el; }}
                 data-step={i}
+                data-side={i % 2 ? 'r' : 'l'}
+                className={s.slot}
+                style={{ gridRow: i + 1 }}
+              >
+              <article
                 data-side={i % 2 ? 'r' : 'l'}
                 data-active={i === active ? 'true' : 'false'}
                 className={`story-step ${s.step}`}
@@ -85,6 +90,7 @@ export default function PlanStory() {
                   </div>
                 )}
               </article>
+              </div>
             ))}
           </div>
         </div>

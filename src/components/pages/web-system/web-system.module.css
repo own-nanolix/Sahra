@@ -28,7 +28,7 @@
 .onDarkCell { background: var(--chocolate); border-radius: var(--r-btn); padding: 0 8px; color: var(--beige); }
 
 /* Pinned states: the same declarations as the shared :hover / :active, held still. */
-.sHover :global(.btn) { background: #774f36; transform: translateY(-1px); }
+.sHover :global(.btn) { background: var(--tribal-hover); transform: translateY(-1px); }
 .sHover :global(.btn-black) { background: var(--chocolate); }
 .sHover :global(.btn-outline) { background: rgba(135, 93, 65, 0.08); }
 .sHover :global(.btn-ghost) { background: rgba(135, 93, 65, 0.08); }
@@ -37,7 +37,7 @@
 .sActive :global(.btn-black) { background: var(--chocolate); }
 .sActive :global(.btn-outline) { background: rgba(135, 93, 65, 0.16); color: inherit; }
 .sActive :global(.btn-ghost) { background: rgba(135, 93, 65, 0.16); color: inherit; }
-.sHover :global(.btn-dark) { background: #4a3328; }
+.sHover :global(.btn-dark) { background: var(--chocolate-hover); }
 .sHover :global(.btn-beige) { background: var(--white); }
 .sActive :global(.btn-beige) { background: var(--sand-20); }
 .sFocus :global(.btn) { outline: 2px solid var(--tribal); outline-offset: 2px; }

@@ -33,7 +33,7 @@ here from the start.
 - [x] 6. Review team; shared fixes applied
 - [x] 7. Verify in the browser; SVG export
 - [x] 8. `REPORT.md` and `README.md`
-- [ ] 9. Final independent review, then one push (standing orders, points 5 and 6)
+- [x] 9. Final independent review done, fixes applied, pushed once (needs a Vercel import by the owner)
 
 ## Decisions
 
@@ -112,3 +112,4 @@ http://localhost:3104 (start with `npx next dev -p 3104`; stop it before `npm ru
 - 8 reviewers (Opus) reviewed and fixed all 30 pages; each committed locally. All pending shared fixes above were applied by a fixer (Sonnet): 14 icons corrected, the construction diagram prints "34°" on the Latin cuts and "42°" on the Arabic cuts as the stills do, the About phone screen re-measured once (margins 24, word-mark 160 wide, headline 34/35, rows 99 apart) and made to agree in all three places, pressed states of two buttons, neutral device frames, `HEX.error`, no cross-page imports, LAYOUTS.md lines brought in step with what is built.
 - Decisions: the designers' agency names stay on the overview as the case study's credits (the designer is the audience); the "©" in one agency's styled name is not printed. The dark jacket of m07 is drawn empty, as a garment, with the mark on its back.
 - Step 7: lint clean; build passes; check --strict 30 of 30 ok; audit 30 of 30 clean at 1440 and 390 px on the built site, no console errors; export-svg wrote 441 SVGs with 0 warnings.
+- Final review (Opus, independent): 3 must-fix and 4 should-fix findings, all fixed (font product name on pages, stray screenshots in the root, starter logos in public/, lp-process story, business-card stacks, SOURCE and BRIEF angle wording, hover tokens, report). Lint clean, build passes, check --strict 30 of 30, audit 30 of 30, 441 SVGs with 0 warnings.

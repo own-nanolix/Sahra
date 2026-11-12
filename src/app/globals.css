@@ -11,6 +11,8 @@
   --black: #000000;          /* Black */
   --chocolate: #35241c;      /* Dark Chocolate Brown */
   --tribal: #875d41;         /* Tribal Brown */
+  --tribal-hover: #774f36;   /* button hover on Tribal Brown */
+  --chocolate-hover: #4a3328; /* button hover on the dark button */
   --sand: #b58f6b;           /* Sand */
   --beige: #f5f0e3;          /* Beige */
   --white: #ffffff;          /* White */
@@ -268,13 +270,13 @@ button.chip[aria-pressed="true"] { background: var(--chocolate); color: var(--be
 
 /* ---------- Buttons: rounded rectangles with a small radius (m16 "→ sahra.sa", m12 "Follow") ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 20px; border: 0; border-radius: var(--r-btn); font-family: var(--font-sans); font-weight: 400; font-size: 16px; letter-spacing: -0.01em; line-height: 1; text-decoration: none; white-space: nowrap; background: var(--tribal); color: var(--beige); position: relative; transition: transform var(--dur-1) var(--ease-out), background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out); }
-.btn:hover { background: #774f36; transform: translateY(-1px); }
+.btn:hover { background: var(--tribal-hover); transform: translateY(-1px); }
 .btn:active { transform: translateY(1px); background: var(--chocolate); }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
 .btn-black { background: var(--black); color: var(--white); }
 .btn-black:hover { background: var(--chocolate); }
 .btn-dark { background: var(--chocolate); color: var(--beige); }
-.btn-dark:hover { background: #4a3328; }
+.btn-dark:hover { background: var(--chocolate-hover); }
 .btn-beige { background: var(--beige); color: var(--chocolate); }
 .btn-beige:hover { background: var(--white); }
 .btn-beige:active { background: var(--sand-20); color: var(--chocolate); }
