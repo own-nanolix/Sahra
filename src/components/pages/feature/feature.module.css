@@ -1,0 +1,65 @@
+/* Plan explorer: page-only styles. Motion uses the shared tokens; nothing bounces. */
+
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--gap); align-items: end; padding-block: clamp(40px, 7vw, 112px) clamp(24px, 3vw, 48px); }
+.headLead { max-width: 30em; margin-top: 18px; }
+.headContacts { display: flex; flex-wrap: wrap; gap: 18px 36px; align-items: flex-end; }
+@media (max-width: 760px) { .head { grid-template-columns: minmax(0, 1fr); } }
+
+.secHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; padding-bottom: 20px; }
+
+/* ---------- The explorer ---------- */
+.explorer { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+@media (max-width: 960px) { .explorer { grid-template-columns: minmax(0, 1fr); } }
+.stageCol { position: sticky; top: 20px; min-width: 0; }
+@media (max-width: 960px) { .stageCol { position: static; } }
+
+.stage { position: relative; aspect-ratio: 600 / 837; width: min(100%, calc((100svh - 150px) * 0.7168)); min-width: min(100%, 300px); margin-inline: auto; }
+.viewer { position: absolute; inset: 0; cursor: grab; touch-action: pan-y; box-shadow: 14px 16px 0 0 rgba(53, 36, 28, 0.22); user-select: none; -webkit-user-select: none; }
+.viewer[data-zoomed="yes"] { touch-action: none; }
+.viewer svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.viewer:focus-visible { outline: 3px solid var(--sand); outline-offset: 5px; }
+.grabbing { cursor: grabbing; }
+
+/* the sheet moves with CSS: slow for the rows and the tour, quick for buttons and keys, none while dragging */
+.glideSlow { transition: transform var(--dur-4) var(--ease-in-out); }
+.glideFast { transition: transform var(--dur-2) var(--ease-out); }
+.glideNone { transition: none; }
+
+/* the lid swings shut from its hinge at the left and lands on the closed box */
+.lid { position: absolute; inset: 0; z-index: 2; transform-origin: 0 50%; box-shadow: 14px 16px 0 0 rgba(30, 20, 15, 0.3); }
+.lid svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lidNone { display: none; }
+.lidClosed { animation: feature-lid-close var(--dur-5) var(--ease-in-out) both; }
+.lidOpen { animation: feature-lid-open var(--dur-4) var(--ease-in-out) both; }
+@keyframes feature-lid-close { from { transform: scaleX(0); visibility: visible; } to { transform: none; visibility: visible; } }
+@keyframes feature-lid-open { from { transform: none; visibility: visible; } to { transform: scaleX(0); visibility: hidden; } }
+
+.caption { margin-top: 28px; min-height: 9.5em; max-width: 36em; margin-inline: auto; }
+.captionText { font-family: var(--font-serif); font-size: clamp(19px, 1.7vw, 24px); line-height: 1.22; letter-spacing: -0.01em; margin-top: 6px; }
+
+/* ---------- The panel ---------- */
+.panel { display: grid; gap: clamp(22px, 2.4vw, 36px); min-width: 0; }
+.group { display: grid; gap: 12px; min-width: 0; }
+.group h3 { margin: 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.zoomNum { font-variant-numeric: tabular-nums; min-width: 3.4em; padding-left: 6px; }
+.stepRow[aria-pressed="true"] { background: rgba(135, 93, 65, 0.1); }
+.stepRow[aria-pressed="true"] :global(.ruled-row-plus)::after { transform: translate(-50%, -50%) rotate(0deg); }
+.planText span { transition: color var(--dur-3) var(--ease-out), background-color var(--dur-3) var(--ease-out); }
+.on { background: var(--sand-20); box-shadow: 0 0 0 3px var(--sand-20); }
+.dim { color: var(--muted); }
+
+/* ---------- The artwork tiles ---------- */
+.art { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+.art > * { min-width: 0; }
+.tPlan { grid-column: span 5; }
+.tLayers { grid-column: span 7; }
+.tBeige { grid-column: span 4; }
+.tDark { grid-column: span 4; }
+.tBox { grid-column: span 4; }
+@media (max-width: 900px) { .tPlan, .tLayers { grid-column: span 12; } .tBeige, .tDark { grid-column: span 6; } .tBox { grid-column: span 12; } }
+@media (max-width: 600px) { .tBeige, .tDark { grid-column: span 12; } }
+.tile { padding: 0; overflow: hidden; }
+.tileBody { padding: 12px; }
+.tileCap { display: flex; justify-content: space-between; gap: 12px; padding: 14px 4px 0; }
+.tileCap h3 { margin: 0; }

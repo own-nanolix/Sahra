@@ -1,0 +1,18 @@
+/* Showcase: four full-width scenes, each on its own pair of flat fields. Page-only styles. */
+
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--gap); align-items: end; padding-block: clamp(40px, 7vw, 112px) clamp(28px, 4vw, 64px); }
+.headLine { max-width: 18em; }
+@media (max-width: 760px) { .head { grid-template-columns: minmax(0, 1fr); } }
+
+.scene { margin-top: clamp(48px, 7vw, 112px); }
+.scene:first-of-type { margin-top: 0; }
+.sceneHead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 16px; }
+.sceneHead h2 { margin: 0; }
+.plate { display: block; }
+.plate > svg { width: 100%; height: auto; }
+
+/* the pair of plates (laptop and tablet): 5 : 4 so that both stand at the same height */
+.pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr); gap: var(--gap); align-items: start; }
+.pair > * { min-width: 0; }
+@media (max-width: 900px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+
