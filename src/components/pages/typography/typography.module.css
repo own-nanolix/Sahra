@@ -1,0 +1,35 @@
+/* Typography page. Class-based selectors only; keyframes are prefixed typography-. */
+.hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; padding-block: clamp(36px, 6vw, 96px) clamp(24px, 3vw, 48px); }
+.heroText { max-width: 34em; display: grid; gap: 12px; }
+.heroLine { display: block; overflow: hidden; }
+.heroLine > span { display: block; animation: typography-line var(--dur-4) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 120ms); }
+@keyframes typography-line { from { transform: translateY(105%); } to { transform: none; } }
+.slideFrame { background: var(--white); line-height: 0; }
+.fill { width: 100%; height: auto; display: block; }
+.slideCap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 10px; }
+
+.sectionHead { display: grid; grid-template-columns: 3.2em minmax(0, 1fr); gap: 12px; align-items: baseline; padding-block: clamp(48px, 7vw, 112px) clamp(16px, 2vw, 28px); border-top: var(--hair) solid var(--line-strong); margin-top: clamp(40px, 6vw, 96px); }
+.sectionHead p { grid-column: 2; max-width: 42em; }
+
+.scrollX { overflow-x: auto; scrollbar-width: thin; }
+.scrollX > svg { min-width: 760px; width: 100%; height: auto; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.tileText { padding: clamp(16px, 1.8vw, 28px); display: grid; gap: 8px; align-content: start; }
+
+.tester { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(16px, 2vw, 32px); align-items: start; }
+.testerControls { display: grid; gap: 14px; align-content: start; }
+.controlRow { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+.testerStage { padding: clamp(18px, 2.4vw, 40px); min-height: 360px; display: grid; gap: 16px; align-content: space-between; transition: background-color var(--dur-3) var(--ease-in-out), color var(--dur-3) var(--ease-in-out); overflow: hidden; }
+.testerText { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; transition: font-size var(--dur-2) var(--ease-out), letter-spacing var(--dur-2) var(--ease-out), line-height var(--dur-2) var(--ease-out); }
+.range { width: 100%; accent-color: var(--tribal); min-height: 28px; }
+
+.habits { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.habits li { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 8px; padding: 10px 0; border-top: var(--hair) solid var(--line); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .tester { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .pair { grid-template-columns: minmax(0, 1fr); }
+}
