@@ -1,0 +1,113 @@
+/* Motion page. Only transform and opacity animate; every duration and curve is a shared token (--dur-*, --ease-*).
+   Base styles are the finished state: each keyframe plays from a start state towards it, so a demo that is
+   interrupted, replayed or switched to reduced motion always lands on its final value. */
+
+.intro { display: grid; gap: 20px; max-width: 46em; }
+.sec { padding-block: calc(var(--band) / 2); }
+.secHead { display: grid; gap: 10px; margin-bottom: clamp(20px, 3vw, 40px); max-width: 44em; }
+.tileHead { display: grid; gap: 4px; margin-bottom: 14px; }
+.tileFoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.grow { display: grid; gap: var(--gap); }
+
+/* ---------- Curves ---------- */
+.curveGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 1100px) { .curveGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .curveGrid { grid-template-columns: minmax(0, 1fr); } }
+.curveTile { background: var(--white); border-radius: var(--r-card-sm); padding: 14px 14px 12px; min-width: 0; }
+.curveWrap { position: relative; }
+.curveWrap > svg { width: 100%; height: auto; }
+/* The dot rests on the end of the curve (1, 1); the script moves it back along the curve and forward again. */
+.dot { position: absolute; left: calc(220 / 260 * 100%); top: calc(50 / 220 * 100%); width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--chocolate); box-shadow: 0 0 0 3px var(--beige); will-change: transform; pointer-events: none; }
+.track { position: relative; height: 28px; margin-top: 8px; }
+.rail { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--line-strong); }
+.tdot { position: absolute; right: 0; top: 50%; width: 16px; height: 16px; margin-top: -8px; border-radius: 4px; background: var(--tribal); will-change: transform; }
+.durWrap { background: var(--white); border-radius: var(--r-card-sm); padding: 14px; }
+.durWrap > svg { width: 100%; max-width: 640px; height: auto; margin-inline: auto; }
+.bar { transform-box: fill-box; transform-origin: 0 50%; animation: motion-bar var(--d) var(--ease-out) both; }
+@keyframes motion-bar { from { transform: scaleX(0); } to { transform: none; } }
+
+/* ---------- Logo build (a layer plays from its start state towards its finished base style) ---------- */
+.logoBuild > svg, .markAssemble > svg { width: 100%; height: auto; border-radius: var(--r-card-sm); }
+.markAssemble > svg { max-width: 300px; margin-inline: auto; }
+.gDraw { stroke-dasharray: 1; animation: motion-draw var(--dur-4) var(--ease-draw) both; animation-delay: calc(var(--i, 0) * 30ms); }
+.gOut { stroke-dasharray: 1; opacity: 0; animation: motion-draw var(--dur-4) var(--ease-draw) both, motion-out var(--dur-4) var(--ease-sun) both; animation-delay: calc(500ms + var(--i, 0) * 70ms), calc(2400ms + var(--i, 0) * 20ms); }
+.gAnc { opacity: 0; animation: motion-anc var(--dur-5) var(--ease-out) both; animation-delay: calc(1300ms + var(--i, 0) * 18ms); }
+.gFill { transform-box: fill-box; animation: motion-fade var(--dur-5) var(--ease-sun) 2300ms both; }
+@keyframes motion-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes motion-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes motion-anc { 0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes motion-fade { from { opacity: 0; } to { opacity: 1; } }
+.storyboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 600px) { .storyboard { grid-template-columns: minmax(0, 1fr); } }
+.frame { margin: 0; display: grid; gap: 8px; min-width: 0; }
+.frame svg, .refSvg { width: 100%; height: auto; border-radius: var(--r-card-sm); }
+.refs { display: grid; gap: 12px; }
+.refIn { animation: motion-fade var(--dur-3) var(--ease-out) both; }
+
+/* ---------- Transitions ---------- */
+.enterFrame { background: var(--beige-60); border-radius: var(--r-card-sm); padding: 18px; display: grid; gap: 12px; box-shadow: inset 0 0 0 var(--hair) var(--line); }
+.enterItem, .enterBar { animation: motion-enter var(--dur-3) var(--ease-out) both; animation-delay: calc(80ms + var(--i, 0) * var(--stagger)); }
+.enterBar { height: 14px; }
+.enterItemRow { height: 14px; }
+.enterBlock { height: 64px; border-radius: var(--r-btn); background: var(--tribal-40); }
+@keyframes motion-enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.enterFrame .ph, .sheetPage .ph { display: block; }
+
+.cardDemo { position: relative; padding: 0 12px 12px 0; }
+.cardShadow { position: absolute; inset: 12px 0 0 12px; border-radius: var(--r-card-sm); background: rgba(53, 36, 28, 0.14); }
+.cardFace { position: relative; display: grid; gap: 10px; width: 100%; text-align: left; border: 0; border-radius: var(--r-card-sm); background: var(--white); padding: 22px; box-shadow: inset 0 0 0 var(--hair) var(--line-strong); transition: transform var(--dur-3) var(--ease-out); }
+.cardFace:hover { transform: translate(-3px, -3px); }
+.cardFace:active { transform: translate(2px, 2px); transition-duration: var(--dur-1); }
+.cardLift, .cardLift:hover { transform: translate(-10px, -10px); }
+
+.sheetStage { position: relative; height: 260px; overflow: hidden; border-radius: var(--r-card-sm); background: var(--beige-60); box-shadow: inset 0 0 0 var(--hair) var(--line); }
+.sheetPage { display: grid; gap: 12px; padding: 20px; align-content: start; justify-items: start; }
+.scrim { position: absolute; inset: 0; background: rgba(53, 36, 28, 0.5); opacity: 0; pointer-events: none; transition: opacity var(--dur-2) var(--ease-in-out); }
+.scrimOn { opacity: 1; pointer-events: auto; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 16px; padding: 20px; border-radius: 18px 18px 0 0; background: var(--white); transform: translateY(100%); transition: transform var(--dur-2) var(--ease-in-out); }
+.sheetOn { transform: none; transition: transform var(--dur-3) var(--ease-out); }
+.tabIn { animation: motion-tab var(--dur-2) var(--ease-out) both; }
+@keyframes motion-tab { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Micro-interactions ---------- */
+.saveBtn { min-width: 120px; }
+.saveSlot { display: inline-grid; place-items: center; width: 18px; height: 18px; }
+.saveSlot:empty { display: none; }
+.spinSm { animation: motion-spin var(--dur-4) var(--ease-in-out) infinite; }
+.toggleRow { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.miniGrid { color: var(--tribal); opacity: 0.2; transition: opacity var(--dur-3) var(--ease-out); }
+.miniGridOn { opacity: 1; }
+.ruled { position: relative; display: grid; gap: 6px; }
+.ruled label { font-size: 13px; color: var(--muted); }
+.ruledInput { width: 100%; min-height: 44px; border: 0; border-bottom: var(--hair) solid var(--line-strong); background: transparent; padding: 0 2px; font: inherit; font-size: 16px; color: var(--ink); outline: none; }
+.ruledInput::placeholder { color: var(--muted); }
+.ruledLine { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--tribal); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--dur-3) var(--ease-draw); pointer-events: none; }
+.ruled:focus-within .ruledLine { transform: none; }
+.ruledInput:focus-visible { outline: none; }
+.loaders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); align-items: end; }
+@media (max-width: 600px) { .loaders { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lineLoader { grid-column: 1 / -1; } }
+.loaders figure { margin: 0; display: grid; gap: 6px; }
+.loaders svg { width: 100%; max-width: 140px; height: auto; border-radius: 12px; }
+.spin { transform-origin: 60px 60px; animation: motion-spin var(--dur-5) var(--ease-in-out) infinite; }
+@keyframes motion-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.pulse { animation: motion-pulse var(--dur-5) var(--ease-sun) infinite; animation-delay: calc(var(--i, 0) * 140ms); }
+@keyframes motion-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+.lineTrack { height: 6px; border-radius: 3px; background: var(--tribal-20); overflow: hidden; }
+.lineFill { display: block; height: 100%; background: var(--tribal); transform-origin: 0 50%; animation: motion-bar var(--dur-5) var(--ease-draw) both; }
+.swap { position: relative; display: block; width: 20px; height: 20px; }
+.swapA, .swapB { position: absolute; inset: 0; display: grid; place-items: center; transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out); }
+.swapB { opacity: 0; transform: translateY(4px); }
+.swapOut { opacity: 0; transform: translateY(-4px); }
+.swapIn { opacity: 1; transform: none; }
+.microGrid > .tile { display: grid; align-content: start; gap: 14px; }
+
+/* ---------- Do and don't ---------- */
+.ddBar { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.dd { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 760px) { .dd { grid-template-columns: minmax(0, 1fr); } }
+.ddTile { display: grid; gap: 18px; align-content: start; }
+.ddRow { display: grid; gap: 8px; }
+.lane { height: 72px; overflow: hidden; border-radius: 10px; background: rgba(135, 93, 65, 0.12); display: flex; align-items: center; padding: 0 16px; }
+.laneBlocks { display: flex; gap: 10px; }
+.laneBlock { display: block; width: 52px; height: 32px; border-radius: 6px; background: var(--tribal); animation: motion-lane var(--d) var(--e) both; animation-delay: calc(var(--i, 0) * var(--st, 0ms)); }
+@keyframes motion-lane { from { opacity: 0; transform: var(--from); } to { opacity: 1; transform: none; } }
