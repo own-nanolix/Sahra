@@ -1,0 +1,47 @@
+/* Campaign board. Columns are minmax(0, 1fr); every SVG scales with width: 100%; nothing scrolls sideways. */
+.board { padding-bottom: 40px; }
+.intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding-block: clamp(40px, 6vw, 96px) clamp(24px, 3vw, 48px); }
+.intro p { max-width: 34em; margin-top: 16px; }
+.sizes { list-style: none; margin: 0 0 clamp(16px, 2vw, 32px); padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sizes li { gap: 10px; }
+.band { padding-top: clamp(48px, 7vw, 112px); }
+.head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: clamp(16px, 2vw, 28px); }
+
+.cell { margin: 0; min-width: 0; position: relative; }
+.cell > svg { width: 100%; height: auto; box-shadow: 8px 9px 0 0 rgba(53, 36, 28, 0.1); }
+.cap { font-size: 12px; line-height: 1.4; color: var(--muted); padding-top: 10px; }
+.profile .cap { color: var(--beige-muted); }
+
+/* Posts: a 2 x 2 bento at the left; posters: three tall tiles of different heights at the right. */
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--gap); align-items: start; }
+.posts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.posters { display: grid; grid-template-columns: 1.1fr 1.45fr 0.9fr; gap: var(--gap); align-items: end; }
+.posters .cell > svg { box-shadow: 6px 7px 0 0 rgba(53, 36, 28, 0.1); }
+.pa { margin-bottom: 4%; }
+.pc { margin-bottom: 9%; }
+
+.wide { margin-top: clamp(24px, 3vw, 48px); }
+.stories { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.stories .cell > svg { border-radius: var(--r-card-sm); box-shadow: none; }
+
+.profile { background: var(--chocolate); margin-top: clamp(48px, 7vw, 112px); padding-block: clamp(40px, 6vw, 96px); }
+.profile .head h2 { color: var(--beige); }
+.profileGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(20px, 4vw, 64px); align-items: center; }
+.profile .cell > svg { box-shadow: none; }
+
+.mocks { display: grid; gap: clamp(24px, 3vw, 48px); }
+.mock > svg { box-shadow: none; }
+
+@media (max-width: 1100px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  .stories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .profileGrid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .posts { grid-template-columns: minmax(0, 1fr); }
+  .posters { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .pa, .pc { margin-bottom: 0; }
+  .stories { grid-template-columns: minmax(0, 1fr); }
+}
